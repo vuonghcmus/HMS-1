@@ -44,8 +44,8 @@ app.get("/elements", function (req, res) {
   res.render("elements");
 });
 
-app.get("/room", function (req, res) {
-  res.render("room");
+app.get("/rooms", function (req, res) {
+  res.render("rooms");
 });
 
 app.get("/services", function (req, res) {
