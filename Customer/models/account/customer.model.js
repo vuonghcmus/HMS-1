@@ -10,4 +10,4 @@ const customer = new Schema({
 },{
     collection: 'Customer'
 })
-export default mongoose.model('customer',customer)
+export default mongoose.model('Customer',customer)

@@ -12,4 +12,4 @@ const roomType = new Schema({
 },{
     collection: 'RoomType'
 })
-export default mongoose.model('roomType',roomType)
+export default mongoose.model('Room Type',roomType)
