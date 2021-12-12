@@ -53,6 +53,9 @@ app.get("/rooms/room-details", function(req, res) {
 app.get("/services", function(req, res) {
     res.render("services");
 });
+app.get("/search-order", function(req, res) {
+    res.render("search-order");
+});
 
 const PORT = 3000;
 app.listen(PORT, () => {
