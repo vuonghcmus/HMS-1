@@ -1,0 +1,48 @@
+@import 'theme_color';
+@import 'fonts';
+@import 'mixin';
+@import 'responsive';
+
+.custom-palatin-btn {
+    background-color: $pri-color;
+    @include trans-duration(500ms);
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    min-width: 128px;
+    color: $white-color;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-size: 16px;
+    text-transform: capitalize;
+    &:hover,
+    &:focus {
+        font-size: 16px;
+        background-color: $heading-color;
+        color: $white-color;
+    }
+    &.btn-2 {
+        background-color: $heading-color;
+        color: $white-color;
+        &:hover,
+        &:focus {
+            font-size: 16px;
+            background-color: $pri-color;
+            color: $white-color;
+        }
+    }
+    &.btn-3 {
+        background-color: $white-color;
+        color: $pri-color;
+        border: 2px solid $pri-color;
+        height: 49px;
+        line-height: 48px;
+        &:hover,
+        &:focus {
+            font-size: 16px;
+            background-color: $pri-color;
+            color: $white-color;
+        }
+    }
+}

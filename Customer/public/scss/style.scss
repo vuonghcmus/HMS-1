@@ -2,6 +2,7 @@
 @import 'fonts';
 @import 'mixin';
 @import 'responsive';
+@import 'custom';
 
 /* [Master Stylesheet - v1.0] */
 
@@ -478,14 +479,14 @@ img {
     position: relative;
     z-index: 1;
     display: inline-block;
-    min-width: 123px;
-    height: 53px;
+    min-width: 132px;
+    height: 48px;
     color: $white-color;
     border: none;
-    border-radius: 0;
+    border-radius: 8px;
     padding: 0 30px;
     font-size: 16px;
-    line-height: 53px;
+    line-height: 48px;
     text-transform: capitalize;
     &:hover,
     &:focus {
@@ -551,15 +552,21 @@ img {
                     max-width: 140px;
                 }
             }
+
+            .classynav ul li {
+                margin: 0 4px;
+            }
+
             .classynav ul li a {
                 text-transform: capitalize;
                 color: $white-color;
                 font-size: 16px;
+                font-weight: 700;
                 background-color: transparent;
                 &:hover,
                 &:focus {
-                    color: $white-color;
-                    background-color: $bg-default;
+                    color: $pri-color;
+                    border-bottom: 1px solid $pri-color;
                 }
                 @media #{$breakpoint-lg} {
                     font-size: 14px;
@@ -572,8 +579,8 @@ img {
                 }
             }
             .classynav ul li.active a {
-                color: $white-color;
-                background-color: $bg-default;
+                color: $pri-color;
+                border-bottom: 1px solid $pri-color;
             }
             .classynav ul li.megamenu-item > a::after,
             .classynav ul li.has-down > a::after {
@@ -599,12 +606,14 @@ img {
                 @media #{$breakpoint-md} {
                     margin-left: 30px;
                     border: 2px solid $white-color;
+                    border-radius: 15px;
                     margin-top: 30px;
                     display: inline-block;
                 }
                 @media #{$breakpoint-xs} {
                     margin-left: 30px;
                     border: 2px solid $white-color;
+                    border-radius: 15px;
                     margin-top: 30px;
                     display: inline-block;
                 }
@@ -632,6 +641,16 @@ img {
             }
         }
     }
+}
+
+.classy-menu.menu-on .classynav ul li.active a {
+    @media #{$breakpoint-md} {
+        background-color: $white-color;
+    }
+    @media #{$breakpoint-xs} {
+        background-color: $white-color;
+    }
+    
 }
 
 .breakpoint-on .classy-navbar .classy-menu {
@@ -1196,6 +1215,45 @@ img {
             p {
                 margin-bottom: 0;
             }
+        }
+    }
+
+    .service-item {
+        flex-direction: row;
+        margin: 0 0 40px;
+        justify-content: space-between;
+        padding: 12px 0;
+        
+
+        .text-container {
+            margin-top: 12px;
+        }
+
+        .price-container {
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            border-left: 1px solid rgba(0, 0, 0, .125);
+
+            .price-text {
+                font-size: 32px;
+                color: $pri-color;
+                margin-bottom: 0;
+            }
+
+
+            @media #{$breakpoint-xs} {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-evenly;
+                border: none;
+            }
+
+        }
+        @media #{$breakpoint-xs} {
+            flex-direction: column;
+            text-align: center;
         }
     }
 }

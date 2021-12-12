@@ -47,8 +47,8 @@ app.get("/elements", function(req, res) {
 app.get("/rooms", function(req, res) {
     res.render("rooms");
 });
-app.get("/rooms/room-detail", function(req, res) {
-    res.render("room-detail");
+app.get("/rooms/room-details", function(req, res) {
+    res.render("room-details");
 });
 app.get("/services", function(req, res) {
     res.render("services");
