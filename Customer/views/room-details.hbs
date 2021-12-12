@@ -7,35 +7,132 @@
     <!-- ##### Breadcumb Area End ##### -->
 
     <!-- ##### Rooms Area Start ##### -->
-    <section class="rooms-area section-padding-0-100">
+    <section class="room-details-area section-padding-0-100">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-lg-6">
-                    <div class="section-heading text-center">
-                        <div class="line-"></div>
-                        {{!-- <h2>Choose a room</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien.</p> --}}
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-4 bg-thumbnail bg-img">
+           
+            <div class="row card mt-5">
+                <div class="col-md-4 col-12 bg-thumbnail bg-img">
                     <div class="bg-thumbnail bg-img">
                         <img src="/img/bg-img/1.jpg"/>
                     </div>
                 </div>
-                <div class="col-8">
-                    <h1 class="room-title">Room Name</h1>
+                <div class="col-md-8 col-12">
+                    <h1 class="room-title">Deluxe Room</h1>
                     <p class="room-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. </p>
-                    <p class="room-info">People: 2</p>
-                    <p class="room-info">Areas: 100 m<sup>2</sup></p>
-                    <p class="room-info">Beds: 2</p>
-                    <a href="#" class="book-room-btn btn palatin-btn">Book Room</a>
-
+                    <p class="room-info">People: <span>2</span></p>
+                    <p class="room-info">Areas: <span>100</span> m<sup>2</sup></p>
+                    <p class="room-info">Beds: <span>2</span></p>
+                    <div class="book-container">
+                        <p class="room-price"><span>150$</span>/night</p>
+                        <button href="" class="book-room-btn btn palatin-btn" data-bs-toggle="modal" data-id="1" data-bs-target="#input-information-modal">Book Room</button>
+                    </div>
                 </div>
-                
             </div>
-           
         </div>
     </section>
+
+{{!-- Confirm delete course --}}
+<div class="modal" id="input-information-modal" tabindex="-1">
+    <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Please provide your information</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          {{!-- input information form --}}
+       <form class="row g-3 input-information-form needs-validation" novalidate>
+            <div class="col-12 mt-3">
+                <input type="text" class="form-control" id="first-name" placeholder="First Name" required>
+                <div class="invalid-feedback">
+                    First name must not be empty.
+                </div>
+            </div>
+
+            <div class="col-12 mt-3">
+                <input type="text" class="form-control" id="last-name" placeholder="Last Name" required>
+                <div class="invalid-feedback">
+                    Last name must not be empty.
+                </div>
+            </div>
+
+            <div class="col-12 mt-3">
+                <input type="number" class="form-control" id="phone" placeholder="Phone Number" required>
+                <div class="invalid-feedback">
+                    Phone number must not be empty.
+                </div>
+            </div>
+
+            <div class="col-12 mt-3">
+                <input type="number" class="form-control" id="identity" placeholder="Your ID" required>
+                <div class="invalid-feedback">
+                    ID must not be empty.
+                </div>
+            </div>
+
+            <div class="col-12 mt-3">
+                <label for="checkin" class="form-label">Check In</label>
+                <input type="date" class="form-control" id="checkin" required>
+                <div class="invalid-feedback">
+                    Check in date must not be empty.
+                </div>
+            </div>
+
+            <div class="col-12 mt-3">
+                <label for="checkout" class="form-label">Check Out</label>
+                <input type="date" class="form-control" id="checkout" required>
+                <div class="invalid-feedback">
+                    Check in date must not be empty.
+                </div>
+            </div>
+          
+            <div class="col-12 mt-3">
+                <button class="btn palatin-btn float-right" type="submit">Confirm</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+{{!-- Delete hidden form --}}
+<form name="delete-course-form" method="POST"></form>
+
+<script>
+
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+        }, false)
+        })
+    })()
+
+    //var btnDeleteCourse = document.getElementById('btn-delete-course')
+    //var courseId
+    //var deleteForm = document.forms['delete-course-form']
+
+    var inputInformationModal = document.getElementById('input-information-modal')
+    inputInformationModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget
+        //courseId = button.getAttribute('data-id')
+    })
+    // when dialog confirm clicked
+    //btnDeleteCourse.onclick = () => {
+      //  deleteForm.action = '/courses/' + courseId + '?_method=DELETE'
+        //deleteForm.submit()
+    //}
+</script>
     <!-- ##### Rooms Area End ##### -->
