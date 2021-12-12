@@ -2299,3 +2299,32 @@ img {
 .room-info {
     font-size: 16px;
 }
+
+.service-item {
+    border: 1px solid #B7B7B7;
+    border-radius: 1px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.service-item-demo {
+    width: auto;
+    max-height: 150px;
+    min-height: 50px;
+}
+
+.service-item-price {
+    border-left: 2px solid #F8A27B;
+    text-align: center;
+}
+
+.service-item-price-text {
+    font-size: 35px;
+    color: #F8A27B;
+    font-weight: bold;
+}
+
+.service-item-price-btn {
+    border-radius: 30px;
+}
