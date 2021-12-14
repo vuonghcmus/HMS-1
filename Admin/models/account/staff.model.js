@@ -1,17 +1,20 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const CustomerSchema = new Schema(
+const StaffSchema = new Schema(
   {
     username: { type: Schema.Types.String },
     password: { type: Schema.Types.String },
     fullname: { type: Schema.Types.String },
+    birthday: { type: Schema.Types.String },
     phone: { type: Schema.Types.String },
+    email: { type: Schema.Types.String },
+    bankAccountNumber: { type: Schema.Types.String },
     ID: { type: Schema.Types.String },
     status: { type: Schema.Types.Boolean },
   },
   {
-    collection: "Customer",
+    collection: "Staff",
   }
 );
-const Customer = mongoose.model("Customer", CustomerSchema);
-module.exports = Customer;
+const Staff = mongoose.model("Staff", StaffSchema);
+module.exports = Staff;

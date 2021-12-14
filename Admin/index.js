@@ -75,7 +75,8 @@ app.get("/", function (req, res) {
   res.render("home");
 });
 
-// app.use("/account", require("./routes/account.route"));
+const StaffRoute = require("./routes/staff.route");
+app.use("/staff", StaffRoute);
 
 app.use((req, res) => {
   res.render("errors/404", { layout: false });
