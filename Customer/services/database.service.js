@@ -6,4 +6,4 @@ const databaseService = {
         mongoose.connection.on('error', (e) => { throw e });
     }
 }
-export default databaseService
+module.exports = databaseService
