@@ -471,6 +471,45 @@ img {
     }
 }
 
+.modal-btn {
+    position: fixed;
+    bottom: 52px;
+    background-color: $pri-color;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+    color: $white-color;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    right: 32px;
+    z-index: 99999;
+    text-align: center;
+
+    img {
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    span {
+        padding: 4px 12px;
+        position: absolute;
+        top: -4px;
+        right: -10px;
+        color: $white-color;
+        background-color: red;
+        border-radius: 50%;
+    }
+
+    &.disabled {
+        span {
+            display: none;
+        }
+    }
+}
+
 /* :: 3.8.0 Palatin Button */
 
 .palatin-btn {
@@ -1107,6 +1146,77 @@ img {
         .rooms-text {
             background-color: #000;
         }
+    }
+
+}
+
+.modal-footer {
+
+    flex-direction: column;
+    align-items: flex-start;
+    p {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    span {
+        color: $pri-color;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+.room-details-area {
+
+    .room-info {
+        color: $dark-color;
+        font-size: 16px;
+
+        span {
+            color: $pri-color;
+            font-weight: 600;
+        }
+    }
+
+    .room-info-container {
+        @media #{$breakpoint-lg} {
+
+        }
+
+        @media #{$breakpoint-xs} {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+    
+
+    .card {
+        flex-direction: row;
+        padding: 12px 0;
+    }
+
+    .book-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 16px;
+
+        .room-price {
+            margin-bottom: 0;
+        }
+    
+        .room-price span {
+            font-size: 28px;
+            color: $pri-color;
+        }
+    }
+
+    @media #{$breakpoint-xs} {
+        h1 {
+            margin-top: 16px;
+        }
+
     }
 }
 

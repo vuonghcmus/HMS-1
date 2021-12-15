@@ -105,7 +105,7 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque.</p>
                         </div>
                         <!-- Book Room -->
-                        <a href="#" class="book-room-btn btn palatin-btn">Book Room</a>
+                        <a href="#" class="book-room-btn btn palatin-btn">View Details</a>
                     </div>
                 </div>
 
@@ -123,7 +123,7 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque.</p>
                         </div>
                         <!-- Book Room -->
-                        <a href="#" class="book-room-btn btn palatin-btn">Book Room</a>
+                        <a href="#" class="book-room-btn btn palatin-btn">View Details</a>
                     </div>
                 </div>
 
@@ -141,7 +141,7 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque.</p>
                         </div>
                         <!-- Book Room -->
-                        <a href="#" class="book-room-btn btn palatin-btn">Book Room</a>
+                        <a href="#" class="book-room-btn btn palatin-btn">View Details</a>
                     </div>
                 </div>
 
@@ -159,7 +159,7 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque.</p>
                         </div>
                         <!-- Book Room -->
-                        <a href="#" class="book-room-btn btn palatin-btn">Book Room</a>
+                        <a href="#" class="book-room-btn btn palatin-btn">View Details</a>
                     </div>
                 </div>
 
@@ -177,7 +177,7 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque.</p>
                         </div>
                         <!-- Book Room -->
-                        <a href="#" class="book-room-btn btn palatin-btn">Book Room</a>
+                        <a href="#" class="book-room-btn btn palatin-btn">View Details</a>
                     </div>
                 </div>
 
@@ -195,7 +195,7 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque.</p>
                         </div>
                         <!-- Book Room -->
-                        <a href="#" class="book-room-btn btn palatin-btn">Book Room</a>
+                        <a href="#" class="book-room-btn btn palatin-btn">View Details</a>
                     </div>
                 </div>
 
@@ -213,7 +213,7 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque.</p>
                         </div>
                         <!-- Book Room -->
-                        <a href="#" class="book-room-btn btn palatin-btn">Book Room</a>
+                        <a href="#" class="book-room-btn btn palatin-btn">View Details</a>
                     </div>
                 </div>
 
@@ -231,7 +231,7 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque.</p>
                         </div>
                         <!-- Book Room -->
-                        <a href="#" class="book-room-btn btn palatin-btn">Book Room</a>
+                        <a href="#" class="book-room-btn btn palatin-btn">View Details</a>
                     </div>
                 </div>
 
@@ -249,7 +249,7 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque.</p>
                         </div>
                         <!-- Book Room -->
-                        <a href="#" class="book-room-btn btn palatin-btn">Book Room</a>
+                        <a href="#" class="book-room-btn btn palatin-btn">View Details</a>
                     </div>
                 </div>
 
@@ -268,5 +268,108 @@
 
             </div>
         </div>
+
+{{!-- floating button --}}
+        <button class="btn modal-btn" data-bs-toggle="modal" data-bs-target="#input-information-modal">
+            <img src="/img/icon/order-icon.png" alt="">
+            <span>3</span>
+        </button>
+
+
+        {{!-- modal for confirm booking room --}}
+        <div class="modal" id="input-information-modal" tabindex="-1">
+            <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Please provide your information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{!-- input information form --}}
+                <form id="input-information-form" class="row g-3 px-2 input-information-form needs-validation" novalidate>
+                    <div class="col-12 mt-3">
+                        <input type="text" class="form-control" name="first-name" id="first-name" placeholder="First Name" required>
+                        <div class="invalid-feedback">
+                            First name must not be empty.
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <input type="text" class="form-control" name="last-name" id="last-name" placeholder="Last Name" required>
+                        <div class="invalid-feedback">
+                            Last name must not be empty.
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <input type="number" class="form-control" name="phone" id="phone" placeholder="Phone Number" required>
+                        <div class="invalid-feedback">
+                            Phone number must not be empty.
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <input type="number" class="form-control" name="identity" id="identity" placeholder="Your ID" required>
+                        <div class="invalid-feedback">
+                            ID must not be empty.
+                        </div>
+                    </div>
+                
+                    
+                </form>
+                <div class="modal-footer">
+                    <p></p>
+                    <p style="margin-bottom: 0;">Total Rooms: <span>3</span></p>
+                    <p>Total Amount: <span>135$</span></p>
+                    <button form="input-information-form" class="btn palatin-btn float-right" type="submit">Confirm</button>
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+
+        {{!-- Delete hidden form --}}
+        <form name="delete-course-form" method="POST"></form>
+            </section>
+
+        <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+                })
+            })()
+
+            //var btnDeleteCourse = document.getElementById('btn-delete-course')
+            //var courseId
+            //var deleteForm = document.forms['delete-course-form']
+
+            var inputInformationModal = document.getElementById('input-information-modal')
+            inputInformationModal.addEventListener('show.bs.modal', function (event) {
+                var button = event.relatedTarget
+                //courseId = button.getAttribute('data-id')
+            })
+            // when dialog confirm clicked
+            //btnDeleteCourse.onclick = () => {
+            //  deleteForm.action = '/courses/' + courseId + '?_method=DELETE'
+                //deleteForm.submit()
+            //}
+        </script>
     </section>
     <!-- ##### Rooms Area End ##### -->
+
+    
