@@ -2,6 +2,7 @@ const express = require("express");
 const { engine } = require("express-handlebars");
 const Handlebars = require("handlebars");
 const path = require("path");
+const methodOverride = require('method-override')
 
 const {
     allowInsecurePrototypeAccess,
@@ -11,6 +12,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 app.engine(
     "hbs",
     engine({
@@ -52,6 +54,15 @@ app.get("/rooms/room-details", function(req, res) {
 });
 app.get("/services", function(req, res) {
     res.render("services");
+});
+app.get("/services/service-details", function(req, res) {
+    res.render("service-details");
+});
+app.get("/search-order", function(req, res) {
+    res.render("search-order");
+});
+app.get("/sign-in", function(req, res) {
+    res.render("sign-in", { layout: 'main_no_head' });
 });
 
 const PORT = 3000;
