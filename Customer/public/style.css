@@ -2143,5 +2143,19 @@ img {
 }
 
 /* ====== The End ====== */
+.service-btn-quanlity {
+  border: 1px solid #cb8670;
+}
+
+.signin-card {
+  border-radius: 30px;
+  background-color: #363636;
+  padding: 30px;
+}
+
+.signin-input {
+  border-radius: 30px;
+  border: 1px solid #cb8670;
+}
 
 /*# sourceMappingURL=style.css.map */

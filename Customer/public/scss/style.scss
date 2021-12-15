@@ -6,6 +6,7 @@
 
 /* [Master Stylesheet - v1.0] */
 
+
 /* =========== Index of CSS ===========
 :: 1.0 Import Fonts
 :: 2.0 Import All CSS
@@ -38,6 +39,7 @@
     :: 18.3.0 Tabs Area CSS
 */
 
+
 /* :: 1.0 Import Fonts */
 
 @font-face {
@@ -46,6 +48,7 @@
     font-weight: normal;
     font-style: normal;
 }
+
 
 /* :: 2.0 Import All CSS */
 
@@ -111,6 +114,7 @@ img {
     height: auto;
     max-width: 100%;
 }
+
 
 /* :: 3.1.0 Spacing */
 
@@ -178,6 +182,7 @@ img {
     margin-right: 50px !important;
 }
 
+
 /* :: 3.2.0 Height */
 
 .height-400 {
@@ -200,6 +205,7 @@ img {
     height: 800px !important;
 }
 
+
 /* :: 3.3.0 Section Padding */
 
 .section-padding-100 {
@@ -221,6 +227,7 @@ img {
     padding-top: 100px;
     padding-bottom: 70px;
 }
+
 
 /* :: 3.4.0 Section Heading */
 
@@ -263,6 +270,7 @@ img {
         }
     }
 }
+
 
 /* :: 3.5.0 Preloader CSS */
 
@@ -401,6 +409,7 @@ img {
     }
 }
 
+
 /* :: 3.6.0 Miscellaneous */
 
 .bg-img {
@@ -449,6 +458,7 @@ img {
 .bg-fixed {
     background-attachment: fixed !important;
 }
+
 
 /* :: 3.7.0 ScrollUp */
 
@@ -510,6 +520,7 @@ img {
     }
 }
 
+
 /* :: 3.8.0 Palatin Button */
 
 .palatin-btn {
@@ -558,6 +569,7 @@ img {
     }
 }
 
+
 /* :: 4.0 Header Area CSS */
 
 .header-area {
@@ -591,11 +603,9 @@ img {
                     max-width: 140px;
                 }
             }
-
             .classynav ul li {
                 margin: 0 4px;
             }
-
             .classynav ul li a {
                 text-transform: capitalize;
                 color: $white-color;
@@ -621,8 +631,8 @@ img {
                 color: $pri-color;
                 border-bottom: 1px solid $pri-color;
             }
-            .classynav ul li.megamenu-item > a::after,
-            .classynav ul li.has-down > a::after {
+            .classynav ul li.megamenu-item>a::after,
+            .classynav ul li.has-down>a::after {
                 color: $white-color;
             }
             .classynav ul li ul li a {
@@ -689,7 +699,6 @@ img {
     @media #{$breakpoint-xs} {
         background-color: $white-color;
     }
-    
 }
 
 .breakpoint-on .classy-navbar .classy-menu {
@@ -713,6 +722,7 @@ img {
 .classycloseIcon .cross-wrap span {
     background: $white-color;
 }
+
 
 /* :: 5.0 Hero Area CSS */
 
@@ -852,6 +862,7 @@ img {
     }
 }
 
+
 /* :: 6.0 Book Now Area CSS */
 
 .book-now-area {
@@ -981,6 +992,7 @@ img {
     }
 }
 
+
 /* :: 7.0 About Us Area CSS */
 
 .about-thumbnail {
@@ -1037,6 +1049,7 @@ img {
     }
 }
 
+
 /* :: 8.0 Pool Area CSS */
 
 .pool-content {
@@ -1069,6 +1082,7 @@ img {
         }
     }
 }
+
 
 /* :: 9.0 Rooms Area CSS */
 
@@ -1263,6 +1277,7 @@ img {
     }
 }
 
+
 /* :: 10.0 Services Area CSS */
 
 .services-intro {
@@ -1327,39 +1342,30 @@ img {
             }
         }
     }
-
     .service-item {
         flex-direction: row;
         margin: 0 0 40px;
         justify-content: space-between;
         padding: 12px 0;
-        
-
         .text-container {
             margin-top: 12px;
         }
-
         .price-container {
             justify-content: center;
             align-items: center;
             flex-direction: column;
-
             border-left: 1px solid rgba(0, 0, 0, .125);
-
             .price-text {
                 font-size: 32px;
                 color: $pri-color;
                 margin-bottom: 0;
             }
-
-
             @media #{$breakpoint-xs} {
                 flex-direction: row;
                 align-items: center;
                 justify-content: space-evenly;
                 border: none;
             }
-
         }
         @media #{$breakpoint-xs} {
             flex-direction: column;
@@ -1398,6 +1404,7 @@ img {
     }
 }
 
+
 /* :: 11.0 Our Hotel Area CSS */
 
 .single-hotel-info {
@@ -1428,6 +1435,7 @@ img {
         }
     }
 }
+
 
 /* :: 12.0 Testimonial Area CSS */
 
@@ -1470,6 +1478,7 @@ img {
         }
     }
 }
+
 
 /* :: 13.0 Footer Area CSS */
 
@@ -1536,6 +1545,7 @@ img {
     }
 }
 
+
 /* :: 14.0 Breadcumb Area CSS */
 
 .breadcumb-area {
@@ -1567,6 +1577,7 @@ img {
         }
     }
 }
+
 
 /* :: 15.0 Blog Area CSS */
 
@@ -1635,6 +1646,7 @@ img {
         }
     }
 }
+
 
 /* :: 16.0 Contact Area CSS */
 
@@ -1774,6 +1786,7 @@ img {
     }
 }
 
+
 /* :: 17.0 Skills Area CSS */
 
 .single-skils-area {
@@ -1805,6 +1818,7 @@ img {
     }
 }
 
+
 /* :: 18.0 Elements Area CSS */
 
 .elements-title {
@@ -1833,6 +1847,7 @@ img {
         font-size: 16px;
     }
 }
+
 
 /* :: 18.1.0 Single Cool Facts CSS */
 
@@ -1883,6 +1898,7 @@ img {
         }
     }
 }
+
 
 /* :: 18.2.0 Accordians Area CSS */
 
@@ -1953,6 +1969,7 @@ img {
     }
 }
 
+
 /* :: 18.3.0 Tabs Area CSS */
 
 .palatin-tabs-content {
@@ -1999,4 +2016,21 @@ img {
     }
 }
 
+
 /* ====== The End ====== */
+
+// CUSTOM CSS HERE
+.service-btn-quanlity {
+    border: 1px solid #cb8670;
+}
+
+.signin-card {
+    border-radius: 30px;
+    background-color: #363636;
+    padding: 30px;
+}
+
+.signin-input {
+    border-radius: 30px;
+    border: 1px solid #cb8670;
+}
