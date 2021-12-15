@@ -497,6 +497,40 @@ img {
   background-color: #363636;
 }
 
+.modal-btn {
+  position: fixed;
+  bottom: 60px;
+  background-color: #cb8670;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  right: 50px;
+  z-index: 99999;
+  text-align: center;
+}
+.modal-btn img {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.modal-btn span {
+  padding: 4px 12px;
+  position: absolute;
+  top: -4px;
+  right: -10px;
+  color: #ffffff;
+  background-color: red;
+  border-radius: 50%;
+}
+.modal-btn.disabled span {
+  display: none;
+}
+
 /* :: 3.8.0 Palatin Button */
 .palatin-btn {
   background-color: #cb8670;
@@ -1233,6 +1267,25 @@ img {
 }
 .single-rooms-area:hover .rooms-text, .single-rooms-area:focus .rooms-text {
   background-color: #000;
+}
+
+.room-details-area .room-price span {
+  font-size: 28px;
+  color: #cb8670;
+}
+.room-details-area .card {
+  flex-direction: row;
+  padding: 12px 0;
+}
+@media only screen and (max-width:767px) {
+  .room-details-area h1 {
+    margin-top: 16px;
+  }
+  .room-details-area .book-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
 }
 
 .pagination-area {
