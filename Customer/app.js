@@ -2,6 +2,7 @@ const express = require("express");
 const { engine } = require("express-handlebars");
 const Handlebars = require("handlebars");
 const path = require("path");
+const methodOverride = require('method-override')
 
 const {
     allowInsecurePrototypeAccess,
@@ -11,6 +12,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 app.engine(
     "hbs",
     engine({
