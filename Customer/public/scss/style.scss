@@ -481,8 +481,6 @@ img {
     }
 }
 
-<<<<<<< HEAD
-=======
 .modal-btn {
     position: fixed;
     bottom: 52px;
@@ -521,8 +519,6 @@ img {
         }
     }
 }
->>>>>>> 4e01f8ee0175b7e6da45a572170fcca4a30c3c1d
-
 
 /* :: 3.8.0 Palatin Button */
 
@@ -571,7 +567,6 @@ img {
         }
     }
 }
-
 
 /* :: 4.0 Header Area CSS */
 
@@ -2028,12 +2023,47 @@ img {
 }
 
 .signin-card {
-    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
     background-color: #363636;
-    padding: 30px;
+    padding: 32px;
+    justify-content: space-between;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.signin-input {
-    border-radius: 30px;
-    border: 1px solid #cb8670;
+#sign-in-form {
+    button {
+        width: 100%;
+        background-color: $pri-color;
+        border-radius: 20px;
+        padding: 8px;
+        color: $white-color;
+        margin-bottom: 16px;
+    }
+
+    .form-control {
+        border-radius: 20px;
+        background-color: $footer-color;
+        border: 1px solid $pri-color;
+        padding: 22px 20px;
+        color: $white-color;
+        outline: none;
+        text-align: center;
+    }
+
+    .form-control:focus {
+        outline: none;
+    }
+
+}
+
+.search-order-container {
+    input {
+        outline: 0;
+        border: 0;
+        border-bottom: 1px solid #ddd !important;
+    }
+
+    
 }
