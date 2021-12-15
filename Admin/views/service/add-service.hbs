@@ -1,0 +1,145 @@
+<section
+  class=" bg-image"
+  style="background-image: url('https://mdbootstrap.com/img/Photos/new-templates/search-box/img4.jpg'); background-size: cover;"
+>
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card mt-4" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              
+              {{#if msg}}
+                <div class="alert alert-danger">
+                  {{msg}}
+                </div>
+              {{/if}}             
+                    
+              <h2 class="text-uppercase text-center mb-3">Thêm dịch vụ</h2>
+
+               {{!-- alert error message when filling in missing data --}}
+              <div style="display: none;" id="message" class="alert alert-danger" role="alert">                
+              </div>   
+
+              <form  id="add-service-form" action="/service/add-service" method="POST" >
+
+              {{!-- name --}}
+                <div class="form-outline mb-2">
+                  <label  class="form-label" for="name">Tên sản phẩm</label>
+                  <input name="name" type="text" id="name" class="form-control form-control-lg" required/>                  
+                </div>
+
+                {{!-- description --}}
+                <div class="form-outline mb-2">
+                  <label class="form-label" for="description">Mô tả</label>
+                  <textarea
+                    class="form-control"
+                    id="description"
+                    rows="5"
+                    name="description"
+                    required
+                  ></textarea>
+                </div>
+
+                {{!-- price --}}
+                <div class="form-outline mb-2">
+                  <label class="form-label" for="price">Giá</label>
+                  <input name="price" type="number" id="price" class="form-control form-control-lg" required />
+                </div>
+
+                {{!-- image --}}       
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="fileImageService">Ảnh</label>
+                  <input name="image" type="file" id="fileImageService" class="form-control form-control-lg" required/>
+                </div>
+
+                {{!-- serviceType --}} 
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="serviceType">Loại dịch vụ</label>
+                  <select
+                    id="serviceType"
+                    name="serviceType"
+                    class="form-control form-control-lg"
+                  >
+                    {{#each serviceType}}
+                      <option value="{{this._id}}">{{this.name}}</option>
+                    {{/each}}
+                  </select>
+                </div>
+
+                <input type="hidden" name="urlImage" id="url-image"/>
+                <input type="hidden" name="selectedServiceType" id="selected-service-type"/>
+
+              </form>
+
+              
+              <div class="d-grid gap-2">
+                <button
+                  onclick="myFunction()"
+                  class="btn btn-primary btn-lg btn-block"
+                >Thêm</button>
+              </div>
+
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+              <script>
+                function myFunction(){
+                  (async () =>{                     
+                    const name = $('#name').val();
+                    const description = $('#description').val();
+                    const price = $('#price').val();
+                    const fileImageService = $('#fileImageService').val();
+
+                    if (name == "") {
+                      $('#message').show();
+                      $('#message').html('Bạn chưa nhập tên sản phẩm!');
+                      $('#name').focus();
+                      return;
+                    }
+                    if (description == "") {
+                      $('#message').show();
+                      $('#message').html('Bạn chưa nhập chi tiết sản phẩm!');
+                      $('#description').focus();
+                      return;
+                    }
+                    if (price == "") {
+                      $('#message').show();
+                      $('#message').html('Bạn chưa nhập giá sản phẩm!');
+                      $('#price').focus();
+                      return;
+                    }
+                    if (parseInt(price) < 0) {
+                      $('#message').show();
+                      $('#message').html('Giá sản phẩm không được nhỏ hơn 0!');
+                      $('#price').focus();
+                      return;
+                    }                                      
+                    
+                    if (fileImageService == "") {
+                      $('#message').show();
+                      $('#message').html('Bạn chưa nhập ảnh dịch vụ!');
+                      $('#fileImageService').focus();
+                      return;
+                    }
+
+                    const valueServiceType = $("#serviceType option:selected").text();
+                    $('#selected-service-type').val(valueServiceType);
+
+                    
+                    const urlImage = await upload("#fileImageService");
+                    console.log(urlImage);
+                    console.log(urlImage);
+                    document.getElementById('url-image').value = urlImage;                
+                    document.getElementById('add-service-form').submit();  
+                  })();                                                               
+                
+                }
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{> upload-image}}

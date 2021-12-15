@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const ServiceTypeSchema = new Schema(
   {
-    nameOfServiceType: { type: Schema.Types.String },
-    services: [{ type: Schema.Types.ObjectId }],
+    name: { type: Schema.Types.String },
+    listServices: [{ type: Schema.Types.ObjectId }],
   },
   {
     collection: "ServiceType",

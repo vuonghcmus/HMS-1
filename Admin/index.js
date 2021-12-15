@@ -8,6 +8,9 @@ const {
 } = require("@handlebars/allow-prototype-access");
 const env = require("dotenv").config();
 const databaseService = require("./services/database.service");
+const StaffRoute = require("./routes/staff.route");
+const ServiceRoute = require("./routes/service.route");
+const ServiceTypeRoute = require("./routes/serviceType.route");
 
 databaseService.connectDatabase();
 
@@ -75,8 +78,9 @@ app.get("/", function (req, res) {
   res.render("home");
 });
 
-const StaffRoute = require("./routes/staff.route");
 app.use("/staff", StaffRoute);
+app.use("/service", ServiceRoute);
+app.use("/service-type", ServiceTypeRoute);
 
 app.use((req, res) => {
   res.render("errors/404", { layout: false });
