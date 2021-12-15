@@ -291,9 +291,113 @@
             </div>
         </div>
 {{!-- floating button --}}
-         <a href="" class="btn modal-btn disabled">
+         
+{{!-- floating button --}}
+        <button class="btn modal-btn" data-bs-toggle="modal" data-bs-target="#confirm-order-modal">
             <img src="/img/icon/order-icon.png" alt="">
             <span>3</span>
-        </a>
+        </button>
+
+
+        {{!-- modal for confirm booking room --}}
+        <div class="modal" id="confirm-order-modal" tabindex="-1">
+            <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Your Orders</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{!-- input information form --}}
+                <form id="confirm-order-form" class="row g-3 px-2 confirm-order-form">
+                        <ul class="order-list" style="width: 100%;">
+                            <li class="order-item col-12 mt-3 d-flex justify-content-between align-items-center">
+                                <span class="order-amount">x2</span>
+                                <div>
+                                    <h4 class="order-title">Fried Rice</h4>
+                                    <p class="order-description">Shortbread, chocolate turtle cookies, and red velvet.</p>                            
+                                </div>
+                                <p class="order-price">24$</p>
+                            </li>
+                            <li class="order-item col-12 mt-3 d-flex justify-content-between align-items-center">
+                                <span class="order-amount">x2</span>
+                                <div>
+                                    <h4 class="order-title">Fried Rice</h4>
+                                    <p class="order-description">Shortbread, chocolate turtle cookies, and red velvet.</p>                            
+                                </div>
+                                <p class="order-price">24$</p>
+                            </li>
+                            <li class="order-item col-12 mt-3 d-flex justify-content-between align-items-center">
+                                <span class="order-amount">x2</span>
+                                <div>
+                                    <h4 class="order-title">Fried Rice</h4>
+                                    <p class="order-description">Shortbread, chocolate turtle cookies, and red velvet.</p>                            
+                                </div>
+                                <p class="order-price">24$</p>
+                            </li>
+                            <li class="order-item col-12 mt-3 d-flex justify-content-between align-items-center">
+                                <span class="order-amount">x2</span>
+                                <div>
+                                    <h4 class="order-title">Fried Rice</h4>
+                                    <p class="order-description">Shortbread, chocolate turtle cookies, and red velvet.</p>                            
+                                </div>
+                                <p class="order-price">24$</p>
+                            </li>
+                        </ul>
+                    
+                    
+                    
+                </form>
+                <div class="modal-footer pt-0">
+                    <p></p>
+                    <p style="margin-bottom: 0;">Total Orders: <span>4</span></p>
+                    <p>Total Amount: <span>96$</span></p>
+                    <button form="confirm-order-form" class="btn palatin-btn" type="submit">Confirm</button>
+                    
+                </div>
+            </div>
+        </div>
+
+        {{!-- Delete hidden form --}}
+        <form name="delete-course-form" method="POST"></form>
     </section>
+
+
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+                })
+            })()
+
+            //var btnDeleteCourse = document.getElementById('btn-delete-course')
+            //var courseId
+            //var deleteForm = document.forms['delete-course-form']
+
+            var inputInformationModal = document.getElementById('input-information-modal')
+            inputInformationModal.addEventListener('show.bs.modal', function (event) {
+                var button = event.relatedTarget
+                //courseId = button.getAttribute('data-id')
+            })
+            // when dialog confirm clicked
+            //btnDeleteCourse.onclick = () => {
+            //  deleteForm.action = '/courses/' + courseId + '?_method=DELETE'
+                //deleteForm.submit()
+            //}
+        </script>
     <!-- ##### Services Area End ##### -->

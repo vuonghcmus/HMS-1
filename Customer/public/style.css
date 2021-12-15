@@ -507,7 +507,7 @@ img {
   height: 60px;
   border-radius: 50%;
   right: 32px;
-  z-index: 99999;
+  z-index: 99;
   text-align: center;
 }
 .modal-btn img {
@@ -1302,18 +1302,23 @@ img {
   flex-direction: row;
   padding: 12px 0;
 }
-.room-details-area .book-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 16px;
-}
-.room-details-area .book-container .room-price {
+.room-details-area .room-price {
   margin-bottom: 0;
 }
-.room-details-area .book-container .room-price span {
+.room-details-area .room-price span {
   font-size: 28px;
   color: #cb8670;
+}
+.room-details-area .book-container {
+  margin-top: 16px;
+}
+.room-details-area .book-container button {
+  float: right;
+}
+@media only screen and (max-width:767px) {
+  .room-details-area .book-container button {
+    width: 100%;
+  }
 }
 @media only screen and (max-width:767px) {
   .room-details-area h1 {
@@ -2182,6 +2187,29 @@ img {
   outline: 0;
   border: 0;
   border-bottom: 1px solid #ddd !important;
+}
+
+#confirm-order-form {
+  max-height: 280px;
+  overflow-y: scroll;
+}
+#confirm-order-form .order-item {
+  margin-bottom: 16px;
+}
+#confirm-order-form .order-amount,
+#confirm-order-form .order-price {
+  color: #cb8670;
+  font-weight: 600;
+}
+#confirm-order-form .order-amount {
+  font-size: 18px;
+}
+#confirm-order-form .order-price {
+  font-size: 24px;
+}
+#confirm-order-form .order-description,
+#confirm-order-form .order-price {
+  margin-bottom: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

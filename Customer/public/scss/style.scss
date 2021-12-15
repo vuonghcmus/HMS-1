@@ -491,7 +491,7 @@ img {
     height: 60px;
     border-radius: 50%;
     right: 32px;
-    z-index: 99999;
+    z-index: 99;
     text-align: center;
 
     img {
@@ -1208,20 +1208,25 @@ img {
         padding: 12px 0;
     }
 
+    .room-price {
+        margin-bottom: 0;
+    }
+
+    .room-price span {
+        font-size: 28px;
+        color: $pri-color;
+    }
+
     .book-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        button {
+            float: right;
+            @media #{$breakpoint-xs} {
+                width: 100%;
+            }
+        }
         margin-top: 16px;
 
-        .room-price {
-            margin-bottom: 0;
-        }
-    
-        .room-price span {
-            font-size: 28px;
-            color: $pri-color;
-        }
+        
     }
 
     @media #{$breakpoint-xs} {
@@ -2018,6 +2023,7 @@ img {
 /* ====== The End ====== */
 
 // CUSTOM CSS HERE
+
 .service-btn-quanlity {
     border: 1px solid #cb8670;
 }
@@ -2064,6 +2070,36 @@ img {
         border: 0;
         border-bottom: 1px solid #ddd !important;
     }
+   
+}
 
-    
+#confirm-order-form {
+
+    max-height: 280px;
+    overflow-y: scroll;
+
+    .order-item {
+        margin-bottom: 16px;
+    }
+
+    .order-amount,
+    .order-price {
+        color: $pri-color;
+        font-weight: 600;
+    }
+
+    .order-amount {
+        font-size: 18px;
+    }
+
+    .order-price {
+        font-size: 24px;
+    }
+
+    .order-description,
+    .order-price {
+        margin-bottom: 0;
+    }
+
+
 }
