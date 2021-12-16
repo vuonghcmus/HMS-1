@@ -2,16 +2,16 @@
   <div id="search-form" class="row mt-3 justify-content-start">
 
     <div class="col-12 col-md-6 col-xl-8 mb-3">
-        <a class="btn btn-primary btn-block gradient-custom-4" href="/service/add-service">
+        <a class="btn btn-primary btn-block gradient-custom-4" href="/room/add-room">
           <i class="fas fa-plus-circle"></i>
-          Thêm dịch vụ
+          Thêm phòng
         </a>
     </div>
 
     <div class="col-12 col-md-6 col-xl-4 mb-3">
       <div class="p-1 bg-light rounded rounded-pill shadow-lg d-flex justify-content-end">
         <div class="input-group">
-          <input id="myInput" type="search" onkeyup="mySearchFunction()" placeholder="Nhập tên dịch vụ bạn cần tìm?" aria-describedby="btn-search" class="form-control border-0 bg-light">
+          <input id="myInput" type="search" onkeyup="mySearchFunction()" placeholder="Nhập số phòng bạn cần tìm?" aria-describedby="btn-search" class="form-control border-0 bg-light">
           <div class="input-group-append">
             <button id="btn-search" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
           </div>
@@ -26,50 +26,48 @@
     <table id="myTable" class="table table-hover table-striped table-bordered">
       <thead>
         <tr>
-          <th>Tên dịch vụ</th>
-          <th>Mô tả</th>
-          <th>Giá</th>
-          <th>Ảnh</th>
-          <th>Loại dịch vụ</th>
+          <th>Số phòng</th>
+          <th>Ngày đặt phòng</th>
+          <th>Ngày hết hạn thuê</th>
+          <th>Loại phòng</th>
+          <th>Trạng thái</th>
           <th>Điều chỉnh</th>
         </tr>
       </thead>
 
       <tbody>
-        {{#each service}}
+        {{#each room}}
           <tr>
-            <td>{{this.name}}</td>
-            <td>{{this.description}}</td>
-            <td>{{this.price}}</td>            
-            <td>
-              <a href="{{this.image}}" target="_blank">
-                <img 
-                src="{{this.image}}" 
-                class="thumbnail img-responsive" 
-                alt="{{this.name}}" 
-                width="100" 
-                height="100"
-                style="border-radius: 10px;">
-              </a>
-            </td>
-            <td>{{this.type}}</td>
+            <td>{{this.roomNumber}}</td>
+            {{#ifCond this.status "==" true}}
+              <td>{{this.bookedDate}}</td>
+              <td>{{this.rentalEndDate}}</td> 
+              <td>{{this.type}}</td>                    
+              <td>Đã có khách</td> 
+            {{else}}
+              <td>trống</td>
+              <td>trống</td>
+              <td>{{this.type}}</td>                    
+              <td>Chưa có khách</td>
+            {{/ifCond}}           
+            
              <td>
               <div class="row text-center">
                 <div class="col-4">
-                  <a href="/service/edit-service/{{_id}}">
-                    <i class="far fa-edit" title="Chỉnh sửa dịch vụ"></i>
+                  <a href="/room/edit-room/{{_id}}">
+                    <i class="far fa-edit" title="Chỉnh sửa phòng"></i>
                   </a>
                 </div>
 
                 <div class="col-4">
                   <a
-                    href="/service/delete-service/{{_id}}"
-                    onclick="return confirm('Bạn có muốn xóa dịch vụ không?')"
+                    href="/room/delete-room/{{_id}}"
+                    onclick="return confirm('Bạn có muốn xóa phòng này không?')"
                   >
                     <i
                       class="fas fa-trash"
                       style="color: red"
-                      title="Xóa dịch vụ"
+                      title="Xóa phòng"
                     ></i>
                   </a>
                 </div>
@@ -87,19 +85,19 @@
       <nav aria-label="Page navigation example">
           <ul class="pagination">
               <li class="page-item {{#unless this.isPreviousPage}} disabled {{/unless}}">
-                  <a class="page-link " href="/service/list-service?page={{this.previousPage}}" aria-label="Previous">
+                  <a class="page-link " href="/room/list-room?page={{this.previousPage}}" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
                       <span class="sr-only">Previous</span>
                   </a>
               </li>
               {{#each pages}}
                   <li class="page-item {{#if this.isCurrentPage}} active {{/if}}">
-                      <a class="page-link" href="/service/list-service?page={{this.page}}">{{this.page}}</a>
+                      <a class="page-link" href="/room/list-room?page={{this.page}}">{{this.page}}</a>
                   </li>
               {{/each}}
 
               <li class="page-item {{#unless this.isNextPage}} disabled {{/unless}}">
-                  <a class="page-link" href="/service/list-service?page={{this.nextPage}}" aria-label="Next">
+                  <a class="page-link" href="/room/list-room?page={{this.nextPage}}" aria-label="Next">
                       <span aria-hidden="true">&raquo;</span>
                       <span class="sr-only">Next</span>
                   </a>

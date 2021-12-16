@@ -1,0 +1,162 @@
+<section
+  class="vh-50 bg-image"
+  style="background-image: url('https://mdbootstrap.com/img/Photos/new-templates/search-box/img4.jpg'); background-size: cover;"
+>
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card mt-4" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-3">Thêm loại phòng</h2>
+
+               {{!-- alert error message when filling in missing data --}}
+              <div style="display: none;" id="message" class="alert alert-danger" role="alert">                
+              </div>
+
+              <form id="add-room-type-form" method="POST" action="/room-type/add-room-type">
+                <div class="form-outline mb-2">
+                  <label  class="form-label" for="name">Tên loại phòng</label>
+                  <input name="name" type="text" id="name" class="form-control form-control-lg" required />                  
+                </div>
+
+                <div class="form-outline mb-2">
+                  <label  class="form-label" for="price">Giá</label>
+                  <input name="price" type="number" id="price" class="form-control form-control-lg" required />                  
+                </div>
+
+                <div class="form-outline mb-2">
+                  <label  class="form-label" for="area">Diện tích</label>
+                  <input name="area" type="number" id="area" class="form-control form-control-lg" required />                  
+                </div>
+
+                <div class="form-outline mb-2">
+                  <label  class="form-label" for="singleBed">Số giường đơn</label>
+                  <input name="singleBed" type="number" id="singleBed" class="form-control form-control-lg" required />                  
+                </div>
+
+                <div class="form-outline mb-2">
+                  <label  class="form-label" for="doubleBed">Số giường đôi</label>
+                  <input name="doubleBed" type="number" id="doubleBed" class="form-control form-control-lg" required />                  
+                </div>
+
+                <div class="form-outline mb-2">
+                  <label  class="form-label" for="maxOfPeople">Số khách tối đa</label>
+                  <input name="maxOfPeople" type="number" id="maxOfPeople" class="form-control form-control-lg" required />                  
+                </div>
+
+                <div class="form-outline mb-2">
+                  <label class="form-label" for="description">Mô tả</label>
+                  <textarea
+                    class="form-control"
+                    id="description"
+                    rows="5"
+                    name="description"
+                    required
+                  ></textarea>
+                </div>
+
+                {{!-- image --}}       
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="fileImageRoomType">Ảnh</label>
+                  <input name="image" type="file" id="fileImageRoomType" class="form-control form-control-lg" required/>
+                </div>
+
+                <input type="hidden" name="urlImage" id="url-image"/>
+
+              </form>
+
+              <div class="d-grid gap-2">
+                <button
+                  onclick="myFunction()"
+                  class="btn btn-primary btn-lg btn-block"
+                >Thêm</button>
+              </div> 
+
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+              <script>
+                const notifyError = (message) => {
+                  $('#message').html(message);
+                  $('#message').show();
+                }
+
+                function myFunction(){
+                  (async () =>{                     
+                    const name = $('#name').val();
+                    const price = $('#price').val();
+                    const area = $('#area').val();
+                    const singleBed = $('#singleBed').val();
+                    const doubleBed = $('#doubleBed').val();
+                    const maxOfPeople = $('#maxOfPeople').val();
+                    const description = $('#description').val();
+                    const fileImageRoomType = $('#fileImageRoomType').val();
+
+                    if (name == "") {
+                      notifyError('Bạn chưa nhập tên loại phòng!');
+                      $('#name').focus();
+                      return;
+                    }
+
+                    if (price == "") {
+                      notifyError('Bạn chưa nhập giá loại phòng!');
+                      $('#price').focus();
+                      return;
+                    }
+                    if (parseInt(price) < 0) {
+                      notifyError('Giá loại phòng không được nhỏ hơn 0!');
+                      $('#price').focus();
+                      return;
+                    }      
+                    if (area == "") {
+                      notifyError('Bạn chưa nhập diện tích loại phòng!');
+                      $('#area').focus();
+                      return;
+                    }
+
+                    if (singleBed == "") {
+                      notifyError('Bạn chưa nhập số lượng giường đơn!');
+                      $('#singleBed').focus();
+                      return;
+                    }
+
+                    if (doubleBed == "") {
+                      notifyError('Bạn chưa nhập số lượng giường đôi!');
+                      $('#doubleBed').focus();
+                      return;
+                    }
+
+                    if (maxOfPeople == "") {
+                      notifyError('Bạn chưa nhập tên số lượng khách tối đa!');
+                      $('#maxOfPeople').focus();
+                      return;
+                    }
+                   
+                    if (description == "") {
+                      notifyError('Bạn chưa nhập chi tiết sản phẩm!');
+                      $('#description').focus();
+                      return;
+                    }                                                   
+                    
+                    if (fileImageRoomType == "") {
+                      notifyError('Bạn chưa nhập ảnh dịch vụ!');
+                      $('#fileImageRoomType').focus();
+                      return;
+                    }
+                    
+                    const urlImage = await upload("#fileImageRoomType");
+                    $('#url-image').val(urlImage);
+                    $('#add-room-type-form').submit();  
+                  })();                                                               
+                
+                }
+              </script>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{> upload-image}}

@@ -4,8 +4,9 @@ const RoomSchema = new Schema(
   {
     roomNumber: { type: Schema.Types.String },
     status: { type: Schema.Types.Boolean },
-    retalEndDate: { type: Schema.Types.Date },
-    bookedDate: [{ type: Schema.Types.Date }],
+    rentalEndDate: { type: Schema.Types.String },
+    bookedDate: { type: Schema.Types.String },
+    type: { type: Schema.Types.String },
   },
   {
     collection: "Room",

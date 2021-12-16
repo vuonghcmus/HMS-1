@@ -1,10 +1,20 @@
 <div class="container-fluid">
-  <div id="search-form" class="row mt-3 me-5 justify-content-end">
-    <div class="p-1 bg-light rounded rounded-pill shadow-lg col-12 col-md-6 col-xl-4">
-      <div class="input-group">
-        <input id="myInput" type="search" onkeyup="mySearchFunction()" placeholder="Nhập username bạn cần tìm?" aria-describedby="btn-search" class="form-control border-0 bg-light">
-        <div class="input-group-append">
-          <button id="btn-search" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
+  <div id="search-form" class="row mt-3 justify-content-start">
+
+    <div class="col-12 col-md-6 col-xl-8 mb-3">
+        <a class="btn btn-primary btn-block gradient-custom-4" href="/staff/add-staff">
+          <i class="fas fa-plus-circle"></i>
+          Thêm tài khoản
+        </a>
+    </div>
+
+    <div class="col-12 col-md-6 col-xl-4 mb-3">
+      <div class="p-1 bg-light rounded rounded-pill shadow-lg d-flex justify-content-end">
+        <div class="input-group">
+          <input id="myInput" type="search" onkeyup="mySearchFunction()" placeholder="Nhập username bạn cần tìm?" aria-describedby="btn-search" class="form-control border-0 bg-light">
+          <div class="input-group-append">
+            <button id="btn-search" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
+          </div>
         </div>
       </div>
     </div>
