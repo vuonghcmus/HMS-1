@@ -62,27 +62,24 @@ module.exports = {
       }
     });
   },
-  editRoomTypePost: (req, res) => {
-    RoomType.findByIdAndUpdate(
-      req.body.id,
-      {
-        name: req.body.name,
-        price: req.body.price,
-        area: req.body.area,
-        singleBed: req.body.singleBed,
-        doubleBed: req.body.doubleBed,
-        maxOfPeople: req.body.maxOfPeople,
-        image: req.body.urlImage,
-        description: req.body.description,
-      },
-      (err, category) => {
-        if (err) {
-          console.log(err);
-        } else {
-          res.redirect("/room-type/list-room-type?page=1");
-        }
-      }
-    );
+  editRoomTypePost: async (req, res) => {
+    const roomType = await RoomType.findById(req.body.id);
+    roomType.name = req.body.name;
+    roomType.price = req.body.price;
+    roomType.area = req.body.area;
+    roomType.singleBed = req.body.singleBed;
+    roomType.doubleBed = req.body.doubleBed;
+    roomType.maxOfPeople = req.body.maxOfPeople;
+    roomType.image = req.body.urlImage;
+    roomType.description = req.body.description;
+    roomType.save();
+    const listRooms = roomType.listRooms;
+    for (let i = 0; i < listRooms.length; i++) {
+      const room = await Room.findById(listRooms[i]);
+      room.type = req.body.name;
+      room.save();
+    }
+    res.redirect("/room-type/list-room-type?page=1");
   },
   deleteRoomType: async (req, res) => {
     const roomType = await RoomType.findById(req.params.id);

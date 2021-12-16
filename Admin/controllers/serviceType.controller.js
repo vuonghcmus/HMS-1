@@ -62,20 +62,17 @@ module.exports = {
       }
     });
   },
-  editServiceTypePost: (req, res) => {
-    ServiceType.findByIdAndUpdate(
-      req.body.id,
-      {
-        name: req.body.name,
-      },
-      (err, category) => {
-        if (err) {
-          console.log(err);
-        } else {
-          res.redirect("/service-type/list-service-type?page=1");
-        }
-      }
-    );
+  editServiceTypePost: async (req, res) => {
+    const serviceType = await ServiceType.findById(req.body.id);
+    serviceType.name = req.body.name;
+    serviceType.save();
+    const listServices = serviceType.listServices;
+    for (let i = 0; i < listServices.length; i++) {
+      const service = await Service.findById(listServices[i]);
+      service.type = req.body.name;
+      service.save();
+    }
+    res.redirect("/service-type/list-service-type?page=1");
   },
   deleteServiceType: async (req, res) => {
     const serviceType = await ServiceType.findById(req.params.id);
