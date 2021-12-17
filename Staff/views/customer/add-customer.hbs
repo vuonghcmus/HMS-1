@@ -1,0 +1,90 @@
+<section
+  class="vh-100 bg-image"
+  style="background-image: url('https://mdbootstrap.com/img/Photos/new-templates/search-box/img4.jpg'); background-size: cover;"
+>
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card mt-3" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-3">Tạo tài khoản</h2>
+              <!-- alert error -->
+              {{#if error}}
+                <div class="alert alert-danger" role="alert">
+                  {{error}}
+                </div>
+              {{/if}}
+
+              <form method="POST" action="/customer/add-customer">
+                <div class="form-outline">
+                  <label class="form-label" for="username">Username</label>
+                  <input
+                    name="username"
+                    type="text"
+                    id="username"
+                    class="form-control"
+                    required
+                  />
+                </div>
+
+                <div class="form-outline mb-2">
+                  <label class="form-label" for="password">Mật khẩu</label>
+                  <input
+                    name="password"
+                    type="password"
+                    id="password"
+                    class="form-control"
+                    required
+                  />
+                </div>
+
+                <div class="form-outline mb-2">
+                  <label class="form-label" for="name">Họ tên</label>
+                  <input
+                    name="name"
+                    type="text"
+                    id="name"
+                    class="form-control"
+                    required
+                  />
+                </div>                
+
+                <div class="form-outline mb-2">
+                  <label class="form-label" for="phone">Số điện thoại</label>
+                  <input
+                    name="phone"
+                    type="number"
+                    id="phone"
+                    class="form-control"
+                    required
+                  />
+                </div>                
+
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="id">ID</label>
+                  <input
+                    name="id"
+                    type="text"
+                    id="id"
+                    class="form-control"
+                    required
+                  />
+                </div>
+
+                <div class="d-grid gap-2">
+                  <button
+                    type="submit"
+                    class="btn btn-primary btn-lg btn-block"
+                  >Tạo tài khoản</button>
+                </div>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
