@@ -2,7 +2,7 @@ const customerModel = require("../models/account/customer.model");
 
 const CustomerService = {
     async getUserById(id){
-        return await customerModel.findById(id)
+        return await customerModel.findById(id).lean()
     },
     async getUser(username, password) {
         const queryObject = { username }
