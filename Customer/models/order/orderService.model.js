@@ -2,8 +2,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const OrderServiceSchema = new Schema(
   {
-    customer: { type: Schema.Types.ObjectId },
+    customerID: { type: Schema.Types.ObjectId },
     orderDate: { type: Schema.Types.Date },
+    roomID: {type: Schema.Types.ObjectId},
     status: { type: Schema.Types.String },
     detailsOrderService: [{ type: Schema.Types.ObjectId }],
   },

@@ -2,10 +2,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const OrderRoomSchema = new Schema(
   {
-    fullname: { type: Schema.Types.String },
-    phone: { type: Schema.Types.String },
-    ID: { type: Schema.Types.String },
+    customerID: {type: Schema.Types.ObjectId},
     detailsOrderRoom: [{ type: Schema.Types.ObjectId }],
+    status: {type: Schema.Types.String},
   },
   {
     collection: "OrderRoom",
