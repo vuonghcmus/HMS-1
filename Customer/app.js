@@ -3,6 +3,10 @@ const { engine } = require("express-handlebars");
 const Handlebars = require("handlebars");
 const path = require("path");
 const methodOverride = require('method-override')
+const CustomerRoute = require("./routes/customer.route")
+const passport = require('passport');
+const bcrypt = require('bcrypt');
+const session = require('express-session');
 
 const {
     allowInsecurePrototypeAccess,
@@ -13,6 +17,11 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+
+require("./middlewares/session")(app);
+require("./middlewares/passport")(app);
+app.use(require("./middlewares/locals"));
+
 app.engine(
     "hbs",
     engine({
@@ -61,9 +70,10 @@ app.get("/services/service-details", function(req, res) {
 app.get("/search-order", function(req, res) {
     res.render("search-order");
 });
-app.get("/sign-in", function(req, res) {
-    res.render("sign-in", { layout: 'main_no_head' });
-});
+app.use("/sign-in", CustomerRoute);
+// app.get("/sign-in", function(req, res) {
+//     res.render("sign-in", { layout: 'main_no_head' }); 
+// });
 
 const PORT = 3000;
 app.listen(PORT, () => {

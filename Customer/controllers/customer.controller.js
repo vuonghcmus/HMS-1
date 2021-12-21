@@ -1,0 +1,43 @@
+const Customer = require("../models/account/customer.model");
+const bcrypt = require("bcrypt");
+const passport = require("passport");
+
+module.exports = {
+    getLogin: (req, res, next) => {
+        if (req.user) {
+            return res.redirect("/");
+        }
+
+        res.render("sign-in", {
+            layout: "main_no_head",
+        });
+    },
+    postLogin: (req, res, next) => {
+        passport.authenticate(
+            "local", {
+                successRedirect: "/",
+                failureRedirect: "/sign-in",
+                failureFlash: true,
+            },
+            (err, customer, info) => {
+                if (err) {
+                    return next(err);
+                }
+
+                if (!customer) {
+                    return res.render("sign-in", {
+                        layout: false,
+                        error: "Tài khoản hoặc mật khẩu không đúng",
+                    });
+                }
+                const retUrl = req.query.retUrl || "/";
+                req.logIn(customer, (err) => {
+                    if (err) {
+                        return next(err);
+                    }
+                    return res.redirect(retUrl);
+                });
+            }
+        )(req, res, next);
+    }
+}
