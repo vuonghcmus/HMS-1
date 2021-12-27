@@ -3,6 +3,7 @@ const { engine } = require("express-handlebars");
 const Handlebars = require("handlebars");
 const path = require("path");
 const methodOverride = require('method-override')
+const databaseService = require("./services/database.service");
 
 const logger = require("morgan");
 //config authenication
@@ -16,6 +17,7 @@ const {
     allowInsecurePrototypeAccess,
 } = require("@handlebars/allow-prototype-access");
 
+databaseService.connectDatabase()
 const app = express();
 
 app.use(express.json());
@@ -41,7 +43,6 @@ app.set("view engine", "hbs");
 app.set("views", "./views");
 
 app.use(express.static(path.join(__dirname, "/public")));
-
 
 routes(app)
 
