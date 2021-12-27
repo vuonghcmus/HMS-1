@@ -308,50 +308,30 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                {{!-- input information form --}}
+                {{!-- confirm order form --}}
                 <form id="confirm-order-form" class="row g-3 px-2 confirm-order-form">
                         <ul class="order-list" style="width: 100%;">
                             <li class="order-item col-12 mt-3 d-flex justify-content-between align-items-center">
-                                <span class="order-amount">x2</span>
                                 <div>
-                                    <h4 class="order-title">Fried Rice</h4>
+                                    <h4 class="order-title">
+                                        Fried Rice
+                                        <span class="order-price">24$</span>
+                                    </h4>
                                     <p class="order-description">Shortbread, chocolate turtle cookies, and red velvet.</p>                            
                                 </div>
-                                <p class="order-price">24$</p>
-                            </li>
-                            <li class="order-item col-12 mt-3 d-flex justify-content-between align-items-center">
-                                <span class="order-amount">x2</span>
-                                <div>
-                                    <h4 class="order-title">Fried Rice</h4>
-                                    <p class="order-description">Shortbread, chocolate turtle cookies, and red velvet.</p>                            
+                                <div class="order-amount">
+                                    <button class="btn btn-decrease">-</button>
+                                    <span style="width: 100%;">2</span> 
+                                    <button class="btn btn-increase">+</button>
                                 </div>
-                                <p class="order-price">24$</p>
-                            </li>
-                            <li class="order-item col-12 mt-3 d-flex justify-content-between align-items-center">
-                                <span class="order-amount">x2</span>
-                                <div>
-                                    <h4 class="order-title">Fried Rice</h4>
-                                    <p class="order-description">Shortbread, chocolate turtle cookies, and red velvet.</p>                            
-                                </div>
-                                <p class="order-price">24$</p>
-                            </li>
-                            <li class="order-item col-12 mt-3 d-flex justify-content-between align-items-center">
-                                <span class="order-amount">x2</span>
-                                <div>
-                                    <h4 class="order-title">Fried Rice</h4>
-                                    <p class="order-description">Shortbread, chocolate turtle cookies, and red velvet.</p>                            
-                                </div>
-                                <p class="order-price">24$</p>
+                                
                             </li>
                         </ul>
-                    
-                    
-                    
                 </form>
                 <div class="modal-footer pt-0">
                     <p></p>
-                    <p style="margin-bottom: 0;">Total Orders: <span>4</span></p>
-                    <p>Total Amount: <span>96$</span></p>
+                    <p style="margin-bottom: 0;">Total Amount: <span>4</span></p>
+                    <p>Total Price: <span>96$</span></p>
                     <button form="confirm-order-form" class="btn palatin-btn" type="submit">Confirm</button>
                     
                 </div>
@@ -364,33 +344,16 @@
 
 
     <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-            (function () {
-            'use strict'
 
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.querySelectorAll('.needs-validation')
+            
+            const confirmOrderModal = document.getElementById('confirm-order-modal')
 
-            // Loop over them and prevent submission
-            Array.prototype.slice.call(forms)
-                .forEach(function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                    }
-
-                    form.classList.add('was-validated')
-                }, false)
-                })
-            })()
 
             //var btnDeleteCourse = document.getElementById('btn-delete-course')
             //var courseId
             //var deleteForm = document.forms['delete-course-form']
 
-            var inputInformationModal = document.getElementById('input-information-modal')
-            inputInformationModal.addEventListener('show.bs.modal', function (event) {
+            confirmOrderModal.addEventListener('show.bs.modal', function (event) {
                 var button = event.relatedTarget
                 //courseId = button.getAttribute('data-id')
             })
@@ -400,4 +363,3 @@
                 //deleteForm.submit()
             //}
         </script>
-    <!-- ##### Services Area End ##### -->
