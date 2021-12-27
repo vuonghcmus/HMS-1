@@ -26,8 +26,8 @@ module.exports = {
 
                 if (!customer) {
                     return res.render("sign-in", {
-                        layout: false,
-                        error: "Tài khoản hoặc mật khẩu không đúng",
+                        layout: "main_no_head",
+                        error: "Account or password is not correct",
                     });
                 }
                 const retUrl = req.query.retUrl || "/";

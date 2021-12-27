@@ -3,10 +3,16 @@ const { engine } = require("express-handlebars");
 const Handlebars = require("handlebars");
 const path = require("path");
 const methodOverride = require('method-override')
-const CustomerRoute = require("./routes/customer.route")
+
+const logger = require("morgan");
+//config authenication
 const passport = require('passport');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
+
+//config router
+const CustomerRoute = require("./routes/customer.route")
+const ServiceRouter = require("./routes/service.route");
 
 const {
     allowInsecurePrototypeAccess,
@@ -17,6 +23,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+// use logger and use read json , static file
+app.use(logger("dev"));
 
 require("./middlewares/session")(app);
 require("./middlewares/passport")(app);
@@ -61,9 +69,9 @@ app.get("/rooms", function(req, res) {
 app.get("/rooms/room-details", function(req, res) {
     res.render("room-details");
 });
-app.get("/services", function(req, res) {
-    res.render("services");
-});
+// app.get("/services", function(req, res) {
+//     res.render("services");
+// });
 app.get("/services/service-details", function(req, res) {
     res.render("service-details");
 });
@@ -74,6 +82,8 @@ app.use("/sign-in", CustomerRoute);
 // app.get("/sign-in", function(req, res) {
 //     res.render("sign-in", { layout: 'main_no_head' }); 
 // });
+
+app.use("/services", ServiceRouter);
 
 const PORT = 3000;
 app.listen(PORT, () => {

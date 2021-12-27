@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const BillSchema = new Schema(
   {
-    customer: { type: Schema.Types.ObjectId },
-    status: { type: Schema.Types.Boolean },
+    customerID: { type: Schema.Types.ObjectId },
+    status: { type: Schema.Types.String },
     dateOfCreated: { type: Schema.Types.Date },
     ServiceBill: [{ type: Schema.Types.ObjectId }],
     RoomBill: [{ type: Schema.Types.ObjectId }],
