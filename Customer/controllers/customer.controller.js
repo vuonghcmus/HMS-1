@@ -1,9 +1,9 @@
-const Customer = require("../models/account/customer.model");
+const customerModel = require("../models/account/customer.model");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 
 module.exports = {
-    getLogin: (req, res, next) => {
+    show: (req, res, next) => {
         if (req.user) {
             return res.redirect("/");
         }
@@ -12,7 +12,7 @@ module.exports = {
             layout: "main_no_head",
         });
     },
-    postLogin: (req, res, next) => {
+    login: (req, res, next) => {
         passport.authenticate(
             "local", {
                 successRedirect: "/",
