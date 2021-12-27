@@ -1,10 +1,10 @@
 const serviceTypeModel = require("../../models/service/serviceType.model");
 
 const ServiceTypeService = {
-    async getAll(){
+    async findAll(){
         return await serviceTypeModel.find().lean()
     },
-    async getServiceTypeById(id){
+    async findById(id){
         return await serviceTypeModel.findById(id).lean()
     },
     

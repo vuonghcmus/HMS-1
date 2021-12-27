@@ -14,4 +14,4 @@ const RoomTypeSchema = new Schema({
 },{
     collection: 'RoomType'
 })
-export default mongoose.model('RoomType',RoomTypeSchema)
+module.exports = mongoose.model('RoomType',RoomTypeSchema)

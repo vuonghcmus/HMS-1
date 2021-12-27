@@ -3,10 +3,10 @@ const Schema = mongoose.Schema;
 const OrderServiceSchema = new Schema(
   {
     customerID: { type: Schema.Types.ObjectId },
-    orderDate: { type: Schema.Types.Date },
     roomID: {type: Schema.Types.ObjectId},
-    status: { type: Schema.Types.String },
     detailsOrderService: [{ type: Schema.Types.ObjectId }],
+    status: { type: Schema.Types.String },
+    orderDate: { type: Schema.Types.Date },
   },
   {
     collection: "OrderService",
