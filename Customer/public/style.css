@@ -48,6 +48,12 @@
   color: #ffffff;
 }
 
+.btn-close {
+  font-size: 24px;
+  border: none;
+  background-color: transparent;
+}
+
 /* [Master Stylesheet - v1.0] */
 /* =========== Index of CSS ===========
 :: 1.0 Import Fonts
@@ -2196,18 +2202,18 @@ img {
 #confirm-order-form .order-item {
   margin-bottom: 16px;
 }
-#confirm-order-form .order-amount,
+#confirm-order-form .order-amount-container,
 #confirm-order-form .order-price {
   color: #cb8670;
   font-weight: 600;
 }
-#confirm-order-form .order-amount {
+#confirm-order-form .order-amount-container {
   font-size: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-#confirm-order-form .order-amount span {
+#confirm-order-form .order-amount-container span {
   color: #141414;
 }
 #confirm-order-form .order-price {

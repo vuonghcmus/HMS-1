@@ -7,7 +7,9 @@ const auth = require("../middlewares/auth");
 
 const router = express.Router();
 
-router.get("/", customerController.show);
-router.post("/", customerController.login);
+router.get("/sign-in", customerController.show);
+router.get("/profile", customerController.profile);
+router.get("/change-password", customerController.changePassword);
+router.post("/sign-in", customerController.login);
 
 module.exports = router

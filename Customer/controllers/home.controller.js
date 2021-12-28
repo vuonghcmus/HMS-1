@@ -1,6 +1,4 @@
-const serviceService = require("../services/service/service.service");
-
-class ServiceController {
+class HomeController {
     //[GET] /
     async show(req, res, next) {
         res.render("home/home");
@@ -37,4 +35,4 @@ class ServiceController {
     }
 
 }
-module.exports = new ServiceController;
+module.exports = new HomeController;

@@ -2082,13 +2082,13 @@ img {
         margin-bottom: 16px;
     }
 
-    .order-amount,
+    .order-amount-container,
     .order-price {
         color: $pri-color;
         font-weight: 600;
     }
 
-    .order-amount {
+    .order-amount-container {
         font-size: 20px;
         display: flex;
         align-items: center;
