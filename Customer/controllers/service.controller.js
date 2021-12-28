@@ -13,7 +13,7 @@ class ServiceController {
     }
 
     async ServiceDetail(req, res, next) {
-        const service = await serviceService.findServiceById(req.params.id_service);
+        const service = await serviceService.findById(req.params.id_service);
         console.log(service);
         res.render("services/service-details", { service: service });
     }

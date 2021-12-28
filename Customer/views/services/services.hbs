@@ -226,12 +226,12 @@
 {{!-- floating button --}}
         
 {{!-- floating button --}}
+    {{#if user}}
     <button class="btn modal-btn btn-floating" data-bs-toggle="modal" data-bs-target="#confirm-order-modal">
         <img src="/img/icon/order-icon.png" alt="">
         <span>3</span>
     </button>
 
-    {{#if user}}
     {{!-- modal for confirm booking room --}}
     <div class="modal" id="confirm-order-modal" tabindex="-1">
         <div class="modal-dialog">

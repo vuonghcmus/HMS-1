@@ -5,10 +5,10 @@ const ServiceService = {
         const res = await serviceModel.find({});
         return res;
     },
-    async findServiceById(id) {
+    async findById(id) {
         return await serviceModel.findById(id).lean();
     },
-    async getAllServicesByTypeId(serviceTypeId) {
+    async findAllServicesByTypeId(serviceTypeId) {
         const currentServiceType = await serviceTypeService.getServiceTypeById(serviceTypeId)
         const servicesId = currentServiceType.services
         const services = servicesId.map(serviceModel.findById)

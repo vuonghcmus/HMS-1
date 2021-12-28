@@ -7,7 +7,6 @@ class RoomController {
         const allRooms = await RoomTypeSerivce.findAll();
         console.log(allRooms);
 
-        // res.render("rooms", { allRooms: allRooms });
         res.render('rooms/rooms', { allRooms: allRooms });
     }
 
@@ -15,7 +14,6 @@ class RoomController {
     async getRoomDetail(req, res, next) {
         const room = await RoomTypeSerivce.findById(req.params.id_room);
         console.log(room);
-        // res.render("room-details", { room: room });
         res.render('rooms/room-details', { room: room });
     }
 }

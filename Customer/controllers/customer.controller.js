@@ -16,7 +16,7 @@ module.exports = {
         passport.authenticate(
             "local", {
                 successRedirect: "/",
-                failureRedirect: "/sign-in",
+                failureRedirect: "/account/sign-in",
                 failureFlash: true,
             },
             (err, customer, info) => {
@@ -25,7 +25,7 @@ module.exports = {
                 }
 
                 if (!customer) {
-                    return res.render("sign-in", {
+                    return res.render("account/sign-in", {
                         layout: "main_no_head",
                         error: "Account or password is not correct",
                     });
