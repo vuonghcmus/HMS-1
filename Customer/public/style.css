@@ -622,8 +622,10 @@ img {
     max-width: 140px;
   }
 }
-.header-area .palatin-main-menu .classy-navbar .classynav ul li {
-  margin: 0 4px;
+@media only screen and (min-width:992px) and (max-width:1199px) {
+  .header-area .palatin-main-menu .classy-navbar .classynav ul li {
+    margin: 0 4px;
+  }
 }
 .header-area .palatin-main-menu .classy-navbar .classynav ul li a {
   text-transform: capitalize;
