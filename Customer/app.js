@@ -4,6 +4,9 @@ const Handlebars = require("handlebars");
 const path = require("path");
 const methodOverride = require('method-override')
 
+const mongoose = require("mongoose");
+// mongoose.connect(process.env.da)
+
 const logger = require("morgan");
 //config authenication
 const passport = require('passport');

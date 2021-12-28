@@ -493,7 +493,6 @@ img {
     right: 32px;
     z-index: 99;
     text-align: center;
-
     img {
         width: 24px;
         height: 24px;
@@ -502,7 +501,6 @@ img {
         top: 50%;
         transform: translate(-50%, -50%);
     }
-
     span {
         padding: 4px 12px;
         position: absolute;
@@ -512,13 +510,13 @@ img {
         background-color: red;
         border-radius: 50%;
     }
-
     &.disabled {
         span {
             display: none;
         }
     }
 }
+
 
 /* :: 3.8.0 Palatin Button */
 
@@ -567,6 +565,7 @@ img {
         }
     }
 }
+
 
 /* :: 4.0 Header Area CSS */
 
@@ -1159,64 +1158,50 @@ img {
             background-color: #000;
         }
     }
-
 }
 
 .modal-footer {
-
     flex-direction: column;
     align-items: flex-start;
     p {
         font-size: 20px;
         font-weight: 600;
     }
-
     span {
         color: $pri-color;
     }
-
     button {
         width: 100%;
     }
 }
-.room-details-area {
 
+.room-details-area {
     .room-info {
         color: $dark-color;
         font-size: 16px;
-
         span {
             color: $pri-color;
             font-weight: 600;
         }
     }
-
     .room-info-container {
-        @media #{$breakpoint-lg} {
-
-        }
-
+        @media #{$breakpoint-lg} {}
         @media #{$breakpoint-xs} {
             display: flex;
             justify-content: space-between;
         }
     }
-    
-
     .card {
         flex-direction: row;
         padding: 12px 0;
     }
-
     .room-price {
         margin-bottom: 0;
     }
-
     .room-price span {
         font-size: 28px;
         color: $pri-color;
     }
-
     .book-container {
         button {
             float: right;
@@ -1225,15 +1210,11 @@ img {
             }
         }
         margin-top: 16px;
-
-        
     }
-
     @media #{$breakpoint-xs} {
         h1 {
             margin-top: 16px;
         }
-
     }
 }
 
@@ -2023,7 +2004,6 @@ img {
 /* ====== The End ====== */
 
 // CUSTOM CSS HERE
-
 .service-btn-quanlity {
     border: 1px solid #cb8670;
 }
@@ -2047,7 +2027,6 @@ img {
         color: $white-color;
         margin-bottom: 16px;
     }
-
     .form-control {
         border-radius: 20px;
         background-color: $footer-color;
@@ -2057,11 +2036,9 @@ img {
         outline: none;
         text-align: center;
     }
-
     .form-control:focus {
         outline: none;
     }
-
 }
 
 .search-order-container {
@@ -2070,36 +2047,33 @@ img {
         border: 0;
         border-bottom: 1px solid #ddd !important;
     }
-   
 }
 
 #confirm-order-form {
-
     max-height: 280px;
     overflow-y: scroll;
-
     .order-item {
         margin-bottom: 16px;
     }
-
     .order-amount,
     .order-price {
         color: $pri-color;
         font-weight: 600;
     }
-
     .order-amount {
         font-size: 18px;
     }
-
     .order-price {
         font-size: 24px;
     }
-
     .order-description,
     .order-price {
         margin-bottom: 0;
     }
+}
 
-
+.btn-close-modal {
+    background: none;
+    border: none;
+    font-size: 20px;
 }
