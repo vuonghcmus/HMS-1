@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const ServiceSchema = new Schema({
-    serviceName: { type: Schema.Types.String },
+    name: { type: Schema.Types.String },
     description: { type: Schema.Types.String },
     price: { type: Schema.Types.Number },
-    type: { type: Schema.Types.String },
     image: { type: Schema.Types.String },
+    type: { type: Schema.Types.String },
 }, {
     collection: "Service",
 });

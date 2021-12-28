@@ -2224,25 +2224,51 @@ img {
 #confirm-order-form .order-price {
   margin-bottom: 0;
 }
-#confirm-order-form .btn-increase,
-#confirm-order-form .btn-decrease {
+
+.btn-close-modal {
+  background: none;
+  border: none;
+  font-size: 20px;
+}
+
+.btn-increase,
+.btn-decrease {
   font-size: 24px;
   background-color: transparent;
   color: #cb8670;
   padding: 0 8px;
 }
-#confirm-order-form .btn-increase:hover, #confirm-order-form .btn-increase:focus,
-#confirm-order-form .btn-decrease:hover,
-#confirm-order-form .btn-decrease:focus {
+.btn-increase:hover, .btn-increase:focus,
+.btn-decrease:hover,
+.btn-decrease:focus {
   background-color: #cb8670;
   color: #ffffff;
 }
-#confirm-order-form .btn-increase {
+
+.btn-increase {
   margin-left: 6px;
 }
-#confirm-order-form .btn-decrease {
+
+.btn-decrease {
   margin-right: 6px;
   padding: 0 10px;
+}
+
+.room-text-description {
+  height: 200px;
+  width: 300px;
+  padding: 20px 20px 40px 20px;
+}
+
+.modal-content {
+  /* 80% of window height */
+  max-height: 540px;
+}
+
+.modal-body {
+  /* 100% = dialog height, 120px = header + footer */
+  max-height: calc(100% - 120px);
+  overflow-y: scroll;
 }
 
 /*# sourceMappingURL=style.css.map */

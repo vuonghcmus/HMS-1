@@ -91,25 +91,26 @@
 
         <div class="row">
 
+            {{#each allRooms}}
             <!-- Single Rooms Area -->
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="single-rooms-area wow fadeInUp" data-wow-delay="100ms">
                     <!-- Thumbnail -->
                     <div class="bg-thumbnail bg-img" style="background-image: url(/img/bg-img/1.jpg);"></div>
                     <!-- Price -->
-                    <p class="price-from">From $150/night</p>
+                    <p class="price-from">$ {{this.price}}/night</p>
                     <!-- Rooms Text -->
-                    <div class="rooms-text">
+                    <div class="room-text-description rooms-text">
                         <div class="line"></div>
-                        <h4>Deluxe Room</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque.</p>
+                        <h4>{{this.name}}</h4>
+                        <p>{{this.description}}</p>
                     </div>
                     <!-- Book Room -->
-                    <a href="#" class="book-room-btn btn palatin-btn">View Details</a>
+                    <a href="/rooms/{{this._id}}" class="book-room-btn btn palatin-btn">View Details</a>
                 </div>
             </div>
-
-            <!-- Single Rooms Area -->
+            {{/each}}
+            {{!-- <!-- Single Rooms Area -->
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="single-rooms-area wow fadeInUp" data-wow-delay="200ms">
                     <!-- Thumbnail -->
@@ -251,9 +252,9 @@
                     <!-- Book Room -->
                     <a href="#" class="book-room-btn btn palatin-btn">View Details</a>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="col-12">
+            {{!-- <div class="col-12">
                 <!-- Pagination -->
                 <div class="pagination-area wow fadeInUp" data-wow-delay="400ms">
                     <nav>
@@ -264,7 +265,7 @@
                         </ul>
                     </nav>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
     </div>

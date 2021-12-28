@@ -10,23 +10,23 @@
 <section class="room-details-area">
     <div class="container mb-5">
         <div class="row card mt-5">
-            <div class="col-md-6 col-lg-4 col-12 bg-thumbnail bg-img">
+            <div class="col-md-6 col-lg-4 col-12 bg-thumbnail bg-img d-flex align-items-center">
                 <div class="bg-thumbnail bg-img">
-                    <img src="/img/bg-img/1.jpg"/>
+                    <img src={{room.image}}/>
                 </div>
             </div>
             <div class="col-md-6 col-lg-8 col-12">
-                <h1 class="room-title">Deluxe Room</h1>
-                <p class="room-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. </p>
+                <h1 class="room-title">{{room.name}}</h1>
+                <p class="room-info">{{room.description}}</p>
                 <div class="room-info-container">
-                    <p class="room-info">People: <span>2</span></p>
+                    <p class="room-info">People: <span>{{room.maxOfPeople}}</span></p>
                     <p class="room-info">Areas: <span>100m<sup>2</sup></span></p>
                 </div>
                 <div class="room-info-container">
                     <p class="room-info">Beds: <span>2</span></p>
                     <p class="room-info">Rooms left: <span>2</span></p>
                 </div>
-                <p class="room-info room-price"><span>150$</span>/night</p>
+                <p class="room-info room-price"><span>{{room.price}}$</span>/night</p>
             </div>
             <form class="col-12 needs-validation" novalidate>
                 <div class="mt-3">

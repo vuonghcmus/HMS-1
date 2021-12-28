@@ -4,6 +4,6 @@ const router = express.Router();
 const serviceController = require("../controllers/service.controller.js");
 
 router.get("/", serviceController.show);
-router.get("/:service_name")
+router.get("/:id_service", serviceController.ServiceDetail);
 
 module.exports = router

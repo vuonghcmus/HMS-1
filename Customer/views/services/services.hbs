@@ -73,20 +73,20 @@
         <div class="row service-item card">
             
             <div class="col-12 col-md-3">
-                <img src="/img/bg-img/2.jpg"/>
+                <img src="{{this.image}}"/>
             </div>
             <div class="col-md-6 col-12 text-container">
-                <h2>{{this.serviceName}}</h2>
+                <h2>{{this.name}}</h2>
                 <p>{{this.description}}</p>
             </div>
         
             <div class="col-md-3 col-12 price-container d-flex">
                 <p class="price-text"><span>{{this.price}}</span>$</p>
-                <a href="#" class="book-room-btn btn custom-palatin-btn price-btn ">Details</a>
+                <a href="/services/{{this._id}}" class="book-room-btn btn custom-palatin-btn price-btn ">Details</a>
             </div>
         </div>
         {{/each}}
-        <div class="row service-item card">
+        {{!-- <div class="row service-item card">
             
             <div class="col-12 col-md-3">
                 <img src="/img/bg-img/2.jpg"/>
@@ -157,7 +157,7 @@
                 </div>
             </div>
 
-        </div>
+        </div> --}}
     </div>
 </section>
 <!-- ##### Core Features End ##### -->
@@ -165,7 +165,7 @@
 <!-- ##### Services Area Start ##### -->
 <section class="services-area">
     <div class="container">
-        <div class="row">
+        {{!-- <div class="row">
 
             <!-- Single Service Area -->
             <div class="col-12 col-sm-6 col-lg-4">
@@ -221,7 +221,7 @@
                 </div>
             </div>
 
-        </div>
+        </div> --}}
     </div>
 {{!-- floating button --}}
         
@@ -231,7 +231,7 @@
         <span>3</span>
     </button>
 
-
+    {{#if user}}
     {{!-- modal for confirm booking room --}}
     <div class="modal" id="confirm-order-modal" tabindex="-1">
         <div class="modal-dialog">
@@ -311,6 +311,7 @@
             </div>
         </div>
     </div>
+    {{/if}}
 
     {{!-- Delete hidden form --}}
     <form name="delete-course-form" method="POST"></form>

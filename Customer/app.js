@@ -5,6 +5,9 @@ const path = require("path");
 const methodOverride = require('method-override')
 const databaseService = require("./services/database.service");
 
+const mongoose = require("mongoose");
+// mongoose.connect(process.env.da)
+
 const logger = require("morgan");
 //config authenication
 const passport = require('passport');
