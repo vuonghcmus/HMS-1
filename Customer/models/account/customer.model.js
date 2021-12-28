@@ -6,7 +6,7 @@ const CustomerSchema = new Schema({
     fullname: { type: Schema.Types.String },
     phone: { type: Schema.Types.String },
     ID: { type: Schema.Types.String },
-    status: { type: Schema.Types.Boolean },
+    status: { type: Schema.Types.String },
 }, {
     collection: "Customer",
 });

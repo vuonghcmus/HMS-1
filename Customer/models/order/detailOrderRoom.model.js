@@ -5,6 +5,8 @@ const DetailOrderRoomSchema = new Schema(
     roomID: { type: Schema.Types.ObjectId },
     dateOfCheckIn: { type: Schema.Types.Date },
     dateOfCheckOut: { type: Schema.Types.Date },
+    detailOrderService: [{ type: Schema.Types.ObjectId }],
+    price: {type: Schema.Types.Number},
   },
   {
     collection: "DetailOrderRoom",

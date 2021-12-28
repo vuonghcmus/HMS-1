@@ -5,6 +5,7 @@ const Schema = mongoose.Schema
 const RoomSchema = new Schema({
     roomNumber: { type: Schema.Types.String},
     status: { type: Schema.Types.String},
+    type: { type: Schema.Types.String},
 },{
     collection: 'Room'
 })

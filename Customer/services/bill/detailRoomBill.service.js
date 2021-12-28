@@ -1,13 +1,17 @@
 const detailRoomBillModel = require("../../models/bill/detailRoomBill.model");
 
 const DetailRoomBillService = {
-    async getAll(){
-        return await detailRoomBillModel.find().lean()
+    async findAll() {
+        const result = await detailRoomBillModel.find({});
+        return result;
     },
-    async getDetailRoomBillById(id){
-        return await detailRoomBillModel.findById(id).lean()
+    async findById(id) {
+        return await detailRoomBillModel.findById(id).lean();
     },
-    
+
+    async findByRoomId(roomId) {
+        return await detailRoomBillModel.find({roomID: roomId}).lean();
+    },
 }
 
 module.exports = DetailRoomBillService

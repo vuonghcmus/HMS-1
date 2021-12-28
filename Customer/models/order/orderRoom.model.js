@@ -3,8 +3,9 @@ const Schema = mongoose.Schema;
 const OrderRoomSchema = new Schema(
   {
     customerID: {type: Schema.Types.ObjectId},
-    detailsOrderRoom: [{ type: Schema.Types.ObjectId }],
-    status: {type: Schema.Types.String},
+    detailOrderRoom: [{ type: Schema.Types.ObjectId }],
+    tempOrderRoom: [{ type: Schema.Types.ObjectId }],
+    totalPrice: {type: Schema.Types.Number},
   },
   {
     collection: "OrderRoom",
