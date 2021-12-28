@@ -7,7 +7,10 @@ class ServiceController {
         // console.log(allServices);
         // console.log(allServices);
         // console.log(allServices[0].id);
-        res.render("services/services", { allServices: allServices });
+        res.render("services/services", {
+            allServices: allServices,
+            active: {service: true}
+        });
 
         // res.send(allServices);
     }
@@ -15,7 +18,10 @@ class ServiceController {
     async ServiceDetail(req, res, next) {
         const service = await serviceService.findById(req.params.id_service);
         console.log(service);
-        res.render("services/service-details", { service: service });
+        res.render("services/service-details", {
+            service: service ,
+            active: {service: true}
+        });
     }
 }
 module.exports = new ServiceController;

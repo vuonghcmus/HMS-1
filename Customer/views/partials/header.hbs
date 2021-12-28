@@ -25,12 +25,12 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li class="active"><a href="/">Home</a></li>
+                                <li class="{{#if active.home}}active{{/if}}"><a href="/">Home</a></li>
                                 
-                                <li><a href="/rooms">Rooms</a></li>
-                                <li><a href="/services">Services</a></li>
-                                <li><a href="/contact">Contact</a></li>
-                                <li>
+                                <li class="{{#if active.room}}active{{/if}}"><a href="/rooms">Rooms</a></li>
+                                <li class="{{#if active.service}}active{{/if}}"><a href="/services">Services</a></li>
+                                <li class="{{#if active.contact}}active{{/if}}"><a href="/contact">Contact</a></li>
+                                <li class="{{#if active.search}}active{{/if}}">
                                     <a href="/search-order">
                                         Search Order
                                         <svg

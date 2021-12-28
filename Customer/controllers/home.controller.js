@@ -1,12 +1,16 @@
 class HomeController {
     //[GET] /
     async show(req, res, next) {
-        res.render("home/home");
+        res.render("home/home", {
+            active: {home: true}
+        });
     }
 
     //[GET] /search-order
     async getSearch(req, res, next) {
-        res.render("home/search-order");
+        res.render("home/search-order", {
+            active: {search: true}
+        });
     }
 
     //[POST] /search-order
@@ -26,7 +30,9 @@ class HomeController {
 
     // [GET] /contact
     async contact(req, res, next) {
-        res.render("home/contact");
+        res.render("home/contact", {
+            active: {contact: true}
+        });
     }
 
     // [GET] /about-us
