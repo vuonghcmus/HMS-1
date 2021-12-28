@@ -8,7 +8,7 @@ module.exports = {
             return res.redirect("/");
         }
 
-        res.render("sign-in", {
+        res.render("account/sign-in", {
             layout: "main_no_head",
         });
     },
@@ -39,5 +39,14 @@ module.exports = {
                 });
             }
         )(req, res, next);
+    },
+
+    profile: (req, res, next) => {
+        res.render('account/profile')
+    },
+
+    changePassword: (req, res, next) => {
+        res.render('account/change-password')
     }
+
 }

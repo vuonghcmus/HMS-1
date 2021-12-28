@@ -6,7 +6,7 @@ const orderRouter = require('./order.route')
 const homeRouter = require('./home.route')
 
 const routes = app => {
-    app.use('/sign-in', customerRouter)
+    app.use('/account', customerRouter)
     app.use('/services', serviceRouter)
     app.use('/rooms', roomRouter)
     app.use('/bills', billRouter)
