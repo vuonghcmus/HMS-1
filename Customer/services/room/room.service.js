@@ -1,10 +1,16 @@
 const roomModel = require("../../models/room/room.model");
 
 const RoomService = {
-    async getRoomByStatus(status){
+
+    async findAll() {
+        const result = await roomModel.find({});
+        return result;
+    },
+
+    async findByStatus(status){
         return await roomModel.find({ status }).lean()
     },
-    async getRoomById(id){
+    async findById(id){
         return await roomModel.findById(id).lean()
     },
 }

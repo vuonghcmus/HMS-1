@@ -9,8 +9,8 @@
 
 /* =========== Index of CSS ===========
 :: 1.0 Import Fonts
-:: 2.0 Import All CSS
-:: 3.0 Base CSS
+:: 4.0 Import All CSS
+:: 340 Base CSS
     :: 3.1.0 Spacing
     :: 3.2.0 Height
     :: 3.3.0 Section Padding
@@ -2061,9 +2061,16 @@ img {
         font-weight: 600;
     }
     .order-amount {
-        font-size: 18px;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        span {
+            color: $dark-color;
+        }
     }
     .order-price {
+        margin-left: 20px;
         font-size: 24px;
     }
     .order-description,
@@ -2076,4 +2083,43 @@ img {
     background: none;
     border: none;
     font-size: 20px;
+}
+
+.btn-increase,
+.btn-decrease {
+    font-size: 24px;
+    background-color: transparent;
+    color: $pri-color;
+    padding: 0 8px;
+    &:hover,
+    &:focus {
+        background-color: $pri-color;
+        color: $white-color;
+    }
+}
+
+.btn-increase {
+    margin-left: 6px;
+}
+
+.btn-decrease {
+    margin-right: 6px;
+    padding: 0 10px;
+}
+
+.room-text-description {
+    height: 200px;
+    width: 300px;
+    padding: 20px 20px 40px 20px;
+}
+
+.modal-content {
+    /* 80% of window height */
+    max-height: 540px;
+}
+
+.modal-body {
+    /* 100% = dialog height, 120px = header + footer */
+    max-height: calc(100% - 120px);
+    overflow-y: scroll;
 }

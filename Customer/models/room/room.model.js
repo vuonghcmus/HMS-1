@@ -8,4 +8,4 @@ const RoomSchema = new Schema({
 },{
     collection: 'Room'
 })
-export default mongoose.model('Room',RoomSchema)
+module.exports = mongoose.model('Room',RoomSchema)
