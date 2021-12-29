@@ -9,7 +9,6 @@ class RoomController {
 
         res.render('rooms/rooms', {
             allRooms: allRooms,
-            active: {room: true}
         });
     }
 
@@ -29,13 +28,11 @@ class RoomController {
             {_id: 8, roomNumber: 407},
         ]
 
-
         const table = generateBookingTable(rooms)
 
         res.render('rooms/room-details', {
             roomType: roomType,
             table: table,
-            active: {room: true}
         });
     }
 }
