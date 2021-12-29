@@ -14,5 +14,22 @@
 <!-- Active js -->
 <script src="/js/active.js"></script>
 <script>
-
+function setUpNavLink()
+{
+    var navlinks=document.getElementsByClassName("navigate-link");
+    var navdivs=document.getElementsByClassName("navigate-div");
+    const url=window.location.pathname;
+    for (var i =0;i<navdivs.length;i++)
+    {
+        if(navlinks[i].getAttribute("href")==url)
+        {
+            navdivs[i].className="navigate-div active";
+        }
+        else
+        {
+            navdivs[i].className="navigate-div";
+        }
+    }
+}
+setUpNavLink();
 </script>

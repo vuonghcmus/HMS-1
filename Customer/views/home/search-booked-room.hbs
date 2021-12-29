@@ -15,7 +15,7 @@
                     <div class="service-intro-text">
                         <div class="section-heading text-center">
                             {{!-- <div class="line-"></div> --}}
-                            <h2>Find your order</h2>
+                            <h2>Find your booked room</h2>
                         </div>
                         {{!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p> --}}
                         {{!-- <a href="#" class="btn custom-palatin-btn mt-50">Read More</a> --}}
@@ -60,7 +60,11 @@
                     </div>
                 </div> --}}
             </div>
+            
+            
+            
             {{!-- INPUT INFORMATION --}}
+            
             <form id="search-order-form" class="row align-items-center mb-2">
                 <div class="col-12 col-lg-5 mx-auto">
                     <div class="form-group row text-center">
@@ -81,12 +85,23 @@
                     <button type="submit" class="btn custom-palatin-btn">Search</button>
                 </div>
             </form>
+            {{#if err}}
+            <div class="row" style="padding-left:20px;">
+                <p style="color: red;">{{err}}</p>
+            </div>
+            {{/if}}
             <div class="mb-4" style="border: 1px solid #cb8670;"></div>
         </div>
     </section>
     <!-- ##### Service Intro Area End ##### -->
     <section class="core-features-area">
         <div class="container " style="min-height: 500px; ">
+            {{#if isEmpty}}
+            <div class="row d-flex justify-content-center">
+                <p class="message-error">Not found your booked rooms</p>
+            </div>
+            {{else}}
+            {{#each bookedRooms}}
             <div class="row service-item card" >
                  <div class="col-12 col-md-3">
                     <img src="/img/bg-img/2.jpg"/>
@@ -103,37 +118,8 @@
                     <a href="#" class="book-room-btn btn custom-palatin-btn price-btn ">Details</a>
                 </div>
             </div>
-           <div class="row service-item card" >
-                 <div class="col-12 col-md-3">
-                    <img src="/img/bg-img/2.jpg"/>
-                </div>
-                <div class="col-md-6 col-12 text-container">
-                    <h2>Deluxe Room</h2>
-                    <p>Price: 150$</p>
-                    <p>Beds: 2</p>
-                    <p>People: 2</p>
-                </div>
-            
-                <div class="col-md-3 col-12 price-container d-flex">
-                    <p class="price-text">x <span>2</span></p>
-                    <a href="#" class="book-room-btn btn custom-palatin-btn price-btn ">Details</a>
-                </div>
-            </div>
-            <div class="row service-item card" >
-                 <div class="col-12 col-md-3">
-                    <img src="/img/bg-img/2.jpg"/>
-                </div>
-                <div class="col-md-6 col-12 text-container">
-                    <h2>Deluxe Room</h2>
-                    <p>Price: 150$</p>
-                    <p>Beds: 2</p>
-                    <p>People: 2</p>
-                </div>
-            
-                <div class="col-md-3 col-12 price-container d-flex">
-                    <p class="price-text">x <span>2</span></p>
-                    <a href="#" class="book-room-btn btn custom-palatin-btn price-btn ">Details</a>
-                </div>
-            </div>
+            {{/each}}
+            {{/if}}
+           
         </div>
     </section>
