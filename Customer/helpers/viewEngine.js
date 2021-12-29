@@ -25,6 +25,9 @@ const helpers = {
             return options.inverse(this);
         }
     },
+    roomStatus: function(status) {
+        return status === 'available' ? '' : 'disabled'
+    }
 }
 
 module.exports = helpers

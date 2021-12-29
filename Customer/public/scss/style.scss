@@ -5,8 +5,10 @@
 @import 'custom';
 
 /* [Master Stylesheet - v1.0] */
-
-
+.booking-table td .active {
+    background-color: $pri-color;
+    color: $white-color;
+}
 /* =========== Index of CSS ===========
 :: 1.0 Import Fonts
 :: 4.0 Import All CSS
@@ -1189,7 +1191,7 @@ img {
     }
     .room-info-container {
         @media #{$breakpoint-lg} {}
-        @media #{$breakpoint-xs} {
+        @media #{$breakpoint-md} {
             display: flex;
             justify-content: space-between;
         }
