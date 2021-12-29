@@ -601,7 +601,10 @@ img {
                 }
             }
             .classynav ul li {
-                margin: 0 4px;
+
+                @media #{$breakpoint-lg} {
+                    margin: 0 4px;
+                }
             }
             .classynav ul li a {
                 text-transform: capitalize;

@@ -1,13 +1,14 @@
 const detailServiceBillModel = require("../../models/bill/detailServiceBill.model");
 
 const DetailServiceBillService = {
-    async getAll(){
-        return await detailServiceBillModel.find().lean()
+    async findAll() {
+        const result = await detailServiceBillModel.find({});
+        return result;
     },
-    async getDetailServiceBillById(id){
-        return await detailServiceBillModel.findById(id).lean()
+    async findById(id) {
+        return await detailServiceBillModel.findById(id).lean();
     },
-    
+
 }
 
 module.exports = DetailServiceBillService

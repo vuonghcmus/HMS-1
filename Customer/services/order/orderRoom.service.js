@@ -1,5 +1,6 @@
 const orderRoomModel = require("../../models/order/orderRoom.model");
 const detailOrderRoomService = require('./detailOrderRoom.service')
+
 const OrderRoomService = {
 
     async findAll() {
@@ -14,12 +15,19 @@ const OrderRoomService = {
     async findById(id) {
         const order = await orderRoomModel.findById(id)
         const details = []
-        for(const id in order.detailsOrderRoom) {
+        const tempDetails = []
+        for(const id of order.detailOrderRoom) {
             const detail = await this.findDetailById(id)
             details.push(detail)
-            order.detailsOrderRoom = details
         }
-        order.detailsOrderRoom = details
+
+        for(const id of order.tempOrderRoom) {
+            const detail = await this.findDetailById(id)
+            tempDetails.push(detail)
+        }
+
+        order.detailOrderRoom = details
+        order.tempOrderRoom = tempDetails
         return order
     },
 

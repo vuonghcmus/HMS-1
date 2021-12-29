@@ -2,7 +2,9 @@ const HomeService = require("../services/home/home.service");
 class HomeController {
     //[GET] /
     async show(req, res, next) {
-        res.render("home/home");
+        res.render("home/home", {
+            active: { home: true }
+        });
     }
 
     //[GET] /search-order
@@ -50,7 +52,9 @@ class HomeController {
 
     // [GET] /contact
     async contact(req, res, next) {
-        res.render("home/contact");
+        res.render("home/contact", {
+            active: { contact: true }
+        });
     }
 
     // [GET] /about-us

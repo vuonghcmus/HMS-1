@@ -6,6 +6,7 @@ const ServiceSchema = new Schema({
     price: { type: Schema.Types.Number },
     image: { type: Schema.Types.String },
     type: { type: Schema.Types.String },
+    available: { type: Schema.Types.Number },
 }, {
     collection: "Service",
 });

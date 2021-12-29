@@ -4,7 +4,7 @@ const Handlebars = require("handlebars");
 const path = require("path");
 const methodOverride = require('method-override')
 const databaseService = require("./services/database.service");
-
+const helpers = require('./helpers/viewEngine')
 const mongoose = require("mongoose");
 // mongoose.connect(process.env.da)
 
@@ -40,6 +40,7 @@ app.engine(
         extname: ".hbs",
         defaultLayout: "main",
         handlebars: allowInsecurePrototypeAccess(Handlebars),
+        helpers: helpers
     })
 );
 app.set("view engine", "hbs");
