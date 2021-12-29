@@ -54,7 +54,33 @@
   background-color: transparent;
 }
 
+.booking-table td {
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  color: #cb8670;
+}
+
+.booking-table td.disabled {
+  cursor: default;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.unselectable {
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #cc0000;
+}
+
 /* [Master Stylesheet - v1.0] */
+.booking-table td .active {
+  background-color: #cb8670;
+  color: #ffffff;
+}
+
 /* =========== Index of CSS ===========
 :: 1.0 Import Fonts
 :: 4.0 Import All CSS
@@ -1300,7 +1326,7 @@ img {
   color: #cb8670;
   font-weight: 600;
 }
-@media only screen and (max-width:767px) {
+@media only screen and (min-width:768px) and (max-width:991px) {
   .room-details-area .room-info-container {
     display: flex;
     justify-content: space-between;

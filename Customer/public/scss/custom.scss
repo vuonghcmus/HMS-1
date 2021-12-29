@@ -53,3 +53,26 @@
     border: none;
     background-color: transparent;
 }
+
+
+.booking-table td {
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    color: $pri-color;
+    
+}
+
+.booking-table td.disabled {
+    cursor: default;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.unselectable {
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: #cc0000;
+  }
