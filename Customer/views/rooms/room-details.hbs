@@ -20,7 +20,7 @@
                 <p class="room-info">{{roomType.description}}</p>
                 <div class="room-info-container">
                     <p class="room-info">People: <span>{{roomType.maxOfPeople}}</span></p>
-                    <p class="room-info">Areas: <span>100m<sup>2</sup></span></p>
+                    <p class="room-info">Areas: <span>{{roomType.area}}m<sup>2</sup></span></p>
                 </div>
                 <div class="room-info-container">
                     <p class="room-info">Beds: <span>2</span></p>
@@ -43,36 +43,9 @@
                 </table>
             </div>
 
-            
-
-            <form class="col-12 needs-validation" novalidate>
-                <div class="mt-3">
-                    <label for="people" class="form-label">Number of people</label>
-                    <input type="number" class="form-control" id="people" name="people" value="1" required>
-                    <div class="invalid-feedback">
-                        Number of people can't be 0.
-                    </div>
-                </div>
-
-                <div class="mt-3">
-                    <label for="checkin" class="form-label">Check In</label>
-                    <input type="date" class="form-control" id="checkin" name="checkin" required>
-                    <div class="invalid-feedback">
-                        Check in date must not be empty.
-                    </div>
-                </div>
-
-                <div class="mt-3">
-                    <label for="checkout" class="form-label">Check Out</label>
-                    <input type="date" class="form-control" id="checkout" name="checkout" required>
-                    <div class="invalid-feedback">
-                        Check in date must not be empty.
-                    </div>
-                </div>
-                    
+            <form class="col-12 booking-form needs-validation" method="POST" action="" novalidate>
                 <div class="book-container">
-                    
-                    <button type="submit" class="btn book-room-btn palatin-btn">Book Room</button>
+                    <button type="submit" disabled class="btn book-room-btn palatin-btn">Book Room</button>
                 </div>
             </form>
         </div>
@@ -81,3 +54,5 @@
 
 <script src="/js/formValidation.js"></script>
 <script src="/js/bookingTableUI.js"></script>
+<script src="/js/bookingTableLogic.js"></script>
+
