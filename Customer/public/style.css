@@ -2299,4 +2299,39 @@ img {
   overflow-y: scroll;
 }
 
+.section-order .order-title {
+  font-weight: 700;
+}
+.section-order .order-amount,
+.section-order .order-price {
+  color: #141414;
+  margin-bottom: 0;
+}
+.section-order .order-amount span,
+.section-order .order-price span {
+  color: #cb8670;
+  font-size: 20px;
+}
+.section-order .order-total-amount-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.section-order .order-total-amount-container .order-total-amount span {
+  color: #cb8670;
+}
+@media only screen and (max-width:767px) {
+  .section-order .order-total-amount-container {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .section-order .order-total-amount-container .btn-container {
+    display: flex;
+    width: 100%;
+  }
+  .section-order .order-total-amount-container .btn-container .btn {
+    flex: 1;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */

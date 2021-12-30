@@ -2132,3 +2132,47 @@ img {
     max-height: calc(100% - 120px);
     overflow-y: scroll;
 }
+
+
+.section-order {
+
+    .order-title {
+        font-weight: 700;
+    }
+
+    .order-amount,
+    .order-price {
+        color: $dark-color;
+        margin-bottom: 0;
+    }
+
+    .order-amount span,
+    .order-price span {
+        color: $pri-color;
+        font-size: 20px;
+    }
+
+    .order-total-amount-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .order-total-amount span {
+            color: $pri-color;
+        }
+
+        @media #{$breakpoint-xs} {
+            flex-direction: column;
+            justify-content: center;
+            .btn-container{
+                display: flex;
+                width: 100%;
+               .btn {
+                   flex: 1;
+               }
+            }
+
+            
+        }
+    }
+}

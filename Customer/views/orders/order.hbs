@@ -1,71 +1,82 @@
-<div class="p-4">
-    <h2>Confirm your Order</h2>
-    <form id="input-information-form" class="row g-3 px-2 input-information-form needs-validation" novalidate>
-        <div class="col-12 mt-3">
+<div class="section-order p-4">
+    <h2 class="mb-3">Provide your information</h2>
+    <form id="input-information-form" method="POST" action="" class="row g-3 px-2 input-information-form needs-validation" novalidate>
+        <div class="col-12 col-md-6 col-lg-5 mb-4">
             <input type="text" class="form-control" name="first-name" id="first-name" placeholder="First Name" required>
             <div class="invalid-feedback">
                 First name must not be empty.
             </div>
         </div>
 
-        <div class="col-12 mt-3">
+        <div class="col-12 col-md-6 col-lg-5 mb-4">
             <input type="text" class="form-control" name="last-name" id="last-name" placeholder="Last Name" required>
             <div class="invalid-feedback">
                 Last name must not be empty.
             </div>
         </div>
 
-        <div class="col-12 mt-3">
+        <div class="col-12 col-md-6 col-lg-5 mb-4">
             <input type="number" class="form-control" name="phone" id="phone" placeholder="Phone Number" required>
             <div class="invalid-feedback">
                 Phone number must not be empty.
             </div>
         </div>
 
-        <div class="col-12 mt-3">
+        <div class="col-12 col-md-6 col-lg-5 mb-4">
             <input type="number" class="form-control" name="identity" id="identity" placeholder="Your ID" required>
             <div class="invalid-feedback">
                 ID must not be empty.
             </div>
         </div>
-        <div class="confirm-container col-12 mt-3">
-            <button form="input-information-form" class="btn palatin-btn float-end" type="submit">Confirm</button>
-        </div>
+        {{!-- <div class="confirm-container col-12 mt-3">
+            <button form="input-information-form" class="btn palatin-btn" style="float: right;" type="submit">Confirm</button>
+        </div> --}}
     </form>
-    <ul class="order-list" style="width: 100%;">
-        <li class="order-item col-12 mt-3 d-flex justify-content-between align-items-center">
-            <span class="order-amount">Number of rooms: 2</span>
-            <div>
-                <h4 class="order-title">Fried Rice</h4>
-                <p class="order-description">Shortbread, chocolate turtle cookies, and red velvet.</p>                            
-            </div>
-            <p class="order-price">24$</p>
-        </li>
-        <li class="order-item col-12 mt-3 d-flex justify-content-between align-items-center">
-            <span class="order-amount">Number of rooms: 2</span>
-            <div>
-                <h4 class="order-title">Fried Rice</h4>
-                <p class="order-description">Shortbread, chocolate turtle cookies, and red velvet.</p>                            
-            </div>
-            <p class="order-price">24$</p>
-        </li>
-        <li class="order-item col-12 mt-3 d-flex justify-content-between align-items-center">
-            <span class="order-amount">Number of rooms: 2</span>
-            <div>
-                <h4 class="order-title">Fried Rice</h4>
-                <p class="order-description">Shortbread, chocolate turtle cookies, and red velvet.</p>                            
-            </div>
-            <p class="order-price">24$</p>
-        </li>
-        <li class="order-item col-12 mt-3 d-flex justify-content-between align-items-center">
-            <span class="order-amount">Number of rooms: 2</span>
-            <div>
-                <h4 class="order-title">Fried Rice</h4>
-                <p class="order-description">Shortbread, chocolate turtle cookies, and red velvet.</p>                            
-            </div>
-            <p class="order-price">24$</p>
-        </li>
-    </ul>
+    <h2 class="mt-5 order-booking-container">Your Booking</h2>
+    <div class="mb-4" style="border: 1px solid #eee;"></div>
+        <ul class="order-list px-3" style="width: 100%;">
+            <li class="order-item mb-4 d-flex justify-content-between align-items-center">
+                <div class="">
+                    <h4 class="order-title">Phòng Bình Dân</h4>
+                    <span class="order-date">19-12-2021 to 20-12-2021</span>
+                </div>
+                <div class="">
+                    <p class="order-amount">Number of rooms: <span>2</span></p>
+                    <p class="order-price">Price: <span>24$</span></p>
+                </div>
+            </li>
+            <li class="order-item mb-4 d-flex justify-content-between align-items-center">
+                <div class="">
+                    <h4 class="order-title">Phòng Bình Dân</h4>
+                    <span class="order-date">19-12-2021 to 20-12-2021</span>
+                </div>
+                <div class="">
+                    <p class="order-amount">Number of rooms: <span>2</span></p>
+                    <p class="order-price">Price: <span>24$</span></p>
+                </div>
+            </li>
+            <li class="order-item mb-4 d-flex justify-content-between align-items-center">
+                <div class="">
+                    <h4 class="order-title">Phòng Bình Dân</h4>
+                    <span class="order-date">19-12-2021 to 20-12-2021</span>
+                </div>
+                <div class="">
+                    <p class="order-amount">Number of rooms: <span>2</span></p>
+                    <p class="order-price">Price: <span>24$</span></p>
+                </div>
+            </li>
+            
+
+        </ul>
+    <div class="mb-4" style="border: 1px solid #eee;"></div>
+    <div class="order-total-amount-container">
+        <h2 class="order-total-amount">Total Amount: <span>4.650.000đ</span></h2>
+        <div class="btn-container">
+            <a href="/rooms" class="btn palatin-btn btn-3" style="margin-right: 6px;">Return</a>
+            <button form="input-information-form" class="btn palatin-btn" type="submit">Confirm</button>
+        </div>
+    </div>
+
 </div>
 
 <script src="/js/formValidation.js"></script>
