@@ -1,13 +1,5 @@
 <div class="container-fluid">
-  <div id="search-form" class="row mt-3 justify-content-start">
-
-    <div class="col-12 col-md-6 col-xl-8 mb-3">
-        <a class="btn btn-primary btn-block gradient-custom-4" href="/room/add-room">
-          <i class="fas fa-plus-circle"></i>
-          Thêm phòng
-        </a>
-    </div>
-
+  <div id="search-form" class="row mt-3 justify-content-end">
     <div class="col-12 col-md-6 col-xl-4 mb-3">
       <div class="p-1 bg-light rounded rounded-pill shadow-lg d-flex justify-content-end">
         <div class="input-group">
@@ -26,53 +18,43 @@
     <table id="myTable" class="table table-hover table-striped table-bordered">
       <thead>
         <tr>
-          <th>Số phòng</th>
-          <th>Ngày đặt phòng</th>
-          <th>Ngày hết hạn thuê</th>
-          <th>Loại phòng</th>
-          <th>Trạng thái</th>
-          <th>Điều chỉnh</th>
+          <th>Tên phòng</th>
+          <th>Khách đặt phòng</th>
+          <th>Dịch vụ</th>         
         </tr>
       </thead>
 
       <tbody>
-        {{#each room}}
+        {{#each information}}
           <tr>
-            <td>{{this.roomNumber}}</td>
-            {{#ifCond this.status "==" true}}
-              <td>{{this.bookedDate}}</td>
-              <td>{{this.rentalEndDate}}</td> 
-              <td>{{this.type}}</td>                    
-              <td>Đã có khách</td> 
-            {{else}}
-              <td>trống</td>
-              <td>trống</td>
-              <td>{{this.type}}</td>                    
-              <td>Chưa có khách</td>
-            {{/ifCond}}           
-            
-             <td>
-              <div class="row text-center">
-                <div class="col-4">
-                  <a href="/room/edit-room/{{_id}}">
-                    <i class="far fa-edit" title="Chỉnh sửa phòng"></i>
-                  </a>
-                </div>
-
-                <div class="col-4">
-                  <a
-                    href="/room/delete-room/{{_id}}"
-                    onclick="return confirm('Bạn có muốn xóa phòng này không?')"
-                  >
-                    <i
-                      class="fas fa-trash"
-                      style="color: red"
-                      title="Xóa phòng"
-                    ></i>
-                  </a>
-                </div>
-              </div>
+            <td>
+              <h6>{{this.roomNumber}}</h6>
             </td>
+            <td>
+              <div>
+                <p>Họ tên: {{this.nameCustomer}}</p>
+                <p>CMND: {{this.ID}}</p>
+                <p>Ngày đặt phòng: {{this.dateCheckIn}}</p>
+                <p>Ngày trả phòng: {{this.dateCheckOut}}</p>
+              </div>
+            </td>         
+            <td>
+              {{#if this.serviceInfo}}
+                {{#each this.serviceInfo}}
+                  <div class="d-flex justify-content-around">
+                    <img style="border-radius: 10px;" src="{{this.image}}" alt="ảnh dịch vụ" width="150px" height="auto">
+                    <div>
+                      <p>Tên dịch vụ: {{this.name}}</p>
+                      <p>Giá: {{this.price}}</p>
+                    </div>
+                  </div>
+
+                {{/each}}
+              {{else}}
+                <p>Khách chưa đặt dịch vụ</p>
+              {{/if}}
+            </td>
+            
           </tr>
         {{/each}}
       </tbody>
@@ -85,19 +67,19 @@
       <nav aria-label="Page navigation example">
           <ul class="pagination">
               <li class="page-item {{#unless this.isPreviousPage}} disabled {{/unless}}">
-                  <a class="page-link " href="/room/list-room?page={{this.previousPage}}" aria-label="Previous">
+                  <a class="page-link " href="/room?page={{this.previousPage}}" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
                       <span class="sr-only">Previous</span>
                   </a>
               </li>
               {{#each pages}}
                   <li class="page-item {{#if this.isCurrentPage}} active {{/if}}">
-                      <a class="page-link" href="/room/list-room?page={{this.page}}">{{this.page}}</a>
+                      <a class="page-link" href="/room?page={{this.page}}">{{this.page}}</a>
                   </li>
               {{/each}}
 
               <li class="page-item {{#unless this.isNextPage}} disabled {{/unless}}">
-                  <a class="page-link" href="/room/list-room?page={{this.nextPage}}" aria-label="Next">
+                  <a class="page-link" href="/room?page={{this.nextPage}}" aria-label="Next">
                       <span aria-hidden="true">&raquo;</span>
                       <span class="sr-only">Next</span>
                   </a>

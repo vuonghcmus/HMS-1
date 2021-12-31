@@ -1,0 +1,16 @@
+<h1>Hello</h1>
+{{#each information}}
+
+    <h2>{{this.nameCustomer}}</h2>
+    <h2>{{this.phoneCustomer}}</h2>
+    <h2>{{this.dateCheckIn}}</h2>
+    <h2>{{this.dateCheckOut}}</h2>
+    <h2>{{this.ID}}</h2>
+    <h2>{{this.roomNumber}}</h2>
+    {{#each this.serviceInfo}}
+        <h2>{{this.name}}</h2>
+        <h2>{{this.price}}</h2>
+        <h2>{{this.image}}</h2>
+    {{/each}}
+    
+{{/each}}

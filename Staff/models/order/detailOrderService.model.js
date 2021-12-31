@@ -2,8 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const DetailOrderServiceSchema = new Schema(
   {
-    service: { type: Schema.Types.ObjectId },
+    serviceID: [{ type: Schema.Types.ObjectId }],
     number: { type: Schema.Types.Number },
+    orderDate: { type: Schema.Types.String },
+    roomID: { type: Schema.Types.ObjectId },
   },
   {
     collection: "DetailOrderService",

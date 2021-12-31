@@ -119,7 +119,7 @@
             <div class="nav">
               <div class="sb-sidenav-menu-heading">Tài khoản</div>
 
-              <a class="nav-link" href="/customer/list-customer?page=1">
+              <a class="nav-link" href="/account?page=1">
                 <div class="sb-nav-link-icon"><i
                     class="fas fa-list-ul"
                   ></i></div>
@@ -127,36 +127,51 @@
               </a>              
 
               <div class="sb-sidenav-menu-heading">Khách hàng</div>
-              <a class="nav-link" href="/product/list-product/1">
-                <div class="sb-nav-link-icon"><i
-                    class="fas fa-list-ul"
-                  ></i></div>
-                Xem danh sách
-              </a>              
+              <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                  <div class="sb-nav-link-icon"><i class="fas fa-list-ul"></i></div>
+                    Xem danh sách
+                  <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+              </a>
+              <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                  <nav class="sb-sidenav-menu-nested nav">
+                      <a class="nav-link" href="/customer?page=1">
+                       <div class="sb-nav-link-icon">
+                         <i class="fas fa-check-circle" style="color: green;"></i>
+                       </div>                        
+                        Đang hoạt động
+                      </a>
+                      <a class="nav-link" href="/customer?page=1">
+                        <div class="sb-nav-link-icon">
+                          <i class="fas fa-lock" style="color: orange;"></i>
+                        </div>
+                        Không hoạt động
+                      </a>
+                  </nav>
+              </div>           
 
               <div class="sb-sidenav-menu-heading">Dịch vụ</div>
-              <a class="nav-link" href="/service/list-service?page=1">
+              <a class="nav-link" href="/service?page=1">
                 <div class="sb-nav-link-icon"><i
                     class="fas fa-list-ul"
                   ></i></div>
                 Xem danh sách
               </a>
               
-              <a class="nav-link" href="/service-type/list-service-type?page=1">
+              <a class="nav-link" href="/service-type?page=1">
                 <div class="sb-nav-link-icon"><i class="fas fa-indent"></i></div>
                 Loại dịch vụ
               </a>
 
 
               <div class="sb-sidenav-menu-heading">Phòng</div>
-              <a class="nav-link" href="/room/list-room?page=1">
+              <a class="nav-link" href="/room?page=1">
                 <div class="sb-nav-link-icon"><i
                     class="fas fa-list-ul"
                   ></i></div>
                 Xem danh sách
               </a>
 
-              <a class="nav-link" href="/room-type/list-room-type?page=1">
+              <a class="nav-link" href="/room-type?page=1">
                 <div class="sb-nav-link-icon"><i class="fas fa-indent"></i></div>
                 Loại phòng
               </a>

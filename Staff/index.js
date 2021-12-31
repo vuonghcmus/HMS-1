@@ -8,12 +8,13 @@ const {
 } = require("@handlebars/allow-prototype-access");
 const env = require("dotenv").config();
 const databaseService = require("./services/database.service");
-const CustomerRoute = require("./routes/customer.route");
+const AccountRoute = require("./routes/account.route");
 const ServiceRoute = require("./routes/service.route");
 const ServiceTypeRoute = require("./routes/serviceType.route");
 const RoomRoute = require("./routes/room.route");
 const RoomTypeRoute = require("./routes/roomType.route");
 const StaffRoute = require("./routes/staff.route");
+const CustomerRoute = require("./routes/customer.route");
 
 databaseService.connectDatabase();
 
@@ -81,6 +82,7 @@ app.get("/", function (req, res) {
   res.render("home");
 });
 
+app.use("/account", AccountRoute);
 app.use("/customer", CustomerRoute);
 app.use("/service", ServiceRoute);
 app.use("/service-type", ServiceTypeRoute);
