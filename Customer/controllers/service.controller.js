@@ -9,7 +9,7 @@ class ServiceController {
         // console.log(allServices[0].id);
         res.render("services/services", {
             allServices: allServices,
-            active: {service: true}
+            isAuth: req.user
         });
 
         // res.send(allServices);
@@ -20,7 +20,7 @@ class ServiceController {
         console.log(service);
         res.render("services/service-details", {
             service: service ,
-            active: {service: true}
+            isAuth: req.user
         });
     }
 }

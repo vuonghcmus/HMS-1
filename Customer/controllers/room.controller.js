@@ -18,6 +18,7 @@ class RoomController {
         res.render('rooms/rooms', {
             allRooms: allRooms,
             cart: cart,
+            isAuth: req.user
         });
     }
 
@@ -72,6 +73,7 @@ class RoomController {
             table: table,
             cart: req.session.cart,
             message: msg,
+            isAuth: req.user
         });
     }
 

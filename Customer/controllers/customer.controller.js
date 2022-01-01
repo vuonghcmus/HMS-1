@@ -5,6 +5,7 @@ const passport = require("passport");
 module.exports = {
     show: (req, res, next) => {
         if (req.user) {
+            console.log(req.user)
             return res.redirect("/");
         }
 

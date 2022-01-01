@@ -9,10 +9,6 @@ const mongoose = require("mongoose");
 // mongoose.connect(process.env.da)
 
 const logger = require("morgan");
-//config authenication
-const passport = require('passport');
-const bcrypt = require('bcrypt');
-const session = require('express-session');
 
 const routes = require('./routes/index')
 
@@ -50,9 +46,7 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 routes(app)
 
-// app.get("/services/service-details", function(req, res) {
-//     res.render("service-details");
-// });
+
 
 const PORT = 3000;
 app.listen(PORT, () => {
