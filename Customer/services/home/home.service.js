@@ -1,5 +1,4 @@
 const CustomerModel = require("../../models/account/customer.model");
-const OrderRoomModel = require("../../models/order/orderRoom.model");
 const DetailOrderRoomModel = require("../../models/order/detailOrderRoom.model");
 const HomeService = {
     async getBookedRoom(phone, identity) {
@@ -11,14 +10,14 @@ const HomeService = {
         var returnList = [];
 
         if (customer) { //find room booked by customer
-            const orderRoom = await OrderRoomModel.findOne({
+            const orderRoom = await DetailOrderRoomModel.find({
                 customerID: customer._id
             }).lean();
 
             const listRoom = orderRoom.detailOrderRoom;
 
             for (let i = 0; i < listRoom.length; i++) {
-                const detail = await DetailOrderRoomModel.findOne({
+                const detail = await DetailOrderRoomModel.find({
                     _id: listRoom[i],
                 }).lean();
                 returnList.push(detail);

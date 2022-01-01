@@ -1,10 +1,9 @@
-const RoomService = require("../services/room/room.service");
 const RoomTypeSerivce = require("../services/room/roomType.service");
 const { generateBookingTable } = require('../utils/')
 class RoomController {
     //[GET] /rooms/
     async show(req, res, next) {
-        const allRooms = await RoomTypeSerivce.findAll();
+        const allRooms = await RoomTypeSerivce.find();
         console.log(allRooms);
 
         res.render('rooms/rooms', {

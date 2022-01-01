@@ -6,9 +6,10 @@ const RoomTypeSchema = new Schema({
     price: { type: Schema.Types.Number},
     area: { type: Schema.Types.Number},
     bed: { type: Schema.Types.Number},
+    type: { type: Schema.Types.Number},
     maxOfPeople: { type: Schema.Types.Number},
     description: { type: Schema.Types.String},
-    rooms: [{type: Schema.Types.ObjectId}],
+    rooms: [{type: Schema.Types.String}],
     image: {type: Schema.Types.String},
 },{
     collection: 'RoomType'

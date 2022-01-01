@@ -7,6 +7,10 @@ const RoomTypeService = {
     async findById(id){
         return await roomTypeModel.findById(id).lean()
     },
+
+    async find(obj){
+        return await roomTypeModel.find(obj).lean()
+    }
 }
 
 module.exports = RoomTypeService
