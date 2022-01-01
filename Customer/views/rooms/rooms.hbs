@@ -273,7 +273,7 @@
 {{!-- floating button --}}
     <button class="btn modal-btn" data-bs-toggle="modal" data-bs-target="#input-information-modal">
         <img src="/img/icon/order-icon.png" alt="">
-        <span>3</span>
+        <span>{{cart.length }}</span>
     </button>
 
 
@@ -282,23 +282,39 @@
         <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Please provide your information</h5>
-            <button type="button" class="fa fa-close btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="modal-title">Your booking room</h5>
+            <button type="button" class="fa fa-close btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+            </button>
         </div>
         <div class="modal-body">
-           
-           
+            {{message}}
+            {{#each cart.rooms}}
+           <div class="modal-card row">
+               <div class="col-md-5 col-6">
+                   <img src="{{this.RoomImage}}" alt="rom type"/>
+               </div>
+               <div class="col-md-5 col-6">
+                   <p class="roomtype">{{this.RoomType}}</p>
+                   <p class="roomprice">Price: {{this.RoomPrice}}</p>
+                   <p>Room: {{#each this.listRoom}}
+                       {{this.roomid}} 
+                       {{/each}}</p>
+                </div>
+               <div class="col-md-2 col-12">x<span class="roomcount">{{this.listRoom.length}}</span></div>
+           </div>
+           {{/each}}
             <div class="modal-footer">
                 <p></p>
-                <p style="margin-bottom: 0;">Total Rooms: <span>3</span></p>
-                <p>Total Amount: <span>135$</span></p>
+                <p style="margin-bottom: 0;">Total Rooms: <span id="totalroom">0</span></p>
+                <p>Total Amount: <span id="totalprice">0$</span></p>
                 <a href="/orders" class="btn palatin-btn">Book Now</a>
             </div>
         </div>
     </div>
 
     {{!-- Delete hidden form --}}
-    <form name="delete-course-form" method="POST"></form>
+    {{!-- <form name="delete-course-form" method="POST"></form> --}}
 </section>
 
 
@@ -319,6 +335,21 @@
     //  deleteForm.action = '/courses/' + courseId + '?_method=DELETE'
         //deleteForm.submit()
     //}
+</script>
+<script>
+    var allPrices=document.getElementsByClassName("roomprice");
+    var allCounts=document.getElementsByClassName("roomcount");
+    var totalRoom=0;
+    var totalPrice=0;
+    for(let i=0;i<allPrices.length;i++)
+    {
+        const price=parseInt(allPrices[i].innerHTML.split("Price: ")[1]);
+        const count=parseInt(allCounts[i].innerHTML);
+        totalRoom+=count;
+        totalPrice+=price*count;
+    }
+    document.getElementById("totalroom").innerHTML=totalRoom;
+    document.getElementById("totalprice").innerHTML=String(totalPrice)+"$";
 </script>
 <!-- ##### Rooms Area End ##### -->
 

@@ -34,7 +34,7 @@
                     {{#each table}}
                         <tr>
                             {{#each this}}
-                            <td class="text-center unselectable {{roomStatus this.status}}" style="border: 1px solid black" data-id="{{this._id}}">
+                            <td class="text-center unselectable {{roomStatus this.status}}" style="border: 1px solid black" data-id="{{this.roomNumber}}">
                                 {{this.roomNumber}}
                             </td>
                             {{/each}}
@@ -43,8 +43,11 @@
                 </table>
             </div>
 
-            <form class="col-12 booking-form needs-validation" method="POST" action="/cart" novalidate>
+            <form class="col-12 booking-form needs-validation" method="POST" action="/rooms/add" novalidate>
                 <div class="book-container">
+                    <input type="hidden" name="roomType" value="{{roomType.name}}">
+                    <input type="hidden" name="roomImage" value="{{roomType.image}}">
+                    <input type="hidden" name="roomPrice" value="{{roomType.price}}">
                     <button type="submit" disabled class="btn book-room-btn palatin-btn">Book Room</button>
                 </div>
             </form>
