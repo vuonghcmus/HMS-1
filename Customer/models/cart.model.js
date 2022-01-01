@@ -1,8 +1,16 @@
-module.exports = function Cart(oldCart) {
-    this.rooms = oldCart.rooms || []
-    this.services = oldCart.services || []
-    this.totalRoomPrice = oldCart.totalRoomPrice || 0
-    this.totalServicePrice = oldCart.totalServicePrice || 0
+//static cart
+var cart = { rooms: [], services: [] };
+
+module.exports = class Cart {
+    static getCart() {
+        return cart;
+    }
+
+    static emptyRooms() {
+        cart.rooms = [];
+    }
+
+    static emptyServices() {
+        cart.services = [];
+    }
 }
-
-

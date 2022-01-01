@@ -5,10 +5,13 @@
 @import 'custom';
 
 /* [Master Stylesheet - v1.0] */
+
 .booking-table td .active {
     background-color: $pri-color;
     color: $white-color;
 }
+
+
 /* =========== Index of CSS ===========
 :: 1.0 Import Fonts
 :: 4.0 Import All CSS
@@ -603,7 +606,6 @@ img {
                 }
             }
             .classynav ul li {
-
                 @media #{$breakpoint-lg} {
                     margin: 0 4px;
                 }
@@ -2060,15 +2062,11 @@ img {
     .order-item {
         margin-bottom: 16px;
     }
-
-
     .order-amount-container,
     .order-price {
         color: $pri-color;
         font-weight: 600;
     }
-
-
     .order-amount-container {
         font-size: 20px;
         display: flex;
@@ -2133,7 +2131,6 @@ img {
     overflow-y: scroll;
 }
 
-
 .section-order {
 
     .order-title {
@@ -2175,4 +2172,16 @@ img {
             
         }
     }
+
+.modal-card p {
+    color: #7d7d7d;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: "FuturaLT-Book";
+}
+
+.modal-card span {
+    color: #cb8670;
+    font-weight: 600;
+    font-size: 20px;
 }
