@@ -100,3 +100,30 @@
         background-color: #fff !important;
     }
 }
+
+
+.custom-service-item {
+    .info-container {
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h2 {
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .price-text {
+            color: $pri-color;
+            font-size: 28px;
+        }
+
+        .order-amount-container {
+            .order-amount {
+                font-size: 18px;
+                padding: 0 8px;
+            }
+        }
+    }
+}

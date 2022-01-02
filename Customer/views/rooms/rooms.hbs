@@ -6,76 +6,6 @@
 </section>
 <!-- ##### Breadcumb Area End ##### -->
 
-<!-- ##### Book Now Area Start ##### -->
-<div class="book-now-area">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-10">
-                <div class="book-now-form">
-                    {{!-- <form action="#">
-                        <!-- Form Group -->
-                        <div class="form-group">
-                            <label for="select1">Check In</label>
-                            <select class="form-control" id="select1">
-                                <option>19 June</option>
-                                <option>20 June</option>
-                                <option>21 June</option>
-                                <option>22 June</option>
-                                <option>23 June</option>
-                                <option>24 June</option>
-                                <option>25 June</option>
-                            </select>
-                        </div>
-
-                        <!-- Form Group -->
-                        <div class="form-group">
-                            <label for="select2">Check Out</label>
-                            <select class="form-control" id="select2">
-                                <option>20 June</option>
-                                <option>21 June</option>
-                                <option>22 June</option>
-                                <option>23 June</option>
-                                <option>24 June</option>
-                                <option>25 June</option>
-                                <option>26 June</option>
-                                <option>27 June</option>
-                            </select>
-                        </div>
-
-                        <!-- Form Group -->
-                        <div class="form-group">
-                            <label for="select3">Adults</label>
-                            <select class="form-control" id="select3">
-                                <option>02</option>
-                                <option>03</option>
-                                <option>04</option>
-                                <option>05</option>
-                                <option>06</option>
-                            </select>
-                        </div>
-
-                        <!-- Form Group -->
-                        <div class="form-group">
-                            <label for="select4">Childrens</label>
-                            <select class="form-control" id="select4">
-                                <option>01</option>
-                                <option>02</option>
-                                <option>03</option>
-                                <option>04</option>
-                                <option>05</option>
-                            </select>
-                        </div>
-
-                        <!-- Button -->
-                        <button type="submit">Book Now</button>
-                    </form> --}}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- ##### Book Now Area End ##### -->
-
 <!-- ##### Rooms Area Start ##### -->
 <section class="rooms-area section-padding-0-100">
     <div class="container">
@@ -308,34 +238,17 @@
                 <p></p>
                 <p style="margin-bottom: 0;">Total Rooms: <span id="totalroom">0</span></p>
                 <p>Total Amount: <span id="totalprice">0$</span></p>
-                <a href="/orders" class="btn palatin-btn">Book Now</a>
+                <div class="d-flex justify-content-between w-100">
+                    <a href="/rooms/clear-cart" class="btn palatin-btn btn-3">Clear All</a>
+                    <a href="/orders" class="btn palatin-btn">Book Now</a>
+                </div>
             </div>
         </div>
     </div>
-
-    {{!-- Delete hidden form --}}
-    {{!-- <form name="delete-course-form" method="POST"></form> --}}
 </section>
-
 
 <script src="./js/formValidation.js"></script>
 
-<script>
-    //var btnDeleteCourse = document.getElementById('btn-delete-course')
-    //var courseId
-    //var deleteForm = document.forms['delete-course-form']
-
-    var inputInformationModal = document.getElementById('input-information-modal')
-    inputInformationModal.addEventListener('show.bs.modal', function (event) {
-        var button = event.relatedTarget
-        //courseId = button.getAttribute('data-id')
-    })
-    // when dialog confirm clicked
-    //btnDeleteCourse.onclick = () => {
-    //  deleteForm.action = '/courses/' + courseId + '?_method=DELETE'
-        //deleteForm.submit()
-    //}
-</script>
 <script>
     var allPrices=document.getElementsByClassName("roomprice");
     var allCounts=document.getElementsByClassName("roomcount");

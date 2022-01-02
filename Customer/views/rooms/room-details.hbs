@@ -29,13 +29,43 @@
                 <p class="room-info room-price"><span>{{roomType.price}}$</span>/night</p>
             </div>
             
+           
+
+            {{#if finding}}
+            <form class="col-12 find-room-form needs-validation" method="POST" novalidate>
+                {{!-- CHECK IN AND OUT DATE --}}
+                <div class="col-md-12 col-lg-12 col-12 mt-4">
+                    <div class="row mb-3">
+                        <div class="col-5 mt-4">
+                            <label for="checkindate" class="form-label">Check In</label>
+                            <input type="date" class="form-control" id="checkindate" name="checkin" required>
+                            <div class="invalid-feedback">
+                                Check in date must not be empty.
+                            </div>
+                        </div>
+                        <div class="col-5 mt-4">
+                            <label for="checkoutdate" class="form-label">Check Out</label>
+                            <input type="date" class="form-control" id="checkoutdate" name="checkout" required>
+                            <div class="invalid-feedback">
+                                Check out date must not be empty.
+                            </div>
+                        </div>
+                        <div class="col-2 mt-4 d-flex align-items-end" >
+                            <button class="btn palatin-btn" type="submit">Find</button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </form>
+            
+            {{else}}
             <div class="col-md-12 col-lg-12 col-12 mt-4">
                 <table class="table booking-table">
                     <h4>Click to select your rooms</h4>
                     {{#each table}}
                         <tr>
                             {{#each this}}
-                            <td class="text-center unselectable " style="border: 1px solid black" data-id="{{this.roomNumber}}">
+                            <td class="text-center unselectable {{roomStatus this.available}}" style="border: 1px solid black" data-id="{{this.roomNumber}}">
                                 {{this.roomNumber}}
                             </td>
                             {{/each}}
@@ -43,28 +73,7 @@
                     {{/each}}
                 </table>
             </div>
-
             <form class="col-12 booking-form needs-validation" method="POST" action="/rooms/add" novalidate>
-                {{!-- CHECK IN AND OUT DATE --}}
-            <div class="col-md-12 col-lg-12 col-12 mt-4">
-                <div class="row mb-3">
-                    <div class="col-5 mt-4">
-                        <label for="checkindate" class="form-label">Check In</label>
-                        <input type="date" class="form-control" id="checkindate" name="checkin" required="">
-                        
-                    </div>
-                    <div class="col-5 mt-4">
-                        <label for="checkoutdate" class="form-label">Check Out</label>
-                        <input type="date" class="form-control" id="checkoutdate" name="checkout" required="">
-                        
-                    </div>
-                    <div class="col-2 mt-4 d-flex align-items-end" >
-                        <button class="btn btn-info" type="button" onclick="findEmptyRoom()">Find</button>
-                    </div>
-                </div>
-                
-                
-            </div>
                 <div class="book-container">
                     <input type="hidden" name="roomType" value="{{roomType.name}}">
                     <input type="hidden" name="roomImage" value="{{roomType.image}}">
@@ -72,6 +81,8 @@
                     <button type="submit" class="btn book-room-btn palatin-btn">Book Room</button>
                 </div>
             </form>
+            {{/if}}
+
         </div>
     </div>
 </section>
@@ -79,40 +90,3 @@
 <script src="/js/formValidation.js"></script>
 <script src="/js/bookingTableUI.js"></script>
 <script src="/js/bookingTableLogic.js"></script>
-<script>
-    
-
-function findEmptyRoom()
-{
-    var checkindate=document.getElementById("checkindate");
-    var checkoutdate=document.getElementById("checkoutdate");
-    if(checkindate.value!=''&&checkindate.value!='')
-    {
-        const data=loadBusyRoom(String(checkindate.value),String(checkoutdate.value));
-        console.log(data);
-    }
-}
-
-//ajax for load booked room
-function loadBusyRoom(checkindate,checkoutdate)
-{
-    var result=[];
-    $.ajax({
-        url:'/api/dtor/'+checkindate+'/'+checkoutdate,
-        method:"GET",
-        success:function(data)
-        {
-            result=data;
-            //console.log(data);
-            console.log("Data found: "+String(data.length));
-            //handle room in here
-
-            return data;
-        }
-        
-    });
-
-    return result;
-}
-</script>
-

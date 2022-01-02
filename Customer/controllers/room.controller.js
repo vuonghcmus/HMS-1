@@ -1,12 +1,12 @@
 const Cart = require("../models/cart.model");
 
-const RoomTypeSerivce = require("../services/room/roomType.service");
-const { generateBookingTable } = require('../utils/')
+const RoomTypeService = require("../services/room/roomType.service");
+const { generateBookingTable, findBusyRoom, findEmptyRoom } = require('../utils/')
+
 class RoomController {
     //[GET] /rooms/
     async show(req, res, next) {
-        const allRooms = await RoomTypeSerivce.find();
-        console.log(allRooms);
+        const allRooms = await RoomTypeService.find();
 
         console.log(req.session.cart);
         if (!req.session.cart) {
@@ -24,26 +24,27 @@ class RoomController {
 
     //[GET] /rooms/:id_room
     async getRoomDetail(req, res, next) {
-        const roomType = await RoomTypeSerivce.findById(req.params.id_room);
-        console.log(roomType);
-        // mock data will be changed to load data from database after
-        const rooms = [
-            // { _id: 1, roomNumber: 400, status: 'available' },
-            // { _id: 2, roomNumber: 401 },
-            // { _id: 3, roomNumber: 402 },
-            // { _id: 4, roomNumber: 403, status: 'available' },
-            // { _id: 5, roomNumber: 404 },
-            // { _id: 6, roomNumber: 405 },
+        // if haven't find by check in and check out date
+        const roomType = await RoomTypeService.findById(req.params.id_room);
+        if(!req.busyRooms) {
+            return res.render('rooms/room-details', {
+                roomType: roomType,
+                isAuth: req.user,
+                finding: true
+            });
+        }
 
-        ];
+        // mock data will be changed to load data from database after
+        let rooms = [];
 
         for (let i = 0; i < roomType.rooms.length; i++) {
             rooms.push({
                 _id: i,
                 roomNumber: roomType.rooms[i],
-                status: 'available',
             });
         }
+        rooms = findEmptyRoom(rooms, req.busyRooms)
+        req.busyRooms = null
         //combine with cart to set up status
         if (!req.session.cart) {
             req.session.cart = { rooms: [], services: [] };
@@ -55,12 +56,12 @@ class RoomController {
             //if exist
             if (currentRoomCart) {
                 for (let j = 0; j < rooms.length; j++) {
-                    if (rooms[j].status == 'available') {
+                    if (rooms[j].available) {
                         console.log(rooms[j].roomNumber);
                         console.log(currentRoomCart.listRoom);
                         const index = currentRoomCart.listRoom.findIndex((o) => String(o.roomid) == String(rooms[j].roomNumber));
                         if (index >= 0) {
-                            rooms[j].status = 'unvailable';
+                            rooms[j].available = false;
                         }
                     }
                 }
@@ -72,15 +73,21 @@ class RoomController {
         }
 
         const table = generateBookingTable(rooms);
-        console.log(table)
 
         res.render('rooms/room-details', {
             roomType: roomType,
             table: table,
             cart: req.session.cart,
             message: msg,
-            isAuth: req.user
+            isAuth: req.user,
         });
+    }
+
+    async findBusyRoom(req, res, next) {
+        const { checkin, checkout } = req.body
+        const busyRooms = await findBusyRoom(checkin, checkout)
+        req.busyRooms = busyRooms
+        next()
     }
 
     async addRoomCart(req, res, next) {
@@ -127,13 +134,15 @@ class RoomController {
             cart.rooms.push(room);
         }
 
-
-
         // {"rooms":[{"RoomType":"Phòng thường","RoomImage":"https://firebasestorage.googleapis.com/v0/b/hmsapp-91b1a.appspot.com/o/Noi-that-khach-san-dep-3.png?alt=media&token=f0b108b4-1f9d-482a-b32a-1b87e1a46cf2","listRoom":[{"roomid":"403","people":"1","checkin":"2022-01-01","checkout":"2022-01-02"},
         //{"roomid":"400","people":"1","checkin":"2022-01-20","checkout":"2022-01-03"}]}],"services":[],"length":0}
         //push to cart
         res.redirect("/rooms");
+    }
 
+    clearCart(req, res, next) {
+        req.session.cart = null
+        res.redirect("/rooms")
 
     }
 }

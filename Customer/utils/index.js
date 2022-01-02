@@ -1,3 +1,4 @@
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const generateBookingTable = (rooms, rowLength = 4) => {
 
     const newRooms = rooms.slice()
@@ -10,7 +11,24 @@ const generateBookingTable = (rooms, rowLength = 4) => {
     return table
 }
 
+const findBusyRoom = async (checkin, checkout) => {
+    const response = await fetch(`http:127.0.0.1:3000/api/dtor/${checkin}/${checkout}`)
+    const data = await response.json()
+    return data
+}
+
+const findEmptyRoom = (rooms, busyRooms) => {
+    
+    const data = rooms.map(room => {
+        room.available = !busyRooms.includes(room.roomNumber)
+        return room
+    })
+    return data   
+}
+
 
 module.exports = {
-    generateBookingTable
+    generateBookingTable,
+    findBusyRoom,
+    findEmptyRoom,
 }

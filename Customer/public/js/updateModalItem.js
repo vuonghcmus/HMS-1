@@ -35,7 +35,7 @@ items.map(item => {
     const unitPrice = 12
     btnDecrease.onclick = (event) => {
         event.preventDefault()
-        updateItem(item, unitPrice, -1)
+        updateItem(item, unitPrice, -1) 
         updateTotal()
     }
     btnIncrease.onclick = (event) => {

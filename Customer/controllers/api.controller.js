@@ -6,7 +6,6 @@ class ApiController {
     async show(req, res, next) {
         const allServices = await billService.findAll();
         console.log(allServices);
-
         res.render("services", { allServices: allServices });
         res.send(allServices);
     }
@@ -21,7 +20,7 @@ class ApiController {
         for (let i = 0; i < dtors.length; i++) {
             ret.push(dtors[i].roomID);
         }
-        res.send(ret);
+        res.json(ret);
     }
 }
 module.exports = new ApiController;

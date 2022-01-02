@@ -89,6 +89,24 @@
   background-color: #fff !important;
 }
 
+.custom-service-item .info-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.custom-service-item .info-container h2 {
+  display: inline-block;
+  margin: 20px 0;
+}
+.custom-service-item .info-container .price-text {
+  color: #cb8670;
+  font-size: 28px;
+}
+.custom-service-item .info-container .order-amount-container .order-amount {
+  font-size: 18px;
+  padding: 0 8px;
+}
+
 /* [Master Stylesheet - v1.0] */
 .booking-table td .active {
   background-color: #cb8670;

@@ -25,8 +25,8 @@ const helpers = {
             return options.inverse(this);
         }
     },
-    roomStatus: function(status) {
-        return status === 'available' ? '' : 'disabled'
+    roomStatus: function(available) {
+        return available  ? '' : 'disabled'
     }
 }
 
