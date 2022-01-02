@@ -18,7 +18,8 @@ class RoomController {
         res.render('rooms/rooms', {
             allRooms: allRooms,
             cart: cart,
-            isAuth: req.user
+            isAuth: req.user,
+            isEmpty: cart.length <= 0
         });
     }
 

@@ -20,7 +20,7 @@
                 <p class="room-info">{{roomType.description}}</p>
                 <div class="room-info-container">
                     <p class="room-info">People: <span>{{roomType.MaxOfPeople}}</span></p>
-                    <p class="room-info">Areas: <span>{{roomType.area}}m<sup>2</sup></span></p>
+                    <p class="room-info">Area: <span>{{roomType.area}}m<sup>2</sup></span></p>
                 </div>
                 <div class="room-info-container">
                     <p class="room-info">Beds: <span>{{roomType.bed}}</span></p>
@@ -30,28 +30,27 @@
             </div>
             
            
-
             {{#if finding}}
             <form class="col-12 find-room-form needs-validation" method="POST" novalidate>
                 {{!-- CHECK IN AND OUT DATE --}}
                 <div class="col-md-12 col-lg-12 col-12 mt-4">
                     <div class="row mb-3">
                         <div class="col-5 mt-4">
-                            <label for="checkindate" class="form-label">Check In</label>
-                            <input type="date" class="form-control" id="checkindate" name="checkin" required>
+                            <label for="checkin" class="form-label">Check In</label>
+                            <input type="date" class="form-control" id="checkin" name="checkin" required>
                             <div class="invalid-feedback">
                                 Check in date must not be empty.
                             </div>
                         </div>
                         <div class="col-5 mt-4">
-                            <label for="checkoutdate" class="form-label">Check Out</label>
-                            <input type="date" class="form-control" id="checkoutdate" name="checkout" required>
+                            <label for="checkout" class="form-label">Check Out</label>
+                            <input type="date" class="form-control" id="checkout" name="checkout" required>
                             <div class="invalid-feedback">
                                 Check out date must not be empty.
                             </div>
                         </div>
                         <div class="col-2 mt-4 d-flex align-items-end" >
-                            <button class="btn palatin-btn" type="submit">Find</button>
+                            <button class="btn-find btn palatin-btn" type="submit">Find</button>
                         </div>
                     </div>
                 </div>
@@ -60,7 +59,7 @@
             {{else}}
             <div class="col-md-12 col-lg-12 col-12 mt-4">
                 <table class="table booking-table">
-                    <h4>Click to select your rooms</h4>
+                    <h4>Select your rooms</h4>
                     {{#each table}}
                         <tr>
                             {{#each this}}
@@ -89,5 +88,9 @@
 </section>
 
 <script src="/js/formValidation.js"></script>
+{{#if finding}}
+<script src="/js/dateChecking.js"></script>
+{{else}}
 <script src="/js/bookingTableUI.js"></script>
 <script src="/js/bookingTableLogic.js"></script>
+{{/if}}
