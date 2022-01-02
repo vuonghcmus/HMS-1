@@ -17,8 +17,11 @@ class ApiController {
         const checkoutdate = req.params.checkoutdate;
 
         const dtors = await dtorService.findByDateInOut(new Date(checkindate), new Date(checkoutdate));
-        console.log(dtors);
-        res.send(dtors);
+        var ret = [];
+        for (let i = 0; i < dtors.length; i++) {
+            ret.push(dtors[i].roomID);
+        }
+        res.send(ret);
     }
 }
 module.exports = new ApiController;
