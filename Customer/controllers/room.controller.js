@@ -22,24 +22,29 @@ class RoomController {
         });
     }
 
-    //[GET] /rooms/room-details
+    //[GET] /rooms/:id_room
     async getRoomDetail(req, res, next) {
         const roomType = await RoomTypeSerivce.findById(req.params.id_room);
-
-
-
+        console.log(roomType);
         // mock data will be changed to load data from database after
         const rooms = [
-                { _id: 1, roomNumber: 400, status: 'available' },
-                { _id: 2, roomNumber: 401 },
-                { _id: 3, roomNumber: 402 },
-                { _id: 4, roomNumber: 403, status: 'available' },
-                { _id: 5, roomNumber: 404 },
-                { _id: 6, roomNumber: 405 },
-                { _id: 7, roomNumber: 406 },
-                { _id: 8, roomNumber: 407 },
-            ]
-            //combine with cart to set up status
+            // { _id: 1, roomNumber: 400, status: 'available' },
+            // { _id: 2, roomNumber: 401 },
+            // { _id: 3, roomNumber: 402 },
+            // { _id: 4, roomNumber: 403, status: 'available' },
+            // { _id: 5, roomNumber: 404 },
+            // { _id: 6, roomNumber: 405 },
+
+        ];
+
+        for (let i = 0; i < roomType.rooms.length; i++) {
+            rooms.push({
+                _id: i,
+                roomNumber: roomType.rooms[i],
+                status: 'available',
+            });
+        }
+        //combine with cart to set up status
         if (!req.session.cart) {
             req.session.cart = { rooms: [], services: [] };
         }
@@ -66,7 +71,8 @@ class RoomController {
             msg = "Please book your room";
         }
 
-        const table = generateBookingTable(rooms)
+        const table = generateBookingTable(rooms);
+        console.log(table)
 
         res.render('rooms/room-details', {
             roomType: roomType,

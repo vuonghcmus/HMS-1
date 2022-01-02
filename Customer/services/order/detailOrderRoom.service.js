@@ -5,7 +5,7 @@ const DetailOrderRoomService = {
     async findAll() {
         const detailOrders = await detailOrderRoomModel.find({});
 
-        
+
         const newDetailOrders = detailOrders.map(detail => {
             const newDetailOrder = this.findById(detail._id)
             return newDetailOrder
@@ -17,7 +17,7 @@ const DetailOrderRoomService = {
 
         const detailOrder = await detailOrderRoomModel.findById(id).lean();
         detailOrderServices = []
-        for(const id of detailOrder.detailOrderService) {
+        for (const id of detailOrder.detailOrderService) {
             const service = await detailOrderServiceService.findById(id)
             detailOrderServices.push(service)
         }
@@ -26,7 +26,16 @@ const DetailOrderRoomService = {
     },
 
     async findByRoomId(roomId) {
-        return await detailOrderRoomModel.find({roomID: roomId}).lean();
+        return await detailOrderRoomModel.find({ roomID: roomId }).lean();
+    },
+
+    async findByDateInOut(datein, dateout) {
+        console.log(dateout);
+        console.log(dateout <= new Date("2022-01-15"));
+        return await detailOrderRoomModel.find({
+            dateOfCheckIn: { $lte: datein },
+            dateOfCheckOut: { $gte: dateout },
+        });
     },
 
 
