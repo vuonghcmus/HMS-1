@@ -54,7 +54,6 @@
                             <button class="btn palatin-btn" type="submit">Find</button>
                         </div>
                     </div>
-                    
                 </div>
             </form>
             
@@ -74,15 +73,17 @@
                 </table>
             </div>
             <form class="col-12 booking-form needs-validation" method="POST" action="/rooms/add" novalidate>
+                <div class="row mb-3"></div>
                 <div class="book-container">
                     <input type="hidden" name="roomType" value="{{roomType.name}}">
                     <input type="hidden" name="roomImage" value="{{roomType.image}}">
                     <input type="hidden" name="roomPrice" value="{{roomType.price}}">
+                    <input type="date" hidden name="checkin" value="{{checkin}}">
+                    <input type="date" hidden name="checkout" value="{{checkout}}">
                     <button type="submit" class="btn book-room-btn palatin-btn">Book Room</button>
                 </div>
             </form>
             {{/if}}
-
         </div>
     </div>
 </section>

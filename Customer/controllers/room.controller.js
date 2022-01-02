@@ -26,7 +26,7 @@ class RoomController {
     async getRoomDetail(req, res, next) {
         // if haven't find by check in and check out date
         const roomType = await RoomTypeService.findById(req.params.id_room);
-        if(!req.busyRooms) {
+        if(!req.finding) {
             return res.render('rooms/room-details', {
                 roomType: roomType,
                 isAuth: req.user,
@@ -43,8 +43,11 @@ class RoomController {
                 roomNumber: roomType.rooms[i],
             });
         }
-        rooms = findEmptyRoom(rooms, req.busyRooms)
-        req.busyRooms = null
+        rooms = findEmptyRoom(rooms, req.finding.busyRooms)
+        const checkin = req.finding.checkin
+        const checkout = req.finding.checkout
+
+        req.finding = null
         //combine with cart to set up status
         if (!req.session.cart) {
             req.session.cart = { rooms: [], services: [] };
@@ -80,21 +83,23 @@ class RoomController {
             cart: req.session.cart,
             message: msg,
             isAuth: req.user,
+            checkin: checkin,
+            checkout: checkout
         });
     }
 
     async findBusyRoom(req, res, next) {
         const { checkin, checkout } = req.body
         const busyRooms = await findBusyRoom(checkin, checkout)
-        req.busyRooms = busyRooms
+        req.finding = {busyRooms, checkin, checkout}
         next()
     }
 
     async addRoomCart(req, res, next) {
         const idRooms = req.body.roomID;
         const peoples = req.body.people;
-        const checkins = req.body.checkin;
-        const checkouts = req.body.checkout;
+        const checkin = req.body.checkin;
+        const checkout = req.body.checkout;
 
         console.log(req.body.people);
         console.log(req.body.roomType);
@@ -111,16 +116,16 @@ class RoomController {
                 room.listRoom.push({
                     roomid: idRooms[i],
                     people: peoples[i],
-                    checkin: checkins[i],
-                    checkout: checkouts[i],
+                    checkin: checkin,
+                    checkout: checkout,
                 });
             }
         } else {
             room.listRoom.push({
                 roomid: idRooms,
                 people: peoples,
-                checkin: checkins,
-                checkout: checkouts,
+                checkin: checkin,
+                checkout: checkout,
             });
         }
 
