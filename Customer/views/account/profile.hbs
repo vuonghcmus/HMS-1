@@ -1,0 +1,65 @@
+<div class="section-order p-4 mb-5" style="margin-top: 140px;">
+    <h2 class="mb-3">Your information</h2>
+    <form id="input-information-form" method="POST" action="" class="row g-3 px-2 input-information-form needs-validation" novalidate>
+        <div class="col-12 col-md-6 col-lg-5 mb-4">
+            <label for="fullname">Full name:</label>
+            <input disabled style="background-color: #fff;" type="text" class="form-control" name="fullname" id="fullname" value="{{user.fullname}}" required>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-5 mb-4">
+            <label for="fullname">Phone number:</label>
+            <input disabled style="background-color: #fff;" type="number" class="form-control" name="phone" id="phone" value="{{user.phone}}" required>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-5 mb-4">
+            <label for="fullname">Your ID:</label>
+            <input disabled style="background-color: #fff;" type="number" class="form-control" name="identity" id="identity" value="{{user.ID}}" required>
+        </div>
+        {{!-- <div class="confirm-container col-12 mt-3">
+            <button form="input-information-form" class="btn palatin-btn" style="float: right;" type="submit">Confirm</button>
+        </div> --}}
+    </form>
+    <h2 class="mt-5 order-booking-container">Your Booking</h2>
+    <div class="mb-4" style="border: 1px solid #eee;"></div>
+        <ul class="order-list px-3" style="width: 100%;">
+            <li class="order-item mb-4 d-flex justify-content-between align-items-center">
+                <div class="">
+                    <h4 class="order-title">Phòng Bình Dân</h4>
+                    <span class="order-date">19-12-2021 to 20-12-2021</span>
+                </div>
+                <div class="">
+                    <p class="order-amount">Number of rooms: <span>2</span></p>
+                    <p class="order-price">Price: <span>24$</span></p>
+                </div>
+            </li>
+            <li class="order-item mb-4 d-flex justify-content-between align-items-center">
+                <div class="">
+                    <h4 class="order-title">Phòng Bình Dân</h4>
+                    <span class="order-date">19-12-2021 to 20-12-2021</span>
+                </div>
+                <div class="">
+                    <p class="order-amount">Number of rooms: <span>2</span></p>
+                    <p class="order-price">Price: <span>24$</span></p>
+                </div>
+            </li>
+            <li class="order-item mb-4 d-flex justify-content-between align-items-center">
+                <div class="">
+                    <h4 class="order-title">Phòng Bình Dân</h4>
+                    <span class="order-date">19-12-2021 to 20-12-2021</span>
+                </div>
+                <div class="">
+                    <p class="order-amount">Number of rooms: <span>2</span></p>
+                    <p class="order-price">Price: <span>24$</span></p>
+                </div>
+            </li>
+            
+
+        </ul>
+    <div class="mb-4" style="border: 1px solid #eee;"></div>
+    <div class="order-total-amount-container">
+        <h2 class="order-total-amount">Total Amount: <span>4.650.000đ</span></h2>
+    </div>
+
+</div>
+
+<script src="/js/formValidation.js"></script>

@@ -11,12 +11,14 @@ module.exports = {
 
         res.render("account/sign-in", {
             layout: "main_no_head",
+            retUrl: req.query.retUrl || '/'
         });
     },
     login: (req, res, next) => {
+        console.log(req.query)
         passport.authenticate(
             "local", {
-                successRedirect: "/",
+                successRedirect: req.query.retUrl,
                 failureRedirect: "/account/sign-in",
                 failureFlash: true,
             },
@@ -43,11 +45,50 @@ module.exports = {
     },
 
     profile: (req, res, next) => {
-        res.render('account/profile')
+        res.render('account/profile', {
+            isAuth: req.user,
+            user: req.user,
+            active: {account: true, profile: true}
+        })
     },
 
-    changePassword: (req, res, next) => {
-        res.render('account/change-password')
-    }
+    getChangePassword: (req, res, next) => {
+        res.render('account/change-password', {
+            layout: 'main_no_head'
+        })
+    },
+    postChangePassword: async (req, res, next) => {
+        
+        const user = await customerModel.findOne(req.user)
+        if(!user) {
+            return res.redirect('/account/sign-in')
+        }
 
+        const isValid = bcrypt.compareSync(req.body['old-password'], user.password)
+        if(!isValid) {
+            return res.render('account/change-password', {
+                layout: 'main_no_head',
+                error: "Current password is not correct",
+            })
+        }
+
+        if(req.body['new-password'] !== req.body['confirm-password']) {
+            return res.render('account/change-password', {
+                layout: 'main_no_head',
+                error: "Please confirm your new password",
+            })
+        }
+
+        const hash = bcrypt.hashSync(req.body['new-password'], 10)
+        req.user.password = hash
+        await customerModel.findOneAndUpdate({_id: req.user._id}, {password: hash})
+        res.redirect('/')
+    },
+
+    logout: (req, res, next) => {
+        req.logOut();
+        req.session.destroy(function (err) {
+        res.redirect("/");
+        });
+    }
 }

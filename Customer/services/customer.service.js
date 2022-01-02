@@ -1,7 +1,7 @@
 const customerModel = require("../models/account/customer.model");
 
 const CustomerService = {
-    async getUserById(id){
+    async findById(id){
         return await customerModel.findById(id).lean()
     },
     async getUser(username, password) {
@@ -10,7 +10,10 @@ const CustomerService = {
 
         return await customerModel.findOne(queryObject).lean()
     },
-    async createNewUser(username, password, fullname, phone, ID) {
+    async find(user = {}) {
+        return await customerModel.findOne(user).lean()
+    },
+    async create(username, password, fullname, phone, ID) {
         return await customerModel.create({username: username, password: password, fullname: fullname, phone: phone, ID: ID, status: "pending"})
     },
 }

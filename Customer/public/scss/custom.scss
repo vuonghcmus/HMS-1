@@ -76,3 +76,27 @@
     user-select: none;
     color: #cc0000;
   }
+
+
+.menu-btn {
+
+
+    .dropdown-item {
+        color: $dark-color !important;
+    }
+
+    .dropdown.active{
+        
+        i {
+            color: $pri-color;
+        }
+        .dropdown-toggle::after{
+            color: $pri-color;
+        }
+    }
+
+    .dropdown-item.active {
+        color: $pri-color !important;
+        background-color: #fff !important;
+    }
+}

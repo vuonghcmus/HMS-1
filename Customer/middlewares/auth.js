@@ -5,6 +5,6 @@ module.exports = (req, res, next) => {
             query = `?retUrl=${req.originalUrl}`;
         }
 
-        res.redirect(`/signin${query}`);
+        res.redirect(`/account/sign-in${query}`);
     } else next();
 };
