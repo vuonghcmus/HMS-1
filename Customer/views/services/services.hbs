@@ -10,7 +10,6 @@
 <!-- ##### Service Intro Area Start ##### -->
 <section class="services-intro">
     <div class="container">
-        
         <div class="row align-items-center">
             <!-- Service Intro Text -->
             <div class="col-12 col-lg-6">
@@ -86,78 +85,6 @@
             </div>
         </div>
         {{/each}}
-        {{!-- <div class="row service-item card">
-            
-            <div class="col-12 col-md-3">
-                <img src="/img/bg-img/2.jpg"/>
-            </div>
-            <div class="col-md-6 col-12 text-container">
-                <h2>Berverage and foods</h2>
-                <p>Order your food and drink while staying at our place.</p>
-            </div>
-        
-            <div class="col-md-3 col-12 price-container d-flex">
-                <p class="price-text"><span>150</span>$</p>
-                <a href="#" class="book-room-btn btn custom-palatin-btn price-btn ">Details</a>
-            </div>
-        </div>
-        <div class="row service-item card">
-            
-            <div class="col-12 col-md-3">
-                <img src="/img/bg-img/2.jpg"/>
-            </div>
-            <div class="col-md-6 col-12 text-container">
-                <h2>Berverage and foods</h2>
-                <p>Order your food and drink while staying at our place.</p>
-            </div>
-        
-            <div class="col-md-3 col-12 price-container d-flex">
-                <p class="price-text"><span>150</span>$</p>
-                <a href="#" class="book-room-btn btn custom-palatin-btn price-btn ">Details</a>
-            </div>
-        </div>  
-        <div class="row justify-content-center">
-
-            <!-- Single Core Feature Area -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="single-core-feature mb-100">
-                    <div class="bg-thumbnail bg-img" style="background-image: url(/img/bg-img/12.jpg);"></div>
-                    <!-- Content -->
-                    <div class="feature-content">
-                        <i class="icon-sunset"></i>
-                        <h3>Wellness</h3>
-                        <p>Malesuada lorem maximus mauris sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus. faucibus finibus.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Single Core Feature Area -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="single-core-feature mb-100">
-                    <div class="bg-thumbnail bg-img" style="background-image: url(/img/bg-img/13.jpg);"></div>
-                    <!-- Content -->
-                    <div class="feature-content">
-                        <i class="icon-sunset"></i>
-                        <h3>Spa Center</h3>
-                        <p>Malesuada lorem maximus mauris sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus. faucibus finibus.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Single Core Feature Area -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="single-core-feature mb-100">
-                    <div class="bg-thumbnail bg-img" style="background-image: url(/img/bg-img/14.jpg);"></div>
-                    <!-- Content -->
-                    <div class="feature-content">
-                        <i class="icon-island"></i>
-                        <h3>Lounge Bar</h3>
-                        <p>Malesuada lorem maximus mauris sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus. faucibus finibus.</p>
-                    </div>
-                </div>
-            </div>
-
-        </div> --}}
     </div>
 </section>
 <!-- ##### Core Features End ##### -->
@@ -226,7 +153,7 @@
 {{!-- floating button --}}
         
 {{!-- floating button --}}
-    {{#if user}}
+    {{#if isAuth}}
     <button class="btn modal-btn btn-floating" data-bs-toggle="modal" data-bs-target="#confirm-order-modal">
         <img src="/img/icon/order-icon.png" alt="">
         <span>3</span>
@@ -311,31 +238,6 @@
             </div>
         </div>
     </div>
-    
-
-    {{!-- Delete hidden form --}}
-    <form name="delete-course-form" method="POST"></form>
 </section>
-
-
-<script>
-
-    const confirmOrderModal = document.getElementById('confirm-order-modal')
-
-    //var btnDeleteCourse = document.getElementById('btn-delete-course')
-    //var courseId
-    //var deleteForm = document.forms['delete-course-form']
-
-    confirmOrderModal.addEventListener('show.bs.modal', function (event) {
-        var button = event.relatedTarget
-        //courseId = button.getAttribute('data-id')
-    })
-    // when dialog confirm clicked
-    //btnDeleteCourse.onclick = () => {
-    //  deleteForm.action = '/courses/' + courseId + '?_method=DELETE'
-        //deleteForm.submit()
-    //}
-</script>
-
 <script src="/js/updateModalItem.js"></script>
 {{/if}}    

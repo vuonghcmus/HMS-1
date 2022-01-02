@@ -7,14 +7,19 @@
 <section class="rooms-area section-padding-0-100">
     <div class="container card" style="margin-top:50px;padding-top:20px;">
        
-        <div class="row">
-            <div class="col-lg-3 col-12">
+        <div class="row custom-service-item">
+            <div class="col-lg-3 col-12 image-container">
                 <img src="/img/food-img/fried-rice.jpg"/>
             </div>
-            <div class="col-lg-6 col-12">
-                <h2>{{service.name}} </h2>
-                <p class="price-text">{{service.price}} $</p>
-                <p>{{service.description}}</p>
+            <div class="col-lg-9 col-12 info-container">
+                <div class="text-container">
+                    <h2>{{service.name}} </h2> 
+                    <span class="price-text">{{service.price}} $</span>
+                    <p>{{service.description}}</p>
+                </div>
+                <div class="order-amount-container">
+                    <input type="number" class="order-amount" min="0">
+                </div>
             </div>
             
         </div>

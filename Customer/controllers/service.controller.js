@@ -4,15 +4,11 @@ class ServiceController {
     //[GET] /services/
     async show(req, res, next) {
         const allServices = await serviceService.findAll();
-        // console.log(allServices);
-        // console.log(allServices);
-        // console.log(allServices[0].id);
         res.render("services/services", {
             allServices: allServices,
             isAuth: req.user
         });
 
-        // res.send(allServices);
     }
 
     async ServiceDetail(req, res, next) {
