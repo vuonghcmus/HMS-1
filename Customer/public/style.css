@@ -75,6 +75,20 @@
   color: #cc0000;
 }
 
+.menu-btn .dropdown-item {
+  color: #141414 !important;
+}
+.menu-btn .dropdown.active i {
+  color: #cb8670;
+}
+.menu-btn .dropdown.active .dropdown-toggle::after {
+  color: #cb8670;
+}
+.menu-btn .dropdown-item.active {
+  color: #cb8670 !important;
+  background-color: #fff !important;
+}
+
 /* [Master Stylesheet - v1.0] */
 .booking-table td .active {
   background-color: #cb8670;
@@ -2333,6 +2347,7 @@ img {
     flex: 1;
   }
 }
+
 .modal-card p {
   color: #7d7d7d;
   font-size: 18px;
@@ -2345,4 +2360,5 @@ img {
   font-weight: 600;
   font-size: 20px;
 }
+
 /*# sourceMappingURL=style.css.map */
