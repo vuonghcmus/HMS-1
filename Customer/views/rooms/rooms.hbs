@@ -80,6 +80,36 @@
                    <p class="roomprice">Price: {{this.RoomPrice}}</p>
                 </div>
                <div class="col-md-2 col-12">x<span class="roomcount">{{this.listRoom.length}}</span></div>
+               <div class="col-md-12">
+                    <a class="btn btn-info" data-toggle="collapse" href="#collapse-{{this.RoomTypeID}}" role="button" aria-expanded="false" aria-controls="collapse-{{this.RoomTypeID}}">
+                        More details <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    </a>
+               </div>
+               <div class="col-md-12 collapse"  id="collapse-{{this.RoomTypeID}}">
+               <table class="table">
+                   <thead>
+                       <tr>
+                            <th scope="col">Room</th>
+                            <th scope="col">People</th>
+                            <th scope="col">Checkin</th>
+                            <th scope="col">Checkout</th>
+                        </tr>
+                   </thead>
+                   <tbody>
+                       {{#each this.listRoom}}
+                       <tr>
+                       
+                            <th scope="row">{{this.roomid}}</th>
+                            <td> {{this.people}}</td>
+                            <td>{{this.checkin}}</td>
+                            <td>{{this.checkout}}</td>                            
+                        
+                        </tr>
+                        {{/each}}
+                   </tbody>
+                   
+               </table>
+               </div>
            </div>
            <div class="my-2" style="border: 1px solid #eee;"></div>
            {{/each}}

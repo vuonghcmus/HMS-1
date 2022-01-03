@@ -49,7 +49,7 @@
                         <span class="order-date">{{this.checkin}} to {{this.checkout}}</span>
                     </div>
                     <div class="">
-                        <p class="order-price">Price: <span>24$</span></p>
+                        <p class="order-price">Price: <span class="price-room">{{../RoomPrice}}$</span></p>
                     </div>
                 </div>
                 {{/each}}
@@ -58,7 +58,7 @@
         </ul>
     <div class="mb-4" style="border: 1px solid #eee;"></div>
     <div class="order-total-amount-container">
-        <h2 class="order-total-amount">Total Amount: <span>4.650.000đ</span></h2>
+        <h2 class="order-total-amount" >Total Amount: <span id="total-bill">4.650.000đ</span></h2>
         <div class="btn-container">
             <a href="/rooms" class="btn palatin-btn btn-3" style="margin-right: 6px;">Return</a>
             <button form="input-information-form" class="btn palatin-btn" type="submit">Confirm</button>
@@ -68,3 +68,21 @@
 </div>
 
 <script src="/js/formValidation.js"></script>
+<script>
+function updateTotal()
+{
+    var ttbill=document.getElementById("total-bill");
+    const rooms=document.getElementsByClassName("price-room");
+    var total=0;
+    for(let i=0;i<rooms.length;i++)
+    {
+        var value=String(rooms[i].innerHTML);
+        value=value.substr(0,value.length-1);
+        console.log(value);
+        total+=parseInt(value);
+    }
+    ttbill.innerHTML=String(total)+"$";
+
+}
+updateTotal()
+</script>

@@ -27,7 +27,7 @@ class RoomController {
     async getRoomDetail(req, res, next) {
         // if haven't find by check in and check out date
         const roomType = await RoomTypeService.findById(req.params.id_room);
-        if(!req.finding) {
+        if (!req.finding) {
             return res.render('rooms/room-details', {
                 roomType: roomType,
                 isAuth: req.user,
@@ -49,7 +49,7 @@ class RoomController {
         const checkout = req.finding.checkout
 
         req.finding = null
-        //combine with cart to set up status
+            //combine with cart to set up status
         if (!req.session.cart) {
             req.session.cart = { rooms: [], services: [] };
         }
@@ -71,6 +71,7 @@ class RoomController {
                 }
             }
         }
+        console.log(rooms[0]);
         var msg = "";
         if (cart.rooms.length == 0) {
             msg = "Please book your room";
@@ -85,14 +86,15 @@ class RoomController {
             message: msg,
             isAuth: req.user,
             checkin: checkin,
-            checkout: checkout
+            checkout: checkout,
+
         });
     }
 
     async findBusyRoom(req, res, next) {
         const { checkin, checkout } = req.body
         const busyRooms = await findBusyRoom(checkin, checkout)
-        req.finding = {busyRooms, checkin, checkout}
+        req.finding = { busyRooms, checkin, checkout }
         next()
     }
 
@@ -109,6 +111,7 @@ class RoomController {
             RoomType: req.body.roomType,
             RoomImage: req.body.roomImage,
             RoomPrice: req.body.roomPrice,
+            RoomTypeID: req.body.roomTypeID,
             listRoom: [],
         };
 
@@ -127,6 +130,7 @@ class RoomController {
                 people: peoples,
                 checkin: checkin,
                 checkout: checkout,
+                // finding: true,
             });
         }
 
