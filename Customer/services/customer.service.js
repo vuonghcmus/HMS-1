@@ -1,20 +1,29 @@
 const customerModel = require("../models/account/customer.model");
-
+const bcrypt = require('bcrypt')
 const CustomerService = {
-    async findById(id){
+    async findById(id) {
         return await customerModel.findById(id).lean()
     },
     async getUser(username, password) {
         const queryObject = { username }
-        if(password) queryObject.password = password
+        if (password) queryObject.password = password
 
         return await customerModel.findOne(queryObject).lean()
     },
-    async find(user = {}) {
+    async findOne(user = {}) {
         return await customerModel.findOne(user).lean()
     },
-    async create(username, password, fullname, phone, ID) {
-        return await customerModel.create({username: username, password: password, fullname: fullname, phone: phone, ID: ID, status: "pending"})
+    async create(user) {
+        const { password, fullname, phone, ID } = user
+        const hash = bcrypt.hashSync(password.toString(), 10)
+        return await customerModel.create({
+            username: phone,
+            password: hash,
+            fullname: fullname,
+            phone: phone,
+            ID: ID,
+            status: false
+        })
     },
 }
 

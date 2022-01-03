@@ -98,8 +98,8 @@
             <form class="col-12 booking-form needs-validation" method="POST" action="/rooms/add" novalidate>
                 <div class="row mb-3"></div>
                 <div class="book-container">
-                    <input type="hidden" name="roomType" value="{{roomType.name}}">
                     <input type="hidden" name="roomTypeID" value="{{roomType._id}}">
+                    <input type="hidden" name="roomType" value="{{roomType.name}}">
                     <input type="hidden" name="roomImage" value="{{roomType.image}}">
                     <input type="hidden" name="roomPrice" value="{{roomType.price}}">
                     <input type="date" hidden name="checkin" value="{{checkin}}">

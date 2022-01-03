@@ -8,8 +8,12 @@ const RoomTypeService = {
         return await roomTypeModel.findById(id).lean()
     },
 
-    async find(obj){
+    async find(obj) {
         return await roomTypeModel.find(obj).lean()
+    },
+
+    async findByRoomID(roomid) {
+        return await roomTypeModel.findOne({ rooms: { "$in": roomid } });
     }
 }
 

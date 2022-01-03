@@ -1,4 +1,5 @@
 const HomeService = require("../services/home/home.service");
+const RoomService = require("../services/room/roomType.service");
 class HomeController {
     //[GET] /
     async show(req, res, next) {
@@ -16,7 +17,20 @@ class HomeController {
         var listRoom = [];
 
         if (phone && identity) {
-            const bookedRooms = await HomeService.getBookedRoom(phone, identity);
+            let bookedRooms = await HomeService.getBookedRoom(phone, identity);
+            for (let i = 0; i < bookedRooms.length; i++) {
+                let room = await RoomService.findByRoomID(bookedRooms[i].roomID);
+                console.log(room);
+                if (room) {
+                    bookedRooms[i].room = room;
+                }
+                let checkindate = bookedRooms[i].dateOfCheckIn;
+                bookedRooms[i].dateOfCheckIn = checkindate.toISOString().substring(0, 10);
+                let checkoutdate = bookedRooms[i].dateOfCheckOut;
+                bookedRooms[i].dateOfCheckOut = checkoutdate.toISOString().substring(0, 10);
+
+            }
+            console.log(bookedRooms);
             var empty;
             if (bookedRooms.length <= 0) {
                 empty = true;
@@ -38,22 +52,22 @@ class HomeController {
 
     // [GET] /elements
     async elements(req, res, next) {
-        res.render("home/elements", {isAuth: req.user});
+        res.render("home/elements", { isAuth: req.user });
     }
 
     // [GET] /blog
     async blog(req, res, next) {
-        res.render("home/blog", {isAuth: req.user});
+        res.render("home/blog", { isAuth: req.user });
     }
 
     // [GET] /contact
     async contact(req, res, next) {
-        res.render("home/contact", {isAuth: req.user});
+        res.render("home/contact", { isAuth: req.user });
     }
 
     // [GET] /about-us
     async aboutUs(req, res, next) {
-        res.render("home/about-us", {isAuth: req.user});
+        res.render("home/about-us", { isAuth: req.user });
     }
 
 }

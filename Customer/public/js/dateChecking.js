@@ -16,6 +16,21 @@ function getCurrentDay() {
     return today
 }
 
+function nextDayDate(checkin) {
+    // get today's date then add one
+    var nextDay = new Date(checkin);
+    nextDay.setDate(nextDay.getDate() + 1);
+
+    var month = nextDay.getMonth() + 1;
+    var day = nextDay.getDate();
+    var year = nextDay.getFullYear();
+
+    if (month < 10) { month = "0" + month } 
+    if (day < 10) { day = "0" + day }
+
+    return `${year}-${month}-${day}`;
+}
+
 
 const btnFind = document.querySelector('.btn-find')
 const inputCheckIn = document.querySelector('#checkin')
@@ -25,7 +40,8 @@ inputCheckIn.setAttribute('min', getCurrentDay())
 
 inputCheckIn.addEventListener('change', e => {
     inputCheckOut.value = ''
-    inputCheckOut.setAttribute('min', e.target.value)
+    const minCheckoutDate = nextDayDate(e.target.value)
+    inputCheckOut.setAttribute('min', minCheckoutDate)
 })
 
 inputCheckOut.addEventListener('change', e => {

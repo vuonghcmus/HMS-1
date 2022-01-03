@@ -26,9 +26,18 @@ const findEmptyRoom = (rooms, busyRooms) => {
     return data   
 }
 
+const calculateDay = (checkin, checkout) => {
+
+    const checkinDate = new Date(checkin)
+    const checkoutDate = new Date(checkout)
+
+    return (checkoutDate.getTime() - checkinDate.getTime())/(1000*60*60*24)
+}
+
 
 module.exports = {
     generateBookingTable,
     findBusyRoom,
     findEmptyRoom,
+    calculateDay
 }

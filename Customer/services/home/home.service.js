@@ -7,25 +7,18 @@ const HomeService = {
             ID: identity,
             phone: phone
         }).lean();
-        var returnList = [];
+
+        let listRoom = []
 
         if (customer) { //find room booked by customer
-            const orderRoom = await DetailOrderRoomModel.find({
+            listRoom = await DetailOrderRoomModel.find({
                 customerID: customer._id
             }).lean();
 
-            const listRoom = orderRoom.detailOrderRoom;
-
-            for (let i = 0; i < listRoom.length; i++) {
-                const detail = await DetailOrderRoomModel.find({
-                    _id: listRoom[i],
-                }).lean();
-                returnList.push(detail);
-            }
+            console.log(listRoom);
+            
         }
-        console.log(returnList);
-        return returnList;
-
+        return listRoom;
     }
 }
 

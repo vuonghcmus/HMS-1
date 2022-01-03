@@ -1,6 +1,50 @@
 <div class="section-order p-4" style="margin-top: 140px;">
+    {{!-- already sign in form --}}
+    {{#if isAuth}}
+    <h2 class="mb-3">Your information</h2>
+    <form id="input-information-form" method="POST" action="/orders" class="row g-3 px-2 input-information-form">
+        <div class="col-12 col-md-8 mb-4">
+            <label for="fullname">Full name</label>
+            <input disabled style="background-color: #fff;" type="text" class="form-control" name="fullname" id="fullname" value="{{user.fullname}}">
+        </div>
+        <div class="col-12 mb-4">
+            <div class="row">
+                <div class="col-12 col-md-4 mb-4">
+                    <label for="fullname">Phone number</label>
+                    <input
+                        onkeydown="return false;"
+                        onkeypress="return false;"
+                        autocomplete="off"
+                        style="background-color: #fff;"
+                        type="number"
+                        class="form-control"
+                        name="phone"
+                        id="phone"
+                        value="{{user.phone}}"
+                    >
+                </div>
+                <div class="col-12 col-md-4 mb-4">
+                    <label for="fullname">ID number</label>
+                    <input
+                        onkeydown="return false;"
+                        onkeypress="return false;"
+                        autocomplete="off"
+                        style="background-color: #fff;"
+                        type="number"
+                        class="form-control"
+                        name="identity"
+                        id="identity"
+                        value="{{user.ID}}"
+                    >
+                </div>
+            </div>
+        </div>
+    </form>
+
+    {{!-- register form --}}
+    {{else}}
     <h2 class="mb-3">Provide your information</h2>
-    <form id="input-information-form" method="POST" action="" class="row g-3 px-2 input-information-form needs-validation" novalidate>
+    <form id="input-information-form" method="POST" action="/orders" class="row g-3 px-2 input-information-form needs-validation" novalidate>
         <div class="col-12 col-md-6 col-lg-5 mb-4">
             <input type="text" class="form-control" name="first-name" id="first-name" placeholder="First Name" required>
             <div class="invalid-feedback">
@@ -28,10 +72,9 @@
                 ID must not be empty.
             </div>
         </div>
-        {{!-- <div class="confirm-container col-12 mt-3">
-            <button form="input-information-form" class="btn palatin-btn" style="float: right;" type="submit">Confirm</button>
-        </div> --}}
     </form>
+    {{/if}}
+
     <h2 class="mt-5 order-booking-container">Your Booking</h2>
         <ul class="order-list px-3" style="width: 100%;">
             {{#each rooms}}
@@ -49,7 +92,7 @@
                         <span class="order-date">{{this.checkin}} to {{this.checkout}}</span>
                     </div>
                     <div class="">
-                        <p class="order-price">Price: <span class="price-room">{{../RoomPrice}}$</span></p>
+                        <p class="order-price">Price: <span>{{this.amount}}$</span></p>
                     </div>
                 </div>
                 {{/each}}
@@ -58,7 +101,7 @@
         </ul>
     <div class="mb-4" style="border: 1px solid #eee;"></div>
     <div class="order-total-amount-container">
-        <h2 class="order-total-amount" >Total Amount: <span id="total-bill">4.650.000đ</span></h2>
+        <h2 class="order-total-amount">Total Amount: <span>{{rooms.totalAmount}}$</span></h2>
         <div class="btn-container">
             <a href="/rooms" class="btn palatin-btn btn-3" style="margin-right: 6px;">Return</a>
             <button form="input-information-form" class="btn palatin-btn" type="submit">Confirm</button>
@@ -84,5 +127,5 @@ function updateTotal()
     ttbill.innerHTML=String(total)+"$";
 
 }
-updateTotal()
+//updateTotal()
 </script>

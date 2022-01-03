@@ -104,18 +104,27 @@
             {{#each bookedRooms}}
             <div class="row service-item card" >
                  <div class="col-12 col-md-3">
-                    <img src="/img/bg-img/2.jpg"/>
+                    <img src="{{this.room.image}}"/>
+                    <div class="d-flex justify-content-center mt-4">
+                        <a href="/rooms/{{this.room._id}}" class="book-room-btn btn custom-palatin-btn price-btn ">Details</a>      
+                    </div>
+                    
+                    <p class="price-text" style="font-size: 16px;">Room Number: <span style="color: #cb8670;">{{this.roomID}}</span></p>
+                     
                 </div>
                 <div class="col-md-6 col-12 text-container">
-                    <h2>Deluxe Room</h2>
-                    <p>Price: 150$</p>
-                    <p>Beds: 2</p>
-                    <p>People: 2</p>
+                    <h2>{{this.room.name}}</h2>
+                    <p>Price: {{this.room.price}}$</p>
+                    <p>Beds: {{this.room.bed}}</p>
+                    <p>People: {{this.people}}</p>
+                    
                 </div>
             
-                <div class="col-md-3 col-12 price-container d-flex">
-                    <p class="price-text">x <span>2</span></p>
-                    <a href="#" class="book-room-btn btn custom-palatin-btn price-btn ">Details</a>
+                <div class="col-md-2 col-12 price-container d-flex">
+                    <p>Check in date: {{this.dateOfCheckIn}}</p>
+                    <p>Check out date: {{this.dateOfCheckOut}}</p>
+                    
+                   
                 </div>
             </div>
             {{/each}}
