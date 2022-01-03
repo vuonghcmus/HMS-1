@@ -102,15 +102,14 @@ class RoomController {
         const checkin = req.body.checkin;
         const checkout = req.body.checkout;
 
-        console.log(req.body.people);
-        console.log(req.body.roomType);
-        console.log(req.body.roomID);
         const room = {
             RoomType: req.body.roomType,
+            RoomTypeID: req.body.roomTypeID,
             RoomImage: req.body.roomImage,
             RoomPrice: req.body.roomPrice,
             listRoom: [],
         };
+
 
         if (Array.isArray(idRooms)) {
             for (let i = 0; i < idRooms.length; i++) {
@@ -140,9 +139,6 @@ class RoomController {
             cart.rooms.push(room);
         }
 
-        // {"rooms":[{"RoomType":"Phòng thường","RoomImage":"https://firebasestorage.googleapis.com/v0/b/hmsapp-91b1a.appspot.com/o/Noi-that-khach-san-dep-3.png?alt=media&token=f0b108b4-1f9d-482a-b32a-1b87e1a46cf2","listRoom":[{"roomid":"403","people":"1","checkin":"2022-01-01","checkout":"2022-01-02"},
-        //{"roomid":"400","people":"1","checkin":"2022-01-20","checkout":"2022-01-03"}]}],"services":[],"length":0}
-        //push to cart
         res.redirect("/rooms");
     }
 
