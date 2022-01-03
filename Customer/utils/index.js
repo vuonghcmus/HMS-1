@@ -34,10 +34,15 @@ const calculateDay = (checkin, checkout) => {
     return (checkoutDate.getTime() - checkinDate.getTime())/(1000*60*60*24)
 }
 
+function convertDate(dateIn) {
+    return dateIn.toISOString().slice(0, 10)
+  }
+
 
 module.exports = {
     generateBookingTable,
     findBusyRoom,
     findEmptyRoom,
-    calculateDay
+    calculateDay,
+    convertDate,
 }

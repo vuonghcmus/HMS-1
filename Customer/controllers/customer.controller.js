@@ -1,4 +1,9 @@
 const customerModel = require("../models/account/customer.model");
+const serviceModel = require('../models/service/service.model')
+const roomTypeModel = require('../models/room/roomType.model')
+const detailOrderRoomModel = require('../models/order/detailOrderRoom.model')
+const detailOrderServiceModel = require('../models/order/detailOrderService.model')
+const { convertDate } = require('../utils/')
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 
@@ -15,7 +20,6 @@ module.exports = {
         });
     },
     login: (req, res, next) => {
-        console.log(req.query)
         passport.authenticate(
             "local", {
                 successRedirect: req.query.retUrl,
@@ -33,6 +37,14 @@ module.exports = {
                         error: "Account or password is not correct",
                     });
                 }
+
+                if(!customer.status) {
+                    return res.render("account/sign-in", {
+                        layout: "main_no_head",
+                        error: "Please check in at the hotel to activate your account",
+                    });
+                }
+
                 const retUrl = req.query.retUrl || "/";
                 req.logIn(customer, (err) => {
                     if (err) {
@@ -44,10 +56,32 @@ module.exports = {
         )(req, res, next);
     },
 
-    profile: (req, res, next) => {
+    profile: async (req, res, next) => {
+
+        const orders = await detailOrderRoomModel.find({customerID: req.user._id})
+
+        for(let order of orders) {
+            const detailOrderService = []
+            for(let detailServiceID of order.detailOrderService) {
+                const serviceDetail = await detailOrderServiceModel.findById(detailServiceID).lean()
+                const service = await serviceModel.findById(serviceDetail.serviceID).lean()
+                serviceDetail.service = service
+                detailOrderService.push(serviceDetail)
+            }
+            order.detailOrderService = detailOrderService
+            order.checkin = convertDate(new Date(order.dateOfCheckIn))
+            order.checkout = convertDate(new Date(order.dateOfCheckOut))
+            const roomType = await roomTypeModel.findById(order.roomTypeID)
+            order.roomType = roomType ? roomType.name : `Room isn't available`
+        }
+
+       
+
+
         res.render('account/profile', {
             isAuth: req.user,
             user: req.user,
+            orders: orders, 
             active: {account: true, profile: true}
         })
     },

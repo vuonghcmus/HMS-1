@@ -1,4 +1,3 @@
-const customerModel = require('../models/account/customer.model')
 const customerService = require('../services/customer.service')
 const detailOrderRoomModel = require('../models/order/detailOrderRoom.model')
 const { calculateDay } = require('../utils/')
@@ -12,9 +11,16 @@ class ServiceController {
 
         if (req.query.status === 'success') {
             req.session.cart = null
-            let message = req.query.user === 'exists' ?
-                'Please login with your current account password' :
-                'Please check in at the hotel to active your account (default password is your ID number)'
+
+            let message = ''
+            if(req.query.user === 'exists') {
+                
+                message = req.user ? 'See the orders in your profile' : 'Please login with your current account password'
+               
+            } else {
+                message = 'Please check in at the hotel to activate your account (default password is your ID number)'
+            }
+
             return res.render('orders/success', {
                 message: message,
                 isAuth: req.user
@@ -27,13 +33,6 @@ class ServiceController {
                 room.amount = calculateDay(room.checkin, room.checkout) * roomType.RoomPrice
                 totalAmount += room.amount
             })
-        }
-
-
-        console.log('rooms', roomTypes)
-
-        for (const roomType of roomTypes) {
-            console.log(roomType.listRoom)
         }
 
         req.session.cart.rooms.totalAmount = totalAmount
@@ -52,7 +51,6 @@ class ServiceController {
         let userIsExists = true
         let { phone, identity } = req.body
         let customer = await customerService.findOne({ phone: phone, ID: identity })
-        console.log(customer)
             // customer not exists
         if (!customer) {
             userIsExists = false
@@ -73,7 +71,7 @@ class ServiceController {
                 await detailOrderRoomModel.create({
                     roomID: room.roomid,
                     customerID: customer._id,
-                    roomTypeID: roomType.roomTypeID,
+                    roomTypeID: roomType.RoomTypeID,
                     people: room.people,
                     dateOfCheckIn: new Date(room.checkin),
                     dateOfCheckOut: new Date(room.checkout),
@@ -83,10 +81,8 @@ class ServiceController {
                 })
             }
         }
-
         let url = '/orders?status=success'
         url += userIsExists ? '&&user=exists' : ''
-
         res.redirect(url)
     }
 

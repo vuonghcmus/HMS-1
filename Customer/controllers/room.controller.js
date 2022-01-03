@@ -8,7 +8,6 @@ class RoomController {
     async show(req, res, next) {
         const allRooms = await RoomTypeService.find();
 
-        console.log(req.session.cart);
         if (!req.session.cart) {
             req.session.cart = { rooms: [], services: [] };
         }
@@ -54,15 +53,12 @@ class RoomController {
             req.session.cart = { rooms: [], services: [] };
         }
         var cart = req.session.cart;
-        console.log(cart.rooms);
         for (let i = 0; i < cart.rooms.length; i++) {
             const currentRoomCart = cart.rooms[i];
             //if exist
             if (currentRoomCart) {
                 for (let j = 0; j < rooms.length; j++) {
                     if (rooms[j].available) {
-                        console.log(rooms[j].roomNumber);
-                        console.log(currentRoomCart.listRoom);
                         const index = currentRoomCart.listRoom.findIndex((o) => String(o.roomid) == String(rooms[j].roomNumber));
                         if (index >= 0) {
                             rooms[j].available = false;
@@ -132,7 +128,6 @@ class RoomController {
                 // finding: true,
             });
         }
-        console.log(room);
 
         var cart = req.session.cart;
         const index = cart.rooms.findIndex((o) => o.RoomType == room.RoomType);
