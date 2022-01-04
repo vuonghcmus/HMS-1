@@ -78,6 +78,8 @@ class ServiceController {
             res.redirect("/services");
         }
     }
+
+    //[POST] /services/clear-cart
     async clearCart(req, res, next) {
         if (req.user) {
             if (req.user.ServiceCart) {
