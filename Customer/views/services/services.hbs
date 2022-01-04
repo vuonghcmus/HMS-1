@@ -233,8 +233,8 @@
             </form>
             <div class="modal-footer pt-0">
                 <p></p>
-                <p style="margin-bottom: 0;">Total Amount: <span class="total-amount">4</span></p>
-                <p>Total Price: <span class="total-price">96$</span></p>
+                <p style="margin-bottom: 0;">Total Amount: <span class="total-amount" id="total-amount">4</span></p>
+                <p>Total Price: <span class="total-price" id="total-price">96$</span></p>
                 <div class="d-flex justify-content-between w-100">
                     <button onclick="clearCart()" class="btn palatin-btn btn-3">Clear All</button>
                     <button form="confirm-order-form" class="btn palatin-btn btn-confirm" type="submit">Confirm</button>
@@ -247,15 +247,21 @@
 <script>
 function clearCart()
 {
-    $.ajax{
+    $.ajax({
         url:'/services/clear-cart',
         method:'POST',
         success:function(data)
         {
             console.log(data);
         }
-    }
+    });
     //clear elements in cart
+    var items=document.getElementsByClassName("order-item");
+    for (let i=0;i<items.length;i++)
+    {
+        items[i].remove();
+    }
+    updateTotal();
 }
 </script>
 {{/if}} 

@@ -4,7 +4,7 @@ const updateItem = (item, unitPrice, step) => {
     let amount = item.getElementsByClassName('order-amount')[0].innerText
     const newAmount = Number(amount) + step
     const newPrice = unitPrice * newAmount
-    item.getElementsByClassName('order-price')[0].innerText = newPrice + '$'
+        // item.getElementsByClassName('order-price')[0].innerText = newPrice + '$'
     item.getElementsByClassName('order-amount')[0].innerText = newAmount
     if (newAmount === 0) item.remove()
     return newAmount
@@ -12,7 +12,7 @@ const updateItem = (item, unitPrice, step) => {
 
 // update the total order modal
 const updateTotal = () => {
-    const items = Array.from(document.getElementsByClassName('order-item'))
+    /*const items = Array.from(document.getElementsByClassName('order-item'))
     const totalAmount = items.length
     const totalPrice = items.reduce((total, item) => {
         let price = item.getElementsByClassName('order-price')[0].innerText.slice(0, 2)
@@ -25,6 +25,21 @@ const updateTotal = () => {
     document.getElementsByClassName('btn-floating')[0]
         .getElementsByTagName('span')[0].innerText = totalAmount
     document.getElementsByClassName('btn-floating')[0].disabled = totalAmount === 0
+    */
+    const amouts = document.getElementsByClassName("order-amount");
+    const prices = document.getElementsByClassName("order-price");
+    var totalAmount = 0;
+    var totalPrice = 0;
+    for (let i = 0; i < amouts.length; i++) {
+        const priceElement = prices[i].innerHTML;
+        const price = priceElement.substring(0, priceElement.length - 1);
+        totalAmount += parseInt(amouts[i].innerHTML);
+        totalPrice += parseInt(price) * parseInt(amouts[i].innerHTML);
+
+    }
+    document.getElementById("total-amount").innerHTML = totalAmount;
+    document.getElementById("total-price").innerHTML = String(totalPrice) + "$";
+
 }
 
 const items = Array.from(document.getElementsByClassName('order-item'))
@@ -44,3 +59,4 @@ items.map(item => {
         updateTotal()
     }
 })
+updateTotal()

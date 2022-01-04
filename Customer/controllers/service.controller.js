@@ -84,8 +84,27 @@ class ServiceController {
         if (req.user) {
             if (req.user.ServiceCart) {
                 req.user.ServiceCart = [];
+                console.log(req.user.ServiceCart);
             }
         }
     }
+
+    //[POST] /services/update-cart/:serviceID/:qty
+    async updateIncart(req, res, next) {
+        if (req.user) {
+            const serviceID = req.params.serviceID;
+            const qty = req.params.qty;
+            if (req.user.ServiceCart) {
+                const index = req.user.ServiceCart.findIndex((o) => o.idService == serviceID);
+                if (index >= 0) {
+                    req.user.ServiceCart[index].orderAmount = qty;
+                    res.send("Success update " + String(serviceID) + "-" + String(qty));
+                }
+            }
+
+        }
+    }
+
+
 }
 module.exports = new ServiceController;
