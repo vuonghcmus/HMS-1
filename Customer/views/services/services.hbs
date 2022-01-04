@@ -80,7 +80,7 @@
             </div>
         
             <div class="col-md-3 col-12 price-container d-flex">
-                <p class="price-text"><span>{{this.price}}</span>$</p>
+                {{!-- <p class="price-text"><span>{{this.price}}</span>$</p> --}}
                 <a href="/services/{{this._id}}" class="book-room-btn btn custom-palatin-btn price-btn ">Details</a>
             </div>
         </div>
@@ -156,7 +156,7 @@
     {{#if isAuth}}
     <button class="btn modal-btn btn-floating" data-bs-toggle="modal" data-bs-target="#confirm-order-modal">
         <img src="/img/icon/order-icon.png" alt="">
-        <span>3</span>
+        <span>{{cart.length}}</span>
     </button>
 
     {{!-- modal for confirm booking room --}}
@@ -171,7 +171,23 @@
             {{!-- confirm order form --}}
             <form id="confirm-order-form" class="row g-3 px-2 confirm-order-form">
                     <ul class="order-list" style="width: 100%;">
+                        {{#each cart}}
                         <li class="order-item col-12 mt-3 d-flex justify-content-between align-items-center">
+                            <div>
+                                <h4 class="order-title">
+                                    {{this.nameService}}
+                                    <span class="order-price">{{this.priceService}}$</span>
+                                </h4>
+                                {{!-- <p class="order-description">Shortbread, chocolate turtle cookies, and red velvet.</p>                             --}}
+                            </div>
+                            <div class="order-amount-container">
+                                <button class="btn btn-decrease">-</button>
+                                <span class="order-amount" style="width: 100%;">{{this.orderAmount}}</span> 
+                                <button class="btn btn-increase">+</button>
+                            </div>
+                        </li>
+                        {{/each}}
+                        {{!-- <li class="order-item col-12 mt-3 d-flex justify-content-between align-items-center">
                             <div>
                                 <h4 class="order-title">
                                     Fried Rice
@@ -212,32 +228,46 @@
                                 <span class="order-amount" style="width: 100%;">2</span> 
                                 <button class="btn btn-increase">+</button>
                             </div>
-                        </li>
-                        <li class="order-item col-12 mt-3 d-flex justify-content-between align-items-center">
-                            <div>
-                                <h4 class="order-title">
-                                    Fried Rice
-                                    <span class="order-price">24$</span>
-                                </h4>
-                                <p class="order-description">Shortbread, chocolate turtle cookies, and red velvet.</p>                            
-                            </div>
-                            <div class="order-amount-container">
-                                <button class="btn btn-decrease">-</button>
-                                <span class="order-amount" style="width: 100%;">2</span> 
-                                <button class="btn btn-increase">+</button>
-                            </div>
-                        </li>
+                        </li> --}}
                     </ul>
             </form>
             <div class="modal-footer pt-0">
                 <p></p>
                 <p style="margin-bottom: 0;">Total Amount: <span class="total-amount">4</span></p>
                 <p>Total Price: <span class="total-price">96$</span></p>
-                <button form="confirm-order-form" class="btn palatin-btn btn-confirm" type="submit">Confirm</button>
+                <div class="row mb-3">
+                    <div class="col mb-3">
+                        
+                            <button class="btn palatin-btn btn-confirm" type="button" onclick="clearCart()">Clear All</button>
+                        
+                    </div>
+                    <div class="col mb-3">
+                        <button form="confirm-order-form" class="btn palatin-btn btn-confirm" type="submit">Confirm</button>
+                    </div>
+                    
+                    
+                    
+                </div>
+                
                 
             </div>
         </div>
     </div>
 </section>
 <script src="/js/updateModalItem.js"></script>
-{{/if}}    
+<script>
+function clearCart()
+{
+    $.ajax{
+        url:'/services/clear-cart',
+        method:'POST',
+        success:function(data)
+        {
+            console.log(data);
+        }
+    }
+    //clear elements in cart
+}
+</script>
+{{/if}} 
+   

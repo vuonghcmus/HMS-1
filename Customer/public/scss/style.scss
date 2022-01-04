@@ -2132,47 +2132,38 @@ img {
 }
 
 .section-order {
-
     .order-title {
         font-weight: 700;
     }
-
     .order-amount,
     .order-price {
         color: $dark-color;
         margin-bottom: 0;
     }
-
     .order-amount span,
     .order-price span {
         color: $pri-color;
         font-size: 20px;
     }
-
     .order-total-amount-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
-
         .order-total-amount span {
             color: $pri-color;
         }
-
         @media #{$breakpoint-xs} {
             flex-direction: column;
             justify-content: center;
-            .btn-container{
+            .btn-container {
                 display: flex;
                 width: 100%;
-               .btn {
-                   flex: 1;
-               }
+                .btn {
+                    flex: 1;
+                }
             }
-
-            
         }
     }
-
 }
 
 .modal-card p {
@@ -2188,3 +2179,7 @@ img {
     font-size: 20px;
 }
 
+.order-service-button {
+    border: none;
+    background-color: inherit;
+}

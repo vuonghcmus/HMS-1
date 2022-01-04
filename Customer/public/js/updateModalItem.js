@@ -6,7 +6,7 @@ const updateItem = (item, unitPrice, step) => {
     const newPrice = unitPrice * newAmount
     item.getElementsByClassName('order-price')[0].innerText = newPrice + '$'
     item.getElementsByClassName('order-amount')[0].innerText = newAmount
-    if (newAmount === 0)item.remove()
+    if (newAmount === 0) item.remove()
     return newAmount
 }
 
@@ -23,7 +23,7 @@ const updateTotal = () => {
     document.getElementsByClassName('total-price')[0].innerText = totalPrice + '$'
     document.getElementsByClassName('btn-confirm')[0].disabled = totalAmount === 0
     document.getElementsByClassName('btn-floating')[0]
-            .getElementsByTagName('span')[0].innerText = totalAmount
+        .getElementsByTagName('span')[0].innerText = totalAmount
     document.getElementsByClassName('btn-floating')[0].disabled = totalAmount === 0
 }
 
@@ -32,10 +32,10 @@ const items = Array.from(document.getElementsByClassName('order-item'))
 items.map(item => {
     const btnDecrease = item.getElementsByClassName('btn-decrease')[0]
     const btnIncrease = item.getElementsByClassName('btn-increase')[0]
-    const unitPrice = 12
+    const unitPrice = 50
     btnDecrease.onclick = (event) => {
         event.preventDefault()
-        updateItem(item, unitPrice, -1) 
+        updateItem(item, unitPrice, -1)
         updateTotal()
     }
     btnIncrease.onclick = (event) => {

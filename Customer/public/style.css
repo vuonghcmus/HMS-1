@@ -2379,4 +2379,9 @@ img {
   font-size: 20px;
 }
 
+.order-service-button {
+  border: none;
+  background-color: inherit;
+}
+
 /*# sourceMappingURL=style.css.map */

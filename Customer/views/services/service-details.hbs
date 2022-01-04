@@ -5,23 +5,75 @@
     </div>
 </section>
 <section class="rooms-area section-padding-0-100">
+    
+
+    
+    
     <div class="container card" style="margin-top:50px;padding-top:20px;">
-       
+        <form action="/services/add-to-cart" method="POST">
+       {{#each services}}
         <div class="row custom-service-item">
             <div class="col-lg-3 col-12 image-container">
-                <img src="/img/food-img/fried-rice.jpg"/>
+                <img src="{{this.image}}"/>
             </div>
             <div class="col-lg-9 col-12 info-container">
                 <div class="text-container">
-                    <h2>{{service.name}} </h2> 
-                    <span class="price-text">{{service.price}} $</span>
-                    <p>{{service.description}}</p>
+                    <h2>{{this.name}} </h2> 
+                    <span class="price-text">{{this.price}} $</span>
+                    <p>{{this.description}}</p>
                 </div>
                 <div class="order-amount-container">
-                    <input type="number" class="order-amount" min="0">
+                    <button type="button" class="order-service-button" onclick="changeValue('{{this._id}}','-')">
+                        <span><i class="fa fa-minus"></i></span>
+                    </button>
+                    <input type="hidden" name="id_service" value="{{this._id}}">
+                    <input type="hidden" name="name_service" value="{{this.name}}">
+                    <input type="hidden" name="price_service" value="{{this.price}}">
+                    <input type="number" name="order_amount" class="order-amount" min="0" value="0" id="{{this._id}}">
+                    <button type="button" class="order-service-button" onclick="changeValue('{{this._id}}','+')">
+                        <span><i class="fa fa-plus"></i></span>
+                    </button>
+                    
                 </div>
             </div>
             
         </div>
+        {{/each}}
+        {{#if isAuth}}
+        <button class="btn-find btn palatin-btn mb-4" type="submit">Confirm</button>
+        {{/if}}
+        </form>
     </div>
+    
+
+    
+    </form>
 </section>
+
+<script>
+function changeValue(inputID,operator)
+{
+
+    var input=document.getElementById(inputID);
+   
+    const value=parseInt(input.value);
+    if(value<0)
+    {
+        input.value=0;
+        return;
+    }
+    if(operator=='+')
+    {
+        input.value=value+1;
+    }
+    if(operator=='-')
+    {
+        if(value>0)
+        {
+            input.value=value-1;
+        }
+    }
+    
+}
+
+</script>
