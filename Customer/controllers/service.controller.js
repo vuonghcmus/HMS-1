@@ -14,7 +14,7 @@ class ServiceController {
         res.render("services/services", {
             allServices: allServiceTypes,
             isAuth: req.user,
-            cart: req.user.ServiceCart,
+            cart: req.user ? req.user.ServiceCart : null,
         });
 
     }

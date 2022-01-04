@@ -29,7 +29,14 @@
                     <input type="hidden" name="id_service" value="{{this._id}}">
                     <input type="hidden" name="name_service" value="{{this.name}}">
                     <input type="hidden" name="price_service" value="{{this.price}}">
-                    <input type="number" name="order_amount" class="order-amount" min="0" value="0" id="{{this._id}}">
+                    <input
+                        type="number"
+                        name="order_amount"
+                        class="order-amount order-service-amount"
+                        min="0"
+                        value="0"
+                        id="{{this._id}}"
+                    >
                     <button type="button" class="order-service-button" onclick="changeValue('{{this._id}}','+')">
                         <span><i class="fa fa-plus"></i></span>
                     </button>
