@@ -1,7 +1,9 @@
 const serviceService = require("../services/service/service.service");
 const serviceTypeService = require("../services/service/serviceType.service");
 
+
 class ServiceController {
+
     //[GET] /services/
     async show(req, res, next) {
         const allServiceTypes = await serviceTypeService.findAll();
@@ -65,11 +67,18 @@ class ServiceController {
             //find existed services
             for (let i = 0; i < tempCart.length; i++) {
                 const index = ServiceCart.findIndex((o) => o.idService == tempCart[i].idService);
+
                 if (index >= 0) {
                     //update quantity
-                    ServiceCart[index].orderAmount = tempCart[i].orderAmount;
+                    if (parseInt(tempCart[i].orderAmount) > 0) {
+                        ServiceCart[index].orderAmount = tempCart[i].orderAmount;
+                    }
+
                 } else {
-                    ServiceCart.push(tempCart[i]);
+                    {
+                        ServiceCart.push(tempCart[i]);
+                    }
+
                 }
             }
 
@@ -79,12 +88,18 @@ class ServiceController {
         }
     }
 
-    //[POST] /services/clear-cart
+    //[GET] /services/clear-cart
     async clearCart(req, res, next) {
         if (req.user) {
             if (req.user.ServiceCart) {
-                req.user.ServiceCart = [];
                 console.log(req.user.ServiceCart);
+                req.user.ServiceCart = null;
+
+                console.log("Deleted received!");
+                console.log(req.user.ServiceCart);
+                console.log(req.user);
+                res.redirect('/services');
+
             }
         }
     }
@@ -99,6 +114,8 @@ class ServiceController {
                 if (index >= 0) {
                     req.user.ServiceCart[index].orderAmount = qty;
                     res.send("Success update " + String(serviceID) + "-" + String(qty));
+
+                    return;
                 }
             }
 

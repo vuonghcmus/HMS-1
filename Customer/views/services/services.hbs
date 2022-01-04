@@ -233,11 +233,20 @@
             </form>
             <div class="modal-footer pt-0">
                 <p></p>
-                <p style="margin-bottom: 0;">Total Amount: <span class="total-amount" id="total-amount">4</span></p>
-                <p>Total Price: <span class="total-price" id="total-price">96$</span></p>
+                <p style="margin-bottom: 0;">Total Amount: <span class="total-amount" id="total-amount">0</span></p>
+                <p>Total Price: <span class="total-price" id="total-price">0$</span></p>
+                <p style="font-weight: 500;font-size:15px;">Your change will be affected after confirm! Please check your order before confirm.</p>
                 <div class="d-flex justify-content-between w-100">
-                    <button onclick="clearCart()" class="btn palatin-btn btn-3">Clear All</button>
-                    <button form="confirm-order-form" class="btn palatin-btn btn-confirm" type="submit">Confirm</button>
+                    <div class="col mb-3">
+                        <form action="/services/clear-cart" method="POST">
+                            <button class="btn palatin-btn btn-3">Clear All</button>
+                        </form>
+                    </div>
+                    <div class="col mb-3">
+                        <button form="confirm-order-form" class="btn palatin-btn btn-confirm" type="submit">Confirm</button>
+                    </div>
+                    
+                    
                 </div>
             </div>
         </div>
@@ -249,17 +258,18 @@ function clearCart()
 {
     $.ajax({
         url:'/services/clear-cart',
-        method:'POST',
+        method:'GET',
         success:function(data)
         {
             console.log(data);
+            console.log("deleted");
         }
     });
     //clear elements in cart
     var items=document.getElementsByClassName("order-item");
-    for (let i=0;i<items.length;i++)
+    while(items.length>0)
     {
-        items[i].remove();
+        items[0].remove();
     }
     updateTotal();
 }

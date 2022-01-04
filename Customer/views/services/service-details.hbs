@@ -7,11 +7,11 @@
 <section class="rooms-area section-padding-0-100">
     
 
-    
-    
-    <div class="container card" style="margin-top:50px;padding-top:20px;">
-        <form action="/services/add-to-cart" method="POST">
-       {{#each services}}
+    <form action="/services/add-to-cart" method="POST">
+    {{#each services}}
+    <div class="container card" style="margin-top:20px;padding-top:20px;">
+        
+       
         <div class="row custom-service-item">
             <div class="col-lg-3 col-12 image-container">
                 <img src="{{this.image}}"/>
@@ -45,13 +45,18 @@
             </div>
             
         </div>
-        {{/each}}
-        {{#if isAuth}}
-        <button class="btn-find btn palatin-btn mb-4" type="submit">Confirm</button>
-        {{/if}}
-        </form>
+        
+        
+        
     </div>
-    
+    {{/each}}
+    {{#if isAuth}}
+        <div class="container" style="margin-top:20px;padding-top:20px;">
+            <button class="btn-find btn palatin-btn mb-4" type="submit">Confirm</button>
+        </div>
+        
+    {{/if}}
+    </form>
 
     
     </form>
