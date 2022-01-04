@@ -76,8 +76,6 @@ module.exports = {
         }
 
        
-
-
         res.render('account/profile', {
             isAuth: req.user,
             user: req.user,
