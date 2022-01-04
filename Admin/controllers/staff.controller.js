@@ -73,7 +73,7 @@ module.exports = {
     });
     newStaff.save((err) => {
       if (err) return next(err);
-      return res.redirect("/staff/list-staff?page=1");
+      return res.redirect("/staff?page=1");
     });
   },
   editStaffGet: (req, res) => {
@@ -104,7 +104,7 @@ module.exports = {
     staff.ID = req.body.ID;
     staff.save((err) => {
       if (err) return next(err);
-      return res.redirect("/staff/list-staff?page=1");
+      return res.redirect("/staff?page=1");
     });
   },
 
@@ -118,7 +118,7 @@ module.exports = {
       },
       (err, account) => {
         if (err) return next(err);
-        res.redirect("/staff/list-staff?page=1");
+        res.redirect("/staff?page=1");
       }
     );
   },
@@ -132,14 +132,14 @@ module.exports = {
       },
       (err, account) => {
         if (err) return next(err);
-        res.redirect("/staff/list-staff?page=1");
+        res.redirect("/staff?page=1");
       }
     );
   },
   deleteStaff: (req, res) => {
     Staff.findByIdAndDelete(req.params.id, (err, account) => {
       if (err) return next(err);
-      res.redirect("/staff/list-staff?page=1");
+      res.redirect("/staff?page=1");
     });
   },
 };

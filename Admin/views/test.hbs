@@ -1,0 +1,9 @@
+{{#each data}}
+
+    <p>{{this.name}}</p>
+    {{#each this.info}}
+        {{!-- <p>{{this}}</p> --}}
+        <p>{{../name}}</p>
+    {{/each}}
+
+{{/each}}

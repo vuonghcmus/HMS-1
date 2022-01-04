@@ -4,7 +4,7 @@ const router = express.Router();
 const ServiceController = require("../controllers/service.controller");
 
 // show list service
-router.get("/list-service", ServiceController.showListService);
+router.get("/", ServiceController.showListService);
 
 // add service
 router.get("/add-service", ServiceController.addServiceGet);

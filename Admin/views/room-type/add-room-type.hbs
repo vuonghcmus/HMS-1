@@ -31,13 +31,13 @@
                 </div>
 
                 <div class="form-outline mb-2">
-                  <label  class="form-label" for="singleBed">Số giường đơn</label>
-                  <input name="singleBed" type="number" id="singleBed" class="form-control form-control-lg" required />                  
+                  <label  class="form-label" for="bed">Số giường</label>
+                  <input name="bed" type="number" id="bed" class="form-control form-control-lg" required />                  
                 </div>
 
                 <div class="form-outline mb-2">
-                  <label  class="form-label" for="doubleBed">Số giường đôi</label>
-                  <input name="doubleBed" type="number" id="doubleBed" class="form-control form-control-lg" required />                  
+                  <label  class="form-label" for="type">Loại</label>
+                  <input name="type" type="text" id="type" class="form-control form-control-lg" required />                  
                 </div>
 
                 <div class="form-outline mb-2">
@@ -85,8 +85,8 @@
                     const name = $('#name').val();
                     const price = $('#price').val();
                     const area = $('#area').val();
-                    const singleBed = $('#singleBed').val();
-                    const doubleBed = $('#doubleBed').val();
+                    const bed = $('#bed').val();
+                    const type = $('#type').val();
                     const maxOfPeople = $('#maxOfPeople').val();
                     const description = $('#description').val();
                     const fileImageRoomType = $('#fileImageRoomType').val();
@@ -113,15 +113,15 @@
                       return;
                     }
 
-                    if (singleBed == "") {
-                      notifyError('Bạn chưa nhập số lượng giường đơn!');
-                      $('#singleBed').focus();
+                    if (bed == "") {
+                      notifyError('Bạn chưa nhập số lượng giường!');
+                      $('#bed').focus();
                       return;
                     }
 
-                    if (doubleBed == "") {
-                      notifyError('Bạn chưa nhập số lượng giường đôi!');
-                      $('#doubleBed').focus();
+                    if (type == "") {
+                      notifyError('Bạn chưa nhập loại phòng (phòng đơn/đôi)!');
+                      $('#type').focus();
                       return;
                     }
 

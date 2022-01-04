@@ -11,7 +11,6 @@ const databaseService = require("./services/database.service");
 const StaffRoute = require("./routes/staff.route");
 const ServiceRoute = require("./routes/service.route");
 const ServiceTypeRoute = require("./routes/serviceType.route");
-const RoomRoute = require("./routes/room.route");
 const RoomTypeRoute = require("./routes/roomType.route");
 
 databaseService.connectDatabase();
@@ -83,8 +82,21 @@ app.get("/", function (req, res) {
 app.use("/staff", StaffRoute);
 app.use("/service", ServiceRoute);
 app.use("/service-type", ServiceTypeRoute);
-app.use("/room", RoomRoute);
 app.use("/room-type", RoomTypeRoute);
+
+app.get("/test", (req, res) => {
+  const data = [
+    {
+      name: "Nguyen Van A",
+      info: [1, 2, 3],
+    },
+    {
+      name: "Nguyen Van B",
+      info: [4, 5, 6],
+    },
+  ];
+  res.render("test", { data });
+});
 
 app.use((req, res) => {
   res.render("errors/404", { layout: false });
@@ -96,5 +108,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log("App listening on port 3000");
+  console.log(`App listening on port ${process.env.PORT || 3000}`);
 });
