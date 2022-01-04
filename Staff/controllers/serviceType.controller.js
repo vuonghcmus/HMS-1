@@ -20,7 +20,7 @@ module.exports = {
 
           for (let i = 0; i < serviceTypes.length; i++) {
             const _service = await Service.find({
-              _id: { $in: serviceTypes[i].listServices },
+              _id: { $in: serviceTypes[i].services },
             });
 
             listServices.push(_service);

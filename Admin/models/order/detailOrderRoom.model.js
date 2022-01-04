@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const DetailOrderRoomSchema = new Schema(
   {
-    roomID: { type: Schema.Types.ObjectId },
+    roomID: { type: Schema.Types.String },
     customerID: { type: Schema.Types.ObjectId },
     roomTypeID: { type: Schema.Types.ObjectId },
     dateOfCheckIn: { type: Schema.Types.Date },

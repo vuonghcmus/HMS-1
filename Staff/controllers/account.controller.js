@@ -95,13 +95,13 @@ module.exports = {
     const checkPhoneNumber = await Customer.findOne({ phone: req.body.phone });
     const checkID = await Customer.findOne({ ID: req.body.ID });
     const customer = await Customer.findById(req.body._id);
-    if (checkPhoneNumber) {
+    if (checkPhoneNumber && checkPhoneNumber.phone != req.body.phone) {
       return res.render("account/edit-customer", {
         error: "Số điện thoại đã tồn tại",
         customer,
       });
     }
-    if (checkID) {
+    if (checkID && checkID.ID != req.body.ID) {
       return res.render("account/edit-customer", {
         error: "ID đã tồn tại",
         customer,

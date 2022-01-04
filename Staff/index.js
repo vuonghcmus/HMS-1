@@ -11,10 +11,10 @@ const databaseService = require("./services/database.service");
 const AccountRoute = require("./routes/account.route");
 const ServiceRoute = require("./routes/service.route");
 const ServiceTypeRoute = require("./routes/serviceType.route");
-const RoomRoute = require("./routes/room.route");
 const RoomTypeRoute = require("./routes/roomType.route");
 const StaffRoute = require("./routes/staff.route");
 const CustomerRoute = require("./routes/customer.route");
+const RoomRoute = require("./routes/room.route");
 
 databaseService.connectDatabase();
 
@@ -64,19 +64,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "/public")));
 
-require("./middlewares/session")(app);
-require("./middlewares/passport")(app);
-app.use(require("./middlewares/locals"));
+// require("./middlewares/session")(app);
+// require("./middlewares/passport")(app);
+// app.use(require("./middlewares/locals"));
 
-app.use("/staff", StaffRoute);
+// app.use("/staff", StaffRoute);
 
-app.use((req, res, next) => {
-  if (!req.user) {
-    res.redirect("/staff/login");
-  } else {
-    next();
-  }
-});
+// app.use((req, res, next) => {
+//   if (!req.user) {
+//     res.redirect("/staff/login");
+//   } else {
+//     next();
+//   }
+// });
 
 app.get("/", function (req, res) {
   res.render("home");
@@ -86,8 +86,8 @@ app.use("/account", AccountRoute);
 app.use("/customer", CustomerRoute);
 app.use("/service", ServiceRoute);
 app.use("/service-type", ServiceTypeRoute);
-app.use("/room", RoomRoute);
 app.use("/room-type", RoomTypeRoute);
+app.use("/room", RoomRoute);
 
 app.use((req, res) => {
   res.render("errors/404", { layout: false });

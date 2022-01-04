@@ -1,5 +1,5 @@
 const RoomType = require("../models/room/roomType.model");
-const Room = require("../models/room/room.model");
+// const Room = require("../models/room/room.model");
 
 module.exports = {
   showListRoomType: async (req, res) => {
@@ -16,15 +16,7 @@ module.exports = {
         RoomType.countDocuments(async (err, count) => {
           // đếm để tính có bao nhiêu trang
           if (err) return next(err);
-          const listRooms = [];
 
-          for (let i = 0; i < roomType.length; i++) {
-            const _room = await Room.find({
-              _id: { $in: roomType[i].listRooms },
-            });
-
-            listRooms.push(_room);
-          }
           let isCurrentPage;
           const pages = [];
           for (let i = 1; i <= Math.ceil(count / perPage); i++) {
@@ -45,8 +37,6 @@ module.exports = {
             isPreviousPage: page > 1,
             nextPage: +page + 1,
             previousPage: +page - 1,
-            rooms: listRooms,
-            length: listRooms.length,
           });
         });
       });

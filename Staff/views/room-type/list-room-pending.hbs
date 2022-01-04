@@ -3,7 +3,7 @@
     <div class="col-12 col-md-6 col-xl-4 mb-3">
       <div class="p-1 bg-light rounded rounded-pill shadow-lg d-flex justify-content-end">
         <div class="input-group">
-          <input id="myInput" type="search" onkeyup="mySearchFunction()" placeholder="Nhập số phòng bạn cần tìm?" aria-describedby="btn-search" class="form-control border-0 bg-light">
+          <input id="myInput" type="search" onkeyup="mySearchFunction()" placeholder="Nhập tên loại phòng bạn cần tìm?" aria-describedby="btn-search" class="form-control border-0 bg-light">
           <div class="input-group-append">
             <button id="btn-search" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
           </div>
@@ -15,46 +15,36 @@
 
 <div class="container-fluid mt-4">
   <div class="table-responsive">
-    <table id="myTable" class="table table-hover table-striped table-bordered">
+    <table id="myTable" class="table table-bordered">
       <thead>
         <tr>
           <th>Tên phòng</th>
-          <th>Khách đặt phòng</th>
-          <th>Dịch vụ</th>         
+          <th>Loại phòng</th>
+          <th>Khách hàng</th>
+          <th class="text-center">Thời gian</th>
+          <th class="text-center">Số người</th>
         </tr>
       </thead>
 
       <tbody>
-        {{#each information}}
+        {{#each detailOrderRoom}}
           <tr>
+            <td><h6>{{this.roomID}}</h6></td>            
+            <td>{{this.roomTypeName}}</td>
             <td>
-              <h6>{{this.roomNumber}}</h6>
+              <div>
+                <p><b>Họ tên: {{this.customerName}}</b></p>
+                <p>SĐT: {{this.customerPhone}}</p>
+                <p>CMND: {{customerId}}</p>
+              </div>
             </td>
             <td>
               <div>
-                <p>Họ tên: {{this.nameCustomer}}</p>
-                <p>CMND: {{this.ID}}</p>
-                <p>Ngày đặt phòng: {{this.dateCheckIn}}</p>
-                <p>Ngày trả phòng: {{this.dateCheckOut}}</p>
+                <p><b>checkin</b>: {{this.dateOfCheckIn}}</p>
+                <p><b>checkout</b>: {{this.dateOfCheckOut}}</p>
               </div>
-            </td>         
-            <td>
-              {{#if this.serviceInfo}}
-                {{#each this.serviceInfo}}
-                  <div class="d-flex justify-content-around">
-                    <img style="border-radius: 10px;" src="{{this.image}}" alt="ảnh dịch vụ" width="150px" height="auto">
-                    <div>
-                      <p>Tên dịch vụ: {{this.name}}</p>
-                      <p>Giá: {{this.price}}</p>
-                    </div>
-                  </div>
-
-                {{/each}}
-              {{else}}
-                <p>Khách chưa đặt dịch vụ</p>
-              {{/if}}
             </td>
-            
+            <td class="text-center">{{this.people}}</td>
           </tr>
         {{/each}}
       </tbody>
@@ -63,23 +53,23 @@
 </div>
 
 <div class="center">
-  <div class="mb-2 position-absolute" style="bottom: 0px;">
+  <div class="mb-2">
       <nav aria-label="Page navigation example">
           <ul class="pagination">
               <li class="page-item {{#unless this.isPreviousPage}} disabled {{/unless}}">
-                  <a class="page-link " href="/room?page={{this.previousPage}}" aria-label="Previous">
+                  <a class="page-link " href="/room?status=pending&page={{this.previousPage}}" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
                       <span class="sr-only">Previous</span>
                   </a>
               </li>
               {{#each pages}}
                   <li class="page-item {{#if this.isCurrentPage}} active {{/if}}">
-                      <a class="page-link" href="/room?page={{this.page}}">{{this.page}}</a>
+                      <a class="page-link" href="/room?status=pending&page={{this.page}}">{{this.page}}</a>
                   </li>
               {{/each}}
 
               <li class="page-item {{#unless this.isNextPage}} disabled {{/unless}}">
-                  <a class="page-link" href="/room?page={{this.nextPage}}" aria-label="Next">
+                  <a class="page-link" href="/room?status=pending&page={{this.nextPage}}" aria-label="Next">
                       <span aria-hidden="true">&raquo;</span>
                       <span class="sr-only">Next</span>
                   </a>
@@ -88,3 +78,4 @@
       </nav>
   </div>
 </div>
+

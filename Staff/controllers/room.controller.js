@@ -1,188 +1,203 @@
-const Room = require("../models/room/room.model");
 const DetailOrderRoom = require("../models/order/detailOrderRoom.model");
-const OrderRoom = require("../models/order/orderRoom.model");
 const Customer = require("../models/account/customer.model");
+const RoomType = require("../models/room/roomType.model");
+const DetailOrderService = require("../models/order/detailOrderService.model");
 const Service = require("../models/service/service.model");
 
-module.exports = {
-  // showListRoom: async (req, res) => {
-  //   let perPage = 3; // số lượng sản phẩm xuất hiện trên 1 page
-  //   let page = req.query.page || 1; // số page hiện tại
-  //   if (page < 1) {
-  //     page = 1;
-  //   }
+// show list room using
+const showListRoomUsing = async (req, res) => {
+  let perPage = 2; // số lượng sản phẩm xuất hiện trên 1 page
+  let page = req.query.page || 1; // số page hiện tại
+  if (page < 1) {
+    page = 1;
+  }
 
-  //   const detailOrderRooms = await DetailOrderRoom.aggregate([
-  //     {
-  //       $lookup: {
-  //         from: "Room",
-  //         localField: "roomID",
-  //         foreignField: "_id",
-  //         as: "orderRoom",
-  //       },
-  //     },
-  //     {
-  //       $lookup: {
-  //         from: "DetailOrderService",
-  //         localField: "roomID",
-  //         foreignField: "roomID",
-  //         as: "orderService",
-  //       },
-  //     },
-  //   ]);
-  //   let information = [];
-  //   for (let i = 0; i < detailOrderRooms.length; i++) {
-  //     let orderRoom = await OrderRoom.find({
-  //       detailOrderRoom: detailOrderRooms[i]._id,
-  //     });
+  // find data by status 'using' and skip and limit
+  DetailOrderRoom.find({ status: "using" })
+    .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
+    .limit(perPage)
+    .exec((err, detailOrderRoom) => {
+      DetailOrderRoom.countDocuments(
+        { status: "using" },
+        async (err, count) => {
+          // đếm để tính có bao nhiêu trang
+          if (err) return next(err);
 
-  //     let room = await Room.findById(detailOrderRooms[i].roomID);
+          let isCurrentPage;
+          const pages = [];
+          for (let i = 1; i <= Math.ceil(count / perPage); i++) {
+            if (i === +page) {
+              isCurrentPage = true;
+            } else {
+              isCurrentPage = false;
+            }
+            pages.push({
+              page: i,
+              isCurrentPage: isCurrentPage,
+            });
+          }
+          const listOrderServices = [];
+          for (let i = 0; i < detailOrderRoom.length; i++) {
+            const customer = await Customer.findById(
+              detailOrderRoom[i].customerID
+            );
+            const roomType = await RoomType.findById(
+              detailOrderRoom[i].roomTypeID
+            );
+            detailOrderRoom[i].customerName = customer.fullname;
+            detailOrderRoom[i].customerPhone = customer.phone;
+            detailOrderRoom[i].customerId = customer.ID;
+            detailOrderRoom[i].roomTypeName = roomType.name;
 
-  //     let serviceInfo = [];
-  //     for (let j = 0; j < detailOrderRooms[i].orderService.length; j++) {
-  //       let service = await Service.findById(
-  //         detailOrderRooms[i].orderService[j].serviceID
-  //       );
-  //       serviceInfo.push({
-  //         name: service.name || "rong",
-  //         price: service.price || "rong",
-  //         image: service.image || "rong",
-  //       });
-  //       // console.log(service);
-  //     }
+            if (detailOrderRoom[i].detailOrderService.length > 0) {
+              const _orderService = await DetailOrderService.find({
+                _id: { $in: detailOrderRoom[i].detailOrderService },
+              });
 
-  //     let customer = await Customer.findById(orderRoom[0].customerID);
-  //     information.push({
-  //       nameCustomer: customer.fullname,
-  //       phoneCustomer: customer.phone,
-  //       dateCheckIn: detailOrderRooms[i].dateOfCheckIn,
-  //       dateCheckOut: detailOrderRooms[i].dateOfCheckOut,
-  //       ID: customer.ID,
-  //       roomNumber: room.roomNumber,
-  //       serviceInfo: serviceInfo,
-  //     });
-  //   }
+              const _service = await Service.findById(
+                _orderService[0].serviceID
+              );
 
-  //   console.log(information);
-  //   res.render("room/list-room", {
-  //     information: information,
-  //   });
-  //   // res.send(rooms[0].orderRoom);
+              _orderService[0].serviceName = _service.name;
+              _orderService[0].serviceImage = _service.image;
+              listOrderServices.push(_orderService);
+            } else {
+              listOrderServices.push([]);
+            }
+          }
 
-  //   // Room.find() // find tất cả các data
-  //   //   .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
-  //   //   .limit(perPage)
-  //   //   .exec((err, room) => {
-  //   //     Room.countDocuments((err, count) => {
-  //   //       // đếm để tính có bao nhiêu trang
-  //   //       if (err) return next(err);
-  //   //       let isCurrentPage;
-  //   //       const pages = [];
-  //   //       for (let i = 1; i <= Math.ceil(count / perPage); i++) {
-  //   //         if (i === +page) {
-  //   //           isCurrentPage = true;
-  //   //         } else {
-  //   //           isCurrentPage = false;
-  //   //         }
-  //   //         pages.push({
-  //   //           page: i,
-  //   //           isCurrentPage: isCurrentPage,
-  //   //         });
-  //   //       }
-  //   //       res.render("room/list-room", {
-  //   //         room,
-  //   //         pages,
-  //   //         isNextPage: page < Math.ceil(count / perPage),
-  //   //         isPreviousPage: page > 1,
-  //   //         nextPage: +page + 1,
-  //   //         previousPage: +page - 1,
-  //   //       });
-  //   //     });
-  //   //   });
-  // },
-  showListRoom: async (req, res) => {
-    const detailOrderRooms = await DetailOrderRoom.aggregate([
-      {
-        $lookup: {
-          from: "Room",
-          localField: "roomID",
-          foreignField: "_id",
-          as: "orderRoom",
-        },
-      },
-      {
-        $lookup: {
-          from: "DetailOrderService",
-          localField: "roomID",
-          foreignField: "roomID",
-          as: "orderService",
-        },
-      },
-    ]);
-    let information = [];
-    for (let i = 0; i < detailOrderRooms.length; i++) {
-      let orderRoom = await OrderRoom.find({
-        detailOrderRoom: detailOrderRooms[i]._id,
-      });
-
-      let room = await Room.findById(detailOrderRooms[i].roomID);
-
-      let serviceInfo = [];
-      for (let j = 0; j < detailOrderRooms[i].orderService.length; j++) {
-        let service = await Service.findById(
-          detailOrderRooms[i].orderService[j].serviceID
-        );
-        serviceInfo.push({
-          name: service.name || "rong",
-          price: service.price || "rong",
-          image: service.image || "rong",
-        });
-        // console.log(service);
-      }
-
-      let customer = await Customer.findById(orderRoom[0].customerID);
-      information.push({
-        nameCustomer: customer.fullname,
-        phoneCustomer: customer.phone,
-        dateCheckIn: detailOrderRooms[i].dateOfCheckIn,
-        dateCheckOut: detailOrderRooms[i].dateOfCheckOut,
-        ID: customer.ID,
-        roomNumber: room.roomNumber,
-        serviceInfo: serviceInfo,
-      });
-    }
-
-    const page = req.query.page || 1;
-    if (page < 1) {
-      page = 1;
-    }
-    const perPage = 1;
-    const start = (page - 1) * perPage;
-    const end = page * perPage;
-    const totalPage = Math.ceil(information.length / perPage);
-
-    let isCurrentPage;
-    const pages = [];
-    for (let i = 1; i <= totalPage; i++) {
-      if (i === +page) {
-        isCurrentPage = true;
-      } else {
-        isCurrentPage = false;
-      }
-      pages.push({
-        page: i,
-        isCurrentPage: isCurrentPage,
-      });
-    }
-
-    // res.send(detailOrderRooms);
-    res.render("room/list-room", {
-      information: information.slice(start, end),
-      pages,
-      isNextPage: page < totalPage,
-      isPreviousPage: page > 1,
-      nextPage: +page + 1,
-      previousPage: +page - 1,
+          res.render("room-type/list-room-using", {
+            detailOrderRoom,
+            pages,
+            isNextPage: page < Math.ceil(count / perPage),
+            isPreviousPage: page > 1,
+            nextPage: +page + 1,
+            previousPage: +page - 1,
+            orderServices: listOrderServices,
+            length: listOrderServices.length,
+          });
+        }
+      );
     });
+};
+
+// show list room empty
+const showListRoomEmpty = async (req, res) => {
+  let perPage = 2; // số lượng sản phẩm xuất hiện trên 1 page
+  let page = req.query.page || 1; // số page hiện tại
+  if (page < 1) {
+    page = 1;
+  }
+
+  // find data by status 'using' and skip and limit
+  DetailOrderRoom.find({ status: "done" })
+    .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
+    .limit(perPage)
+    .exec((err, detailOrderRoom) => {
+      DetailOrderRoom.countDocuments({ status: "done" }, async (err, count) => {
+        // đếm để tính có bao nhiêu trang
+        if (err) return next(err);
+
+        let isCurrentPage;
+        const pages = [];
+        for (let i = 1; i <= Math.ceil(count / perPage); i++) {
+          if (i === +page) {
+            isCurrentPage = true;
+          } else {
+            isCurrentPage = false;
+          }
+          pages.push({
+            page: i,
+            isCurrentPage: isCurrentPage,
+          });
+        }
+
+        for (let i = 0; i < detailOrderRoom.length; i++) {
+          const roomType = await RoomType.findById(
+            detailOrderRoom[i].roomTypeID
+          );
+          detailOrderRoom[i].roomTypeName = roomType.name;
+        }
+
+        res.render("room-type/list-room-done", {
+          detailOrderRoom,
+          pages,
+          isNextPage: page < Math.ceil(count / perPage),
+          isPreviousPage: page > 1,
+          nextPage: +page + 1,
+          previousPage: +page - 1,
+        });
+      });
+    });
+};
+
+const showListRoomPending = async (req, res) => {
+  let perPage = 2; // số lượng sản phẩm xuất hiện trên 1 page
+  let page = req.query.page || 1; // số page hiện tại
+  if (page < 1) {
+    page = 1;
+  }
+
+  // find data by status 'using' and skip and limit
+  DetailOrderRoom.find({ status: "pending" })
+    .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
+    .limit(perPage)
+    .exec((err, detailOrderRoom) => {
+      DetailOrderRoom.countDocuments(
+        { status: "pending" },
+        async (err, count) => {
+          // đếm để tính có bao nhiêu trang
+          if (err) return next(err);
+
+          let isCurrentPage;
+          const pages = [];
+          for (let i = 1; i <= Math.ceil(count / perPage); i++) {
+            if (i === +page) {
+              isCurrentPage = true;
+            } else {
+              isCurrentPage = false;
+            }
+            pages.push({
+              page: i,
+              isCurrentPage: isCurrentPage,
+            });
+          }
+
+          for (let i = 0; i < detailOrderRoom.length; i++) {
+            const customer = await Customer.findById(
+              detailOrderRoom[i].customerID
+            );
+            const roomType = await RoomType.findById(
+              detailOrderRoom[i].roomTypeID
+            );
+            detailOrderRoom[i].customerName = customer.fullname;
+            detailOrderRoom[i].customerPhone = customer.phone;
+            detailOrderRoom[i].customerId = customer.ID;
+            detailOrderRoom[i].roomTypeName = roomType.name;
+          }
+
+          res.render("room-type/list-room-pending", {
+            detailOrderRoom,
+            pages,
+            isNextPage: page < Math.ceil(count / perPage),
+            isPreviousPage: page > 1,
+            nextPage: +page + 1,
+            previousPage: +page - 1,
+          });
+        }
+      );
+    });
+};
+
+module.exports = {
+  showListRoom: async (req, res) => {
+    const status = req.query.status;
+    if (status == "using") {
+      return showListRoomUsing(req, res);
+    } else if (status == "done") {
+      return showListRoomEmpty(req, res);
+    } else if (status == "pending") {
+      return showListRoomPending(req, res);
+    }
   },
 };

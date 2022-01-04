@@ -8,7 +8,7 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Admin</title>
+    <title>Staff</title>
     <link href="/css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="/css/my_style.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -134,17 +134,17 @@
               </a>
               <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                   <nav class="sb-sidenav-menu-nested nav">
-                      <a class="nav-link" href="/customer?page=1">
+                      <a class="nav-link" href="/customer?status=using&page=1">
                        <div class="sb-nav-link-icon">
                          <i class="fas fa-check-circle" style="color: green;"></i>
                        </div>                        
-                        Đang hoạt động
+                        Đang sử dụng
                       </a>
-                      <a class="nav-link" href="/customer?page=1">
+                      <a class="nav-link" href="/customer?status=pending&page=1">
                         <div class="sb-nav-link-icon">
                           <i class="fas fa-lock" style="color: orange;"></i>
                         </div>
-                        Không hoạt động
+                        Đang đặt phòng
                       </a>
                   </nav>
               </div>           
@@ -163,18 +163,38 @@
               </a>
 
 
-              <div class="sb-sidenav-menu-heading">Phòng</div>
-              <a class="nav-link" href="/room?page=1">
-                <div class="sb-nav-link-icon"><i
-                    class="fas fa-list-ul"
-                  ></i></div>
-                Xem danh sách
-              </a>
-
+              <div class="sb-sidenav-menu-heading">Loại phòng</div>          
               <a class="nav-link" href="/room-type?page=1">
                 <div class="sb-nav-link-icon"><i class="fas fa-indent"></i></div>
-                Loại phòng
+                Xem danh sách
               </a>
+              <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#room" aria-expanded="false" aria-controls="collapseLayouts">
+                  <div class="sb-nav-link-icon"><i class="fas fa-list-ul"></i></div>
+                    Phòng
+                  <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+              </a>
+              <div class="collapse" id="room" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                  <nav class="sb-sidenav-menu-nested nav">
+                      <a class="nav-link" href="/room?status=using&page=1">
+                       <div class="sb-nav-link-icon">
+                         <i class="fas fa-check-circle" style="color: green;"></i>
+                       </div>                        
+                        Đang được dùng
+                      </a>
+                      <a class="nav-link" href="/room?status=pending&page=1">
+                        <div class="sb-nav-link-icon">
+                          <i class="fas fa-check-circle" style="color: orange;"></i>
+                        </div>
+                        Đã được đăng ký
+                      </a>
+                      <a class="nav-link" href="room?status=done&page=1">
+                        <div class="sb-nav-link-icon">
+                          <i class="fas fa-times-circle" style="color: red;"></i>
+                        </div>
+                        Còn trống
+                      </a>
+                  </nav>
+              </div>  
             </div>
           </div>
 
