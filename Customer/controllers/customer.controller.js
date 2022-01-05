@@ -58,7 +58,7 @@ module.exports = {
 
     profile: async(req, res, next) => {
 
-        const orders = await detailOrderRoomModel.find({ customerID: req.user._id })
+        const orders = await detailOrderRoomModel.find({ customerID: req.user._id, status: "using" })
         var services = [];
         var total = 0;
 

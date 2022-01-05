@@ -10,16 +10,19 @@ class ServiceController {
 
     //[GET] /services/
     async show(req, res, next) {
+
         const allServiceTypes = await serviceTypeService.findAll();
         var allBookedRooms = [];
         if (req.user) {
+            console.log(req.user);
             if (!req.user.ServiceCart) {
                 req.user.ServiceCart = [];
             }
             allBookedRooms = await DetailOrderRoom.findAllCurrentRooms(req.user._id);
             // console.log(req.user.ServiceCart);
+            console.log(req.user.ServiceCart);
         }
-        console.log(req.user.ServiceCart);
+
         // console.log(allBookedRooms);
 
         res.render("services/services", {
@@ -48,6 +51,7 @@ class ServiceController {
             if (!req.user.ServiceCart) {
                 req.user.ServiceCart = [];
             }
+            console.log(req.user);
             var ServiceCart = req.user.ServiceCart;
             var tempCart = [];
             const idservices = req.body.id_service;

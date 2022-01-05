@@ -3,6 +3,7 @@ const detailOrderServiceModel = require("../../models/order/detailOrderService.m
 const DetailOrderServiceService = {
     async findAll() {
         const result = await detailOrderServiceModel.find({});
+        
         return result;
     },
     async findById(id) {
