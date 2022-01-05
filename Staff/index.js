@@ -64,19 +64,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "/public")));
 
-// require("./middlewares/session")(app);
-// require("./middlewares/passport")(app);
-// app.use(require("./middlewares/locals"));
+require("./middlewares/session")(app);
+require("./middlewares/passport")(app);
+app.use(require("./middlewares/locals"));
 
-// app.use("/staff", StaffRoute);
+app.use("/staff", StaffRoute);
 
-// app.use((req, res, next) => {
-//   if (!req.user) {
-//     res.redirect("/staff/login");
-//   } else {
-//     next();
-//   }
-// });
+app.use((req, res, next) => {
+  if (!req.user) {
+    res.redirect("/staff/login");
+  } else {
+    next();
+  }
+});
 
 app.get("/", function (req, res) {
   res.render("home");
