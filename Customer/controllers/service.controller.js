@@ -1,3 +1,4 @@
+const DetailOrderService = require("../services/order/detailOrderService.service");
 const serviceService = require("../services/service/service.service");
 const serviceTypeService = require("../services/service/serviceType.service");
 
@@ -86,6 +87,23 @@ class ServiceController {
             //return to services
             res.redirect("/services");
         }
+    }
+
+    async confirmCart(req, res, next) {
+        const orderAmounts = req.body.orderAmount;
+        var ServiceCart = req.user.ServiceCart;
+        if (Array.isArray(orderAmounts)) {
+            for (let i = 0; i < orderAmounts.length; i++) {
+                ServiceCart[i].orderAmount = orderAmounts[i];
+            }
+        } else {
+            ServiceCart[i].orderAmount = orderAmounts;
+        }
+        //update in database
+        ServiceCart.forEach(async(sc) => { await DetailOrderService.addDetailOrderRoom(sc.idService, sc.priceService, sc.orderAmount, sc.orderDate, req.user._id) });
+        //clear cart and redirect to page
+        ServiceCart = [];
+        res.redirect('/my-bill');
     }
 
     //[GET] /services/clear-cart

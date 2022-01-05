@@ -9,7 +9,7 @@ const routes = app => {
     app.use('/account', customerRouter)
     app.use('/services', serviceRouter)
     app.use('/rooms', roomRouter)
-    app.use('/bills', billRouter)
+    app.use('/my-bill', billRouter)
     app.use('/orders', orderRouter)
     app.use("/api", apiRouter);
     app.use('/', homeRouter)

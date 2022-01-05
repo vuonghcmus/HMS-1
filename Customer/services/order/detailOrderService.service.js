@@ -10,8 +10,17 @@ const DetailOrderServiceService = {
     },
 
     async findByRoomId(roomId) {
-        return await detailOrderServiceModel.find({roomID: roomId}).lean();
+        return await detailOrderServiceModel.find({ roomID: roomId }).lean();
     },
+    async addDetailOrderRoom(serviceID, priceService, orderAmount, orderDate, userID) {
+        return await detailOrderServiceModel.create({
+            serviceID: serviceID,
+            number: orderAmount,
+            orderDate: orderDate,
+            price: priceService,
+            userID: userID,
+        });
+    }
 }
 
 module.exports = DetailOrderServiceService

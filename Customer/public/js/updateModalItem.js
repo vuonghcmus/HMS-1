@@ -1,11 +1,11 @@
 // update each item
 const updateItem = (item, unitPrice, step) => {
     let price = item.getElementsByClassName('order-price')[0].innerText.slice(0, 2)
-    let amount = item.getElementsByClassName('order-amount')[0].innerText
+    let amount = item.getElementsByClassName('order-amount')[0].value
     const newAmount = Number(amount) + step
     const newPrice = unitPrice * newAmount
         // item.getElementsByClassName('order-price')[0].innerText = newPrice + '$'
-    item.getElementsByClassName('order-amount')[0].innerText = newAmount
+    item.getElementsByClassName('order-amount')[0].value = newAmount
     if (newAmount === 0) item.remove()
     return newAmount
 }
@@ -33,8 +33,8 @@ const updateTotal = () => {
     for (let i = 0; i < amouts.length; i++) {
         const priceElement = prices[i].innerHTML;
         const price = priceElement.substring(0, priceElement.length - 1);
-        totalAmount += parseInt(amouts[i].innerHTML);
-        totalPrice += parseInt(price) * parseInt(amouts[i].innerHTML);
+        totalAmount += parseInt(amouts[i].value);
+        totalPrice += parseInt(price) * parseInt(amouts[i].value);
 
     }
     document.getElementById("total-amount").innerHTML = totalAmount;

@@ -169,7 +169,7 @@
         </div>
         <div class="modal-body">
             {{!-- confirm order form --}}
-            <form id="confirm-order-form" class="row g-3 px-2 confirm-order-form">
+            <form id="confirm-order-form" class="row g-3 px-2 confirm-order-form" action="/services/confirm" method="POST" >
                     <ul class="order-list" style="width: 100%;">
                         {{#each cart}}
                         <li class="order-item col-12 mt-3 d-flex justify-content-between align-items-center">
@@ -182,7 +182,9 @@
                             </div>
                             <div class="order-amount-container">
                                 <button class="btn btn-decrease">-</button>
-                                <span class="order-amount" style="width: 100%;">{{this.orderAmount}}</span> 
+                                <input class="order-amount" style="width: 100%;" name="orderAmount" value="{{this.orderAmount}}">
+                       
+                       
                                 <button class="btn btn-increase">+</button>
                             </div>
                         </li>
@@ -254,25 +256,8 @@
 </section>
 <script src="/js/updateModalItem.js"></script>
 <script>
-function clearCart()
-{
-    $.ajax({
-        url:'/services/clear-cart',
-        method:'GET',
-        success:function(data)
-        {
-            console.log(data);
-            console.log("deleted");
-        }
-    });
-    //clear elements in cart
-    var items=document.getElementsByClassName("order-item");
-    while(items.length>0)
-    {
-        items[0].remove();
-    }
-    updateTotal();
-}
+
+
 </script>
 {{/if}} 
    
