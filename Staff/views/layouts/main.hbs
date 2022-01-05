@@ -9,7 +9,9 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Staff</title>
-    <link href="/css/styles.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/notification.css" />
+    <link rel="stylesheet" href="/css/styles.css"/>
     <link rel="stylesheet" href="/css/my_style.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
@@ -72,6 +74,35 @@
           <b> {{authUser.fullname}}</b>
         </p>
       {{/if}}
+      <div class="notifications">
+			<button type="button" class="icon_wrap">
+				<i class="fas fa-bell"></i>
+				<span style="font-size: 10px;" class="icon-button__badge">2</span>
+			</button>
+			<div class="notification_dd">
+                <h5 class="text-center mt-2">Thông báo</h5>
+                <hr class="mt-0 mb-0">
+				<ul class="notification_ul">
+					<li class="starbucks success">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="notify_data">
+                                <div class="title">Lorem, ipsum dolor.</div>
+                                <div class="sub_title">
+                                Lorem ipsum dolor sit amet consectetur.
+                                </div>
+                            </div>
+                            <div class="notify_status">
+                                <a title="chưa xem"><i class="fas fa-circle" style="font-size: 12px; color: rgb(5, 126, 173)"></i></a>
+                            </div>
+                        </div>
+					</li>
+					
+					<li class="show_all">
+					<p class="link">Show All Activities</p>
+					</li>
+				</ul>
+			</div>
+      </div>
       <!-- Navbar-->
       <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
         <li class="nav-item dropdown">
@@ -211,6 +242,7 @@
       crossorigin="anonymous"
     ></script>
 
+    <script src="js/notification.js"></script>
     <script src="/js/scripts.js"></script>
     <script src="/js/search.js"></script>
   </body>
