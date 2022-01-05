@@ -29,6 +29,29 @@ const DetailOrderRoomService = {
         return await detailOrderRoomModel.find({ roomID: roomId }).lean();
     },
 
+    async findAllCurrentRooms(userID) {
+        return await detailOrderRoomModel.find({
+            customerID: userID,
+            status: "using",
+        });
+    },
+
+    async findCurrentByRoomIDAndUser(userID, roomID) {
+        return await detailOrderRoomModel.findOne({
+            customerID: userID,
+            roomID: roomID,
+        });
+    },
+    async updateServiceByRoomId(RoomID, orderServiceID) {
+        return await detailOrderRoomModel.updateOne({
+            roomID: RoomID,
+            status: 'using',
+        }, {
+            $push: { detailOrderService: orderServiceID }
+        });
+
+    },
+
     async findByDateInOut(datein, dateout) {
         console.log(dateout);
         console.log(dateout <= new Date("2022-01-15"));

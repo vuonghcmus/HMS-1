@@ -1,6 +1,9 @@
 const DetailOrderService = require("../services/order/detailOrderService.service");
+const DetailOrderRoom = require("../services/order/detailOrderRoom.service");
+
 const serviceService = require("../services/service/service.service");
 const serviceTypeService = require("../services/service/serviceType.service");
+const { all } = require("../routes/bill.route");
 
 
 class ServiceController {
@@ -8,16 +11,22 @@ class ServiceController {
     //[GET] /services/
     async show(req, res, next) {
         const allServiceTypes = await serviceTypeService.findAll();
+        var allBookedRooms = [];
         if (req.user) {
             if (!req.user.ServiceCart) {
                 req.user.ServiceCart = [];
             }
-            console.log(req.user.ServiceCart);
+            allBookedRooms = await DetailOrderRoom.findAllCurrentRooms(req.user._id);
+            // console.log(req.user.ServiceCart);
         }
+        console.log(req.user.ServiceCart);
+        // console.log(allBookedRooms);
+
         res.render("services/services", {
             allServices: allServiceTypes,
             isAuth: req.user,
-            cart: req.user ? req.user.ServiceCart : null,
+            cart: req.user ? req.user.ServiceCart : [],
+            allBookedRooms: allBookedRooms
         });
 
     }
@@ -76,34 +85,56 @@ class ServiceController {
                     }
 
                 } else {
-                    {
+                    if (parseInt(tempCart[i].orderAmount) > 0) {
                         ServiceCart.push(tempCart[i]);
                     }
-
                 }
-            }
 
-            console.log(req.user.cart);
-            //return to services
-            res.redirect("/services");
+                console.log(req.user.cart);
+                //return to services
+                res.redirect("/services");
+            }
         }
     }
-
     async confirmCart(req, res, next) {
-        const orderAmounts = req.body.orderAmount;
-        var ServiceCart = req.user.ServiceCart;
-        if (Array.isArray(orderAmounts)) {
-            for (let i = 0; i < orderAmounts.length; i++) {
-                ServiceCart[i].orderAmount = orderAmounts[i];
+        if (req.user) {
+            const orderAmounts = req.body.orderAmount;
+            var ServiceCart = req.user.ServiceCart;
+            const roomID = req.body.roomID;
+            console.log(roomID);
+            // console.log(req.body);
+            console.log(ServiceCart);
+
+            if (ServiceCart.length > 0) {
+                if (Array.isArray(orderAmounts)) {
+                    for (let i = 0; i < orderAmounts.length; i++) {
+                        ServiceCart[i].orderAmount = orderAmounts[i];
+                    }
+                } else {
+                    ServiceCart[0].orderAmount = orderAmounts;
+                }
+                //update in database
+
+                ServiceCart.forEach(async(sc) => {
+                    const addBookedService = await DetailOrderService.addDetailOrderRoom(sc.idService, sc.priceService, sc.orderAmount, sc.orderDate, req.user._id);
+                    console.log("Add:");
+                    console.log(addBookedService);
+                    await DetailOrderRoom.updateServiceByRoomId(roomID, addBookedService._id);
+                });
+                //clear cart and redirect to page
+                req.user.ServiceCart = null;
+                res.redirect("/account/profile");
+            } else {
+                console.log("Cart is empty");
+                res.redirect('/services');
             }
+
+
+
         } else {
-            ServiceCart[i].orderAmount = orderAmounts;
+            res.redirect('404');
         }
-        //update in database
-        ServiceCart.forEach(async(sc) => { await DetailOrderService.addDetailOrderRoom(sc.idService, sc.priceService, sc.orderAmount, sc.orderDate, req.user._id) });
-        //clear cart and redirect to page
-        ServiceCart = [];
-        res.redirect('/my-bill');
+
     }
 
     //[GET] /services/clear-cart

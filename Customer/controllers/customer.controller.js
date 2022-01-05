@@ -38,7 +38,7 @@ module.exports = {
                     });
                 }
 
-                if(!customer.status) {
+                if (!customer.status) {
                     return res.render("account/sign-in", {
                         layout: "main_no_head",
                         error: "Please check in at the hotel to activate your account",
@@ -56,32 +56,46 @@ module.exports = {
         )(req, res, next);
     },
 
-    profile: async (req, res, next) => {
+    profile: async(req, res, next) => {
 
-        const orders = await detailOrderRoomModel.find({customerID: req.user._id})
+        const orders = await detailOrderRoomModel.find({ customerID: req.user._id })
+        var services = [];
+        var total = 0;
 
-        for(let order of orders) {
-            const detailOrderService = []
-            for(let detailServiceID of order.detailOrderService) {
-                const serviceDetail = await detailOrderServiceModel.findById(detailServiceID).lean()
-                const service = await serviceModel.findById(serviceDetail.serviceID).lean()
-                serviceDetail.service = service
-                detailOrderService.push(serviceDetail)
+        for (let order of orders) {
+            var detailOrderService = [];
+            for (let detailServiceID of order.detailOrderService) {
+                var serviceDetail = await detailOrderServiceModel.findById(detailServiceID).lean();
+                const serviceType = await serviceModel.findById(serviceDetail.serviceID);
+                // const service = await serviceModel.findById(serviceDetail.serviceID).lean()
+                // serviceDetail.service = service
+                detailOrderService.push(serviceDetail);
+                serviceDetail.ServiceName = serviceType.name;
+                services.push(serviceDetail);
+                total += serviceDetail.price * serviceDetail.number;
+
             }
-            order.detailOrderService = detailOrderService
-            order.checkin = convertDate(new Date(order.dateOfCheckIn))
-            order.checkout = convertDate(new Date(order.dateOfCheckOut))
-            const roomType = await roomTypeModel.findById(order.roomTypeID)
-            order.roomType = roomType ? roomType.name : `Room isn't available`
-        }
+            order.detailOrderService = detailOrderService;
+            order.checkin = convertDate(new Date(order.dateOfCheckIn));
+            order.checkout = convertDate(new Date(order.dateOfCheckOut));
+            const roomType = await roomTypeModel.findById(order.roomTypeID);
+            order.roomType = roomType ? roomType.name : `Room isn't available`;
+            total += order.price;
 
-       
+        }
+        console.log(orders);
+        console.log(services);
+        console.log(total);
+
+
         res.render('account/profile', {
             isAuth: req.user,
             user: req.user,
-            orders: orders, 
-            active: {account: true, profile: true}
-        })
+            orders: orders,
+            services: services,
+            total: total,
+            active: { account: true, profile: true }
+        });
     },
 
     getChangePassword: (req, res, next) => {
@@ -89,22 +103,22 @@ module.exports = {
             layout: 'main_no_head'
         })
     },
-    postChangePassword: async (req, res, next) => {
-        
+    postChangePassword: async(req, res, next) => {
+
         const user = await customerModel.findOne(req.user)
-        if(!user) {
+        if (!user) {
             return res.redirect('/account/sign-in')
         }
 
         const isValid = bcrypt.compareSync(req.body['old-password'], user.password)
-        if(!isValid) {
+        if (!isValid) {
             return res.render('account/change-password', {
                 layout: 'main_no_head',
                 error: "Current password is not correct",
             })
         }
 
-        if(req.body['new-password'] !== req.body['confirm-password']) {
+        if (req.body['new-password'] !== req.body['confirm-password']) {
             return res.render('account/change-password', {
                 layout: 'main_no_head',
                 error: "Please confirm your new password",
@@ -113,14 +127,14 @@ module.exports = {
 
         const hash = bcrypt.hashSync(req.body['new-password'], 10)
         req.user.password = hash
-        await customerModel.findOneAndUpdate({_id: req.user._id}, {password: hash})
+        await customerModel.findOneAndUpdate({ _id: req.user._id }, { password: hash })
         res.redirect('/')
     },
 
     logout: (req, res, next) => {
         req.logOut();
-        req.session.destroy(function (err) {
-        res.redirect("/");
+        req.session.destroy(function(err) {
+            res.redirect("/");
         });
     }
 }
