@@ -91,6 +91,14 @@ app.use("/room", RoomRoute);
 app.use("/receipt", ReceiptRoute);
 
 
+app.get("/test", (req, res) => {
+  res.render("test");
+});
+
+app.get("/test1", (req, res) => {
+  res.render("test1");
+});
+
 app.use((req, res) => {
   res.render("errors/404", { layout: false });
 });

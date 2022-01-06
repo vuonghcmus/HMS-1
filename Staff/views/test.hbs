@@ -1,16 +1,16 @@
-<h1>Hello</h1>
-{{#each information}}
+ <button type="button" class="icon-button mx-4 mt-4">
+    {{!-- <span class="material-icons">notifications</span> --}}
+    <i class="fas fa-bell"></i>
+    <span style="font-size: 12px;" class="icon-button__badge">2</span>
+  </button>
 
-    <h2>{{this.nameCustomer}}</h2>
-    <h2>{{this.phoneCustomer}}</h2>
-    <h2>{{this.dateCheckIn}}</h2>
-    <h2>{{this.dateCheckOut}}</h2>
-    <h2>{{this.ID}}</h2>
-    <h2>{{this.roomNumber}}</h2>
-    {{#each this.serviceInfo}}
-        <h2>{{this.name}}</h2>
-        <h2>{{this.price}}</h2>
-        <h2>{{this.image}}</h2>
-    {{/each}}
-    
-{{/each}}
+  <div class="dropdown mt-5">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Dropdown button
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+  </ul>
+</div>
