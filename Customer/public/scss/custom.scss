@@ -127,3 +127,52 @@
         }
     }
 }
+
+
+.detail-service-btn {
+    @media #{$breakpoint-xs} {
+        width: 100%;
+    }
+}
+
+.custom-service-item {
+    .image-container {
+        @media #{$breakpoint-xl} {
+            text-align: left;
+            img {
+                max-height: 180px;
+            }
+        }
+        @media #{$breakpoint-lg} {
+            text-align: left;
+            img {
+                max-height: 180px;
+            }
+        }
+
+        text-align: center;
+    }
+}
+
+.total-service-amount-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @media #{$breakpoint-xs} {
+        flex-direction: column;
+        .btn {
+            margin-top: 8px;
+           width: 100%;
+        }
+    }
+
+    .total-amount {
+        span {
+            color: $pri-color;
+        }
+    }
+
+    .btn {
+        min-width: 200px;
+    }
+}

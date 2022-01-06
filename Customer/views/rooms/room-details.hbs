@@ -1,120 +1,121 @@
 <!-- ##### Breadcumb Area Start ##### -->
 <section class="breadcumb-area bg-img d-flex align-items-center justify-content-center" style="background-image: url(/img/bg-img/bg-6.jpg);">
     <div class="bradcumbContent">
-        
+        <h2>Rooms</h2>
     </div>
 </section>
 <!-- ##### Breadcumb Area End ##### -->
 
 <!-- ##### Rooms Area Start ##### -->
-<section class="room-details-area">
-    <div class="container mb-5">
-        <div class="row card mt-5">
-            <div class="col-md-12 col-lg-7 col-12 bg-thumbnail bg-img d-flex align-items-center">
-                <div class="bg-thumbnail bg-img">
-                    <img src={{roomType.image}}/>
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-5 col-12">
-                <h1 class="room-title">{{roomType.name}}</h1>
-                <p class="room-info">{{roomType.description}}</p>
-                <div class="room-info-container">
-                    <p class="room-info">People: <span>{{roomType.MaxOfPeople}}</span></p>
-                    <p class="room-info">Area: <span>{{roomType.area}}m<sup>2</sup></span></p>
-                </div>
-                <div class="room-info-container">
-                    <p class="room-info">Beds: <span>{{roomType.bed}}</span></p>
-                    
-                </div>
-                <p class="room-info room-price"><span>{{roomType.price}}$</span>/night</p>
-            </div>
-            
-           
-            {{#if finding}}
-            <form class="col-12 find-room-form needs-validation" method="POST" novalidate>
-                {{!-- CHECK IN AND OUT DATE --}}
-                <div class="col-md-12 col-lg-12 col-12 mt-4">
-                    <div class="row mb-3">
-                        <div class="col-5 mt-4">
-                            <label for="checkin" class="form-label">Check In</label>
-                            <input type="date" class="form-control" id="checkin" name="checkin" required>
-                            <div class="invalid-feedback">
-                                Check in date must not be empty.
-                            </div>
-                        </div>
-                        <div class="col-5 mt-4">
-                            <label for="checkout" class="form-label">Check Out</label>
-                            <input type="date" class="form-control" id="checkout" name="checkout" required>
-                            <div class="invalid-feedback">
-                                Check out date must not be empty.
-                            </div>
-                        </div>
-                        <div class="col-2 mt-4 d-flex align-items-end" >
-                            <button class="btn-find btn palatin-btn" type="submit">Find</button>
-                        </div>
+<div class="py-5" style="background-color: #E8E8E8;">
+    <section class="room-details-area">
+        <div class="container">
+            <div class="row card shadow pt-5 px-2">
+                <div class="col-md-12 col-lg-7 col-12 bg-thumbnail bg-img d-flex align-items-center">
+                    <div class="bg-thumbnail bg-img">
+                        <img src={{roomType.image}}/>
                     </div>
                 </div>
-            </form>
-            
-            {{else}}
-            <form class="col-12 find-room-form needs-validation" method="POST" novalidate>
-                {{!-- CHECK IN AND OUT DATE --}}
-                <div class="col-md-12 col-lg-12 col-12 mt-4">
-                    <div class="row mb-3">
-                        <div class="col-5 mt-4">
-                            <label for="checkin" class="form-label">Check In</label>
-                            <input type="date" class="form-control" id="checkin" name="checkin" value="{{checkin}}" required>
-                            <div class="invalid-feedback">
-                                Check in date must not be empty.
+                <div class="col-md-12 col-lg-5 col-12">
+                    <h1 class="room-title">{{roomType.name}}</h1>
+                    <p class="room-info">{{roomType.description}}</p>
+                    <div class="room-info-container">
+                        <p class="room-info">People: <span>{{roomType.MaxOfPeople}}</span></p>
+                        <p class="room-info">Area: <span>{{roomType.area}}m<sup>2</sup></span></p>
+                    </div>
+                    <div class="room-info-container">
+                        <p class="room-info">Beds: <span>{{roomType.bed}}</span></p>
+                        
+                    </div>
+                    <p class="room-info room-price"><span>{{roomType.price}}$</span>/night</p>
+                </div>
+                
+                {{#if finding}}
+                <form class="col-12 find-room-form needs-validation" method="POST" novalidate>
+                    {{!-- CHECK IN AND OUT DATE --}}
+                    <div class="col-md-12 col-lg-12 col-12 mt-4">
+                        <div class="row mb-3">
+                            <div class="col-6 col-lg-5 mt-4">
+                                <label for="checkin" class="form-label">Check In</label>
+                                <input type="date" class="form-control" id="checkin" name="checkin" required>
+                                <div class="invalid-feedback">
+                                    Check in date must not be empty.
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-5 mt-4">
-                            <label for="checkout" class="form-label">Check Out</label>
-                            <input type="date" class="form-control" id="checkout" name="checkout" value="{{checkout}}" required>
-                            <div class="invalid-feedback">
-                                Check out date must not be empty.
+                            <div class="col-6 col-lg-5 mt-4">
+                                <label for="checkout" class="form-label">Check Out</label>
+                                <input type="date" class="form-control" id="checkout" name="checkout" required>
+                                <div class="invalid-feedback">
+                                    Check out date must not be empty.
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-2 mt-4 d-flex align-items-end" >
-                            <button class="btn-find btn palatin-btn" type="submit">Find</button>
+                            <div class="col-12 col-lg-2 mt-4 d-flex align-items-end" >
+                                <button class="btn-find btn palatin-btn w-100" type="submit">Find</button>
+                            </div>
                         </div>
                     </div>
+                </form>
+                
+                {{else}}
+                <form class="col-12 find-room-form needs-validation" method="POST" novalidate>
+                    {{!-- CHECK IN AND OUT DATE --}}
+                    <div class="col-md-12 col-lg-12 col-12 mt-4">
+                        <div class="row mb-3">
+                            <div class="col-12 col-lg-5 mt-4">
+                                <label for="checkin" class="form-label">Check In</label>
+                                <input type="date" class="form-control" id="checkin" name="checkin" value="{{checkin}}" required>
+                                <div class="invalid-feedback">
+                                    Check in date must not be empty.
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-5 mt-4">
+                                <label for="checkout" class="form-label">Check Out</label>
+                                <input type="date" class="form-control" id="checkout" name="checkout" value="{{checkout}}" required>
+                                <div class="invalid-feedback">
+                                    Check out date must not be empty.
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-2 mt-4 d-flex align-items-end" >
+                                <button class="btn-find btn palatin-btn w-100" type="submit">Find</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="col-md-12 col-lg-12 col-12 mt-4">
+                    <table class="table booking-table">
+                        <h4>Select your rooms</h4>
+                        {{#each table}}
+                            <tr>
+                                {{#each this}}
+                                <td class="text-center unselectable {{roomStatus this.available}}" style="border: 1px solid black" data-id="{{this.roomNumber}}">
+                                    {{this.roomNumber}}
+                                </td>
+                                {{/each}}
+                            </tr>
+                        {{/each}}
+                    </table>
                 </div>
-            </form>
-            <div class="col-md-12 col-lg-12 col-12 mt-4">
-                <table class="table booking-table">
-                    <h4>Select your rooms</h4>
-                    {{#each table}}
-                        <tr>
-                            {{#each this}}
-                            <td class="text-center unselectable {{roomStatus this.available}}" style="border: 1px solid black" data-id="{{this.roomNumber}}">
-                                {{this.roomNumber}}
-                            </td>
-                            {{/each}}
-                        </tr>
-                    {{/each}}
-                </table>
-            </div>
-            <form class="col-12 booking-form needs-validation" method="POST" action="/rooms/add" novalidate>
-                <div class="row mb-3"></div>
-                <div class="book-container">
-                    <input type="hidden" name="roomTypeID" value="{{roomType._id}}">
-                    <input type="hidden" name="roomType" value="{{roomType.name}}">
-                    <input type="hidden" name="roomImage" value="{{roomType.image}}">
-                    <input type="hidden" name="roomPrice" value="{{roomType.price}}">
-                    <input type="date" hidden name="checkin" value="{{checkin}}">
-                    <input type="date" hidden name="checkout" value="{{checkout}}">
-                    <button type="submit" class="btn book-room-btn palatin-btn">Book Room</button>
+                <form class="col-12 booking-form needs-validation" method="POST" action="/rooms/add" novalidate>
+                    <div class="row mb-3"></div>
+                    <div class="book-container">
+                        <input type="hidden" name="roomTypeID" value="{{roomType._id}}">
+                        <input type="hidden" name="roomType" value="{{roomType.name}}">
+                        <input type="hidden" name="roomImage" value="{{roomType.image}}">
+                        <input type="hidden" name="roomPrice" value="{{roomType.price}}">
+                        <input type="date" hidden name="checkin" value="{{checkin}}">
+                        <input type="date" hidden name="checkout" value="{{checkout}}">
+                        <button type="submit" class="btn book-room-btn palatin-btn">Book Room</button>
+                    </div>
+                </form>
+                {{/if}}
+                <div class="col-md-12">
+                    <p>P/s: We do not support book one room on multiple date at the same time </p>
                 </div>
-            </form>
-            {{/if}}
-            <div class="col-md-12">
-                <p>P/s: We do not support book one room on multiple date at the same time </p>
+                
             </div>
-            
         </div>
-    </div>
-</section>
+    </section>
+</div>
 
 <script src="/js/formValidation.js"></script>
 <script src="/js/dateChecking.js"></script>

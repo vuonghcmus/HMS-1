@@ -2025,7 +2025,8 @@ img {
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-#sign-in-form {
+#sign-in-form,
+#forgot-password-form {
     button {
         width: 100%;
         background-color: $pri-color;

@@ -46,12 +46,11 @@
 
 {{!-- floating button --}}
     <button
-        class="btn modal-btn {{#if isEmpty}}disabled{{/if}}"
-        {{#if isEmpty}}
-        {{else}}
+        class="btn modal-btn {{#ifCond cart.length '<=' 0}}disabled{{/ifCond}}"
+        {{#ifCond cart.length '>' 0}}
         data-bs-toggle="modal"
         data-bs-target="#input-information-modal"
-        {{/if}}
+        {{/ifCond}}
     >
         <img src="/img/icon/order-icon.png" alt="">
         <span>{{cart.length }}</span>

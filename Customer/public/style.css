@@ -107,6 +107,53 @@
   padding: 0 8px;
 }
 
+@media only screen and (max-width:767px) {
+  .detail-service-btn {
+    width: 100%;
+  }
+}
+
+.custom-service-item .image-container {
+  text-align: center;
+}
+@media only screen and (min-width:1200px) {
+  .custom-service-item .image-container {
+    text-align: left;
+  }
+  .custom-service-item .image-container img {
+    max-height: 180px;
+  }
+}
+@media only screen and (min-width:992px) and (max-width:1199px) {
+  .custom-service-item .image-container {
+    text-align: left;
+  }
+  .custom-service-item .image-container img {
+    max-height: 180px;
+  }
+}
+
+.total-service-amount-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@media only screen and (max-width:767px) {
+  .total-service-amount-container {
+    flex-direction: column;
+  }
+  .total-service-amount-container .btn {
+    margin-top: 8px;
+    width: 100%;
+  }
+}
+.total-service-amount-container .total-amount span {
+  color: #cb8670;
+}
+.total-service-amount-container .btn {
+  min-width: 200px;
+}
+
 /* [Master Stylesheet - v1.0] */
 .booking-table td .active {
   background-color: #cb8670;
@@ -2228,7 +2275,8 @@ img {
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-#sign-in-form button {
+#sign-in-form button,
+#forgot-password-form button {
   width: 100%;
   background-color: #cb8670;
   border-radius: 20px;
@@ -2236,7 +2284,8 @@ img {
   color: #ffffff;
   margin-bottom: 16px;
 }
-#sign-in-form .form-control {
+#sign-in-form .form-control,
+#forgot-password-form .form-control {
   border-radius: 20px;
   background-color: #363636;
   border: 1px solid #cb8670;
@@ -2245,7 +2294,8 @@ img {
   outline: none;
   text-align: center;
 }
-#sign-in-form .form-control:focus {
+#sign-in-form .form-control:focus,
+#forgot-password-form .form-control:focus {
   outline: none;
 }
 
