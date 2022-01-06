@@ -64,7 +64,6 @@ const showCustomerUsing = async (req, res) => {
               listOrderServices.push([]);
             }
           }
-
           res.render("customer/list-customer-using", {
             detailOrderRoom,
             pages,
