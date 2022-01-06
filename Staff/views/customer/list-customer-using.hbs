@@ -20,11 +20,12 @@
         <tr>
           <th>Khách hàng</th>
           <th class="text-center">Thời gian</th>
-          <th>Số người</th>
-          <th>Tên phòng</th>
-          <th>Loại phòng</th>
-          <th>Giá</th>
+          <th class="text-center">Số người</th>
+          <th class="text-center">Tên phòng</th>
+          <th class="text-center">Loại phòng</th>
+          <th class="text-center">Giá</th>
           <th class="text-center">Dịch vụ</th>
+          <th class="text-center">Tính tiền</th>
         </tr>
       </thead>
 
@@ -49,6 +50,14 @@
             <td>{{this.roomTypeName}}</td>
             <td>{{this.price}}</td>  
             <td class="list-order-service{{@index}}"></td>
+            <td class="text-center">
+              <a href="/receipt/{{this._id}}">
+                <button class = 'btn btn-primary btn-success'>
+                  Tính tiền
+                </button>
+              </a>
+            </td>
+
           </tr>
         {{/each}}
       </tbody>

@@ -15,7 +15,7 @@ const RoomTypeRoute = require("./routes/roomType.route");
 const StaffRoute = require("./routes/staff.route");
 const CustomerRoute = require("./routes/customer.route");
 const RoomRoute = require("./routes/room.route");
-
+const ReceiptRoute = require("./routes/receipt.route");
 databaseService.connectDatabase();
 
 const app = express();
@@ -88,6 +88,8 @@ app.use("/service", ServiceRoute);
 app.use("/service-type", ServiceTypeRoute);
 app.use("/room-type", RoomTypeRoute);
 app.use("/room", RoomRoute);
+app.use("/receipt", ReceiptRoute);
+
 
 app.get("/test", (req, res) => {
   res.render("test");
