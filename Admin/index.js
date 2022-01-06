@@ -1,5 +1,6 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
+const express_handlebars_sections = require("express-handlebars-sections");
 const path = require("path");
 const bodyParser = require("body-parser");
 const Handlebars = require("handlebars");
@@ -12,6 +13,7 @@ const StaffRoute = require("./routes/staff.route");
 const ServiceRoute = require("./routes/service.route");
 const ServiceTypeRoute = require("./routes/serviceType.route");
 const RoomTypeRoute = require("./routes/roomType.route");
+const Revenue = require("./routes/revenue.route");
 
 databaseService.connectDatabase();
 
@@ -20,6 +22,7 @@ const app = express();
 app.engine(
   "hbs",
   exphbs({
+    section: express_handlebars_sections(),
     extname: ".hbs",
     defaultLayout: "main",
     handlebars: allowInsecurePrototypeAccess(Handlebars),
@@ -83,6 +86,7 @@ app.use("/staff", StaffRoute);
 app.use("/service", ServiceRoute);
 app.use("/service-type", ServiceTypeRoute);
 app.use("/room-type", RoomTypeRoute);
+app.use("/revenue", Revenue);
 
 app.get("/test", (req, res) => {
   const data = [
