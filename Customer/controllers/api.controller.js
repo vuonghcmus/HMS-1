@@ -22,5 +22,8 @@ class ApiController {
         }
         res.json(ret);
     }
+    async getBusyRoom(req, res, next) {
+
+    }
 }
 module.exports = new ApiController;
