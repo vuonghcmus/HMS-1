@@ -80,7 +80,7 @@ module.exports = {
     const serviceType = await ServiceType.findById(req.params.id);
     const listServices = serviceType.services;
 
-    for (let i = 0; i < listIdProduct.length; i++) {
+    for (let i = 0; i < listServices.length; i++) {
       await Service.findByIdAndDelete(listServices[i]);
     }
 

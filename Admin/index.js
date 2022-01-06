@@ -22,11 +22,11 @@ const app = express();
 app.engine(
   "hbs",
   exphbs({
-    section: express_handlebars_sections(),
     extname: ".hbs",
     defaultLayout: "main",
     handlebars: allowInsecurePrototypeAccess(Handlebars),
     helpers: {
+      section: express_handlebars_sections(),
       ifCond: function (v1, operator, v2, options) {
         switch (operator) {
           case "==":
@@ -64,19 +64,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "/public")));
 
-require("./middlewares/session")(app);
-require("./middlewares/passport")(app);
-app.use(require("./middlewares/locals"));
+// require("./middlewares/session")(app);
+// require("./middlewares/passport")(app);
+// app.use(require("./middlewares/locals"));
 
-app.use("/admin", require("./routes/admin.route"));
+// app.use("/admin", require("./routes/admin.route"));
 
-app.use((req, res, next) => {
-  if (!req.user) {
-    res.redirect("/admin/login");
-  } else {
-    next();
-  }
-});
+// app.use((req, res, next) => {
+//   if (!req.user) {
+//     res.redirect("/admin/login");
+//   } else {
+//     next();
+//   }
+// });
 
 app.get("/", function (req, res) {
   res.render("home");
