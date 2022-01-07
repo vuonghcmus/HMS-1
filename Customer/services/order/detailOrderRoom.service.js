@@ -56,10 +56,23 @@ const DetailOrderRoomService = {
         console.log(dateout);
         console.log(dateout <= new Date("2022-01-15"));
         return await detailOrderRoomModel.find({
-            dateOfCheckIn: { $lte: datein },
-            dateOfCheckOut: { $gte: dateout },
+            dateOfCheckIn: { $lte: dateout },
+            dateOfCheckOut: { $gte: datein },
         });
     },
+    // async findBusyByDateInOut(datein, dateout) {
+    //     return await detailOrderRoomModel.find({
+    //         $or: [{
+    //                 dateOfCheckIn: { $lte: datein },
+    //                 dateOfCheckOut: { $gte: datein },
+    //             },
+    //             {
+    //                 dateOfCheckIn: { $lte: dateout },
+    //                 dateOfCheckOut: { $gte: dateout },
+    //             },
+    //         ]
+    //     });
+    // }
 
 
 }
