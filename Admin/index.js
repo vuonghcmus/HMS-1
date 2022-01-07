@@ -1,5 +1,6 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
+const express_handlebars_sections = require("express-handlebars-sections");
 const path = require("path");
 const bodyParser = require("body-parser");
 const Handlebars = require("handlebars");
@@ -12,6 +13,7 @@ const StaffRoute = require("./routes/staff.route");
 const ServiceRoute = require("./routes/service.route");
 const ServiceTypeRoute = require("./routes/serviceType.route");
 const RoomTypeRoute = require("./routes/roomType.route");
+const Revenue = require("./routes/revenue.route");
 
 databaseService.connectDatabase();
 
@@ -24,6 +26,7 @@ app.engine(
     defaultLayout: "main",
     handlebars: allowInsecurePrototypeAccess(Handlebars),
     helpers: {
+      section: express_handlebars_sections(),
       ifCond: function (v1, operator, v2, options) {
         switch (operator) {
           case "==":
@@ -61,19 +64,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "/public")));
 
-require("./middlewares/session")(app);
-require("./middlewares/passport")(app);
-app.use(require("./middlewares/locals"));
+// require("./middlewares/session")(app);
+// require("./middlewares/passport")(app);
+// app.use(require("./middlewares/locals"));
 
-app.use("/admin", require("./routes/admin.route"));
+// app.use("/admin", require("./routes/admin.route"));
 
-app.use((req, res, next) => {
-  if (!req.user) {
-    res.redirect("/admin/login");
-  } else {
-    next();
-  }
-});
+// app.use((req, res, next) => {
+//   if (!req.user) {
+//     res.redirect("/admin/login");
+//   } else {
+//     next();
+//   }
+// });
 
 app.get("/", function (req, res) {
   res.render("home");
@@ -83,6 +86,7 @@ app.use("/staff", StaffRoute);
 app.use("/service", ServiceRoute);
 app.use("/service-type", ServiceTypeRoute);
 app.use("/room-type", RoomTypeRoute);
+app.use("/revenue", Revenue);
 
 app.get("/test", (req, res) => {
   const data = [

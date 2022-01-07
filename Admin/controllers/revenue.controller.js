@@ -67,7 +67,7 @@ module.exports = {
           req.body.serviceType,
           {
             $push: {
-              services: service._id,
+              listServices: service._id,
             },
           },
           (err, cha) => {
