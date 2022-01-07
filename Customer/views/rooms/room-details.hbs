@@ -87,7 +87,12 @@
                         {{#each table}}
                             <tr>
                                 {{#each this}}
-                                <td class="text-center unselectable {{roomStatus this.available}}" style="border: 1px solid black" data-id="{{this.roomNumber}}">
+                                <td
+                                    class="text-center unselectable {{roomStatus this.available}}"
+                                    style="border: 1px solid black"
+                                    data-id="{{this.roomNumber}}"
+                                    data-max="{{../../roomType.MaxOfPeople}}"
+                                >
                                     {{this.roomNumber}}
                                 </td>
                                 {{/each}}
