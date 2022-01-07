@@ -147,6 +147,9 @@
     width: 100%;
   }
 }
+.total-service-amount-container .total-amount {
+  font-size: 24px;
+}
 .total-service-amount-container .total-amount span {
   color: #cb8670;
 }
@@ -1348,6 +1351,7 @@ img {
   width: calc(100% - 40px);
   border: 2px solid #cb8670;
   text-align: center;
+  overflow-y: hidden;
   -webkit-transition-duration: 500ms;
   transition-duration: 500ms;
 }
@@ -1369,6 +1373,13 @@ img {
 .single-rooms-area .rooms-text p {
   color: #ffffff;
   margin-bottom: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  /* number of lines to show */
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 .single-rooms-area .book-room-btn {
   position: absolute;
@@ -2409,6 +2420,7 @@ img {
   }
   .section-order .order-total-amount-container .btn-container {
     display: flex;
+    flex-direction: column;
     width: 100%;
   }
   .section-order .order-total-amount-container .btn-container .btn {

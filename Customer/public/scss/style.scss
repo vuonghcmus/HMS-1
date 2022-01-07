@@ -1133,6 +1133,7 @@ img {
         width: calc(100% - 40px);
         border: 2px solid $pri-color;
         text-align: center;
+        overflow-y: hidden;
         @include trans-duration(500ms);
         .line {
             width: 90px;
@@ -1150,6 +1151,12 @@ img {
         p {
             color: $white-color;
             margin-bottom: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /* number of lines to show */
+            line-clamp: 3; 
+            -webkit-box-orient: vertical;
         }
     }
     .book-room-btn {
@@ -2153,12 +2160,15 @@ img {
         .order-total-amount span {
             color: $pri-color;
         }
+
         @media #{$breakpoint-xs} {
             flex-direction: column;
             justify-content: center;
             .btn-container {
                 display: flex;
+                flex-direction: column;
                 width: 100%;
+
                 .btn {
                     flex: 1;
                 }

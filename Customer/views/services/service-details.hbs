@@ -19,8 +19,13 @@
                         <span class="price-text" data-id="{{this._id}}">{{this.price}}$</span>
                         <p>{{this.description}}</p>
                     </div>
+                    {{#if ../isAuth}}
                     <div class="order-amount-container" style="font-size: 20px;">
-                        <button type="button" class="order-service-button" onclick="changeValue('{{this._id}}','-')">
+                        <button
+                            type="button"
+                            class="order-service-button"
+                            onclick="changeValue('{{this._id}}','-')"
+                        >
                             <span><i class="fa fa-minus"></i></span>
                         </button>
                         <input type="hidden" name="id_service" value="{{this._id}}">
@@ -34,11 +39,15 @@
                             value="0"
                             id="{{this._id}}"
                         >
-                        <button type="button" class="order-service-button" onclick="changeValue('{{this._id}}','+')">
+                        <button
+                            type="button"
+                            class="order-service-button"
+                            onclick="changeValue('{{this._id}}','+')"
+                        >
                             <span><i class="fa fa-plus"></i></span>
                         </button>
-                        
                     </div>
+                    {{/if}}
                 </div>
             </div>
         </div>
@@ -67,4 +76,6 @@
     </section>
 </div>
 
+{{#if isAuth}}
 <script src="/js/updateServiceOrder.js"></script>
+{{/if}}
