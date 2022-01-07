@@ -10,16 +10,20 @@ module.exports = {
     showReceipt: async (req, res) => {
         const roomReceipt =  await RoomOrder.findById(req.params.id);
         const roomType = await Room.findById(roomReceipt.roomTypeID);
-        const customerInfo = await Customer.findById(roomReceipt.customerID);      
+        const customerInfo = await Customer.findById(roomReceipt.customerID);
 
         const checkIn =  roomReceipt.dateOfCheckIn.toLocaleDateString() + " " + roomReceipt.dateOfCheckIn.toLocaleTimeString();
-        const checkOut = roomReceipt.dateOfCheckOut.toLocaleDateString() + " " + roomReceipt.dateOfCheckOut.toLocaleTimeString();
+        // const checkOut = roomReceipt.dateOfCheckOut.toLocaleDateString() + " " + roomReceipt.dateOfCheckOut.toLocaleTimeString();
+        const time = new Date()
+        const checkOut = time.toLocaleDateString() + " " + time.toLocaleTimeString();
 
-        const room = {id: req.params.id, name: roomReceipt.roomID, type: roomType.name, price: roomType.price, checkin: checkIn, checkout: checkOut, numday: roomReceipt.price/roomType.price, subtotal: roomReceipt.price};
+        const numday = Math.round(time.getTime()/(24*60*60000)) - Math.round(roomReceipt.dateOfCheckIn.getTime() /(24*60*60000)) 
+
+        const room = {id: req.params.id, name: roomReceipt.roomID, type: roomType.name, price: roomType.price, checkin: checkIn, checkout: checkOut, numday: numday, subtotal: numday * roomType.price};
         var service = [];
         var total = roomReceipt.price;
 
-
+        //Tìm xem khách hàng có còn đặt phòng nào khác hay không (using)
 
         for(var i = 0; i < roomReceipt.detailOrderService.length; i++){
             const serviceId = roomReceipt.detailOrderService[i];
@@ -30,6 +34,8 @@ module.exports = {
             total += serviceInfo.price* serviceItem.number;
         }
 
+
+
         res.render('receipt/receipt',{
             customerInfo,
             room,
@@ -39,10 +45,16 @@ module.exports = {
     },
 
     payment: async (req, res) => {
-        await RoomOrder.findOneAndUpdate(
+        const order = await RoomOrder.findOneAndUpdate(
             {_id: req.params.id},
-            {status: "done"}
+            {status: "done", dateOfCheckOut: new Date()}
         )
+
+        const otherOrder = await RoomOrder.find({customerID: order.customerID, status: "using"})
+        if (otherOrder.length == 0){
+            await Customer.findByIdAndUpdate(order.customerID, {status: false})
+            // await Customer.findOneAndUpdate({_id: order.customerID}, {status: false})
+        }
         res.redirect('/customer?status=using&page=1')
     }
 }

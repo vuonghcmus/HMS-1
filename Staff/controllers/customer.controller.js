@@ -149,9 +149,14 @@ module.exports = {
   },
   acceptOrderRoom: (req, res) => {
     // find detailOrderRoom by id and update status
-    DetailOrderRoom.findById(req.params.id, (err, detailOrderRoom) => {
+    DetailOrderRoom.findById(req.params.id, async (err, detailOrderRoom) => {
       if (err) return next(err);
+
+      // Unlock for customer account if account was loocked
+     await Customer.findByIdAndUpdate(detailOrderRoom.customerID,{status: true})
+      
       detailOrderRoom.status = "using";
+      detailOrderRoom.dateOfCheckIn = new Date()
       detailOrderRoom.save((err) => {
         if (err) {
           return res.status(500).json({
