@@ -114,19 +114,21 @@
 			let id = $('#id-' + i).val();
 
 			$('#accept-order-' + i).on("click", function(e) {
-				e.preventDefault();
-				console.log('accept-order-' + i);
-				$.ajax({
-					url: '/customer/accept-order-room/' + id,
-					type: 'GET',
-					success: function(data){
-						alert('Duyệt đơn đặt phòng thành công!');
-						location.reload();
-					},
-					error: function(error){
-						alert('Duyệt đơn đặt phòng thất bại!');
-					}
-				});
+        if (confirm('Bạn có chắc chắn muốn chấp nhận đơn đặt phòng này?')) {
+          e.preventDefault();
+          console.log('accept-order-' + i);
+          $.ajax({
+            url: '/customer/accept-order-room/' + id,
+            type: 'GET',
+            success: function(data){
+              alert('Duyệt đơn đặt phòng thành công!');
+              location.reload();
+            },
+            error: function(error){
+              alert('Duyệt đơn đặt phòng thất bại!');
+            }
+          });
+        }			
 			});
 
 			$('#reject-order-' + i).on("click", function(e) {

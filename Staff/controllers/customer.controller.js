@@ -153,10 +153,12 @@ module.exports = {
       if (err) return next(err);
 
       // Unlock for customer account if account was loocked
-     await Customer.findByIdAndUpdate(detailOrderRoom.customerID,{status: true})
-      
+      await Customer.findByIdAndUpdate(detailOrderRoom.customerID, {
+        status: true,
+      });
+
       detailOrderRoom.status = "using";
-      detailOrderRoom.dateOfCheckIn = new Date()
+      detailOrderRoom.dateOfCheckIn = new Date();
       detailOrderRoom.save((err) => {
         if (err) {
           return res.status(500).json({
@@ -170,14 +172,29 @@ module.exports = {
   },
   rejectOrderRoom: (req, res) => {
     // find detailOrderRoom by id and delete
-    DetailOrderRoom.findByIdAndDelete(req.params.id, (err, detailOrderRoom) => {
-      if (err) {
-        return res.status(500).json({
-          status: "fail",
-          message: "Reject order room fail",
-        });
-      }
-      return res.status(201).json(detailOrderRoom);
+    // DetailOrderRoom.findByIdAndDelete(req.params.id, (err, detailOrderRoom) => {
+    //   if (err) {
+    //     return res.status(500).json({
+    //       status: "fail",
+    //       message: "Reject order room fail",
+    //     });
+    //   }
+    //   return res.status(201).json(detailOrderRoom);
+    // });
+
+    DetailOrderRoom.findById(req.params.id, async (err, detailOrderRoom) => {
+      if (err) return next(err);
+
+      detailOrderRoom.status = "reject";
+      detailOrderRoom.save((err) => {
+        if (err) {
+          return res.status(500).json({
+            status: "fail",
+            message: "Reject order room fail",
+          });
+        }
+        return res.status(201).json(detailOrderRoom);
+      });
     });
   },
 };
