@@ -92,7 +92,6 @@ app.use("/room-type", RoomTypeRoute);
 app.use("/room", RoomRoute);
 app.use("/receipt", ReceiptRoute);
 
-
 app.get("/test", (req, res) => {
   res.render("test");
 });

@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 
 module.exports = {
   getAllCustomer: (req, res, next) => {
-    let perPage = 5; // số lượng sản phẩm xuất hiện trên 1 page
+    let perPage = 10; // số lượng sản phẩm xuất hiện trên 1 page
     let page = req.query.page || 1; // số page hiện tại
     if (page < 1) {
       page = 1;
@@ -166,6 +166,32 @@ module.exports = {
       }
     );
   },
+
+  resetPasswordCustomer: async (req, res) => {
+    const customer = await Customer.findById(req.params.id);
+    if (customer) {
+      const ID = customer.ID;
+      const newPassword = bcrypt.hashSync(ID, 10);
+      Customer.findByIdAndUpdate(
+        req.params.id,
+        {
+          $set: {
+            password: newPassword,
+          },
+        },
+        (err, account) => {
+          if (err) return next(err);
+          res.redirect("/account?page=1");
+        }
+      );
+    } else {
+      return res.render("account/edit-customer", {
+        error: "Không tìm thấy tài khoản",
+        customer: null,
+      });
+    }
+  },
+
   deleteCustomer: (req, res) => {
     Customer.findByIdAndDelete(req.params.id, (err, account) => {
       if (err) return next(err);

@@ -22,11 +22,11 @@
       <thead>
         <tr>
           <th>Tên phòng</th>
-          <th>Loại phòng</th>
+          <th class="text-center">Loại phòng</th>
           <th>Khách hàng</th>
           <th class="text-center">Thời gian</th>
-          <th>Số người</th>
-          <th>Giá</th>
+          <th class="text-center">Số người</th>
+          <th class="text-center">Giá</th>
           <th class="text-center">Dịch vụ</th>
         </tr>
       </thead>
@@ -34,8 +34,8 @@
       <tbody>
         {{#each detailOrderRoom}}
           <tr>
-            <td>{{this.roomID}}</td>            
-            <td>{{this.roomTypeName}}</td>
+            <td><b>{{this.roomID}}</b></td>            
+            <td class="text-center">{{this.roomTypeName}}</td>
             <td>
               <div>
                 <p><b>Họ tên: {{this.customerName}}</b></p>
@@ -49,8 +49,8 @@
                 <p><b>checkout</b>: {{this.dateOfCheckOut}}</p>
               </div>
             </td>
-            <td>{{this.people}}</td>
-            <td>{{this.price}}</td>  
+            <td class="text-center">{{this.people}}</td>
+            <td class="text-center">{{this.price}}</td>  
             <td class="list-order-service{{@index}}"></td>
           </tr>
         {{/each}}
@@ -88,7 +88,9 @@
           </div>      
       {{/each}}
     {{else}}
-      <h6 class="text-center">Chưa đặt dịch vụ</h6>
+		<div class="text-center">
+			<p style="font-weight: bold; font-style: italic;">Chưa đặt dịch vụ</p>
+		</div>
     {{/if}}
   </div>
 {{/each}}

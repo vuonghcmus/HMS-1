@@ -21,39 +21,36 @@
       <thead>
         <tr>
           <th>Tên</th>
-          <th>Diện tích</th>
-          <th>Số giường</th>
-          <th>Mô tả</th>
-          <th>Ảnh</th>
-          <th>Loại</th>
-          <th>Số người tối đa</th>
+          <th class="text-center">Diện tích</th>
+          <th class="text-center">Số giường</th>
+          <th class="text-center">Mô tả</th>
+          <th class="text-center">Ảnh</th>
+          <th class="text-center">Loại</th>
+          <th class="text-center">Số người tối đa</th>
           <th>Danh sách phòng</th>
         </tr>
       </thead>
 
       <tbody>
         {{#each roomType}}
-        <tr>
-          <td>
-            <h6>{{this.name}}</h6>
-          </td>
-          <td>{{this.area}} m<sup>2</sup></td>
-          <td>{{this.bed}}</td>
-          <td>{{this.description}}</td>
-          <td>
-            <a href="{{this.image}}" target="_blank">
-              <img style="border-radius: 10px;" src="{{this.image}}" alt="{{this.name}}" class="img-fluid" width="150px"
-                height="auto">
-            </a>
-          </td>
-          <td>{{this.type}}</td>
-          <td>{{this.MaxOfPeople}}</td>
-          <td>
-            {{#each this.rooms}}
-            <p class="text-center">{{this}}</p>
-            {{/each}}
-          </td>
-        </tr>
+          <tr>
+            <td><b>{{this.name}}</b></td>            
+            <td class="text-center">{{this.area}} m<sup>2</sup></td>
+            <td class="text-center">{{this.bed}}</td>
+            <td class="text-left">{{this.description}}</td>
+            <td class="text-center">
+              <a href="{{this.image}}" target="_blank">
+                <img style="border-radius: 10px;" src="{{this.image}}" alt="{{this.name}}" class="img-fluid" width="150px" height="auto">
+              </a>
+            </td>
+            <td class="text-center">{{this.type}}</td>
+            <td class="text-center">{{this.MaxOfPeople}}</td>
+            <td>
+              {{#each this.rooms}}               
+                  <p class="text-center">{{this}}</p>                    
+              {{/each}}                            
+            </td>                     
+          </tr>
         {{/each}}
       </tbody>
     </table>

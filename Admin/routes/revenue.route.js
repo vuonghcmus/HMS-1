@@ -1,8 +1,7 @@
 const express = require("express");
+const RevenueController = require("../controllers/revenue.controller");
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.render("revenue/home");
-});
+router.get("/", RevenueController.getTotalRevenue);
 
 module.exports = router;

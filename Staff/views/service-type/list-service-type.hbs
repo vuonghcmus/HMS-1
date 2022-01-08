@@ -21,14 +21,14 @@
       <thead>
         <tr>
           <th>Loại dịch vụ</th>
-          <th>Danh sách dịch vụ</th>
+          <th class="text-center">Danh sách dịch vụ</th>
         </tr>
       </thead>
 
       <tbody>
         {{#each serviceTypes}}
           <tr>
-            <td><h6>{{this.name}}</h6></td>
+            <td><b>{{this.name}}</b></td>
             <td class="list-service{{@index}}"></td>                                 
           </tr>
         {{/each}}
@@ -53,7 +53,7 @@
   <div class="service{{@index}}">
     {{#if this}}
       {{#each this}}      
-          <div class="service" style="display: flex; justify-content: space-between; margin-bottom: 7px;">
+          <div class="service d-flex justify-content-between mb-2">
             <div style="display: flex;">
               <a href="{{this.image}}" target="_blank">
                 <img
@@ -80,7 +80,7 @@
 {{/each}}
 
 <div class="center">
-  <div class="mb-2 position-absolute" style="bottom: 0px;">
+  <div class="mb-2">
       <nav aria-label="Page navigation example">
           <ul class="pagination">
               <li class="page-item {{#unless this.isPreviousPage}} disabled {{/unless}}">
