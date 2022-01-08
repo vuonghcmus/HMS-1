@@ -653,8 +653,17 @@ img {
             }
             .menu-btn {
                 margin-left: 100px;
+
+                .user-icon {
+                    color: white;
+                    background-color: inherit;
+                }
+
                 @media #{$breakpoint-lg} {
                     margin-left: 30px;
+                    .user-icon {
+                        background-color: transparent;
+                    }
                 }
                 @media #{$breakpoint-md} {
                     margin-left: 30px;
@@ -662,13 +671,24 @@ img {
                     border-radius: 15px;
                     margin-top: 30px;
                     display: inline-block;
+                    .user-icon {
+                        background-color: transparent;
+                    }
                 }
                 @media #{$breakpoint-xs} {
-                    margin-left: 30px;
-                    border: 2px solid $white-color;
-                    border-radius: 15px;
-                    margin-top: 30px;
+                    margin-left: 0;
+                    width: 100%;
+                    border-bottom: 1px solid $white-color;
                     display: inline-block;
+
+                    .user-icon {
+                        text-align: left;
+                        width: 100%;
+                    }
+                    .sign-in-btn {
+                        padding-left: 10px !important;
+                        text-align: left !important;
+                    }
                 }
                 a {
                     color: $white-color;

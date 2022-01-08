@@ -1,4 +1,4 @@
-<div class="section-order px-4 pb-5" style="padding-top: 180px !important; background-color: #E8E8E8;">
+<div class="section-order profile px-4 pb-5" style="padding-top: 180px !important; background-color: #E8E8E8;">
     <div class="card shadow p-4 bg-white mb-5">
         <h2 class="mb-3">Your information</h2>
         <form id="input-information-form" method="POST" action="" class="row g-3 px-2 input-information-form needs-validation" novalidate>
@@ -25,10 +25,10 @@
             {{#each orders}}
             <div class="my-4" style="border: 1px solid #eee;"></div>
             <li>
-                <div class="order-item d-flex justify-content-between align-items-center">
-                    <h5 class="order-title mb-0">{{this.roomType}}</h5>
+                <div class="order-item order-item-room">
+                    <h5 class="order-title">{{this.roomType}}</h5>
                 </div>
-                <div class="order-item d-flex justify-content-between align-items-center" style="margin-top: -8px;">
+                <div class="order-item order-item-room-info" style="margin-top: -8px;">
                     <div class="">
                         <h6 class="order-title">Room: <span style="font-size: 20px; color: #cb8670;">{{this.roomID}}</span> ({{this.people}} people)</h6>
                         <span class="order-date">
@@ -43,14 +43,14 @@
                     </div>
                 </div>
                 {{#ifCond this.services.length '>' 0}}
-                <div class="order-item d-flex justify-content-between align-items-center">
-                    <h5 class="order-title mb-1">Services</h5>
+                <div class="order-item">
+                    <a class="order-title order-title-service mb-1 btn btn-info" data-toggle="collapse" href="#collapse-{{this.roomID}}" role="button" aria-expanded="false" aria-controls="collapse-{{this.roomID}}">Services</a>
                 </div>
-                <ul class="mx-4">
+                <ul class="service-list collapse" id="collapse-{{this.roomID}}">
                         {{#each this.services}}
                         <li>
-                            <div class="order-item d-flex mb-1 justify-content-between align-items-center">
-                                <div class="order-item">
+                            <div class="order-item mb-1">
+                                <div>
                                     <h6 class="order-title mb-0">
                                         {{this.ServiceName}}
                                         <span class="order-price"> x <span>{{this.number}}</span></span>

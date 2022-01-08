@@ -1,4 +1,4 @@
-<div class="section-order px-4 pb-5" style="padding-top: 180px !important; background-color: #E8E8E8;">
+<div class="section-order booking-order px-4 pb-5" style="padding-top: 180px !important; background-color: #E8E8E8;">
     <div class="card shadow p-4 bg-white mb-5">
 
         {{!-- already sign in form --}}
@@ -83,18 +83,18 @@
             {{#each rooms}}
             <div class="mb-4" style="border: 1px solid #eee;"></div>
             <li>
-                <div class="order-item d-flex justify-content-between align-items-center">
+                <div class="order-item">
                     <h4 class="order-title">{{this.RoomType}}</h4>
                     <p class="order-amount">Number of rooms: <span>{{this.listRoom.length}}</span></p>
                 </div>
                 {{#each this.listRoom}}
-                <div class="order-item mb-3 d-flex justify-content-between align-items-center" style="margin-left: 24px;">
+                <div class="order-item order-item-room mb-3">
                     <div class="">
                         <h6 class="order-title">Room: <span style="font-size: 18px; color: #cb8670;">{{this.roomid}}</span> ({{this.people}} people)</h6>
                         <span class="order-date">{{this.checkin}} to {{this.checkout}}</span>
                     </div>
                     <div class="">
-                        <p class="order-price">Price: <span>{{this.amount}}$</span></p>
+                        <p class="order-price">Room price: <span>{{this.amount}}$</span></p>
                     </div>
                 </div>
                 {{/each}}
