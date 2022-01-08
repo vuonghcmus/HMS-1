@@ -145,6 +145,33 @@ module.exports = {
       }
     );
   },
+
+  resetPasswordCustomer: async (req, res) => {
+    const customer = await Customer.findById(req.params.id)
+    if(customer) {
+      const ID = customer.ID;
+      const newPassword = bcrypt.hashSync(ID, 10)
+      Customer.findByIdAndUpdate(
+        req.params.id,
+        {
+          $set: {
+            password: newPassword,
+          },
+        },
+        (err, account) => {
+          if (err) return next(err);
+          res.redirect("/account?page=1");
+        }
+      );
+    } else {
+      return res.render("account/edit-customer", {
+        error: "Không tìm thấy tài khoản",
+        customer: null,
+      });
+    }
+  },
+
+  
   deleteCustomer: (req, res) => {
     Customer.findByIdAndDelete(req.params.id, (err, account) => {
       if (err) return next(err);
