@@ -42,13 +42,14 @@ const DetailOrderRoomService = {
             roomID: roomID,
         });
     },
-    async updateServiceByRoomId(RoomID, orderServiceID) {
-        return await detailOrderRoomModel.updateOne({
-            roomID: RoomID,
-            status: 'using',
-        }, {
-            $push: { detailOrderService: orderServiceID }
-        });
+    async updateServiceByRoomId(dtorID, orderServiceID) {
+        console.log("FInd object")
+            // console.log(await detailOrderRoomModel.findOne({ _id: dtorID }));
+        return await detailOrderRoomModel.findOneAndUpdate({ _id: dtorID }, {
+            $push: {
+                detailOrderService: orderServiceID
+            }
+        })
 
     },
 

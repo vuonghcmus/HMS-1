@@ -21,6 +21,7 @@ class ServiceController {
             allBookedRooms = await DetailOrderRoom.findAllCurrentRooms(req.user._id);
             // console.log(req.user.ServiceCart);
             console.log(req.user.ServiceCart);
+
         }
 
         // console.log(allBookedRooms);
@@ -96,16 +97,19 @@ class ServiceController {
 
                 console.log(req.user.cart);
                 //return to services
-                res.redirect("/services");
+
             }
+            res.redirect("/services");
         }
     }
     async confirmCart(req, res, next) {
         if (req.user) {
             const orderAmounts = req.body.orderAmount;
             var ServiceCart = req.user.ServiceCart;
-            const roomID = req.body.roomID;
-            console.log(roomID);
+            const dtorID = req.body.dtorID;
+            var isSuccess = false;
+            var message = "";
+            console.log(dtorID);
             // console.log(req.body);
             console.log(ServiceCart);
 
@@ -123,15 +127,17 @@ class ServiceController {
                     const addBookedService = await DetailOrderService.addDetailOrderRoom(sc.idService, sc.priceService, sc.orderAmount, sc.orderDate, req.user._id);
                     console.log("Add:");
                     console.log(addBookedService);
-                    await DetailOrderRoom.updateServiceByRoomId(roomID, addBookedService._id);
+                    console.log(await DetailOrderRoom.updateServiceByRoomId(dtorID, addBookedService._id));
                 });
                 //clear cart and redirect to page
-                req.user.ServiceCart = null;
-                res.redirect("/account/profile");
+                req.user.ServiceCart = [];
+                isSuccess = true;
+                message = "Your order is received! Our staff will contact with you to confirm later!";
             } else {
                 console.log("Cart is empty");
-                res.redirect('/services');
+                message = "Error occur! Please refresh page and check your order again!";
             }
+            res.render('services/service-payment', { success: isSuccess, msg: message, isAuth: req.user });
 
 
 
@@ -174,6 +180,8 @@ class ServiceController {
 
         }
     }
+
+
 
 
 }

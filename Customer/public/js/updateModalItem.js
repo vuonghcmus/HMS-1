@@ -2,7 +2,10 @@
 const updateItem = (item, unitPrice, step) => {
     let price = item.getElementsByClassName('order-price')[0].innerText.slice(0, 2)
     let amount = item.getElementsByClassName('order-amount')[0].value
-    const newAmount = Number(amount) + step
+    var newAmount = Number(amount) + step
+    if (newAmount <= 1) {
+        newAmount = 1
+    }
     const newPrice = unitPrice * newAmount
         // item.getElementsByClassName('order-price')[0].innerText = newPrice + '$'
     item.getElementsByClassName('order-amount')[0].value = newAmount

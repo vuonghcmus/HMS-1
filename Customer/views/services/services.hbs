@@ -177,10 +177,10 @@
                    <h6>Choose room: </h6>
                </div>
                <div class="col-8 align-self-center">
-                   <select class="form-select" aria-label="Default select example" name="roomID">
+                   <select class="form-select" aria-label="Default select example" name="dtorID">
                     
                     {{#each allBookedRooms}}
-                    <option value="{{this.roomID}}">{{this.roomID}}</option>
+                    <option value="{{this._id}}">{{this.roomID}}</option>
                     {{/each}}
                     
                 </select>
@@ -202,7 +202,7 @@
                             </div>
                             <div class="order-amount-container col-4">
                                 <button class="btn btn-decrease">-</button>
-                                <input class="order-amount" style="width: 100%;" name="orderAmount" value="{{this.orderAmount}}">
+                                <input class="order-amount" style="width: 100%;" name="orderAmount" value="{{this.orderAmount}}" min="1">
                        
                        
                                 <button class="btn btn-increase">+</button>
