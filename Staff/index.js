@@ -16,6 +16,7 @@ const StaffRoute = require("./routes/staff.route");
 const CustomerRoute = require("./routes/customer.route");
 const RoomRoute = require("./routes/room.route");
 const ReceiptRoute = require("./routes/receipt.route");
+
 databaseService.connectDatabase();
 
 const app = express();
@@ -77,6 +78,7 @@ app.use((req, res, next) => {
     next();
   }
 });
+
 
 app.get("/", function (req, res) {
   res.render("home");

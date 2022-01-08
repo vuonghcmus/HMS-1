@@ -8,12 +8,31 @@ module.exports = {
     if (page < 1) {
       page = 1;
     }
+    var username = req.query.username
 
-    Customer.find() // find tất cả các data
+    if(username == ""){
+      res.redirect("/account?page="+page)
+    }
+    else{
+      if(!username){
+        username = ""
+      }
+
+      Customer.find({
+        "username": {
+          $regex: username,
+          $options: 'mi'
+        }
+      }) // find tất cả các data
       .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
       .limit(perPage)
       .exec((err, customers) => {
-        Customer.countDocuments((err, count) => {
+        Customer.countDocuments({
+          "username": {
+            $regex: username,
+            $options: 'mi'
+          }
+        },(err, count) => {
           // đếm để tính có bao nhiêu trang
           if (err) return next(err);
           let isCurrentPage;
@@ -36,9 +55,11 @@ module.exports = {
             isPreviousPage: page > 1,
             nextPage: +page + 1,
             previousPage: +page - 1,
+            username,
           });
         });
       });
+    }
   },
   addCustomer: async (req, res) => {
     // check if username is exist using await
