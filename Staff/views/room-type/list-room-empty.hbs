@@ -19,11 +19,11 @@
       <thead>
         <tr>
           <th>Tên phòng</th>
-          <th>Loại phòng</th>
-          <th>Khách hàng</th>
+          <th class="text-center">Loại phòng</th>
+          <th class="text-center">Khách hàng</th>
           <th class="text-center">Thời gian</th>
-          <th>Số người</th>
-          <th>Giá</th>
+          <th class="text-center">Số người</th>
+          <th class="text-center">Giá</th>
           <th class="text-center">Dịch vụ</th>
         </tr>
       </thead>
@@ -32,12 +32,12 @@
         {{#each info}}
           <tr>
             <td><h6>{{this.roomID}}</h6></td>            
-            <td>{{this.roomTypeName}}</td>
-            <td>Trống</td>        
-            <td>Trống</td>
-            <td>trống</td>
-            <td>{{this.roomPrice}}</td>  
-            <td>Trống</td>
+            <td class="text-center">{{this.roomTypeName}}</td>
+            <td class="text-center">Trống</td>        
+            <td class="text-center">Trống</td>
+            <td class="text-center">trống</td>
+            <td class="text-center">{{this.roomPrice}}</td>  
+            <td class="text-center">Trống</td>
           </tr>
         {{/each}}
       </tbody>

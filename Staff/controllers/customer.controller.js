@@ -80,7 +80,7 @@ const showCustomerUsing = async (req, res) => {
 };
 
 const showCustomerPending = async (req, res) => {
-  let perPage = 2; // số lượng sản phẩm xuất hiện trên 1 page
+  let perPage = 4; // số lượng sản phẩm xuất hiện trên 1 page
   let page = req.query.page || 1; // số page hiện tại
   if (page < 1) {
     page = 1;

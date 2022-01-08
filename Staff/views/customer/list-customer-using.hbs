@@ -25,7 +25,7 @@
           <th class="text-center">Loại phòng</th>
           <th class="text-center">Giá</th>
           <th class="text-center">Dịch vụ</th>
-          <th class="text-center">Tính tiền</th>
+          <th class="text-center">Thanh toán</th>
         </tr>
       </thead>
 
@@ -45,10 +45,10 @@
                 <p><b>checkout</b>: {{this.dateOfCheckOut}}</p>
               </div>
             </td>
-            <td>{{this.people}}</td>
-            <td>{{this.roomID}}</td>            
+            <td class="text-center">{{this.people}}</td>
+            <td class="text-center">{{this.roomID}}</td>            
             <td>{{this.roomTypeName}}</td>
-            <td>{{this.price}}</td>  
+            <td class="text-center">{{this.price}}</td>  
             <td class="list-order-service{{@index}}"></td>
             <td class="text-center">
               <a href="/receipt/{{this._id}}">

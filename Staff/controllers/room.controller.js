@@ -53,13 +53,13 @@ const showListRoomUsing = async (req, res) => {
               const _orderService = await DetailOrderService.find({
                 _id: { $in: detailOrderRoom[i].detailOrderService },
               });
-
-              const _service = await Service.findById(
-                _orderService[0].serviceID
-              );
-
-              _orderService[0].serviceName = _service.name;
-              _orderService[0].serviceImage = _service.image;
+              for (let j = 0; j < _orderService.length; j++) {
+                const service = await Service.findById(
+                  _orderService[j].serviceID
+                );
+                _orderService[j].serviceName = service.name;
+                _orderService[j].serviceImage = service.image;
+              }
               listOrderServices.push(_orderService);
             } else {
               listOrderServices.push([]);

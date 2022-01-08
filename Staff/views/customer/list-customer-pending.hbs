@@ -21,8 +21,8 @@
           <th>Khách hàng</th>
           <th class="text-center">Thời gian</th>
           <th class="text-center">Số người</th>
-          <th>Tên phòng</th>
-          <th>Loại phòng</th>
+          <th class="text-center">Tên phòng</th>
+          <th class="text-center">Loại phòng</th>
           <th>Điều chỉnh</th>
         </tr>
       </thead>
@@ -44,12 +44,12 @@
               </div>
             </td>
             <td class="text-center">{{this.people}}</td>
-            <td>{{this.roomID}}</td>            
-            <td>{{this.roomTypeName}}</td>
+            <td class="text-center">{{this.roomID}}</td>            
+            <td class="text-center">{{this.roomTypeName}}</td>
             <td>
               <input type="hidden" id="id-{{@index}}" value="{{this._id}}">
               <div class="row">
-                <div class="col-4 text-center">
+                <div class="col-6 text-center">
                   <a href="" id="accept-order-{{@index}}">
                     <i
                         class="fas fa-check"
@@ -59,12 +59,12 @@
                   </a>
                 </div>
 
-                <div class="col-4 text-center">
+                <div class="col-6 text-center">
                   <a href="" id="reject-order-{{@index}}">
                     <i
-                      class="fas fa-trash"
+                      class="fas fa-ban"
                       style="color: red"
-                      title="Hủy"
+                      title="Từ chối"
                     ></i>
                   </a>
                 </div>
