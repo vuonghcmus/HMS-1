@@ -25,6 +25,9 @@ router.get("/block-customer/:id", AccountController.blockCustomer);
 // unblock customer
 router.get("/unblock-customer/:id", AccountController.unblockCustomer);
 
+// reset-password customer
+router.get("/reset-password-customer/:id", AccountController.resetPasswordCustomer);
+
 // delete customer
 router.get("/delete-customer/:id", AccountController.deleteCustomer);
 
