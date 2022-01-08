@@ -49,27 +49,33 @@
 <div class="modal" id="confirm-order-modal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Your Orders</h5>
-                <button type="button" class="fa fa-close btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                {{!-- confirm order form --}}
-                <form id="confirm-order-form" class="row g-3 px-2 confirm-order-form" action="/services/confirm" method="POST" style="min-height: 100px;" >
-                {{!-- <div class="row" style="padding: 16px;"> --}}
-                    <div class="col-4 align-self-center">
-                        <h6>Choose room: </h6>
-                    </div>
-                    <div class="col-8 align-self-center">
-                        <select class="form-select w-100" aria-label="Default select example" name="roomID">
-                        
-                        {{#each allBookedRooms}}
-                        <option value="{{this.roomID}}">{{this.roomID}}</option>
-                        {{/each}}
-                        
-                    </select>
-                    </div>
-                {{!-- </div> --}}
+        <div class="modal-header">
+            <h5 class="modal-title">Your Orders</h5>
+            <button type="button" class="fa fa-close btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+           
+            
+            {{!-- confirm order form --}}
+            <form id="confirm-order-form" class="row g-3 px-2 confirm-order-form" action="/services/confirm" method="POST" style="min-height: 100px;" >
+            {{!-- <div class="row" style="padding: 16px;"> --}}
+               <div class="col-4 align-self-center">
+                   <h6>Choose room: </h6>
+               </div>
+               <div class="col-8 align-self-center">
+                   <select class="form-select w-100" aria-label="Default select example" name="dtorID">
+                    
+                    {{#each allBookedRooms}}
+                    <option value="{{this._id}}">{{this.roomID}}</option>
+                    {{/each}}
+                    
+                </select>
+               </div>
+                
+                
+            
+           {{!-- </div> --}}
+                    
                     <ul class="order-list" style="width: 100%;">
                         {{#each cart}}
                         <li class="order-item col-12 mt-3 d-flex justify-content-between align-items-center">
@@ -82,9 +88,7 @@
                             </div>
                             <div class="order-amount-container col-4">
                                 <button class="btn btn-decrease">-</button>
-                                <input class="order-amount text-center" style="width: 100%; border: none;" name="orderAmount" value="{{this.orderAmount}}">
-                        
-                        
+                                <input class="order-amount text-center" style="width: 100%; border: none;" name="orderAmount" value="{{this.orderAmount}}" min="1">
                                 <button class="btn btn-increase">+</button>
                             </div>
                         </li>
