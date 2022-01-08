@@ -64,19 +64,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "/public")));
 
-// require("./middlewares/session")(app);
-// require("./middlewares/passport")(app);
-// app.use(require("./middlewares/locals"));
+require("./middlewares/session")(app);
+require("./middlewares/passport")(app);
+app.use(require("./middlewares/locals"));
 
-// app.use("/admin", require("./routes/admin.route"));
+app.use("/admin", require("./routes/admin.route"));
 
-// app.use((req, res, next) => {
-//   if (!req.user) {
-//     res.redirect("/admin/login");
-//   } else {
-//     next();
-//   }
-// });
+app.use((req, res, next) => {
+  if (!req.user) {
+    res.redirect("/admin/login");
+  } else {
+    next();
+  }
+});
 
 app.get("/", function (req, res) {
   res.render("home");
@@ -89,17 +89,18 @@ app.use("/room-type", RoomTypeRoute);
 app.use("/revenue", Revenue);
 
 app.get("/test", (req, res) => {
-  const data = [
-    {
-      name: "Nguyen Van A",
-      info: [1, 2, 3],
-    },
-    {
-      name: "Nguyen Van B",
-      info: [4, 5, 6],
-    },
-  ];
-  res.render("test", { data });
+  // const data = [
+  //   {
+  //     name: "Nguyen Van A",
+  //     info: [1, 2, 3],
+  //   },
+  //   {
+  //     name: "Nguyen Van B",
+  //     info: [4, 5, 6],
+  //   },
+  // ];
+  // res.render("test", { data });
+  res.render("test", { layout: false });
 });
 
 app.use((req, res) => {

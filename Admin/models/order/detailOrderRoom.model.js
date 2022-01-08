@@ -7,7 +7,7 @@ const DetailOrderRoomSchema = new Schema(
     roomTypeID: { type: Schema.Types.ObjectId },
     dateOfCheckIn: { type: Schema.Types.Date },
     dateOfCheckOut: { type: Schema.Types.Date },
-    status: { type: Schema.Types.Boolean },
+    status: { type: Schema.Types.String },
     detailOrderService: [{ type: Schema.Types.ObjectId }],
     price: { type: Schema.Types.Number },
   },
