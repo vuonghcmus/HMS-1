@@ -1,68 +1,77 @@
-<div class="section-order p-4 mb-5" style="margin-top: 140px;">
-    <h2 class="mb-3">Your information</h2>
-    <form id="input-information-form" method="POST" action="" class="row g-3 px-2 input-information-form needs-validation" novalidate>
-        <div class="col-12 col-md-6 col-lg-5 mb-4">
-            <label for="fullname">Full name:</label>
-            <input disabled style="background-color: #fff;" type="text" class="form-control" name="fullname" id="fullname" value="{{user.fullname}}" required>
-        </div>
+<div class="section-order profile px-4 pb-5" style="padding-top: 180px !important; background-color: #E8E8E8;">
+    <div class="card shadow p-4 bg-white mb-5">
+        <h2 class="mb-3">Your information</h2>
+        <form id="input-information-form" method="POST" action="" class="row g-3 px-2 input-information-form needs-validation" novalidate>
+            <div class="col-12 col-md-6 col-lg-5 mb-4">
+                <label for="fullname">Full name:</label>
+                <input disabled style="background-color: #fff;" type="text" class="form-control" name="fullname" id="fullname" value="{{user.fullname}}" required>
+            </div>
 
-        <div class="col-12 col-md-6 col-lg-5 mb-4">
-            <label for="fullname">Phone number:</label>
-            <input disabled style="background-color: #fff;" type="number" class="form-control" name="phone" id="phone" value="{{user.phone}}" required>
-        </div>
+            <div class="col-12 col-md-6 col-lg-5 mb-4">
+                <label for="fullname">Phone number:</label>
+                <input disabled style="background-color: #fff;" type="number" class="form-control" name="phone" id="phone" value="{{user.phone}}" required>
+            </div>
 
-        <div class="col-12 col-md-6 col-lg-5 mb-4">
-            <label for="fullname">Your ID:</label>
-            <input disabled style="background-color: #fff;" type="number" class="form-control" name="identity" id="identity" value="{{user.ID}}" required>
-        </div>
-        {{!-- <div class="confirm-container col-12 mt-3">
-            <button form="input-information-form" class="btn palatin-btn" style="float: right;" type="submit">Confirm</button>
-        </div> --}}
-    </form>
-    <h2 class="mt-5 order-booking-container">Your Booking</h2>
-    <ul class="order-list px-3" style="width: 100%;">
-        {{#each orders}}
-        <div class="mb-4" style="border: 1px solid #eee;"></div>
-        <li>
-            <div class="order-item d-flex justify-content-between align-items-center">
-                <h4 class="order-title">{{this.roomType}}</h4>
+            <div class="col-12 col-md-6 col-lg-5 mb-4">
+                <label for="fullname">Your ID:</label>
+                <input disabled style="background-color: #fff;" type="number" class="form-control" name="identity" id="identity" value="{{user.ID}}" required>
             </div>
-            <div class="order-item mb-3 d-flex justify-content-between align-items-center">
-                <div class="">
-                    <h6 class="order-title">Room: <span style="font-size: 18px; color: #cb8670;">{{this.roomID}}</span> ({{this.people}} people)</h6>
-                    <span class="order-date">{{this.checkin}} to {{this.checkout}}</span>
+        </form>
+    </div>
+
+    <div class="card shadow p-4 bg-white">
+        <h2 class="order-booking-container mb-0">Your Booking</h2>
+        <ul class="order-list" style="width: 100%;">
+            {{#each orders}}
+            <div class="my-4" style="border: 1px solid #eee;"></div>
+            <li>
+                <div class="order-item order-item-room">
+                    <h5 class="order-title">{{this.roomType}}</h5>
                 </div>
-                <div class="">
-                    <p class="order-price">Price: <span>{{this.price}}$</span></p>
-                    <p class="order-price">Status: <span>{{this.status}}</span></p>
+                <div class="order-item order-item-room-info" style="margin-top: -8px;">
+                    <div class="">
+                        <h6 class="order-title">Room: <span style="font-size: 20px; color: #cb8670;">{{this.roomID}}</span> ({{this.people}} people)</h6>
+                        <span class="order-date">
+                            <span style="font-size: 15px; font-weight: 600;"> {{this.checkin}} </span>
+                            to
+                            <span style="font-size: 15px; font-weight: 600;">{{this.checkout}}</span>
+                        </span>
+                    </div>
+                    <div class="">
+                        <p class="order-price">Status: <span>{{this.status}}</span></p>
+                        <p class="order-price">Price: <span>{{this.price}}$</span></p>
+                    </div>
                 </div>
-            </div>
-        </li>
-        {{/each}}
-    </ul>
-    <ul class="order-list px-3" style="width: 100%;">
-        <div class="mb-4" style="border: 1px solid #eee;"></div>
-        <li>
-            {{#each services}}
-             <div class="order-item d-flex justify-content-between align-items-center">
-                <h4 class="order-title">{{this.ServiceName}}</h4>
-            </div>
-            <div class="order-item mb-3 d-flex justify-content-between align-items-center">
-                <div class="">
-                    <p class="order-price">Amount: x<span>{{this.number}}</span></p>
-                    <span class="order-date">Order date: {{this.orderDate}}</span>
+                {{#ifCond this.services.length '>' 0}}
+                <div class="order-item">
+                    <a class="order-title order-title-service mb-1 btn btn-info" data-toggle="collapse" href="#collapse-{{this.roomID}}" role="button" aria-expanded="false" aria-controls="collapse-{{this.roomID}}">Services</a>
                 </div>
-                <div class="">
-                    <p class="order-price">Price: <span>{{this.price}}$</span></p>
-                    
-                </div>
-            </div>
+                <ul class="service-list collapse" id="collapse-{{this.roomID}}">
+                        {{#each this.services}}
+                        <li>
+                            <div class="order-item mb-1">
+                                <div>
+                                    <h6 class="order-title mb-0">
+                                        {{this.ServiceName}}
+                                        <span class="order-price"> x <span>{{this.number}}</span></span>
+                                    </h6>
+                                    <span class="order-date">Order date: {{this.orderDate}}</span>
+                                </div>
+                                <div class="">
+                                    <p class="order-price">Price: <span>{{this.totalPrice}}$</span></p>
+                                </div>
+                            </div>
+                        </li>
+                        {{/each}}
+                    </ul>
+                {{/ifCond}}
+            </li>
             {{/each}}
-        </li>
-    </ul>
-    <div class="mb-4" style="border: 1px solid #eee;"></div>
-    <div class="mb-4">
-       <p class="order-price" style="font-size: 26px;">Total: <span style="font-weight: 600;">{{total}}$</span></p>
+        </ul>
+        <div class="my-4" style="border: 1px solid #eee;"></div>
+        <div class="clearfix">
+            <p class="order-price" style="font-size: 28px; float: right;">Total: <span style="font-weight: 600; font-size: 32px;">{{total}}$</span></p>
+        </div>
     </div>
 </div>
 

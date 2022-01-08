@@ -653,8 +653,17 @@ img {
             }
             .menu-btn {
                 margin-left: 100px;
+
+                .user-icon {
+                    color: white;
+                    background-color: inherit;
+                }
+
                 @media #{$breakpoint-lg} {
                     margin-left: 30px;
+                    .user-icon {
+                        background-color: transparent;
+                    }
                 }
                 @media #{$breakpoint-md} {
                     margin-left: 30px;
@@ -662,13 +671,24 @@ img {
                     border-radius: 15px;
                     margin-top: 30px;
                     display: inline-block;
+                    .user-icon {
+                        background-color: transparent;
+                    }
                 }
                 @media #{$breakpoint-xs} {
-                    margin-left: 30px;
-                    border: 2px solid $white-color;
-                    border-radius: 15px;
-                    margin-top: 30px;
+                    margin-left: 0;
+                    width: 100%;
+                    border-bottom: 1px solid $white-color;
                     display: inline-block;
+
+                    .user-icon {
+                        text-align: left;
+                        width: 100%;
+                    }
+                    .sign-in-btn {
+                        padding-left: 10px !important;
+                        text-align: left !important;
+                    }
                 }
                 a {
                     color: $white-color;
@@ -1133,6 +1153,7 @@ img {
         width: calc(100% - 40px);
         border: 2px solid $pri-color;
         text-align: center;
+        overflow-y: hidden;
         @include trans-duration(500ms);
         .line {
             width: 90px;
@@ -1150,6 +1171,12 @@ img {
         p {
             color: $white-color;
             margin-bottom: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /* number of lines to show */
+            line-clamp: 3; 
+            -webkit-box-orient: vertical;
         }
     }
     .book-room-btn {
@@ -2025,7 +2052,8 @@ img {
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-#sign-in-form {
+#sign-in-form,
+#forgot-password-form {
     button {
         width: 100%;
         background-color: $pri-color;
@@ -2152,12 +2180,15 @@ img {
         .order-total-amount span {
             color: $pri-color;
         }
+
         @media #{$breakpoint-xs} {
             flex-direction: column;
             justify-content: center;
             .btn-container {
                 display: flex;
+                flex-direction: column;
                 width: 100%;
+
                 .btn {
                     flex: 1;
                 }

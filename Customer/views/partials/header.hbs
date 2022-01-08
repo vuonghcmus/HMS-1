@@ -51,8 +51,8 @@
                             <!-- Button -->
                             <div class="menu-btn">
                                 {{#if isAuth}}
-                                    <div class="dropdown {{#if active.account}} active {{/if}}">
-                                        <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent;">
+                                    <div class="dropdown {{#if active.account}}active{{/if}}">
+                                        <button class="btn dropdown-toggle user-icon" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fa fa-user" style="font-size: 24px;"></i>
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -62,7 +62,7 @@
                                         </div>
                                     </div>
                                 {{else}}
-                                    <a href="/account/sign-in" class="btn custom-palatin-btn">Sign in</a>
+                                    <a href="/account/sign-in" class="btn custom-palatin-btn sign-in-btn">Sign in</a>
                                 {{/if}}
                             </div>
                         </div>

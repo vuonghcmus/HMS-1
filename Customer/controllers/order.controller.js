@@ -14,9 +14,9 @@ class ServiceController {
 
             let message = ''
             if(req.query.user === 'exists') {
-                
-                message = req.user ? 'See the orders in your profile' : 'Please login with your current account password'
-               
+                message = req.user ?
+                    'See the orders in your profile' :
+                    'Please check in at the hotel to activate your account (login with your current account password)'
             } else {
                 message = 'Please check in at the hotel to activate your account (default password is your ID number)'
             }
@@ -85,7 +85,5 @@ class ServiceController {
         url += userIsExists ? '&&user=exists' : ''
         res.redirect(url)
     }
-
-
 }
 module.exports = new ServiceController;

@@ -58,41 +58,35 @@ module.exports = {
 
     profile: async(req, res, next) => {
 
+        // find all orders of current customer with status using 
         const orders = await detailOrderRoomModel.find({ customerID: req.user._id, status: "using" })
-        var services = [];
         var total = 0;
 
         for (let order of orders) {
+            order.totalPrice = order.price
             var detailOrderService = [];
             for (let detailServiceID of order.detailOrderService) {
                 var serviceDetail = await detailOrderServiceModel.findById(detailServiceID).lean();
                 const serviceType = await serviceModel.findById(serviceDetail.serviceID);
-                // const service = await serviceModel.findById(serviceDetail.serviceID).lean()
-                // serviceDetail.service = service
-                detailOrderService.push(serviceDetail);
+                serviceDetail.orderDate = convertDate(new Date(serviceDetail.orderDate))
                 serviceDetail.ServiceName = serviceType.name;
-                services.push(serviceDetail);
-                total += serviceDetail.price * serviceDetail.number;
-
+                detailOrderService.push(serviceDetail);
+                serviceDetail.totalPrice = serviceDetail.price * serviceDetail.number;
+                order.totalPrice += serviceDetail.totalPrice
+                total += serviceDetail.totalPrice
             }
-            order.detailOrderService = detailOrderService;
+            order.services = detailOrderService;
             order.checkin = convertDate(new Date(order.dateOfCheckIn));
             order.checkout = convertDate(new Date(order.dateOfCheckOut));
             const roomType = await roomTypeModel.findById(order.roomTypeID);
             order.roomType = roomType ? roomType.name : `Room isn't available`;
             total += order.price;
-
         }
-        console.log(orders);
-        console.log(services);
-        console.log(total);
-
 
         res.render('account/profile', {
             isAuth: req.user,
             user: req.user,
             orders: orders,
-            services: services,
             total: total,
             active: { account: true, profile: true }
         });
@@ -136,5 +130,16 @@ module.exports = {
         req.session.destroy(function(err) {
             res.redirect("/");
         });
-    }
+    },
+
+
+    getForgotPassword: (req, res, next) => {
+        res.render('account/forgot-password', {
+            layout: 'main_no_head'
+        })
+    },
+
+    postForgotPassword: (req, res, next) => {
+        res.render('account/forgot-password')
+    },
 }

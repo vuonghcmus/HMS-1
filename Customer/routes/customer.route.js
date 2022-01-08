@@ -8,6 +8,8 @@ const router = express.Router();
 
 router.get("/sign-in", customerController.show);
 router.post("/sign-in", customerController.login);
+router.get("/forgot-password", customerController.getForgotPassword);
+router.post("/forgot-password", customerController.postForgotPassword);
 router.get("/logout", customerController.logout);
 router.get("/profile",auth, customerController.profile);
 router.get("/change-password",auth, customerController.getChangePassword);

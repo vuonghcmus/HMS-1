@@ -127,3 +127,166 @@
         }
     }
 }
+
+
+.detail-service-btn {
+    @media #{$breakpoint-xs} {
+        width: 90%;
+    }
+}
+
+.custom-service-item {
+    .image-container {
+        @media #{$breakpoint-xl} {
+            text-align: left;
+            img {
+                max-height: 180px;
+            }
+        }
+        @media #{$breakpoint-lg} {
+            text-align: left;
+            img {
+                max-height: 180px;
+            }
+        }
+
+        text-align: center;
+    }
+
+    .info-container {
+        .order-amount-container {
+            font-size: 20px;       
+        }
+
+        @media #{$breakpoint-md} {        
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .text-container {
+                text-align: center;
+            }
+            .order-amount-container {
+                font-size: 24px;
+                .order-service-button {
+                    padding: 6px 12px;
+                    margin: 0 4px;
+                }
+                input {
+                    font-size: 24px !important;
+                }
+            }
+        }
+
+        @media #{$breakpoint-xs} {        
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .text-container {
+                text-align: center;
+            }
+
+            .order-amount-container {
+                font-size: 24px;
+                .order-service-button {
+                    padding: 6px 12px;
+                    margin: 0 4px;
+                }
+                input {
+                    font-size: 24px !important;
+                }
+            }
+        }
+        
+    }
+}
+
+.total-service-amount-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @media #{$breakpoint-xs} {
+        flex-direction: column;
+        .btn {
+            margin-top: 8px;
+           width: 100%;
+        }
+    }
+
+    .total-amount {
+        font-size: 24px;
+        span {
+            color: $pri-color;
+        }
+    }
+
+    .btn {
+        min-width: 200px;
+    }
+}
+
+.section-order.booking-order {
+    .order-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .order-item-room {
+        margin-left: 24px;
+    }
+
+    @media #{$breakpoint-xs} {
+        .order-item {
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .order-item-room {
+            margin-left: 0;
+        }
+
+        .order-title {
+            margin-bottom: 0;
+        }
+     }
+
+}
+
+.section-order.profile {
+    .order-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .order-title-service {
+        min-width: 174px;
+        background-color: $pri-color !important;
+        border: 1px solid $pri-color !important;
+    }
+
+    
+    @media #{$breakpoint-xs} {
+        .order-item.order-item-room {
+            flex-direction: column;
+            justify-content: center;
+        }
+        .order-item-room-info {
+            .order-title {
+                margin-bottom: 16px !important;
+            }
+        }
+
+        .order-title-service {
+            text-align: center;
+            width: 100%;
+
+        }
+        
+        .service-list {
+            margin-top: 12px !important;
+        }
+    }
+}
+
+

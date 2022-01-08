@@ -107,6 +107,147 @@
   padding: 0 8px;
 }
 
+@media only screen and (max-width:767px) {
+  .detail-service-btn {
+    width: 90%;
+  }
+}
+
+.custom-service-item .image-container {
+  text-align: center;
+}
+@media only screen and (min-width:1200px) {
+  .custom-service-item .image-container {
+    text-align: left;
+  }
+  .custom-service-item .image-container img {
+    max-height: 180px;
+  }
+}
+@media only screen and (min-width:992px) and (max-width:1199px) {
+  .custom-service-item .image-container {
+    text-align: left;
+  }
+  .custom-service-item .image-container img {
+    max-height: 180px;
+  }
+}
+.custom-service-item .info-container .order-amount-container {
+  font-size: 20px;
+}
+@media only screen and (min-width:768px) and (max-width:991px) {
+  .custom-service-item .info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .custom-service-item .info-container .text-container {
+    text-align: center;
+  }
+  .custom-service-item .info-container .order-amount-container {
+    font-size: 24px;
+  }
+  .custom-service-item .info-container .order-amount-container .order-service-button {
+    padding: 6px 12px;
+    margin: 0 4px;
+  }
+  .custom-service-item .info-container .order-amount-container input {
+    font-size: 24px !important;
+  }
+}
+@media only screen and (max-width:767px) {
+  .custom-service-item .info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .custom-service-item .info-container .text-container {
+    text-align: center;
+  }
+  .custom-service-item .info-container .order-amount-container {
+    font-size: 24px;
+  }
+  .custom-service-item .info-container .order-amount-container .order-service-button {
+    padding: 6px 12px;
+    margin: 0 4px;
+  }
+  .custom-service-item .info-container .order-amount-container input {
+    font-size: 24px !important;
+  }
+}
+
+.total-service-amount-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@media only screen and (max-width:767px) {
+  .total-service-amount-container {
+    flex-direction: column;
+  }
+  .total-service-amount-container .btn {
+    margin-top: 8px;
+    width: 100%;
+  }
+}
+.total-service-amount-container .total-amount {
+  font-size: 24px;
+}
+.total-service-amount-container .total-amount span {
+  color: #cb8670;
+}
+.total-service-amount-container .btn {
+  min-width: 200px;
+}
+
+.section-order.booking-order .order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.section-order.booking-order .order-item-room {
+  margin-left: 24px;
+}
+@media only screen and (max-width:767px) {
+  .section-order.booking-order .order-item {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .section-order.booking-order .order-item-room {
+    margin-left: 0;
+  }
+  .section-order.booking-order .order-title {
+    margin-bottom: 0;
+  }
+}
+
+.section-order.profile .order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.section-order.profile .order-title-service {
+  min-width: 174px;
+  background-color: #cb8670 !important;
+  border: 1px solid #cb8670 !important;
+}
+@media only screen and (max-width:767px) {
+  .section-order.profile .order-item.order-item-room {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .section-order.profile .order-item-room-info .order-title {
+    margin-bottom: 16px !important;
+  }
+  .section-order.profile .order-title-service {
+    text-align: center;
+    width: 100%;
+  }
+  .section-order.profile .service-list {
+    margin-top: 12px !important;
+  }
+}
+
 /* [Master Stylesheet - v1.0] */
 .booking-table td .active {
   background-color: #cb8670;
@@ -740,9 +881,16 @@ img {
 .header-area .palatin-main-menu .classy-navbar .menu-btn {
   margin-left: 100px;
 }
+.header-area .palatin-main-menu .classy-navbar .menu-btn .user-icon {
+  color: white;
+  background-color: inherit;
+}
 @media only screen and (min-width:992px) and (max-width:1199px) {
   .header-area .palatin-main-menu .classy-navbar .menu-btn {
     margin-left: 30px;
+  }
+  .header-area .palatin-main-menu .classy-navbar .menu-btn .user-icon {
+    background-color: transparent;
   }
 }
 @media only screen and (min-width:768px) and (max-width:991px) {
@@ -753,14 +901,24 @@ img {
     margin-top: 30px;
     display: inline-block;
   }
+  .header-area .palatin-main-menu .classy-navbar .menu-btn .user-icon {
+    background-color: transparent;
+  }
 }
 @media only screen and (max-width:767px) {
   .header-area .palatin-main-menu .classy-navbar .menu-btn {
-    margin-left: 30px;
-    border: 2px solid #ffffff;
-    border-radius: 15px;
-    margin-top: 30px;
+    margin-left: 0;
+    width: 100%;
+    border-bottom: 1px solid #ffffff;
     display: inline-block;
+  }
+  .header-area .palatin-main-menu .classy-navbar .menu-btn .user-icon {
+    text-align: left;
+    width: 100%;
+  }
+  .header-area .palatin-main-menu .classy-navbar .menu-btn .sign-in-btn {
+    padding-left: 10px !important;
+    text-align: left !important;
   }
 }
 .header-area .palatin-main-menu .classy-navbar .menu-btn a {
@@ -1301,6 +1459,7 @@ img {
   width: calc(100% - 40px);
   border: 2px solid #cb8670;
   text-align: center;
+  overflow-y: hidden;
   -webkit-transition-duration: 500ms;
   transition-duration: 500ms;
 }
@@ -1322,6 +1481,13 @@ img {
 .single-rooms-area .rooms-text p {
   color: #ffffff;
   margin-bottom: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  /* number of lines to show */
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 .single-rooms-area .book-room-btn {
   position: absolute;
@@ -2228,7 +2394,8 @@ img {
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-#sign-in-form button {
+#sign-in-form button,
+#forgot-password-form button {
   width: 100%;
   background-color: #cb8670;
   border-radius: 20px;
@@ -2236,7 +2403,8 @@ img {
   color: #ffffff;
   margin-bottom: 16px;
 }
-#sign-in-form .form-control {
+#sign-in-form .form-control,
+#forgot-password-form .form-control {
   border-radius: 20px;
   background-color: #363636;
   border: 1px solid #cb8670;
@@ -2245,7 +2413,8 @@ img {
   outline: none;
   text-align: center;
 }
-#sign-in-form .form-control:focus {
+#sign-in-form .form-control:focus,
+#forgot-password-form .form-control:focus {
   outline: none;
 }
 
@@ -2359,6 +2528,7 @@ img {
   }
   .section-order .order-total-amount-container .btn-container {
     display: flex;
+    flex-direction: column;
     width: 100%;
   }
   .section-order .order-total-amount-container .btn-container .btn {
