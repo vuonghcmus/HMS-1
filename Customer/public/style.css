@@ -248,6 +248,14 @@
   }
 }
 
+.iti.iti--allow-dropdown {
+  width: 100%;
+}
+
+.iti__country-list {
+  min-width: 312px;
+}
+
 /* [Master Stylesheet - v1.0] */
 .booking-table td .active {
   background-color: #cb8670;
