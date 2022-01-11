@@ -5,56 +5,59 @@ const DetailOrderService = require("../models/order/detailOrderService.model");
 const RoomType = require("../models/room/roomType.model");
 
 const showCustomer = async (req, res) => {
-  const status = req.query.status
+  const status = req.query.status;
   let perPage = 2; // số lượng sản phẩm xuất hiện trên 1 page
   let page = req.query.page || 1; // số page hiện tại
   if (page < 1) {
     page = 1;
   }
 
-  var  name = req.query.name
+  var name = req.query.name;
 
   if (name == "") {
-    res.redirect("/customer?status=" + status + "&page=" + page)
+    res.redirect("/customer?status=" + status + "&page=" + page);
   } else {
     if (!name) {
-      name = ""
+      name = "";
     }
     const customer = await Customer.find({
-      "fullname": {
+      fullname: {
         $regex: name,
-        $options: 'mi'
-      }
-    })
-    var customerIdList = []
+        $options: "mi",
+      },
+    });
+    var customerIdList = [];
     for (var i = 0; i < customer.length; i++) {
-      customerIdList.push(customer[i]._id)
+      customerIdList.push(customer[i]._id);
     }
 
     DetailOrderRoom.find({
-        $and: [{
-            customerID: {
-              $in: customerIdList
-            }
+      $and: [
+        {
+          customerID: {
+            $in: customerIdList,
           },
-          {
-            status: status
-          }
-        ]
-      })
+        },
+        {
+          status: status,
+        },
+      ],
+    })
       .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
       .limit(perPage)
       .exec((err, detailOrderRoom) => {
-        DetailOrderRoom.countDocuments({
-            $and: [{
+        DetailOrderRoom.countDocuments(
+          {
+            $and: [
+              {
                 customerID: {
-                  $in: customerIdList
-                }
+                  $in: customerIdList,
+                },
               },
               {
-                status: status
-              }
-            ]
+                status: status,
+              },
+            ],
           },
           async (err, count) => {
             // đếm để tính có bao nhiêu trang
@@ -89,7 +92,7 @@ const showCustomer = async (req, res) => {
               if (detailOrderRoom[i].detailOrderService.length > 0) {
                 const _orderService = await DetailOrderService.find({
                   _id: {
-                    $in: detailOrderRoom[i].detailOrderService
+                    $in: detailOrderRoom[i].detailOrderService,
                   },
                 });
 
@@ -112,9 +115,9 @@ const showCustomer = async (req, res) => {
                 isPreviousPage: page > 1,
                 nextPage: +page + 1,
                 previousPage: +page - 1,
-                // orderServices: listOrderServices,
-                // length: listOrderServices.length,
-                name: name
+                orderServices: listOrderServices,
+                length: listOrderServices.length,
+                name: name,
               });
             } else {
               res.render("customer/list-customer-using", {
@@ -126,16 +129,14 @@ const showCustomer = async (req, res) => {
                 previousPage: +page - 1,
                 orderServices: listOrderServices,
                 length: listOrderServices.length,
-                name: name
+                name: name,
               });
             }
-
           }
         );
       });
   }
 };
-
 
 module.exports = {
   showAllCustomer: async (req, res) => {

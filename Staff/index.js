@@ -3,6 +3,8 @@ const exphbs = require("express-handlebars");
 const path = require("path");
 const bodyParser = require("body-parser");
 const Handlebars = require("handlebars");
+const socket = require("socket.io");
+const cors = require("cors");
 const {
   allowInsecurePrototypeAccess,
 } = require("@handlebars/allow-prototype-access");
@@ -62,6 +64,7 @@ app.set("view engine", "hbs");
 // body-parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
 app.use(express.static(path.join(__dirname, "/public")));
 
@@ -78,7 +81,6 @@ app.use((req, res, next) => {
     next();
   }
 });
-
 
 app.get("/", function (req, res) {
   res.render("home");
@@ -109,6 +111,24 @@ app.use((err, req, res, next) => {
   res.status(500).render("errors/500", { layout: false, error: err.message });
 });
 
+// const server = app.listen(process.env.PORT || 3000, () => {
+//   console.log(`App listening on port ${process.env.PORT || 3000}`);
+// });
+
+// const io = socket(server);
+// io.on("connection", function (socket) {
+//   console.log("Made socket connection");
+
+//   socket.on("disconnect", function () {
+//     console.log("Made socket disconnected");
+//   });
+
+//   socket.on("send-notification", function (data) {
+//     // io.emit("new-notification", data);
+//     socket.broadcast.emit("new-notification", data);
+//   });
+// });
+
 app.listen(process.env.PORT || 3000, () => {
-  console.log("App listening on port 3000");
+  console.log(`App listening on port ${process.env.PORT || 3000}`);
 });

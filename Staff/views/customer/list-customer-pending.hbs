@@ -136,6 +136,7 @@
 			});
 
 			$('#reject-order-' + i).on("click", function(e) {
+        console.log('reject-order-' + i);
 				// confirm before reject order room
 				if (confirm('Bạn có chắc chắn muốn hủy đơn đặt phòng này?')) {
 					e.preventDefault();
