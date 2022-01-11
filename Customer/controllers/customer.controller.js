@@ -163,7 +163,7 @@ module.exports = {
     if (!user) {
       return res.render("account/forgot-password", {
         layout: "main_no_head",
-        error: "Phone number is not exist",
+        error: "Phone number does not exist!",
       });
     } else if (req.body.phone) {
       client.verify
@@ -175,7 +175,7 @@ module.exports = {
         .then((data) => {
           res.render("account/verification", {
             layout: "main_no_head",
-            message: "Verification is sent!!",
+            message: "Verification has been sent!!",
             phone: req.body.phone,
             origin: req.body.origin_phone,
           });
@@ -208,13 +208,13 @@ module.exports = {
             );
 
             res.render("account/sign-in", {
-              message: "Your password is reseted!!",
+              message: "Your password has been reset!",
               layout: "main_no_head",
             });
           } else {
             res.render("account/verification", {
               layout: "main_no_head",
-              error: "Wrong phone number or code :(",
+              error: "Invalid phone number or code",
               phone: req.body.phone,
               origin: req.body.origin_phone,
             });
@@ -223,7 +223,7 @@ module.exports = {
     } else {
       res.render("account/verification", {
         layout: "main_no_head",
-        error: "Wrong phone number or length of code other than 6 digits :(",
+        error: "Invalid phone number or length of code must be exactly 6 digits",
         phone: req.body.phone,
         origin: req.body.origin_phone,
       });

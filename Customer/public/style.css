@@ -256,6 +256,17 @@
   min-width: 312px;
 }
 
+.not-found-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.not-found-container .btn {
+  min-width: 200px;
+}
+
 /* [Master Stylesheet - v1.0] */
 .booking-table td .active {
   background-color: #cb8670;
