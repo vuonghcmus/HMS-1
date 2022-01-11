@@ -311,3 +311,30 @@
         min-width: 200px;
     }
 }
+
+.search-booked-room-item.service-item {
+    .search-price-container {
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border-left: 1px solid rgba(0, 0, 0, .125);
+        .price-text {
+            font-size: 32px;
+            color: $pri-color;
+            margin-bottom: 0;
+        }
+        @media #{$breakpoint-md} {
+            margin-top: 8px;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+            border: none;
+        }
+        @media #{$breakpoint-xs} {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+            border: none;
+        }
+    }
+}

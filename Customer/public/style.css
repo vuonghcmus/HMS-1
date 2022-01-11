@@ -267,6 +267,35 @@
   min-width: 200px;
 }
 
+.search-booked-room-item.service-item .search-price-container {
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-left: 1px solid rgba(0, 0, 0, 0.125);
+}
+.search-booked-room-item.service-item .search-price-container .price-text {
+  font-size: 32px;
+  color: #cb8670;
+  margin-bottom: 0;
+}
+@media only screen and (min-width:768px) and (max-width:991px) {
+  .search-booked-room-item.service-item .search-price-container {
+    margin-top: 8px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    border: none;
+  }
+}
+@media only screen and (max-width:767px) {
+  .search-booked-room-item.service-item .search-price-container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    border: none;
+  }
+}
+
 /* [Master Stylesheet - v1.0] */
 .booking-table td .active {
   background-color: #cb8670;
