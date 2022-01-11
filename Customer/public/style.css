@@ -1899,6 +1899,16 @@ img {
   padding: 0 15px;
   color: #ffffff;
 }
+.footer-area .footer-widget-area .subscribe-form a {
+  width: 100%;
+  height: 46px;
+  background-color: transparent;
+  border: 1px solid #cb8670;
+  padding: 15px;
+  color: #cccccc;
+  line-height: 100%;
+  margin-bottom: 16px;
+}
 .footer-area .footer-widget-area .subscribe-form button {
   -webkit-transition-duration: 500ms;
   transition-duration: 500ms;
