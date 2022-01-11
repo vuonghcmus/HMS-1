@@ -16,38 +16,41 @@ const showListRoom = async (req, res) => {
   var room = req.query.room;
 
   if (room == "") {
-    res.redirect("/room?status=" + status + "&page=" + page)
+    res.redirect("/room?status=" + status + "&page=" + page);
   } else {
     if (!room) {
-      room = ""
+      room = "";
     }
     // find data by status 'using' and skip and limit
     DetailOrderRoom.find({
-        $and: [{
-            roomID: {
-              $regex: room,
-              $options: 'mi'
-            }
+      $and: [
+        {
+          roomID: {
+            $regex: room,
+            $options: "mi",
           },
-          {
-            status: status
-          }
-        ]
-      })
+        },
+        {
+          status: status,
+        },
+      ],
+    })
       .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
       .limit(perPage)
       .exec((err, detailOrderRoom) => {
-        DetailOrderRoom.countDocuments({
-            $and: [{
+        DetailOrderRoom.countDocuments(
+          {
+            $and: [
+              {
                 roomID: {
                   $regex: room,
-                  $options: 'mi'
-                }
+                  $options: "mi",
+                },
               },
               {
-                status: status
-              }
-            ]
+                status: status,
+              },
+            ],
           },
           async (err, count) => {
             // đếm để tính có bao nhiêu trang
@@ -82,16 +85,17 @@ const showListRoom = async (req, res) => {
               if (detailOrderRoom[i].detailOrderService.length > 0) {
                 const _orderService = await DetailOrderService.find({
                   _id: {
-                    $in: detailOrderRoom[i].detailOrderService
+                    $in: detailOrderRoom[i].detailOrderService,
                   },
                 });
 
-                const _service = await Service.findById(
-                  _orderService[0].serviceID
-                );
-
-                _orderService[0].serviceName = _service.name;
-                _orderService[0].serviceImage = _service.image;
+                for (let j = 0; j < _orderService.length; j++) {
+                  const service = await Service.findById(
+                    _orderService[j].serviceID
+                  );
+                  _orderService[j].serviceName = service.name;
+                  _orderService[j].serviceImage = service.image;
+                }
                 listOrderServices.push(_orderService);
               } else {
                 listOrderServices.push([]);
@@ -134,29 +138,32 @@ const showListRoomEmpty = async (req, res) => {
   if (page < 1) {
     page = 1;
   }
-  var room = req.query.room
+  var room = req.query.room;
   if (room == "") {
-    res.redirect("/room?status=empty&page=" + page)
+    res.redirect("/room?status=empty&page=" + page);
   } else {
-    if(!room){
-      room = ""
+    if (!room) {
+      room = "";
     }
     // find all rom type using await
     const roomType = await RoomType.find({});
     const listRooms = [];
     for (let i = 0; i < roomType.length; i++) {
       for (let j = 0; j < roomType[i].rooms.length; j++) {
-        if(roomType[i].rooms[j].includes(room)){
+        if (roomType[i].rooms[j].includes(room)) {
           listRooms.push(roomType[i].rooms[j]);
         }
       }
     }
     const detailOrderRoom = await DetailOrderRoom.find({
-      $or: [{
-        status: "pending"
-      }, {
-        status: "using"
-      }]
+      $or: [
+        {
+          status: "pending",
+        },
+        {
+          status: "using",
+        },
+      ],
     });
 
     const listRoomUsing = [];
@@ -187,7 +194,7 @@ const showListRoomEmpty = async (req, res) => {
       // find room type that have roomID in rooms
       const roomType = await RoomType.find({
         rooms: {
-          $in: [listRoomEmpty[i]]
+          $in: [listRoomEmpty[i]],
         },
       });
       info.push({
@@ -216,10 +223,9 @@ const showListRoomEmpty = async (req, res) => {
       nextPage: +page + 1,
       previousPage: +page - 1,
       info,
-      room
+      room,
     });
   }
-
 };
 
 // const showListRoomPending = async (req, res) => {
