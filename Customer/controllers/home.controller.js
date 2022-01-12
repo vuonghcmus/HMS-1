@@ -69,6 +69,9 @@ class HomeController {
     async aboutUs(req, res, next) {
         res.render("home/about-us", { isAuth: req.user });
     }
+    async showHelp(req, res, next) {
+        res.render("help/help");
+    }
 
 }
 module.exports = new HomeController;
