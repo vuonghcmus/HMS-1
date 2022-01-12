@@ -84,9 +84,17 @@ const showListRoom = async (req, res) => {
 
               if (detailOrderRoom[i].detailOrderService.length > 0) {
                 const _orderService = await DetailOrderService.find({
-                  _id: {
-                    $in: detailOrderRoom[i].detailOrderService,
-                  },
+                  //   _id: {
+                  //     $in: detailOrderRoom[i].detailOrderService,
+                  //   },
+                  $and: [
+                    {
+                      _id: {
+                        $in: detailOrderRoom[i].detailOrderService,
+                      },
+                    },
+                    { status: "using" },
+                  ],
                 });
 
                 for (let j = 0; j < _orderService.length; j++) {

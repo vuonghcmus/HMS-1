@@ -13,6 +13,7 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    
     <link rel="stylesheet" href="/css/tooplate-style.css" />
     <link rel="stylesheet" href="/css/notification.css" />
     <link rel="stylesheet" href="/css/styles.css" />
@@ -25,6 +26,7 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+	<link rel="stylesheet" href="/css/toastr.min.css"/>
 
     <script
       src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"
@@ -81,7 +83,7 @@
       <div class="notifications">
         <button type="button" class="icon_wrap">
           <i class="fas fa-bell"></i>
-          <span style="font-size: 10px;" class="icon-button__badge">2</span>
+          <span style="font-size: 10px;" class="icon-button__badge"> </span>
         </button>
         <div class="notification_dd">
           <h5 class="text-center mt-2">Thông báo</h5>
@@ -104,9 +106,9 @@
               </div>
             </li>
 
-            <li class="show_all">
+            {{!-- <li class="show_all">
               <p class="link">Show All Activities</p>
-            </li>
+            </li> --}}
           </ul>
         </div>
       </div>
@@ -171,15 +173,14 @@
                 data-bs-toggle="collapse"
                 data-bs-target="#collapseLayouts"
                 aria-expanded="false"
-                aria-controls="collapseLayouts"
-              >
-                <div class="sb-nav-link-icon"><i
-                    class="fas fa-list-ul"
-                  ></i></div>
+                aria-controls="collapseLayouts">
+                <div class="sb-nav-link-icon">
+					<i class="fas fa-list-ul"></i>
+				</div>
                 Xem danh sách
-                <div class="sb-sidenav-collapse-arrow"><i
-                    class="fas fa-angle-down"
-                  ></i></div>
+                <div class="sb-sidenav-collapse-arrow">
+					<i class="fas fa-angle-down"></i>
+				</div>
               </a>
               <div
                 class="collapse"
@@ -204,11 +205,11 @@
               </div>
 
               <div class="sb-sidenav-menu-heading">Dịch vụ</div>
-              <a class="nav-link" href="/service?page=1">
+              <a class="nav-link" href="/service?status=pending&page=1">
                 <div class="sb-nav-link-icon"><i
                     class="fas fa-list-ul"
                   ></i></div>
-                Xem danh sách
+                Danh sách chờ
               </a>
 
               <a class="nav-link" href="/service-type?page=1">
@@ -216,8 +217,8 @@
                     class="fas fa-indent"
                   ></i></div>
                 Loại dịch vụ
-              </a>
-
+              </a>		  
+              
               <div class="sb-sidenav-menu-heading">Loại phòng</div>
               <a class="nav-link" href="/room-type?page=1">
                 <div class="sb-nav-link-icon"><i
@@ -287,5 +288,91 @@
     <script src="js/notification.js"></script>
     <script src="/js/scripts.js"></script>
     <script src="/js/search.js"></script>
+    <script src="/js/toastr.min.js"></script>
+    <script src="/js/socket.io.js"></script>
+	<script>
+		const socket = io("http://localhost:3000"); // port này là của server
+
+		toastr.options = {
+			timeOut: 4000,
+			positionClass: "toast-bottom-right",
+			extendedTimeOut: 0,
+			fadeOut: 3000,
+			fadeIn: 0,
+			showDuration: 0,
+			hideDuration: 2000,
+			debug: false,
+		};
+		let flag = false;
+		socket.on("new-notification", (resp) => {
+			// get current time
+			const time = new Date().toLocaleString(); // 11/16/2015, 11:18:48 PM
+
+			const msg = `Khách hàng ${resp} đã đăng ký phòng lúc ${time}`;
+			console.log(msg);
+			flag = true;
+			//alert(msg);
+			toastr.success(msg, "New notification");
+			$.ajax({
+				url: "/api/notification/notify",
+				type: "GET",
+				success: (data) => {
+					console.log(data);
+					updateNotification(data);
+				},
+			});
+		});
+
+		const updateNotification = (data) => {
+			const dataNotSeen = data.filter((value) => {
+						return !value.seen;
+					});
+			$(".icon-button__badge").html(dataNotSeen.length);
+			let html = "";
+			for(let value of data){
+				html += `
+				<li class="starbucks success">
+					<div class="d-flex justify-content-around align-items-center">
+						<div class="notify_data">
+							<div class="title">${value.title}</div>
+							<div class="sub_title">
+								${value.content} lúc ${value.time}
+							</div>
+						</div>`;
+			  if (!value.seen){
+				  html += `<div class="notify_status">
+								<a title="chưa xem" href="#">
+									<i class="fas fa-circle"
+										style="font-size: 12px; color: rgb(5, 126, 173)"
+									></i>
+								</a>
+							</div>`;
+			  } else{
+				  html += `<div class="notify_status">
+								<a title="chưa xem" href="#" style="pointer-events: none; cursor: default;">
+									<i class="fas fa-circle"
+										style="font-size: 12px; color: white"
+									></i>
+								</a>
+							</div>`;
+			  }
+			  html += `</div>
+			  			</li>`;
+			}
+			$(".notification_ul").html(html);
+		};
+
+		$(document).ready(() => {
+			$.ajax({
+				url: "/api/notification/notify",
+				type: "GET",
+				success: (data) => {
+					console.log(data);					
+					updateNotification(data);
+				},
+			});
+		});
+
+	</script>
   </body>
 </html>
