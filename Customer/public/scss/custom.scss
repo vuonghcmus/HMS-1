@@ -263,14 +263,32 @@
     min-width: 312px;
 }
 
-.not-found-container {
+.error-container {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 700px;
+    max-width: 90%;
     text-align: center;
     .btn {
         min-width: 200px;
+    }
+
+    h1 {
+        font-size: 3.6rem;
+        color: $pri-color;
+        margin-bottom: 28px;
+
+        
+    }
+
+    h3 {
+        text-align: justify;
+        margin-bottom: 16px;
+        @media #{$breakpoint-xs} {
+            text-align: center;   
+        }
     }
 }
 

@@ -256,15 +256,31 @@
   min-width: 312px;
 }
 
-.not-found-container {
+.error-container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 700px;
+  max-width: 90%;
   text-align: center;
 }
-.not-found-container .btn {
+.error-container .btn {
   min-width: 200px;
+}
+.error-container h1 {
+  font-size: 3.6rem;
+  color: #cb8670;
+  margin-bottom: 28px;
+}
+.error-container h3 {
+  text-align: justify;
+  margin-bottom: 16px;
+}
+@media only screen and (max-width:767px) {
+  .error-container h3 {
+    text-align: center;
+  }
 }
 
 .search-booked-room-item.service-item .search-price-container {
@@ -1591,6 +1607,14 @@ img {
   .room-details-area .room-info-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+  }
+}
+@media only screen and (max-width:767px) {
+  .room-details-area .room-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 .room-details-area .card {

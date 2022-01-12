@@ -1223,6 +1223,12 @@ img {
         @media #{$breakpoint-md} {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+        }
+        @media #{$breakpoint-xs} {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
     }
     .card {
