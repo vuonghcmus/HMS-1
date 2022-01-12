@@ -20,6 +20,7 @@ const DetailOrderServiceService = {
             orderDate: orderDate,
             price: priceService,
             userID: userID,
+            status: 'pending',
         });
     }
 }
