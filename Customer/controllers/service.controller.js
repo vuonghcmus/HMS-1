@@ -39,7 +39,6 @@ class ServiceController {
     async ServiceDetail(req, res, next) {
 
         const services = await serviceService.findByTypeId(req.params.id_service);
-        console.log(services);
         res.render("services/service-details", {
             services: services,
             isAuth: req.user
@@ -97,7 +96,6 @@ class ServiceController {
 
                 console.log(req.user.cart);
                 //return to services
-
             }
             res.redirect("/services");
         }

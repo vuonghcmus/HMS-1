@@ -21,54 +21,14 @@
                         {{!-- <a href="#" class="btn custom-palatin-btn mt-50">Read More</a> --}}
                     </div>
                 </div>
-
-                <!-- Services Features -->
-               
-                {{!-- <div class="col-12 col-lg-6">
-                    <div class="row mb-100">
-
-                        <!-- Single Cool Facts -->
-                        <div class="col-12 col-sm-4">
-                            <div class="single-cool-fact">
-                                <div class="scf-text">
-                                    <i class="icon-cocktail-1"></i>
-                                    <p>Pool Beachbar</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Cool Facts -->
-                        <div class="col-12 col-sm-4">
-                            <div class="single-cool-fact">
-                                <div class="scf-text">
-                                    <i class="icon-swimming-pool"></i>
-                                    <p>Infinity Pool</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Cool Facts -->
-                        <div class="col-12 col-sm-4">
-                            <div class="single-cool-fact">
-                                <div class="scf-text">
-                                    <i class="icon-beach"></i>
-                                    <p>Sunbeds</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div> --}}
             </div>
-            
-            
             
             {{!-- INPUT INFORMATION --}}
             
             <form id="search-order-form" class="row align-items-center mb-2">
                 <div class="col-12 col-lg-5 mx-auto">
                     <div class="form-group row text-center">
-                        <div class="col-sm-6">
+                        <div class="col-12">
                             <input type="number" class="form-control-plaintext" id="phone" name="phone" placeholder="Your phone number">
                         </div>
                     </div>
@@ -76,13 +36,13 @@
                 
                 <div class="col-12 col-lg-5 mx-auto">
                     <div class="form-group row text-center">
-                        <div class="col-sm-6">
+                        <div class="col-12">
                             <input type="number" class="form-control-plaintext" id="identity" name="identity" placeholder="Your ID">
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-lg-2 mx-auto">
-                    <button type="submit" class="btn custom-palatin-btn">Search</button>
+                    <button type="submit" class="btn custom-palatin-btn w-100">Search</button>
                 </div>
             </form>
             {{#if err}}
@@ -98,35 +58,37 @@
         <div class="container " style="min-height: 500px; ">
             {{#if isEmpty}}
             <div class="row d-flex justify-content-center">
-                <p class="message-error">Not found your booked rooms</p>
+                <h4 class="message-error">We haven't found any of your booking yet.</h4>
             </div>
             {{else}}
+            <h3 class="mb-3">All your booking</h3>
             {{#each bookedRooms}}
-            <div class="row service-item card" >
-                 <div class="col-12 col-md-3">
+            <div class="row service-item search-booked-room-item card shadow" >
+                 <div class="col-12 col-md-5 col-lg-3">
                     <img src="{{this.room.image}}"/>
-                    <div class="d-flex justify-content-center mt-4">
-                        <a href="/rooms/{{this.room._id}}" class="book-room-btn btn custom-palatin-btn price-btn ">Details</a>      
+                    <div class="d-flex justify-content-center mt-3">
+                        <a href="/rooms/{{this.room._id}}" class="book-room-btn btn custom-palatin-btn price-btn" style="width: 90%;">View Details</a>      
                     </div>
-                    
-                    <p class="price-text" style="font-size: 16px;">Room Number: <span style="color: #cb8670;">{{this.roomID}}</span></p>
-                     
                 </div>
-                <div class="col-md-6 col-12 text-container">
+                <div class="col-md-7 col-lg-6 col-12 text-container">
                     <h2>{{this.room.name}}</h2>
-                    <p>Price: {{this.room.price}}$</p>
-                    <p>Beds: {{this.room.bed}}</p>
-                    <p>People: {{this.people}}</p>
+                    <div class="text-info px-3 d-flex justify-content-between align-items-center">
+                        <p>Price: <span style="color: #cb8670; font-size: 18px;">{{this.room.price}}$</span>/night</p>
+                        <p>Number of beds: <span style="color: #cb8670; font-size: 18px;">{{this.room.bed}}</span></p>
+
+                    </div>
+                    <div class="text-info px-3 d-flex justify-content-between align-items-center">
+                        <p>People: <span style="color: #cb8670; font-size: 18px;">{{this.people}}</span></p>
+                        <p class="price-text">Room Number: <span style="color: #cb8670; font-size: 18px;">{{this.roomID}}</span></p>
+                    </div>
                     
                 </div>
             
-                <div class="col-md-2 col-12 price-container d-flex">
+                <div class="col-lg-2 col-12 search-price-container d-flex">
                     <p>Check in date:</p>
                     <p>{{this.dateOfCheckIn}}</p>
                     <p>Check out date: </p>
-                     <p>   {{this.dateOfCheckOut}}</p>
-                    
-                   
+                    <p>{{this.dateOfCheckOut}}</p>
                 </div>
             </div>
             {{/each}}

@@ -1,113 +1,114 @@
-<div class="section-order p-4" style="margin-top: 140px;">
-    {{!-- already sign in form --}}
-    {{#if isAuth}}
-    <h2 class="mb-3">Your information</h2>
-    <form id="input-information-form" method="POST" action="/orders" class="row g-3 px-2 input-information-form">
-        <div class="col-12 col-md-8 mb-4">
-            <label for="fullname">Full name</label>
-            <input disabled style="background-color: #fff;" type="text" class="form-control" name="fullname" id="fullname" value="{{user.fullname}}">
-        </div>
-        <div class="col-12 mb-4">
-            <div class="row">
-                <div class="col-12 col-md-4 mb-4">
-                    <label for="fullname">Phone number</label>
-                    <input
-                        onkeydown="return false;"
-                        onkeypress="return false;"
-                        autocomplete="off"
-                        style="background-color: #fff;"
-                        type="number"
-                        class="form-control"
-                        name="phone"
-                        id="phone"
-                        value="{{user.phone}}"
-                    >
-                </div>
-                <div class="col-12 col-md-4 mb-4">
-                    <label for="fullname">ID number</label>
-                    <input
-                        onkeydown="return false;"
-                        onkeypress="return false;"
-                        autocomplete="off"
-                        style="background-color: #fff;"
-                        type="number"
-                        class="form-control"
-                        name="identity"
-                        id="identity"
-                        value="{{user.ID}}"
-                    >
-                </div>
-            </div>
-        </div>
-    </form>
+<div class="section-order booking-order px-4 pb-5" style="padding-top: 180px !important; background-color: #E8E8E8;">
+    <div class="card shadow p-4 bg-white mb-5">
 
-    {{!-- register form --}}
-    {{else}}
-    <h2 class="mb-3">Provide your information</h2>
-    <form id="input-information-form" method="POST" action="/orders" class="row g-3 px-2 input-information-form needs-validation" novalidate>
-        <div class="col-12 col-md-6 col-lg-5 mb-4">
-            <input type="text" class="form-control" name="first-name" id="first-name" placeholder="First Name" required>
-            <div class="invalid-feedback">
-                First name must not be empty.
+        {{!-- already sign in form --}}
+        {{#if isAuth}}
+        <h2 class="mb-3">Your information</h2>
+        <form id="input-information-form" method="POST" action="/orders" class="row g-3 px-2 input-information-form">
+            <div class="col-12 col-md-8 mb-4">
+                <label for="fullname">Full name</label>
+                <input disabled style="background-color: #fff;" type="text" class="form-control" name="fullname" id="fullname" value="{{user.fullname}}">
             </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-5 mb-4">
-            <input type="text" class="form-control" name="last-name" id="last-name" placeholder="Last Name" required>
-            <div class="invalid-feedback">
-                Last name must not be empty.
-            </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-5 mb-4">
-            <input type="number" class="form-control" name="phone" id="phone" placeholder="Phone Number" required>
-            <div class="invalid-feedback">
-                Phone number must not be empty.
-            </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-5 mb-4">
-            <input type="number" class="form-control" name="identity" id="identity" placeholder="Your ID" required>
-            <div class="invalid-feedback">
-                ID must not be empty.
-            </div>
-        </div>
-    </form>
-    {{/if}}
-
-    <h2 class="mt-5 order-booking-container">Your Booking</h2>
-    <ul class="order-list px-3" style="width: 100%;">
-        {{#each rooms}}
-        <div class="mb-4" style="border: 1px solid #eee;"></div>
-        
-        <li>
-            <div class="order-item d-flex justify-content-between align-items-center">
-                <h4 class="order-title">{{this.RoomType}}</h4>
-                <p class="order-amount">Number of rooms: <span>{{this.listRoom.length}}</span></p>
-            </div>
-            {{#each this.listRoom}}
-            <div class="order-item mb-3 d-flex justify-content-between align-items-center" style="margin-left: 24px;">
-                <div class="">
-                    <h6 class="order-title">Room: <span style="font-size: 18px; color: #cb8670;">{{this.roomid}}</span> ({{this.people}} people)</h6>
-                    <span class="order-date">{{this.checkin}} to {{this.checkout}}</span>
-                </div>
-                <div class="">
-                    <p class="order-price">Price: <span>{{this.amount}}$</span></p>
+            <div class="col-12 mb-4">
+                <div class="row">
+                    <div class="col-12 col-md-4 mb-4">
+                        <label for="fullname">Phone number</label>
+                        <input
+                            onkeydown="return false;"
+                            onkeypress="return false;"
+                            autocomplete="off"
+                            style="background-color: #fff;"
+                            type="number"
+                            class="form-control"
+                            name="phone"
+                            id="phone"
+                            value="{{user.phone}}"
+                        >
+                    </div>
+                    <div class="col-12 col-md-4 mb-4">
+                        <label for="fullname">ID number</label>
+                        <input
+                            onkeydown="return false;"
+                            onkeypress="return false;"
+                            autocomplete="off"
+                            style="background-color: #fff;"
+                            type="number"
+                            class="form-control"
+                            name="identity"
+                            id="identity"
+                            value="{{user.ID}}"
+                        >
+                    </div>
                 </div>
             </div>
+        </form>
+
+        {{!-- register form --}}
+        {{else}}
+        <h2 class="mb-3">Provide your information</h2>
+        <form id="input-information-form" method="POST" action="/orders" class="row g-3 px-2 input-information-form needs-validation" novalidate>
+            <div class="col-12 col-md-6 col-lg-5 mb-4">
+                <input type="text" class="form-control" name="first-name" id="first-name" placeholder="First Name" required>
+                <div class="invalid-feedback">
+                    First name must not be empty.
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-5 mb-4">
+                <input type="text" class="form-control" name="last-name" id="last-name" placeholder="Last Name" required>
+                <div class="invalid-feedback">
+                    Last name must not be empty.
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-5 mb-4">
+                <input type="number" class="form-control" name="phone" id="phone" placeholder="Phone Number" required>
+                <div class="invalid-feedback">
+                    Phone number must not be empty.
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-5 mb-4">
+                <input type="number" class="form-control" name="identity" id="identity" placeholder="Your ID" required>
+                <div class="invalid-feedback">
+                    ID must not be empty.
+                </div>
+            </div>
+        </form>
+        {{/if}}
+    </div>
+    <div class="card shadow p-4 bg-white">
+        <h2 class="order-booking-container">Your Booking</h2>
+        <ul class="order-list" style="width: 100%;">
+            {{#each rooms}}
+            <div class="mb-4" style="border: 1px solid #eee;"></div>
+            <li>
+                <div class="order-item">
+                    <h4 class="order-title">{{this.RoomType}}</h4>
+                    <p class="order-amount">Number of rooms: <span>{{this.listRoom.length}}</span></p>
+                </div>
+                {{#each this.listRoom}}
+                <div class="order-item order-item-room mb-3">
+                    <div class="">
+                        <h6 class="order-title">Room: <span style="font-size: 18px; color: #cb8670;">{{this.roomid}}</span> ({{this.people}} people)</h6>
+                        <span class="order-date">{{this.checkin}} to {{this.checkout}}</span>
+                    </div>
+                    <div class="">
+                        <p class="order-price">Room price: <span>{{this.amount}}$</span></p>
+                    </div>
+                </div>
+                {{/each}}
+            </li>
             {{/each}}
-        </li>
-        {{/each}}
-    </ul>
-    <div class="mb-4" style="border: 1px solid #eee;"></div>
-    <div class="order-total-amount-container">
-        <h2 class="order-total-amount">Total Amount: <span>{{rooms.totalAmount}}$</span></h2>
-        <div class="btn-container">
-            <a href="/rooms" class="btn palatin-btn btn-3" style="margin-right: 6px;">Return</a>
-            <button form="input-information-form" class="btn palatin-btn" type="submit">Confirm</button>
+        </ul>
+        <div class="mb-4" style="border: 1px solid #eee;"></div>
+        <div class="order-total-amount-container">
+            <h2 class="order-total-amount">Total Amount: <span>{{rooms.totalAmount}}$</span></h2>
+            <div class="btn-container">
+                <button form="input-information-form" class="btn palatin-btn" type="submit">Confirm</button>
+            </div>
         </div>
     </div>
-
 </div>
 
 <script src="/js/formValidation.js"></script>

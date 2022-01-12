@@ -13,6 +13,11 @@ const routes = app => {
     app.use('/orders', orderRouter)
     app.use("/api", apiRouter);
     app.use('/', homeRouter)
+    app.use((req, res, next) => {
+        res.render('error/404', {
+            layout: 'main_no_head'
+        })
+    })
 }
 
 module.exports = routes

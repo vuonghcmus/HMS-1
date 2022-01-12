@@ -6,162 +6,48 @@
 </section>
 <!-- ##### Breadcumb Area End ##### -->
 
-
-<!-- ##### Service Intro Area Start ##### -->
-<section class="services-intro">
-    <div class="container">
-        <div class="row align-items-center">
-            <!-- Service Intro Text -->
-            <div class="col-12 col-lg-6">
-                <div class="service-intro-text mb-100">
-                    <div class="section-heading">
-                        {{!-- <div class="line-"></div> --}}
-                        {{!-- <h2>Amazing Services</h2> --}}
-                    </div>
-                    {{!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p> --}}
-                    {{!-- <a href="#" class="btn custom-palatin-btn mt-50">Read More</a> --}}
-                </div>
-            </div>
-
-            <!-- Services Features -->
-            
-            {{!-- <div class="col-12 col-lg-6">
-                <div class="row mb-100">
-
-                    <!-- Single Cool Facts -->
-                    <div class="col-12 col-sm-4">
-                        <div class="single-cool-fact">
-                            <div class="scf-text">
-                                <i class="icon-cocktail-1"></i>
-                                <p>Pool Beachbar</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Cool Facts -->
-                    <div class="col-12 col-sm-4">
-                        <div class="single-cool-fact">
-                            <div class="scf-text">
-                                <i class="icon-swimming-pool"></i>
-                                <p>Infinity Pool</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Cool Facts -->
-                    <div class="col-12 col-sm-4">
-                        <div class="single-cool-fact">
-                            <div class="scf-text">
-                                <i class="icon-beach"></i>
-                                <p>Sunbeds</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div> --}}
-        </div>
-    </div>
-</section>
-<!-- ##### Service Intro Area End ##### -->
-
 <!-- ##### Core Features Start ##### -->
-<section class="core-features-area">
-    <div class="container">
-        {{#each allServices}}
-        <div class="row service-item card">
-            
-            <div class="col-12 col-md-3">
-                <img src="{{this.image}}"/>
+<div class="py-5" style="background-color: #E8E8E8;">
+    <section class="core-features-area">
+        <div class="container">
+            {{#each allServices}}
+            <div class="row service-item card shadow">
+                
+                <div class="col-12 col-md-3">
+                    <img src="{{this.image}}"/>
+                </div>
+                <div class="col-md-6 col-12 text-container">
+                    <h2>{{this.name}}</h2>
+                    <p>{{this.description}}</p>
+                </div>
+                <div class="col-md-3 col-12 price-container d-flex">
+                    <a href="/services/{{this._id}}" class="detail-service-btn btn custom-palatin-btn price-btn ">Details</a>
+                </div>
             </div>
-            <div class="col-md-6 col-12 text-container">
-                <h2>{{this.name}}</h2>
-                <p>{{this.description}}</p>
-            </div>
-        
-            <div class="col-md-3 col-12 price-container d-flex">
-                {{!-- <p class="price-text"><span>{{this.price}}</span>$</p> --}}
-                <a href="/services/{{this._id}}" class="book-room-btn btn custom-palatin-btn price-btn ">Details</a>
-            </div>
+            {{/each}}
         </div>
-        {{/each}}
-    </div>
-</section>
+    </section>
+</div>
 <!-- ##### Core Features End ##### -->
 
-<!-- ##### Services Area Start ##### -->
-<section class="services-area">
-    <div class="container">
-        {{!-- <div class="row">
 
-            <!-- Single Service Area -->
-            <div class="col-12 col-sm-6 col-lg-4">
-                <div class="single-service-area mb-100 wow fadeInUp" data-wow-delay="100ms">
-                    <i class="icon-trekking"></i>
-                    <h4>Bike Rentals</h4>
-                    <p>Nulla massa dui, posuere non erat in, eleifend mattis dui. Vivamus luctus luctus rhoncus. Donec sagittis nulla id finibus iaculis. Mauris odio tortor.</p>
-                </div>
-            </div>
-
-            <!-- Single Service Area -->
-            <div class="col-12 col-sm-6 col-lg-4">
-                <div class="single-service-area mb-100 wow fadeInUp" data-wow-delay="200ms">
-                    <i class="icon-boat"></i>
-                    <h4>Boat Trips</h4>
-                    <p>Nulla massa dui, posuere non erat in, eleifend mattis dui. Vivamus luctus luctus rhoncus. Donec sagittis nulla id finibus iaculis. Mauris odio tortor.</p>
-                </div>
-            </div>
-
-            <!-- Single Service Area -->
-            <div class="col-12 col-sm-6 col-lg-4">
-                <div class="single-service-area mb-100 wow fadeInUp" data-wow-delay="300ms">
-                    <i class="icon-restaurant"></i>
-                    <h4>Restaurants</h4>
-                    <p>Nulla massa dui, posuere non erat in, eleifend mattis dui. Vivamus luctus luctus rhoncus. Donec sagittis nulla id finibus iaculis. Mauris odio tortor.</p>
-                </div>
-            </div>
-
-            <!-- Single Service Area -->
-            <div class="col-12 col-sm-6 col-lg-4">
-                <div class="single-service-area mb-100 wow fadeInUp" data-wow-delay="400ms">
-                    <i class="icon-beach"></i>
-                    <h4>Massages</h4>
-                    <p>Nulla massa dui, posuere non erat in, eleifend mattis dui. Vivamus luctus luctus rhoncus. Donec sagittis nulla id finibus iaculis. Mauris odio tortor.</p>
-                </div>
-            </div>
-
-            <!-- Single Service Area -->
-            <div class="col-12 col-sm-6 col-lg-4">
-                <div class="single-service-area mb-100 wow fadeInUp" data-wow-delay="500ms">
-                    <i class="icon-boarding-pass"></i>
-                    <h4>Event Tikets</h4>
-                    <p>Nulla massa dui, posuere non erat in, eleifend mattis dui. Vivamus luctus luctus rhoncus. Donec sagittis nulla id finibus iaculis. Mauris odio tortor.</p>
-                </div>
-            </div>
-
-            <!-- Single Service Area -->
-            <div class="col-12 col-sm-6 col-lg-4">
-                <div class="single-service-area mb-100 wow fadeInUp" data-wow-delay="600ms">
-                    <i class="icon-sign"></i>
-                    <h4>Hiking</h4>
-                    <p>Nulla massa dui, posuere non erat in, eleifend mattis dui. Vivamus luctus luctus rhoncus. Donec sagittis nulla id finibus iaculis. Mauris odio tortor.</p>
-                </div>
-            </div>
-
-        </div> --}}
-    </div>
-{{!-- floating button --}}
         
 {{!-- floating button --}}
-    {{#if isAuth}}
-    <button class="btn modal-btn btn-floating" data-bs-toggle="modal" data-bs-target="#confirm-order-modal">
-        <img src="/img/icon/order-icon.png" alt="">
-        <span>{{cart.length}}</span>
-    </button>
+{{#if isAuth}}
+<button
+    class="btn modal-btn btn-floating {{#ifCond cart.length '<=' 0}} disabled {{/ifCond}}"
+    {{#ifCond cart.length '>' 0}}
+    data-bs-toggle="modal"
+    data-bs-target="#confirm-order-modal"
+    {{/ifCond}}
+>
+    <img src="/img/icon/order-icon.png" alt="">
+    <span>{{cart.length}}</span>
+</button>
 
-    {{!-- modal for confirm booking room --}}
-    <div class="modal" id="confirm-order-modal" tabindex="-1">
-        <div class="modal-dialog">
+{{!-- modal for confirm order room --}}
+<div class="modal" id="confirm-order-modal" tabindex="-1">
+    <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title">Your Orders</h5>
@@ -177,7 +63,7 @@
                    <h6>Choose room: </h6>
                </div>
                <div class="col-8 align-self-center">
-                   <select class="form-select" aria-label="Default select example" name="dtorID">
+                   <select class="form-select w-100" aria-label="Default select example" name="dtorID">
                     
                     {{#each allBookedRooms}}
                     <option value="{{this._id}}">{{this.roomID}}</option>
@@ -202,86 +88,33 @@
                             </div>
                             <div class="order-amount-container col-4">
                                 <button class="btn btn-decrease">-</button>
-                                <input class="order-amount" style="width: 100%;" name="orderAmount" value="{{this.orderAmount}}" min="1">
-                       
-                       
+                                <input class="order-amount text-center" style="width: 100%; border: none;" name="orderAmount" value="{{this.orderAmount}}" min="1">
                                 <button class="btn btn-increase">+</button>
                             </div>
                         </li>
                         {{/each}}
-                        {{!-- <li class="order-item col-12 mt-3 d-flex justify-content-between align-items-center">
-                            <div>
-                                <h4 class="order-title">
-                                    Fried Rice
-                                    <span class="order-price">24$</span>
-                                </h4>
-                                <p class="order-description">Shortbread, chocolate turtle cookies, and red velvet.</p>                            
-                            </div>
-                            <div class="order-amount-container">
-                                <button class="btn btn-decrease">-</button>
-                                <span class="order-amount" style="width: 100%;">2</span> 
-                                <button class="btn btn-increase">+</button>
-                            </div>
-                        </li>
-                        <li class="order-item col-12 mt-3 d-flex justify-content-between align-items-center">
-                            <div>
-                                <h4 class="order-title">
-                                    Fried Rice
-                                    <span class="order-price">24$</span>
-                                </h4>
-                                <p class="order-description">Shortbread, chocolate turtle cookies, and red velvet.</p>                            
-                            </div>
-                            <div class="order-amount-container">
-                                <button class="btn btn-decrease">-</button>
-                                <span class="order-amount" style="width: 100%;">2</span> 
-                                <button class="btn btn-increase">+</button>
-                            </div>
-                        </li>
-                        <li class="order-item col-12 mt-3 d-flex justify-content-between align-items-center">
-                            <div>
-                                <h4 class="order-title">
-                                    Fried Rice
-                                    <span class="order-price">24$</span>
-                                </h4>
-                                <p class="order-description">Shortbread, chocolate turtle cookies, and red velvet.</p>                            
-                            </div>
-                            <div class="order-amount-container">
-                                <button class="btn btn-decrease">-</button>
-                                <span class="order-amount" style="width: 100%;">2</span> 
-                                <button class="btn btn-increase">+</button>
-                            </div>
-                        </li> --}}
                     </ul>
-            </form>
-            <div class="modal-footer pt-0">
-                <p></p>
-                <p style="margin-bottom: 0;">Total Amount: <span class="total-amount" id="total-amount">0</span></p>
-                <p>Total Price: <span class="total-price" id="total-price">0$</span></p>
-                <p style="font-weight: 500;font-size:15px;">Your change will be affected after confirm! Please check your order before confirm.</p>
-                <div class="d-flex justify-content-between w-100">
-                    <div class="col mb-3">
-                        <form action="/services/clear-cart" method="POST">
-                            <button class="btn palatin-btn btn-3">Clear All</button>
-                        </form>
+                </form>
+                <div class="modal-footer pt-0">
+                    <p></p>
+                    <p style="margin-bottom: 0;">Total Amount: <span class="total-amount" id="total-amount">0</span></p>
+                    <p>Total Price: <span class="total-price" id="total-price">0$</span></p>
+                    <p style="font-weight: 500;font-size:15px;">Your changes will be done after confirmation! Please check your order before confirming.</p>
+                    <div class="d-flex justify-content-between w-100">
+                        <div class="col mb-3">
+                            <form action="/services/clear-cart" method="POST">
+                                <button class="btn palatin-btn btn-3">Clear All</button>
+                            </form>
+                        </div>
+                        <div class="col mb-3">
+                            <button form="confirm-order-form" class="btn palatin-btn btn-confirm" type="submit">Confirm</button>
+                        </div>
                     </div>
-                    <div class="col mb-3">
-                        <button form="confirm-order-form" class="btn palatin-btn btn-confirm" type="submit">Confirm</button>
-                    </div>
-                    
-                    
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 <script src="/js/updateModalItem.js"></script>
-<script>
-function changeRoomID(roomID)
-{
-    document.getElementById("option-roomID")
-    document.getElementById("roomID").value=roomID;
-}
-
-</script>
 {{/if}} 
    

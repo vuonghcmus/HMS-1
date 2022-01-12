@@ -1,5 +1,5 @@
 const Cart = require("../models/cart.model");
-
+require("dotenv").config();
 const RoomTypeService = require("../services/room/roomType.service");
 const { generateBookingTable, findBusyRoom, findEmptyRoom } = require('../utils/')
 
@@ -18,7 +18,6 @@ class RoomController {
             allRooms: allRooms,
             cart: cart,
             isAuth: req.user,
-            isEmpty: cart.length <= 0
         });
     }
 
@@ -89,7 +88,7 @@ class RoomController {
 
     async findBusyRoom(req, res, next) {
         const { checkin, checkout } = req.body
-        const busyRooms = await findBusyRoom(checkin, checkout)
+        const busyRooms = await findBusyRoom(process.env.DOMAIN || 'http://127.0.0.1:3000', checkin, checkout)
         req.finding = { busyRooms, checkin, checkout }
         next()
     }

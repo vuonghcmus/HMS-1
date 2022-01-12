@@ -1,91 +1,81 @@
 <!-- ##### Breadcumb Area Start ##### -->
 <section class="breadcumb-area bg-img d-flex align-items-center justify-content-center" style="background-image: url(/img/bg-img/bg-5.jpg);">
     <div class="bradcumbContent">
-        {{!-- <h2>Search Order</h2> --}}
+        <h2>Services</h2>
     </div>
 </section>
-<section class="rooms-area section-padding-0-100">
-    
-
-    <form action="/services/add-to-cart" method="POST">
-    {{#each services}}
-    <div class="container card" style="margin-top:20px;padding-top:20px;">
-        
-       
-        <div class="row custom-service-item">
-            <div class="col-lg-3 col-12 image-container">
-                <img src="{{this.image}}"/>
-            </div>
-            <div class="col-lg-9 col-12 info-container">
-                <div class="text-container">
-                    <h2>{{this.name}} </h2> 
-                    <span class="price-text">{{this.price}} $</span>
-                    <p>{{this.description}}</p>
+<div class="" style="background-color: #E8E8E8;">
+    <section class="rooms-area section-padding-0-100">
+        <form action="/services/add-to-cart" method="POST" class="pt-5">
+        {{#each services}}
+        <div class="container card shadow p-3 mb-4">
+            <div class="row custom-service-item">
+                <div class="col-lg-3 col-12 image-container">
+                    <img src="{{this.image}}"/>
                 </div>
-                <div class="order-amount-container">
-                    <button type="button" class="order-service-button" onclick="changeValue('{{this._id}}','-')">
-                        <span><i class="fa fa-minus"></i></span>
-                    </button>
-                    <input type="hidden" name="id_service" value="{{this._id}}">
-                    <input type="hidden" name="name_service" value="{{this.name}}">
-                    <input type="hidden" name="price_service" value="{{this.price}}">
-                    <input
-                        type="number"
-                        name="order_amount"
-                        class="order-amount order-service-amount"
-                        min="0"
-                        value="0"
-                        id="{{this._id}}"
-                    >
-                    <button type="button" class="order-service-button" onclick="changeValue('{{this._id}}','+')">
-                        <span><i class="fa fa-plus"></i></span>
-                    </button>
-                    
+                <div class="col-lg-9 col-12 info-container">
+                    <div class="text-container">
+                        <h2>{{this.name}} </h2> 
+                        <span class="price-text" data-id="{{this._id}}">{{this.price}}$</span>
+                        <p>{{this.description}}</p>
+                    </div>
+                    {{#if ../isAuth}}
+                    <div class="order-amount-container">
+                        <button
+                            type="button"
+                            class="order-service-button"
+                            onclick="changeValue('{{this._id}}','-')"
+                        >
+                            <span><i class="fa fa-minus"></i></span>
+                        </button>
+                        <input type="hidden" name="id_service" value="{{this._id}}">
+                        <input type="hidden" name="name_service" value="{{this.name}}">
+                        <input type="hidden" name="price_service" value="{{this.price}}">
+                        <input
+                            type="number"
+                            name="order_amount"
+                            class="order-amount order-service-amount"
+                            min="0"
+                            value="0"
+                            id="{{this._id}}"
+                        >
+                        <button
+                            type="button"
+                            class="order-service-button"
+                            onclick="changeValue('{{this._id}}','+')"
+                        >
+                            <span><i class="fa fa-plus"></i></span>
+                        </button>
+                    </div>
+                    {{/if}}
                 </div>
             </div>
-            
         </div>
-        
-        
-        
-    </div>
-    {{/each}}
-    {{#if isAuth}}
-        <div class="container" style="margin-top:20px;padding-top:20px;">
-            <button class="btn-find btn palatin-btn mb-4" type="submit">Confirm</button>
+        {{/each}}
+
+        {{#ifCond services.length '>' 0}}
+            {{#if isAuth}}
+                <div class="container clearfix card shadow p-4">
+                    <div class="total-service-amount-container">
+                        <h5 class="total-amount">Total Amount: <span>0</span>$</h5>
+                        <button class="btn-find btn palatin-btn float-right" type="submit">
+                            Confirm
+                        </button>
+                    </div>
+                </div>
+            {{/if}}
+        {{/ifCond}}
+
+        {{#ifCond services.length '<=' 0}}
+        <div class="text-center" style="margin-top: 100px;">
+            <h5 class="">There are no services available at the moment.</h5>
+            <h5 class="">We are sorry for the inconvenience.</h5>
         </div>
-        
-    {{/if}}
-    </form>
+        {{/ifCond}}
+        </form>
+    </section>
+</div>
 
-    
-    </form>
-</section>
-
-<script>
-function changeValue(inputID,operator)
-{
-
-    var input=document.getElementById(inputID);
-   
-    const value=parseInt(input.value);
-    if(value<0)
-    {
-        input.value=0;
-        return;
-    }
-    if(operator=='+')
-    {
-        input.value=value+1;
-    }
-    if(operator=='-')
-    {
-        if(value>0)
-        {
-            input.value=value-1;
-        }
-    }
-    
-}
-
-</script>
+{{#if isAuth}}
+<script src="/js/updateServiceOrder.js"></script>
+{{/if}}

@@ -18,7 +18,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row">
 
             {{#each allRooms}}
@@ -26,7 +25,7 @@
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="single-rooms-area wow fadeInUp" data-wow-delay="100ms">
                     <!-- Thumbnail -->
-                    <div class="bg-thumbnail bg-img" style="background-image: url(/img/bg-img/1.jpg);"></div>
+                    <div class="bg-thumbnail bg-img" style="background-image: url({{this.image}});"></div>
                     <!-- Price -->
                     <p class="price-from">$ {{this.price}}/night</p>
                     <!-- Rooms Text -->
@@ -46,12 +45,11 @@
 
 {{!-- floating button --}}
     <button
-        class="btn modal-btn {{#if isEmpty}}disabled{{/if}}"
-        {{#if isEmpty}}
-        {{else}}
+        class="btn modal-btn {{#ifCond cart.length '<=' 0}}disabled{{/ifCond}}"
+        {{#ifCond cart.length '>' 0}}
         data-bs-toggle="modal"
         data-bs-target="#input-information-modal"
-        {{/if}}
+        {{/ifCond}}
     >
         <img src="/img/icon/order-icon.png" alt="">
         <span>{{cart.length }}</span>
@@ -76,12 +74,15 @@
                    <img src="{{this.RoomImage}}" alt="rom type"/>
                 </div>
                 <div class="col-md-5 col-6">
-                   <p class="roomtype">{{this.RoomType}}</p>
-                   <p class="roomprice">Price: {{this.RoomPrice}}</p>
+                   <h4 class="roomtype">{{this.RoomType}}</h4>
+                   <p>
+                       Price:
+                       <span class="roomprice" style="color: #cb8670;">{{this.RoomPrice}}</span>$
+                    </p>
+                    x<span class="roomcount">{{this.listRoom.length}}</span>
                 </div>
-               <div class="col-md-2 col-12">x<span class="roomcount">{{this.listRoom.length}}</span></div>
-               <div class="col-md-12">
-                    <a class="btn btn-info" data-toggle="collapse" href="#collapse-{{this.RoomTypeID}}" role="button" aria-expanded="false" aria-controls="collapse-{{this.RoomTypeID}}">
+               <div class="col-6 col-md-5 mt-1">
+                    <a class="btn btn-info w-100" data-toggle="collapse" href="#collapse-{{this.RoomTypeID}}" role="button" aria-expanded="false" aria-controls="collapse-{{this.RoomTypeID}}">
                         More details <i class="fa fa-angle-down" aria-hidden="true"></i>
                     </a>
                </div>
@@ -138,7 +139,7 @@
     var totalPrice=0;
     for(let i=0;i<allPrices.length;i++)
     {
-        const price=parseInt(allPrices[i].innerHTML.split("Price: ")[1]);
+        const price=parseInt(allPrices[i].innerHTML);
         const count=parseInt(allCounts[i].innerHTML);
         const diffdays=(new Date(allCheckouts[i].innerHTML)).getDate()-(new Date(allCheckins[i].innerHTML)).getDate();
         totalRoom+=count;
