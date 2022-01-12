@@ -298,4 +298,9 @@
   font-size: 18px;
 }
 
+.help-section span.strong {
+  font-weight: 700;
+  color: #3e3e3e;
+}
+
 /*# sourceMappingURL=custom.css.map */

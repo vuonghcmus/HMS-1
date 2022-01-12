@@ -306,6 +306,11 @@
   font-size: 18px;
 }
 
+.help-section span.strong {
+  font-weight: 700;
+  color: #3e3e3e;
+}
+
 /* [Master Stylesheet - v1.0] */
 .booking-table td .active {
   background-color: #cb8670;
