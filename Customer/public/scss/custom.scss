@@ -2,7 +2,6 @@
 @import 'fonts';
 @import 'mixin';
 @import 'responsive';
-
 .custom-palatin-btn {
     background-color: $pri-color;
     @include trans-duration(500ms);
@@ -47,20 +46,17 @@
     }
 }
 
-
 .btn-close {
     font-size: 24px;
     border: none;
     background-color: transparent;
 }
 
-
 .booking-table td {
     font-weight: 600;
     font-size: 16px;
     cursor: pointer;
     color: $pri-color;
-    
 }
 
 .booking-table td.disabled {
@@ -75,50 +71,39 @@
     -ms-user-select: none;
     user-select: none;
     color: #cc0000;
-  }
-
+}
 
 .menu-btn {
-
-
     .dropdown-item {
         color: $dark-color !important;
     }
-
-    .dropdown.active{
-        
+    .dropdown.active {
         i {
             color: $pri-color;
         }
-        .dropdown-toggle::after{
+        .dropdown-toggle::after {
             color: $pri-color;
         }
     }
-
     .dropdown-item.active {
         color: $pri-color !important;
         background-color: #fff !important;
     }
 }
 
-
 .custom-service-item {
     .info-container {
-
         display: flex;
         justify-content: space-between;
         align-items: center;
-
         h2 {
             display: inline-block;
             margin: 20px 0;
         }
-
         .price-text {
             color: $pri-color;
             font-size: 28px;
         }
-
         .order-amount-container {
             .order-amount {
                 font-size: 18px;
@@ -127,7 +112,6 @@
         }
     }
 }
-
 
 .detail-service-btn {
     @media #{$breakpoint-xs} {
@@ -149,16 +133,13 @@
                 max-height: 180px;
             }
         }
-
         text-align: center;
     }
-
     .info-container {
         .order-amount-container {
-            font-size: 20px;       
+            font-size: 20px;
         }
-
-        @media #{$breakpoint-md} {        
+        @media #{$breakpoint-md} {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -176,15 +157,13 @@
                 }
             }
         }
-
-        @media #{$breakpoint-xs} {        
+        @media #{$breakpoint-xs} {
             display: flex;
             flex-direction: column;
             align-items: center;
             .text-container {
                 text-align: center;
             }
-
             .order-amount-container {
                 font-size: 24px;
                 .order-service-button {
@@ -196,7 +175,6 @@
                 }
             }
         }
-        
     }
 }
 
@@ -208,17 +186,15 @@
         flex-direction: column;
         .btn {
             margin-top: 8px;
-           width: 100%;
+            width: 100%;
         }
     }
-
     .total-amount {
         font-size: 24px;
         span {
             color: $pri-color;
         }
     }
-
     .btn {
         min-width: 200px;
     }
@@ -230,26 +206,21 @@
         justify-content: space-between;
         align-items: center;
     }
-
     .order-item-room {
         margin-left: 24px;
     }
-
     @media #{$breakpoint-xs} {
         .order-item {
             flex-direction: column;
             justify-content: center;
         }
-
         .order-item-room {
             margin-left: 0;
         }
-
         .order-title {
             margin-bottom: 0;
         }
-     }
-
+    }
 }
 
 .section-order.profile {
@@ -258,14 +229,11 @@
         justify-content: space-between;
         align-items: center;
     }
-
     .order-title-service {
         min-width: 174px;
         background-color: $pri-color !important;
         border: 1px solid $pri-color !important;
     }
-
-    
     @media #{$breakpoint-xs} {
         .order-item.order-item-room {
             flex-direction: column;
@@ -276,19 +244,15 @@
                 margin-bottom: 16px !important;
             }
         }
-
         .order-title-service {
             text-align: center;
             width: 100%;
-
         }
-        
         .service-list {
             margin-top: 12px !important;
         }
     }
 }
-
 
 .iti.iti--allow-dropdown {
     width: 100%;
@@ -299,14 +263,12 @@
     min-width: 312px;
 }
 
-
 .not-found-container {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-
     .btn {
         min-width: 200px;
     }
@@ -337,4 +299,14 @@
             border: none;
         }
     }
+}
+
+.price-text {
+    font-size: 32px;
+    color: $pri-color;
+    margin-bottom: 0;
+}
+
+.instruction-text {
+    font-size: 18px;
 }

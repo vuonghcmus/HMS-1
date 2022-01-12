@@ -296,6 +296,16 @@
   }
 }
 
+.price-text {
+  font-size: 32px;
+  color: #cb8670;
+  margin-bottom: 0;
+}
+
+.instruction-text {
+  font-size: 18px;
+}
+
 /* [Master Stylesheet - v1.0] */
 .booking-table td .active {
   background-color: #cb8670;
