@@ -105,10 +105,48 @@
         <div class="order-total-amount-container">
             <h2 class="order-total-amount">Total Amount: <span>{{rooms.totalAmount}}$</span></h2>
             <div class="btn-container">
-                <button form="input-information-form" class="btn palatin-btn" type="submit">Confirm</button>
+                {{!-- form="input-information-form" --}}
+                <button id="confirm" class="btn palatin-btn">Confirm</button>
             </div>
         </div>
     </div>
 </div>
 
+<input type="hidden" id="url-staff" value="{{this.url_staff}}">
 <script src="/js/formValidation.js"></script>
+<script src="/js/socket.io.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    const url_socket = $('#url-staff').val() || 'http://localhost:3000';
+    const socket = io(url_socket); // port này là port của đích đến của socket.io
+    
+    function sendMessage() {
+        let msg = "";
+        const firstName = $("#first-name").val();
+        const lastName = $("#last-name").val();
+        const phone = $("#phone").val();
+        const identity = $("#identity").val();
+        const fullName = $("#fullname").val();
+        if (!fullName){
+            if (firstName && lastName && phone && identity) {
+                msg = firstName + " " + lastName;
+                socket.emit("send-notification", msg);
+                return true;
+            }  else{
+                return false; // điền thiếu thông tin
+            }
+        } else {
+            msg = fullName;
+            socket.emit("send-notification", msg);
+            return true;
+        }
+    } 
+
+    $("#confirm").on("click", function () {
+        console.log("confirm");
+        const flag = sendMessage();
+        if (flag) {
+            $("#input-information-form").submit();
+        }
+    }); 
+</script>

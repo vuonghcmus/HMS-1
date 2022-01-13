@@ -2,6 +2,9 @@ const express = require("express");
 const { engine } = require("express-handlebars");
 const Handlebars = require("handlebars");
 const path = require("path");
+const env = require("dotenv").config();
+const socket = require("socket.io");
+const cors = require("cors");
 const methodOverride = require("method-override");
 const databaseService = require("./services/database.service");
 const helpers = require("./helpers/viewEngine");
@@ -47,7 +50,6 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 routes(app);
 
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
+const server = app.listen(process.env.PORT || 3000, () => {
+  console.log(`App listening on port ${process.env.PORT || 3000}`);
 });
