@@ -1223,6 +1223,12 @@ img {
         @media #{$breakpoint-md} {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+        }
+        @media #{$breakpoint-xs} {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
     }
     .card {
@@ -1527,7 +1533,19 @@ img {
                 padding: 0 15px;
                 color: $white-color;
             }
-            button {
+
+            a {
+                width: 100%;
+                height: 46px;
+                background-color: transparent;
+                border: 1px solid $pri-color;
+                padding: 15px;
+                color: #cccccc;
+                line-height: 100%;
+                margin-bottom: 16px;
+            }
+
+            button{
                 @include trans-duration(500ms);
                 width: 100%;
                 height: 46px;

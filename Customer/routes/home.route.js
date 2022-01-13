@@ -8,7 +8,7 @@ router.get("/contact", homeController.contact)
 router.get("/blog", homeController.blog)
 router.get("/about-us", homeController.aboutUs)
 router.get("/search-booked-rooms", homeController.getSearch)
-
+router.get("/help", homeController.showHelp)
 router.get("/", homeController.show);
 
 module.exports = router

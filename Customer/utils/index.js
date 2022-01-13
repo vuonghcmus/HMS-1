@@ -34,9 +34,13 @@ const calculateDay = (checkin, checkout) => {
     return (checkoutDate.getTime() - checkinDate.getTime())/(1000*60*60*24)
 }
 
+const goBerserk = () => {
+    throw new Error('hehe')
+}
+
 function convertDate(dateIn) {
     return dateIn.toISOString().slice(0, 10)
-  }
+}
 
 
 module.exports = {
@@ -45,4 +49,5 @@ module.exports = {
     findEmptyRoom,
     calculateDay,
     convertDate,
+    goBerserk,
 }

@@ -248,6 +248,85 @@
   }
 }
 
+.iti.iti--allow-dropdown {
+  width: 100%;
+}
+
+.iti__country-list {
+  min-width: 312px;
+}
+
+.error-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  max-width: 90%;
+  text-align: center;
+}
+.error-container .btn {
+  min-width: 200px;
+}
+.error-container h1 {
+  font-size: 3.6rem;
+  color: #cb8670;
+  margin-bottom: 28px;
+}
+.error-container h3 {
+  text-align: justify;
+  margin-bottom: 16px;
+}
+@media only screen and (max-width:767px) {
+  .error-container h3 {
+    text-align: center;
+  }
+}
+
+.search-booked-room-item.service-item .search-price-container {
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-left: 1px solid rgba(0, 0, 0, 0.125);
+}
+.search-booked-room-item.service-item .search-price-container .price-text {
+  font-size: 32px;
+  color: #cb8670;
+  margin-bottom: 0;
+}
+@media only screen and (min-width:768px) and (max-width:991px) {
+  .search-booked-room-item.service-item .search-price-container {
+    margin-top: 8px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    border: none;
+  }
+}
+@media only screen and (max-width:767px) {
+  .search-booked-room-item.service-item .search-price-container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    border: none;
+  }
+}
+
+.price-text {
+  font-size: 32px;
+  color: #cb8670;
+  margin-bottom: 0;
+}
+
+.instruction-text {
+  font-size: 18px;
+}
+
+.help-section span.strong {
+  font-weight: 700;
+  color: #3e3e3e;
+}
+
 /* [Master Stylesheet - v1.0] */
 .booking-table td .active {
   background-color: #cb8670;
@@ -1528,6 +1607,14 @@ img {
   .room-details-area .room-info-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+  }
+}
+@media only screen and (max-width:767px) {
+  .room-details-area .room-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 .room-details-area .card {
@@ -1850,6 +1937,16 @@ img {
   border: 2px solid #cb8670;
   padding: 0 15px;
   color: #ffffff;
+}
+.footer-area .footer-widget-area .subscribe-form a {
+  width: 100%;
+  height: 46px;
+  background-color: transparent;
+  border: 1px solid #cb8670;
+  padding: 15px;
+  color: #cccccc;
+  line-height: 100%;
+  margin-bottom: 16px;
 }
 .footer-area .footer-widget-area .subscribe-form button {
   -webkit-transition-duration: 500ms;
