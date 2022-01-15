@@ -94,7 +94,7 @@ class RoomController {
   async findBusyRoom(req, res, next) {
     const { checkin, checkout } = req.body;
     const busyRooms = await findBusyRoom(
-      process.env.DOMAIN || `http://127.0.0.1:${process.env.PORT || 3000}`,
+      process.env.URL_CUSTOMER || `http://127.0.0.1:${process.env.PORT || 3000}`,
       checkin,
       checkout
     );
