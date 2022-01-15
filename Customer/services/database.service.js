@@ -1,9 +1,16 @@
-const mongoose = require('mongoose');
-
-const databaseService = {
-    async connect() {
-        mongoose.connect(`mongodb+srv://truong2001:truong2001@qlks.nire8.mongodb.net/QuanLyKhachSan?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
-        mongoose.connection.on('error', (e) => { throw e });
-    }
-}
-module.exports = databaseService
+require("dotenv").config();
+module.exports = {
+  connectDatabase: function () {
+    const mongoose = require("mongoose");
+    mongoose.connect(
+      `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@qlks.nire8.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
+      { useNewUrlParser: true, useUnifiedTopology: true }
+    );
+    const db = mongoose.connection;
+    db.on("error", console.error.bind(console, "connection error:"));
+    db.once("open", function () {
+      console.log("Connected to MongoDB");
+      //   callback();
+    });
+  },
+};
