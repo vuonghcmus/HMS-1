@@ -9,38 +9,59 @@ module.exports = {
       page = 1;
     }
 
-    RoomType.find() // find tất cả các data
-      .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
-      .limit(perPage)
-      .exec((err, roomType) => {
-        RoomType.countDocuments(async (err, count) => {
-          // đếm để tính có bao nhiêu trang
-          if (err) return next(err);
+    var type = req.query.type
+    if(type == ""){
+      res.redirect("/room-type?page="+page)
+    }
+    else{
+      if(!type){
+        type = ""
+      }
 
-          let isCurrentPage;
-          const pages = [];
-          for (let i = 1; i <= Math.ceil(count / perPage); i++) {
-            if (i === +page) {
-              isCurrentPage = true;
-            } else {
-              isCurrentPage = false;
+      RoomType.find({
+        "name": {
+          $regex: type,
+          $options: 'mi'
+        }
+      }) // find tất cả các data
+        .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
+        .limit(perPage)
+        .exec((err, roomType) => {
+          RoomType.countDocuments({
+            "name": {
+              $regex: type,
+              $options: 'mi'
             }
-            pages.push({
-              page: i,
-              isCurrentPage: isCurrentPage,
+          }, async (err, count) => {
+            // đếm để tính có bao nhiêu trang
+            if (err) return next(err);
+
+            let isCurrentPage;
+            const pages = [];
+            for (let i = 1; i <= Math.ceil(count / perPage); i++) {
+              if (i === +page) {
+                isCurrentPage = true;
+              } else {
+                isCurrentPage = false;
+              }
+              pages.push({
+                page: i,
+                isCurrentPage: isCurrentPage,
+              });
+            }
+            res.render("room-type/list-room-type", {
+              roomType,
+              pages,
+              isNextPage: page < Math.ceil(count / perPage),
+              isPreviousPage: page > 1,
+              nextPage: +page + 1,
+              previousPage: +page - 1,
+              length: roomType.length,
+              type,
             });
-          }
-          res.render("room-type/list-room-type", {
-            roomType,
-            pages,
-            isNextPage: page < Math.ceil(count / perPage),
-            isPreviousPage: page > 1,
-            nextPage: +page + 1,
-            previousPage: +page - 1,
-            length: roomType.length,
           });
         });
-      });
+    }
   },
   editRoomTypeGet: (req, res) => {
     RoomType.findById(req.params.id, (err, roomType) => {
