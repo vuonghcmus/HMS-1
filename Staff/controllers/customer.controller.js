@@ -46,6 +46,8 @@ const showCustomer = async (req, res) => {
       .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
       .limit(perPage)
       .exec((err, detailOrderRoom) => {
+        console.log(detailOrderRoom)
+
         DetailOrderRoom.countDocuments(
           {
             $and: [
@@ -88,6 +90,7 @@ const showCustomer = async (req, res) => {
               detailOrderRoom[i].customerPhone = customer.phone;
               detailOrderRoom[i].customerId = customer.ID;
               detailOrderRoom[i].roomTypeName = roomType.name;
+              console.log(detailOrderRoom[i])
 
               if (detailOrderRoom[i].detailOrderService.length > 0) {
                 const _orderService = await DetailOrderService.find({
