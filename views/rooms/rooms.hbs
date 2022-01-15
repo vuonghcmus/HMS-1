@@ -1,0 +1,152 @@
+<!-- ##### Breadcumb Area Start ##### -->
+<section class="breadcumb-area bg-img d-flex align-items-center justify-content-center" style="background-image: url(/img/bg-img/bg-6.jpg);">
+    <div class="bradcumbContent">
+        <h2>Rooms</h2>
+    </div>
+</section>
+<!-- ##### Breadcumb Area End ##### -->
+
+<!-- ##### Rooms Area Start ##### -->
+<section class="rooms-area section-padding-0-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-6">
+                <div class="section-heading text-center">
+                    <div class="line-"></div>
+                    <h2>Choose a room</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            {{#each allRooms}}
+            <!-- Single Rooms Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-rooms-area wow fadeInUp" data-wow-delay="100ms">
+                    <!-- Thumbnail -->
+                    <div class="bg-thumbnail bg-img" style="background-image: url({{this.image}});"></div>
+                    <!-- Price -->
+                    <p class="price-from">$ {{this.price}}/night</p>
+                    <!-- Rooms Text -->
+                    <div class="room-text-description rooms-text">
+                        <div class="line"></div>
+                        <h4>{{this.name}}</h4>
+                        <p>{{this.description}}</p>
+                    </div>
+                    <!-- Book Room -->
+                    <a href="/rooms/{{this._id}}" class="book-room-btn btn palatin-btn">View Details</a>
+                </div>
+            </div>
+            {{/each}}
+
+        </div>
+    </div>
+
+{{!-- floating button --}}
+    <button
+        class="btn modal-btn {{#ifCond cart.length '<=' 0}}disabled{{/ifCond}}"
+        {{#ifCond cart.length '>' 0}}
+        data-bs-toggle="modal"
+        data-bs-target="#input-information-modal"
+        {{/ifCond}}
+    >
+        <img src="/img/icon/order-icon.png" alt="">
+        <span>{{cart.length }}</span>
+    </button>
+
+
+    {{!-- modal for confirm booking room --}}
+    <div class="modal" id="input-information-modal" tabindex="-1">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Your booking room</h5>
+            <button type="button" class="fa fa-close btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+            </button>
+        </div>
+        <div class="modal-body">
+            {{message}}
+            {{#each cart.rooms}}
+           <div class="modal-card row align-items-center">
+                <div class="col-md-5 col-6">
+                   <img src="{{this.RoomImage}}" alt="rom type"/>
+                </div>
+                <div class="col-md-5 col-6">
+                   <h4 class="roomtype">{{this.RoomType}}</h4>
+                   <p>
+                       Price:
+                       <span class="roomprice" style="color: #cb8670;">{{this.RoomPrice}}</span>$
+                    </p>
+                    x<span class="roomcount">{{this.listRoom.length}}</span>
+                </div>
+               <div class="col-6 col-md-5 mt-1">
+                    <a class="btn btn-info w-100" data-toggle="collapse" href="#collapse-{{this.RoomTypeID}}" role="button" aria-expanded="false" aria-controls="collapse-{{this.RoomTypeID}}">
+                        More details <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    </a>
+               </div>
+               
+               <div class="col-md-12 collapse"  id="collapse-{{this.RoomTypeID}}">
+               <table class="table">
+                   <thead>
+                       <tr>
+                            <th scope="col">Room</th>
+                            <th scope="col">People</th>
+                            <th scope="col">Checkin</th>
+                            <th scope="col">Checkout</th>
+                        </tr>
+                   </thead>
+                   <tbody>
+                       {{#each this.listRoom}}
+                       <tr>
+                       
+                            <th scope="row">{{this.roomid}}</th>
+                            <td> {{this.people}}</td>
+                            <td class="checkindate">{{this.checkin}}</td>
+                            <td class="checkoutdate">{{this.checkout}}</td>                            
+                        
+                        </tr>
+                        {{/each}}
+                   </tbody>
+                   
+               </table>
+               </div>
+           </div>
+           <div class="my-2" style="border: 1px solid #eee;"></div>
+           {{/each}}
+            <div class="modal-footer">
+                <p></p>
+                <p style="margin-bottom: 0;">Total Rooms: <span id="totalroom">0</span></p>
+                <p>Total Amount: <span id="totalprice">0$</span></p>
+                <div class="d-flex justify-content-between w-100">
+                    <a href="/rooms/clear-cart" class="btn palatin-btn btn-3">Clear All</a>
+                    <a href="/orders" class="btn palatin-btn">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="./js/formValidation.js"></script>
+
+<script>
+    var allPrices=document.getElementsByClassName("roomprice");
+    var allCounts=document.getElementsByClassName("roomcount");
+    var allCheckins=document.getElementsByClassName("checkindate");
+    var allCheckouts=document.getElementsByClassName("checkoutdate");
+    var totalRoom=0;
+    var totalPrice=0;
+    for(let i=0;i<allPrices.length;i++)
+    {
+        const price=parseInt(allPrices[i].innerHTML);
+        const count=parseInt(allCounts[i].innerHTML);
+        const diffdays=(new Date(allCheckouts[i].innerHTML)).getDate()-(new Date(allCheckins[i].innerHTML)).getDate();
+        totalRoom+=count;
+        totalPrice+=price*count*diffdays;
+    }
+    document.getElementById("totalroom").innerHTML=totalRoom;
+    document.getElementById("totalprice").innerHTML=String(totalPrice)+"$";
+</script>
+<!-- ##### Rooms Area End ##### -->
+

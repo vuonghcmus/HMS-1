@@ -1,0 +1,22 @@
+<section class="breadcumb-area bg-img d-flex align-items-center justify-content-center" style="background-image: url(/img/bg-img/bg-5.jpg);">
+    <div class="bradcumbContent">
+        {{!-- <h2>Search Order</h2> --}}
+    </div>
+</section>
+<section class="rooms-area section-padding-0-100">
+    <div class="container card d-flex justify-content-center" style="margin-top:20px;padding-top:20px;border-radius:5px;min-height:200px">
+        {{#if success}}
+    <h3 class="text-center">{{msg}}</h3>
+    <div class="d-flex justify-content-center">
+        <img class="text-center" src="/img/icon/tick.png"/ style="width: 30px;height:30px">
+    </div>
+    {{else}}
+    <h3 class="text-center">    {{msg}}</h3>
+    <div class="d-flex justify-content-center">
+        <img class="text-center" src="/img/icon/abort.png"/ style="width: 30px;height:30px">
+    </div>
+    
+    {{/if}}
+    </div>
+    
+</section>
