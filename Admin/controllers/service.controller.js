@@ -8,12 +8,29 @@ module.exports = {
     if (page < 1) {
       page = 1;
     }
+    var name = req.query.name;
+    if (name == "") {
+      res.redirect("/service?page=" + page);
+    } else {
+      if (!name) {
+        name = "";
+      }
 
-    Service.find() // find tất cả các data
+    Service.find({
+      name: {
+        $regex: name,
+        $options: "mi",
+      },
+    }) // find tất cả các data
       .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
       .limit(perPage)
       .exec((err, service) => {
-        Service.countDocuments((err, count) => {
+        Service.countDocuments({
+          name: {
+            $regex: name,
+            $options: "mi",
+          },
+        }, (err, count) => {
           // đếm để tính có bao nhiêu trang
           if (err) return next(err);
           let isCurrentPage;
@@ -36,9 +53,11 @@ module.exports = {
             isPreviousPage: page > 1,
             nextPage: +page + 1,
             previousPage: +page - 1,
+            name
           });
         });
       });
+    }
   },
   addServiceGet: async (req, res) => {
     const serviceType = await ServiceType.find({});
