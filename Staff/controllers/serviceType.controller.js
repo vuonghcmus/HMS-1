@@ -8,95 +8,72 @@ module.exports = {
     if (page < 1) {
       page = 1;
     }
-
-    ServiceType.find() // find tất cả các data
-      .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
-      .limit(perPage)
-      .exec((err, serviceTypes) => {
-        ServiceType.countDocuments(async (err, count) => {
-          // đếm để tính có bao nhiêu trang
-          if (err) return next(err);
-          const listServices = [];
-
-          for (let i = 0; i < serviceTypes.length; i++) {
-            const _service = await Service.find({
-              _id: { $in: serviceTypes[i].listServices },
-            });
-
-            listServices.push(_service);
-          }
-          let isCurrentPage;
-          const pages = [];
-          for (let i = 1; i <= Math.ceil(count / perPage); i++) {
-            if (i === +page) {
-              isCurrentPage = true;
-            } else {
-              isCurrentPage = false;
+    
+    // Nếu thuộc tính type rỗng reirect để bỏ đi query trống
+    var type = req.query.type;
+    if(type == ""){
+      res.redirect("/service-type?page="+page)
+    }
+    else{
+      if (!type){
+        type = ""
+      }
+      ServiceType.find({
+        "name": {
+          $regex: type,
+          $options: 'mi'
+        }
+      }) // find tất cả các data
+        .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
+        .limit(perPage)
+        .exec((err, serviceTypes) => {
+          ServiceType.countDocuments({
+            "name": {
+              $regex: type,
+              $options: 'mi'
             }
-            pages.push({
-              page: i,
-              isCurrentPage: isCurrentPage,
+          },
+          async (err, count) => {
+            // đếm để tính có bao nhiêu trang
+            if (err) return next(err);
+            const listServices = [];
+  
+            for (let i = 0; i < serviceTypes.length; i++) {
+              const _service = await Service.find({
+                _id: { $in: serviceTypes[i].services },
+              });
+  
+              listServices.push(_service);
+            }
+            let isCurrentPage;
+            const pages = [];
+            for (let i = 1; i <= Math.ceil(count / perPage); i++) {
+              if (i === +page) {
+                isCurrentPage = true;
+              } else {
+                isCurrentPage = false;
+              }
+              pages.push({
+                page: i,
+                isCurrentPage: isCurrentPage,
+              });
+            }
+            res.render("service-type/list-service-type", {
+              serviceTypes,
+              pages,
+              isNextPage: page < Math.ceil(count / perPage),
+              isPreviousPage: page > 1,
+              nextPage: +page + 1,
+              previousPage: +page - 1,
+              services: listServices,
+              length: listServices.length,
+              type,
             });
-          }
-          res.render("service-type/list-service-type", {
-            serviceTypes,
-            pages,
-            isNextPage: page < Math.ceil(count / perPage),
-            isPreviousPage: page > 1,
-            nextPage: +page + 1,
-            previousPage: +page - 1,
-            services: listServices,
-            length: listServices.length,
           });
         });
-      });
-  },
-  editServiceTypeGet: (req, res) => {
-    ServiceType.findById(req.params.id, (err, serviceType) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.render("service-type/edit-service-type", {
-          serviceType,
-        });
-      }
-    });
-  },
-  editServiceTypePost: async (req, res) => {
-    const serviceType = await ServiceType.findById(req.body.id);
-    serviceType.name = req.body.name;
-    serviceType.save();
-    const listServices = serviceType.listServices;
-    for (let i = 0; i < listServices.length; i++) {
-      const service = await Service.findById(listServices[i]);
-      service.type = req.body.name;
-      service.save();
-    }
-    res.redirect("/service-type/list-service-type?page=1");
-  },
-  deleteServiceType: async (req, res) => {
-    const serviceType = await ServiceType.findById(req.params.id);
-    const listServices = serviceType.listServices;
 
-    for (let i = 0; i < listIdProduct.length; i++) {
-      await Service.findByIdAndDelete(listServices[i]);
     }
 
-    await ServiceType.findByIdAndDelete(req.params.id);
-    res.redirect("/service-type/list-service-type?page=1");
-  },
-  addServiceTypePost: (req, res) => {
-    const serviceType = new ServiceType({
-      name: req.body.name,
-      listServices: [],
-    });
 
-    serviceType.save((err) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.redirect("/service-type/list-service-type?page=1");
-      }
-    });
   },
 };

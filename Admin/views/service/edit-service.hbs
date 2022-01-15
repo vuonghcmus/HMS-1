@@ -54,7 +54,7 @@
                
                 {{!-- image --}}
                 <div class="center">
-                  <img  src="{{service.image}}" alt="" width="100px" height="100px" />
+                  <img id="image" style="border-radius: 10px;" src="{{service.image}}" alt="" width="120px" height="auto" />
                 </div>
                 
                 {{!-- choose file image --}}
@@ -90,6 +90,11 @@
 
               <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
               <script>
+                $('#fileImageService').change(function(e){
+                  var fileName = e.target.files[0].name;
+                  $('#image').attr('src', URL.createObjectURL(e.target.files[0]));
+                });
+
                 function myFunction(){
                   (async () =>{                     
                     const name = $('#name').val();

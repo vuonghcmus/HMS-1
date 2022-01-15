@@ -3,7 +3,7 @@ const StaffController = require("../controllers/staff.controller.js");
 
 const router = express.Router();
 
-router.get("/list-staff", StaffController.getAllStaff);
+router.get("/", StaffController.getAllStaff);
 
 // add staff
 router.get("/add-staff", (req, res) => {

@@ -20,7 +20,7 @@ module.exports = {
 
           for (let i = 0; i < serviceTypes.length; i++) {
             const _service = await Service.find({
-              _id: { $in: serviceTypes[i].listServices },
+              _id: { $in: serviceTypes[i].services },
             });
 
             listServices.push(_service);
@@ -65,37 +65,41 @@ module.exports = {
   editServiceTypePost: async (req, res) => {
     const serviceType = await ServiceType.findById(req.body.id);
     serviceType.name = req.body.name;
+    serviceType.description = req.body.description;
+    serviceType.image = req.body.urlImage;
     serviceType.save();
-    const listServices = serviceType.listServices;
+    const listServices = serviceType.services;
     for (let i = 0; i < listServices.length; i++) {
       const service = await Service.findById(listServices[i]);
       service.type = req.body.name;
       service.save();
     }
-    res.redirect("/service-type/list-service-type?page=1");
+    res.redirect("/service-type?page=1");
   },
   deleteServiceType: async (req, res) => {
     const serviceType = await ServiceType.findById(req.params.id);
-    const listServices = serviceType.listServices;
+    const listServices = serviceType.services;
 
-    for (let i = 0; i < listIdProduct.length; i++) {
+    for (let i = 0; i < listServices.length; i++) {
       await Service.findByIdAndDelete(listServices[i]);
     }
 
     await ServiceType.findByIdAndDelete(req.params.id);
-    res.redirect("/service-type/list-service-type?page=1");
+    res.redirect("/service-type?page=1");
   },
   addServiceTypePost: (req, res) => {
     const serviceType = new ServiceType({
       name: req.body.name,
-      listServices: [],
+      description: req.body.description,
+      image: req.body.urlImage,
+      services: [],
     });
 
     serviceType.save((err) => {
       if (err) {
         console.log(err);
       } else {
-        res.redirect("/service-type/list-service-type?page=1");
+        res.redirect("/service-type?page=1");
       }
     });
   },

@@ -9,9 +9,13 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Admin</title>
-    <link href="/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/tooplate-style.css" />
+    <link rel="stylesheet" href="/css/styles.css"/>
     <link rel="stylesheet" href="/css/my_style.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    {{{_sections.script_revenue_chart}}}
+    {{{_sections.css_chart}}}
 
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -126,46 +130,50 @@
             <div class="nav">
               <div class="sb-sidenav-menu-heading">Tài khoản</div>
 
-              <a class="nav-link" href="/staff/list-staff?page=1">
-                <div class="sb-nav-link-icon"><i
-                    class="fas fa-list-ul"
-                  ></i></div>
-                Xem danh sách
-              </a>              
-
-              <div class="sb-sidenav-menu-heading">Doanh thu</div>
-              <a class="nav-link" href="/product/list-product/1">
-                <div class="sb-nav-link-icon"><i
-                    class="fas fa-list-ul"
-                  ></i></div>
-                Tổng doanh thu
-              </a>              
-
-              <div class="sb-sidenav-menu-heading">Dịch vụ</div>
-              <a class="nav-link" href="/service/list-service?page=1">
+              <a class="nav-link" href="/staff?page=1">
                 <div class="sb-nav-link-icon"><i
                     class="fas fa-list-ul"
                   ></i></div>
                 Xem danh sách
               </a>
-              
-              <a class="nav-link" href="/service-type/list-service-type?page=1">
-                <div class="sb-nav-link-icon"><i class="fas fa-indent"></i></div>
+
+              <div class="sb-sidenav-menu-heading">Thống kê</div>
+              <a class="nav-link" href="/revenue?page=1">
+                <div class="sb-nav-link-icon"><i
+                    class="fas fa-list-ul"
+                  ></i></div>
+                Doanh thu
+              </a>
+
+              <a class="nav-link" href="/revenue?page=1">
+                <div class="sb-nav-link-icon"><i
+                    class="fas fa-list-ul"
+                  ></i></div>
+                Truy cập
+              </a>
+
+
+              <div class="sb-sidenav-menu-heading">Dịch vụ</div>
+              <a class="nav-link" href="/service?page=1">
+                <div class="sb-nav-link-icon"><i
+                    class="fas fa-list-ul"
+                  ></i></div>
+                Xem danh sách
+              </a>
+
+              <a class="nav-link" href="/service-type?page=1">
+                <div class="sb-nav-link-icon"><i
+                    class="fas fa-indent"
+                  ></i></div>
                 Loại dịch vụ
               </a>
 
-
-              <div class="sb-sidenav-menu-heading">Phòng</div>
-              <a class="nav-link" href="/room/list-room?page=1">
+              <div class="sb-sidenav-menu-heading">Loại phòng</div>
+              <a class="nav-link" href="/room-type?page=1">
                 <div class="sb-nav-link-icon"><i
                     class="fas fa-list-ul"
                   ></i></div>
                 Xem danh sách
-              </a>
-
-              <a class="nav-link" href="/room-type/list-room-type?page=1">
-                <div class="sb-nav-link-icon"><i class="fas fa-indent"></i></div>
-                Loại phòng
               </a>
             </div>
           </div>
@@ -182,6 +190,8 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+
+    {{{_sections.js_revenue_chart}}}
 
     <script src="/js/scripts.js"></script>
     <script src="/js/search.js"></script>

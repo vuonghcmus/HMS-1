@@ -1,22 +1,17 @@
 <div class="container-fluid">
-  <div id="search-form" class="row mt-3 justify-content-start">
-
-    <div class="col-12 col-md-6 col-xl-8 mb-3">
-        <a class="btn btn-primary btn-block gradient-custom-4" href="/service/add-service">
-          <i class="fas fa-plus-circle"></i>
-          Thêm dịch vụ
-        </a>
-    </div>
-
+  <div id="search-form" class="row mt-3 justify-content-end">
     <div class="col-12 col-md-6 col-xl-4 mb-3">
-      <div class="p-1 bg-light rounded rounded-pill shadow-lg d-flex justify-content-end">
-        <div class="input-group">
-          <input id="myInput" type="search" onkeyup="mySearchFunction()" placeholder="Nhập tên dịch vụ bạn cần tìm?" aria-describedby="btn-search" class="form-control border-0 bg-light">
-          <div class="input-group-append">
-            <button id="btn-search" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
+      <form  action="/service">   
+          <div class="p-1 bg-light rounded rounded-pill shadow-lg d-flex justify-content-end">
+          <div class="input-group">
+            <input id="myInput" type="search" name = "name" placeholder="Nhập tên dịch vụ bạn cần tìm?" aria-describedby="btn-search" class="form-control border-0 bg-light">
+            <div class="input-group-append">
+              <button id="btn-search" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
+            </div>
           </div>
         </div>
-      </div>
+      </form>
+      
     </div>
   </div>
 </div>
@@ -27,21 +22,20 @@
       <thead>
         <tr>
           <th>Tên dịch vụ</th>
-          <th>Mô tả</th>
-          <th>Giá</th>
-          <th>Ảnh</th>
-          <th>Loại dịch vụ</th>
-          <th>Điều chỉnh</th>
+          <th class="text-center">Mô tả</th>
+          <th class="text-center">Giá</th>
+          <th class="text-center">Ảnh</th>
+          <th class="text-center">Loại dịch vụ</th>
         </tr>
       </thead>
 
       <tbody>
         {{#each service}}
           <tr>
-            <td>{{this.name}}</td>
+            <td><b>{{this.name}}</b></td>
             <td>{{this.description}}</td>
-            <td>{{this.price}}</td>            
-            <td>
+            <td class="text-center">{{this.price}}</td>            
+            <td class="text-center">
               <a href="{{this.image}}" target="_blank">
                 <img 
                 src="{{this.image}}" 
@@ -52,29 +46,7 @@
                 style="border-radius: 10px;">
               </a>
             </td>
-            <td>{{this.type}}</td>
-             <td>
-              <div class="row text-center">
-                <div class="col-4">
-                  <a href="/service/edit-service/{{_id}}">
-                    <i class="far fa-edit" title="Chỉnh sửa dịch vụ"></i>
-                  </a>
-                </div>
-
-                <div class="col-4">
-                  <a
-                    href="/service/delete-service/{{_id}}"
-                    onclick="return confirm('Bạn có muốn xóa dịch vụ không?')"
-                  >
-                    <i
-                      class="fas fa-trash"
-                      style="color: red"
-                      title="Xóa dịch vụ"
-                    ></i>
-                  </a>
-                </div>
-              </div>
-            </td>
+            <td class="text-center">{{this.type}}</td>             
           </tr>
         {{/each}}
       </tbody>
@@ -83,23 +55,23 @@
 </div>
 
 <div class="center">
-  <div class="mb-2 position-absolute" style="bottom: 0px;">
+  <div class="mb-2">
       <nav aria-label="Page navigation example">
           <ul class="pagination">
               <li class="page-item {{#unless this.isPreviousPage}} disabled {{/unless}}">
-                  <a class="page-link " href="/service/list-service?page={{this.previousPage}}" aria-label="Previous">
+                  <a class="page-link " href="/service?page={{this.previousPage}}&name={{name}}" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
                       <span class="sr-only">Previous</span>
                   </a>
               </li>
               {{#each pages}}
                   <li class="page-item {{#if this.isCurrentPage}} active {{/if}}">
-                      <a class="page-link" href="/service/list-service?page={{this.page}}">{{this.page}}</a>
+                      <a class="page-link" href="/service?page={{this.page}}&name={{../name}}">{{this.page}}</a>
                   </li>
               {{/each}}
 
               <li class="page-item {{#unless this.isNextPage}} disabled {{/unless}}">
-                  <a class="page-link" href="/service/list-service?page={{this.nextPage}}" aria-label="Next">
+                  <a class="page-link" href="/service?page={{this.nextPage}}&name={{name}}" aria-label="Next">
                       <span aria-hidden="true">&raquo;</span>
                       <span class="sr-only">Next</span>
                   </a>

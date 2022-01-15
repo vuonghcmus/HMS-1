@@ -67,14 +67,14 @@ module.exports = {
           req.body.serviceType,
           {
             $push: {
-              listServices: service._id,
+              services: service._id,
             },
           },
           (err, cha) => {
             if (err) {
               console.log(err);
             } else {
-              res.redirect("/service/list-service?page=1");
+              res.redirect("/service?page=1");
             }
           }
         );
@@ -95,7 +95,7 @@ module.exports = {
   // using async await
   editServicePost: async (req, res) => {
     const currentServiceType = await ServiceType.find({
-      listServices: req.body.id,
+      services: req.body.id,
     }).clone();
 
     const _service = await Service.findByIdAndUpdate(
@@ -116,7 +116,7 @@ module.exports = {
           currentServiceType[0]._id,
           {
             $pull: {
-              listServices: service._id,
+              services: service._id,
             },
           },
           async (err, cha) => {
@@ -127,14 +127,14 @@ module.exports = {
                 req.body.serviceType,
                 {
                   $addToSet: {
-                    listServices: service._id,
+                    services: service._id,
                   },
                 },
                 (err) => {
                   if (err) {
                     console.log(err);
                   } else {
-                    res.redirect("/service/list-service?page=1");
+                    res.redirect("/service?page=1");
                   }
                 }
               ).clone();
@@ -150,21 +150,21 @@ module.exports = {
       if (err) return next(err);
 
       const currentServiceType = await ServiceType.find({
-        listServices: req.params.id,
+        services: req.params.id,
       }).clone();
       // find category and remove Service id
       await ServiceType.findByIdAndUpdate(
         currentServiceType[0]._id,
         {
           $pull: {
-            listServices: req.params.id,
+            services: req.params.id,
           },
         },
         (err, cha) => {
           if (err) {
             console.log(err);
           } else {
-            res.redirect("/service/list-service?page=1");
+            res.redirect("/service?page=1");
           }
         }
       ).clone();

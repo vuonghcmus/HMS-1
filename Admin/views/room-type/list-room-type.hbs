@@ -26,19 +26,12 @@
     <table id="myTable" class="table table-bordered">
       <thead>
         <tr>
-          {{!-- <th width="15%">Loại phòng</th>
-          <th width="10%">Diện tích</th>
-          <th width="12%">Giường đơn/đôi</th>
-          <th width="10%">Mô tả</th>
-          <th width="10%">Ảnh</th>
-          <th width="12%">Số người tối đa</th>
-          <th width="20%">Danh sách phòng</th>
-          <th width="15%">Điều chỉnh</th> --}}
-          <th>Loại phòng</th>
+          <th>Tên</th>
           <th>Diện tích</th>
-          <th>Giường đơn/đôi</th>
+          <th>Số giường</th>
           <th>Mô tả</th>
           <th>Ảnh</th>
+          <th>Loại</th>
           <th>Số người tối đa</th>
           <th>Danh sách phòng</th>
           <th>Điều chỉnh</th>
@@ -50,15 +43,65 @@
           <tr>
             <td><h6>{{this.name}}</h6></td>            
             <td>{{this.area}} m<sup>2</sup></td>
-            <td>{{this.singleBed}}/{{this.doubleBed}}</td>
+            <td>{{this.bed}}</td>
             <td>{{this.description}}</td>
             <td>
               <a href="{{this.image}}" target="_blank">
                 <img src="{{this.image}}" alt="{{this.name}}" class="img-fluid" width="150px" height="auto">
               </a>
             </td>
-            <td>{{this.maxOfPeople}}</td>
-            <td class="list-room{{@index}}"></td>
+            <td>{{this.type}}</td>
+            <td>{{this.MaxOfPeople}}</td>
+            <td>
+              {{#each this.rooms}}
+                <input type="hidden" id="lengthRooms-{{@../index}}" value="{{../this.rooms.length}}">
+                <div class="d-flex justify-content-around">
+                      <p>{{this}}</p>
+                    
+                      <a href="" data-bs-toggle="modal" data-bs-target="#edit-room-{{@../index}}-{{@index}}">
+                        <i class="far fa-edit" style="font-size: 15px;"
+                           title="Chỉnh sửa phòng"></i>
+                        </i>
+                      </a>
+
+                      <div class="modal fade" id="edit-room-{{@../index}}-{{@index}}" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel1">Chỉnh sửa phòng</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <form id="edit-room-form-{{@../index}}-{{@index}}" action="/room-type/edit-room" method="POST">
+                                <input type="hidden" name="roomTypeId" value="{{../_id}}">
+                                <div class="mb-3">
+                                  <label for="new-room-name" class="col-form-label">Tên phòng mới</label>
+                                  <input type="hidden" name="oldRoomName" value="{{this}}">
+                                  <input name="newRoomName" type="text" class="form-control" id="new-room-name" required>                              
+                                </div>                        
+                              </form>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                              <button id="btn-edit-room-{{@../index}}-{{@index}}" type="button" class="btn btn-primary">Cập nhật</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <a
+                        class="delete-room-{{this}}"
+                        href="/room-type/delete-room?roomName={{this}}&roomTypeId={{../_id}}"
+                        onclick="return confirm('Bạn có muốn xóa phòng {{this}} không')"
+                        >
+                      <i class="fas fa-trash" style="color: red; font-size: 15px" 
+                        title="Xóa phòng" >
+                      </i>
+                    </a>
+                </div>
+              {{/each}} 
+                           
+            </td>
             <td>
               <div class="row">
                 <div class="col-4">
@@ -69,14 +112,46 @@
                 </div>
 
                 <div class="col-4">
+                  <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal-{{@index}}">
+                    <i class="fas fa-plus-circle" style="font-size: 15px; color:green"
+                    title="Thêm phòng">
+                    </i>
+                  </a>
+
+                  <div class="modal fade" id="exampleModal-{{@index}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Thêm phòng</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <form id="add-room-{{@index}}" action="/room-type/add-room" method="POST">
+                            <input type="hidden" name="roomTypeId" value="{{_id}}">
+                            <div class="mb-3">
+                              <label for="recipient-name" class="col-form-label">Tên phòng</label>
+                              <input name="roomName" type="text" class="form-control" id="recipient-name" required>                              
+                            </div>                        
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                          <button id="btn-add-room-{{@index}}" type="button" class="btn btn-primary">Thêm phòng</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>               
+
+                <div class="col-4">
                   <a
                    href="/room-type/delete-room-type/{{_id}}"
                   onclick="return confirm('Bạn có muốn xóa loại phòng này không')"
-                >
-                  <i class="fas fa-trash" style="color: red; font-size: 15px" 
-                    title="Xóa loại phòng" >
-                  </i>
-                </a>              
+                  >
+                    <i class="fas fa-trash" style="color: red; font-size: 15px" 
+                      title="Xóa loại phòng" >
+                    </i>
+                  </a>              
                 </div>
               </div>                      
           </tr>
@@ -86,70 +161,78 @@
   </div>
 </div>
 
-<input type="hidden" value={{length}} id="length">
+<input type="hidden" id="length" value="{{length}}">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
   $(document).ready(function(){
     const length = $('#length').val();
-    for(let i = 0; i < length; i++){
-      $(".list-room"+i).append($(".room"+i));
-    }
-  });  
+    for (let i = 0; i < length; i++) {
+
+      $(`#btn-add-room-${i}`).on('click', function() {
+          $.ajax({
+            url: '/room-type/add-room',
+            type: 'POST',
+            data: $(`#add-room-${i}`).serialize(),
+            success: function(data){
+              alert('Thêm phòng thành công');
+              location.reload();
+            },
+            error: function(error){
+              alert('Phòng đã tồn tại');
+              // hide modal
+              $(`#exampleModal-${i}`).modal('hide');
+
+            }
+          });
+      });
+      
+      const lengthRoomsOfRoomType = $(`#lengthRooms-${i}`).val();
+      for (let j = 0; j < lengthRoomsOfRoomType; j++){       
+       
+        $(`#btn-edit-room-${i}-${j}`).on('click', function(){
+            $.ajax({
+            url: '/room-type/edit-room',
+            type: 'POST',
+            data: $(`#edit-room-form-${i}-${j}`).serialize(),
+            success: function(data){
+              alert('Cập nhật thành công');
+              location.reload();
+            },
+            error: function(error){
+              alert('Phòng đã tồn tại');
+              // hide modal
+              $(`#edit-room-${i}-${j}`).modal('hide');
+            }
+          });
+        });
+      }
+     
+    }        
+    
+    
+    
+  });
+  
 </script>
 
-{{#each rooms}}
-  <div class="room{{@index}}">
-    {{#if this}}
-      {{#each this}}      
-          <div class="room d-flex justify-content-between mb-3">
-            <div style="display: flex;">                       
-              <div>
-                <p>Phòng: {{this.roomNumber}}</p>
-                {{#ifCond this.status '==' false}}
-                  <p style="color: green;">Trống</p>
-                {{else}}
-                  <p style="color: red;">Đã đặt</p>
-                {{/ifCond}}
-              </div>
-            </div>         
-            
-            <div>
-              <a href="/room/delete-room/{{_id}}" 
-                onclick="return confirm('Bạn có muốn xóa phòng khỏi loại phòng này không')">
-                <i class="fas fa-trash" 
-                  style="color: red; font-size: 15px; margin-right: 20px"
-                  title="Xóa phòng" >
-                </i>
-              </a>              
-            </div>
-
-          </div>      
-      {{/each}}
-    {{else}}
-      <h6>Không có phòng nào</h6>
-    {{/if}}
-  </div>
-{{/each}}
-
 <div class="center">
-  <div class="mb-2 position-absolute" style="bottom: 0px;">
+  <div class="mb-2">
       <nav aria-label="Page navigation example">
           <ul class="pagination">
               <li class="page-item {{#unless this.isPreviousPage}} disabled {{/unless}}">
-                  <a class="page-link " href="/room-type/list-room-type?page={{this.previousPage}}" aria-label="Previous">
+                  <a class="page-link " href="/room-type?page={{this.previousPage}}" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
                       <span class="sr-only">Previous</span>
                   </a>
               </li>
               {{#each pages}}
                   <li class="page-item {{#if this.isCurrentPage}} active {{/if}}">
-                      <a class="page-link" href="/room-type/list-room-type?page={{this.page}}">{{this.page}}</a>
+                      <a class="page-link" href="/room-type?page={{this.page}}">{{this.page}}</a>
                   </li>
               {{/each}}
 
               <li class="page-item {{#unless this.isNextPage}} disabled {{/unless}}">
-                  <a class="page-link" href="/room-type/list-room-type?page={{this.nextPage}}" aria-label="Next">
+                  <a class="page-link" href="/room-type?page={{this.nextPage}}" aria-label="Next">
                       <span aria-hidden="true">&raquo;</span>
                       <span class="sr-only">Next</span>
                   </a>
@@ -158,3 +241,4 @@
       </nav>
   </div>
 </div>
+

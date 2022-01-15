@@ -1,154 +1,195 @@
 const Customer = require("../models/account/customer.model");
-const bcrypt = require("bcrypt");
+const DetailOrderRoom = require("../models/order/detailOrderRoom.model");
+const Service = require("../models/service/service.model");
+const DetailOrderService = require("../models/order/detailOrderService.model");
+const RoomType = require("../models/room/roomType.model");
 
-module.exports = {
-  getAllCustomer: (req, res, next) => {
-    let perPage = 5; // số lượng sản phẩm xuất hiện trên 1 page
-    let page = req.query.page || 1; // số page hiện tại
-    if (page < 1) {
-      page = 1;
+const showCustomer = async (req, res) => {
+  const status = req.query.status;
+  let perPage = 2; // số lượng sản phẩm xuất hiện trên 1 page
+  let page = req.query.page || 1; // số page hiện tại
+  if (page < 1) {
+    page = 1;
+  }
+
+  var name = req.query.name;
+
+  if (name == "") {
+    res.redirect("/customer?status=" + status + "&page=" + page);
+  } else {
+    if (!name) {
+      name = "";
+    }
+    const customer = await Customer.find({
+      fullname: {
+        $regex: name,
+        $options: "mi",
+      },
+    });
+    var customerIdList = [];
+    for (var i = 0; i < customer.length; i++) {
+      customerIdList.push(customer[i]._id);
     }
 
-    Customer.find() // find tất cả các data
+    DetailOrderRoom.find({
+      $and: [
+        {
+          customerID: {
+            $in: customerIdList,
+          },
+        },
+        {
+          status: status,
+        },
+      ],
+    })
       .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
       .limit(perPage)
-      .exec((err, customers) => {
-        Customer.countDocuments((err, count) => {
-          // đếm để tính có bao nhiêu trang
-          if (err) return next(err);
-          let isCurrentPage;
-          const pages = [];
-          for (let i = 1; i <= Math.ceil(count / perPage); i++) {
-            if (i === +page) {
-              isCurrentPage = true;
-            } else {
-              isCurrentPage = false;
+      .exec((err, detailOrderRoom) => {
+        DetailOrderRoom.countDocuments(
+          {
+            $and: [
+              {
+                customerID: {
+                  $in: customerIdList,
+                },
+              },
+              {
+                status: status,
+              },
+            ],
+          },
+          async (err, count) => {
+            // đếm để tính có bao nhiêu trang
+            if (err) return next(err);
+
+            let isCurrentPage;
+            const pages = [];
+            for (let i = 1; i <= Math.ceil(count / perPage); i++) {
+              if (i === +page) {
+                isCurrentPage = true;
+              } else {
+                isCurrentPage = false;
+              }
+              pages.push({
+                page: i,
+                isCurrentPage: isCurrentPage,
+              });
             }
-            pages.push({
-              page: i,
-              isCurrentPage: isCurrentPage,
-            });
+            const listOrderServices = [];
+            for (let i = 0; i < detailOrderRoom.length; i++) {
+              const customer = await Customer.findById(
+                detailOrderRoom[i].customerID
+              );
+              const roomType = await RoomType.findById(
+                detailOrderRoom[i].roomTypeID
+              );
+              detailOrderRoom[i].customerName = customer.fullname;
+              detailOrderRoom[i].customerPhone = customer.phone;
+              detailOrderRoom[i].customerId = customer.ID;
+              detailOrderRoom[i].roomTypeName = roomType.name;
+
+              if (detailOrderRoom[i].detailOrderService.length > 0) {
+                const _orderService = await DetailOrderService.find({
+                  _id: {
+                    $in: detailOrderRoom[i].detailOrderService,
+                  },
+                });
+
+                const _service = await Service.findById(
+                  _orderService[0].serviceID
+                );
+
+                _orderService[0].serviceName = _service.name;
+                _orderService[0].serviceImage = _service.image;
+                listOrderServices.push(_orderService);
+              } else {
+                listOrderServices.push([]);
+              }
+            }
+            if (status === "pending") {
+              res.render("customer/list-customer-pending", {
+                detailOrderRoom,
+                pages,
+                isNextPage: page < Math.ceil(count / perPage),
+                isPreviousPage: page > 1,
+                nextPage: +page + 1,
+                previousPage: +page - 1,
+                orderServices: listOrderServices,
+                length: listOrderServices.length,
+                name: name,
+              });
+            } else {
+              res.render("customer/list-customer-using", {
+                detailOrderRoom,
+                pages,
+                isNextPage: page < Math.ceil(count / perPage),
+                isPreviousPage: page > 1,
+                nextPage: +page + 1,
+                previousPage: +page - 1,
+                orderServices: listOrderServices,
+                length: listOrderServices.length,
+                name: name,
+              });
+            }
           }
-          res.render("customer/list-customer", {
-            customers,
-            pages,
-            isNextPage: page < Math.ceil(count / perPage),
-            isPreviousPage: page > 1,
-            nextPage: +page + 1,
-            previousPage: +page - 1,
+        );
+      });
+  }
+};
+
+module.exports = {
+  showAllCustomer: async (req, res) => {
+    return showCustomer(req, res);
+  },
+  acceptOrderRoom: (req, res) => {
+    // find detailOrderRoom by id and update status
+    DetailOrderRoom.findById(req.params.id, async (err, detailOrderRoom) => {
+      if (err) return next(err);
+
+      // Unlock for customer account if account was loocked
+      await Customer.findByIdAndUpdate(detailOrderRoom.customerID, {
+        status: true,
+      });
+
+      detailOrderRoom.status = "using";
+      detailOrderRoom.dateOfCheckIn = new Date();
+      detailOrderRoom.save((err) => {
+        if (err) {
+          return res.status(500).json({
+            status: "fail",
+            message: "Accept order room fail",
           });
-        });
+        }
+        return res.status(201).json(detailOrderRoom);
       });
+    });
   },
-  addCustomer: async (req, res) => {
-    // check if username is exist using await
-    const checkUsername = await Customer.findOne({
-      username: req.body.username,
-    });
-    if (checkUsername) {
-      return res.render("customer/add-customer", {
-        error: "Username đã tồn tại",
-      });
-    }
+  rejectOrderRoom: (req, res) => {
+    // find detailOrderRoom by id and delete
+    // DetailOrderRoom.findByIdAndDelete(req.params.id, (err, detailOrderRoom) => {
+    //   if (err) {
+    //     return res.status(500).json({
+    //       status: "fail",
+    //       message: "Reject order room fail",
+    //     });
+    //   }
+    //   return res.status(201).json(detailOrderRoom);
+    // });
 
-    // check if email is exist using await
-    const checkPhoneNumber = await Customer.findOne({ phone: req.body.phone });
-    if (checkPhoneNumber) {
-      return res.render("customer/add-customer", {
-        error: "Số điện thoại đã tồn tại",
-      });
-    }
-
-    const checkID = await Customer.findOne({ ID: req.body.id });
-    if (checkID) {
-      return res.render("customer/add-customer", {
-        error: "ID đã tồn tại",
-      });
-    }
-
-    // hash password
-    const hash = bcrypt.hashSync(req.body.password.toString(), 10);
-
-    const newCustomer = new Customer({
-      username: req.body.username,
-      password: hash,
-      fullname: req.body.name,
-      phone: req.body.phone,
-      ID: req.body.id,
-      status: true,
-    });
-    newCustomer.save((err) => {
+    DetailOrderRoom.findById(req.params.id, async (err, detailOrderRoom) => {
       if (err) return next(err);
-      return res.redirect("/customer/list-customer?page=1");
-    });
-  },
-  editCustomerGet: (req, res) => {
-    Customer.findById(req.params.id, (err, customer) => {
-      if (err) return next(err);
-      res.render("customer/edit-customer", {
-        customer,
-      });
-    });
-  },
-  editCustomerPost: async (req, res) => {
-    // check if phone number is exist using await
-    const checkPhoneNumber = await Customer.findOne({ phone: req.body.phone });
-    const checkID = await Customer.findOne({ ID: req.body.ID });
-    const customer = await Customer.findById(req.body._id);
-    if (checkPhoneNumber) {
-      return res.render("customer/edit-customer", {
-        error: "Số điện thoại đã tồn tại",
-        customer,
-      });
-    }
-    if (checkID) {
-      return res.render("customer/edit-customer", {
-        error: "ID đã tồn tại",
-        customer,
-      });
-    }
 
-    customer.fullname = req.body.name;
-    customer.phone = req.body.phone;
-    customer.ID = req.body.ID;
-    customer.save((err) => {
-      if (err) return next(err);
-      return res.redirect("/customer/list-customer?page=1");
-    });
-  },
-
-  blockCustomer: (req, res) => {
-    Customer.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: {
-          status: false,
-        },
-      },
-      (err, account) => {
-        if (err) return next(err);
-        res.redirect("/customer/list-customer?page=1");
-      }
-    );
-  },
-  unblockCustomer: (req, res) => {
-    Customer.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: {
-          status: true,
-        },
-      },
-      (err, account) => {
-        if (err) return next(err);
-        res.redirect("/customer/list-customer?page=1");
-      }
-    );
-  },
-  deleteCustomer: (req, res) => {
-    Customer.findByIdAndDelete(req.params.id, (err, account) => {
-      if (err) return next(err);
-      res.redirect("/customer/list-customer?page=1");
+      detailOrderRoom.status = "reject";
+      detailOrderRoom.save((err) => {
+        if (err) {
+          return res.status(500).json({
+            status: "fail",
+            message: "Reject order room fail",
+          });
+        }
+        return res.status(201).json(detailOrderRoom);
+      });
     });
   },
 };

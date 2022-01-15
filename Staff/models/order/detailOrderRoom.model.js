@@ -2,9 +2,15 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const DetailOrderRoomSchema = new Schema(
   {
-    room: { type: Schema.Types.ObjectId },
-    dateOfCheckIn: { type: Schema.Types.Date },
-    dateOfCheckOut: { type: Schema.Types.Date },
+    roomID: { type: Schema.Types.String },
+    customerID: { type: Schema.Types.ObjectId },
+    roomTypeID: { type: Schema.Types.ObjectId },
+    people: { type: Schema.Types.Number },
+    dateOfCheckIn: { type: Schema.Types.Date, format: "DD/MM/YYYY hh:mm:ss" },
+    dateOfCheckOut: { type: Schema.Types.Date, format: "DD/MM/YYYY hh:mm:ss" },
+    status: { type: Schema.Types.String },
+    detailOrderService: [{ type: Schema.Types.ObjectId }],
+    price: { type: Schema.Types.Number },
   },
   {
     collection: "DetailOrderRoom",
