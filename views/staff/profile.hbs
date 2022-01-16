@@ -1,0 +1,97 @@
+<section
+  class="vh-50 bg-image"
+  style="background-image: url('https://mdbootstrap.com/img/Photos/new-templates/search-box/img4.jpg'); background-size: cover;"
+>
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card mt-4" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-3">Thông tin tài khoản</h2>
+
+              <input type="hidden" name="id" value="{{id}}" />
+
+              <div class="form-outline mb-2">
+                <label class="form-label" for="username">Username</label>
+                <input
+                  value="{{staff.username}}"
+                  type="text"
+                  id="username"
+                  class="form-control form-control-lg"
+                  readonly
+                />
+              </div>
+
+              <div class="form-outline mb-2">
+                <label class="form-label" for="name">Họ tên</label>
+                <input
+                  value="{{staff.fullname}}"
+                  type="text"
+                  id="name"
+                  class="form-control form-control-lg"
+                  readonly
+                />
+              </div>
+
+              <div class="form-outline mb-2">
+                <label class="form-label" for="birthday">Ngày sinh</label>
+                <input
+                  value="{{staff.birthday}}"
+                  type="text"
+                  id="birthday"
+                  class="form-control form-control-lg"
+                  readonly
+                />
+              </div>
+
+              <div class="form-outline mb-2">
+                <label class="form-label" for="phone-number">Số điện thoại</label>
+                <input
+                  value="{{staff.phone}}"
+                  type="text"
+                  id="phone-number"
+                  class="form-control form-control-lg"
+                  readonly
+                />
+              </div>
+
+              <div class="form-outline mb-2">
+                <label class="form-label" for="email">Email</label>
+                <input
+                  value="{{staff.email}}"
+                  type="text"
+                  id="email"
+                  class="form-control form-control-lg"
+                  readonly
+                />
+              </div>
+
+              <div class="form-outline mb-2">
+                <label class="form-label" for="bankAccountNumber">Số tài khoản</label>
+                <input
+                  value="{{staff.bankAccountNumber}}"
+                  type="text"
+                  id="bankAccountNumber"
+                  class="form-control form-control-lg"
+                  readonly
+                />
+              </div>
+
+              <div class="form-outline mb-2">
+                <label class="form-label" for="ID">ID</label>
+                <input
+                  value="{{staff.ID}}"
+                  type="text"
+                  id="ID"
+                  class="form-control form-control-lg"
+                  readonly
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
