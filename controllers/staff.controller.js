@@ -108,15 +108,15 @@ module.exports = {
   },
   editStaffPost: async (req, res) => {
     // check if email is exist using await
-    const checkEmail = await Staff.findOne({ email: req.body.email });
+    //const checkEmail = await Staff.findOne({ email: req.body.email });
     // find staff by id and update using await
     const staff = await Staff.findById(req.body._id);
-    if (checkEmail) {
-      return res.render("staff/edit-staff", {
-        error: "Email đã tồn tại",
-        staff,
-      });
-    }
+    // if (checkEmail) {
+    //   return res.render("staff/edit-staff", {
+    //     error: "Email đã tồn tại",
+    //     staff,
+    //   });
+    // }
 
     staff.fullname = req.body.name;
     staff.birthday = req.body.birthday;
