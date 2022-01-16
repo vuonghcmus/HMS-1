@@ -1,6 +1,5 @@
 <div class="container-fluid">
   <div id="search-form" class="row mt-3 justify-content-start">
-
     <div class="col-12 col-md-6 col-xl-8 mb-3">
         <a class="btn btn-primary btn-block gradient-custom-4" href="/account/add-customer">
           <i class="fas fa-plus-circle"></i>
@@ -9,14 +8,17 @@
     </div>
 
     <div class="col-12 col-md-6 col-xl-4 mb-3">
-      <div class="p-1 bg-light rounded rounded-pill shadow-lg d-flex justify-content-end">
-        <div class="input-group">
-          <input id="myInput" type="search" onkeyup="mySearchFunction()" placeholder="Nhập username bạn cần tìm?" aria-describedby="btn-search" class="form-control border-0 bg-light">
-          <div class="input-group-append">
-            <button id="btn-search" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
+      <form action="/account">
+        <div class="p-1 bg-light rounded rounded-pill shadow-lg d-flex justify-content-end">
+          <div class="input-group">
+            <input id="myInput" type="search" name="username" placeholder="Nhập username bạn cần tìm?"
+              aria-describedby="btn-search" class="form-control border-0 bg-light">
+            <div class="input-group-append">
+              <button id="btn-search" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
+            </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>
@@ -29,7 +31,7 @@
           <th scope="col">Username</th>
           <th scope="col">Họ tên</th>
           <th scope="col">SĐT</th>
-          <th scope="col">ID</th>
+          <th scope="col">CMND</th>
           <th scope="col" class="text-center">Trạng thái</th>
           <th scope="col" class="text-center">Điều chỉnh</th>
         </tr>
@@ -114,19 +116,19 @@
       <nav aria-label="Page navigation example">
           <ul class="pagination">
               <li class="page-item {{#unless this.isPreviousPage}} disabled {{/unless}}">
-                  <a class="page-link " href="/account?page={{this.previousPage}}" aria-label="Previous">
+                  <a class="page-link " href="/account?username={{username}}&page={{this.previousPage}}" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
                       <span class="sr-only">Previous</span>
                   </a>
               </li>
               {{#each pages}}
                   <li class="page-item {{#if this.isCurrentPage}} active {{/if}}">
-                      <a class="page-link" href="/account?page={{this.page}}">{{this.page}}</a>
+                      <a class="page-link" href="/account?username={{../username}}&page={{this.page}}">{{this.page}}</a>
                   </li>
               {{/each}}
 
               <li class="page-item {{#unless this.isNextPage}} disabled {{/unless}}">
-                  <a class="page-link" href="/account?page={{this.nextPage}}" aria-label="Next">
+                  <a class="page-link" href="/account?username={{username}}&page={{this.nextPage}}" aria-label="Next">
                       <span aria-hidden="true">&raquo;</span>
                       <span class="sr-only">Next</span>
                   </a>

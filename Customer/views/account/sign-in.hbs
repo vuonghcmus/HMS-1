@@ -1,0 +1,46 @@
+<div
+    class=""
+    style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-image: url(/img/bg-img/4.png);"
+>
+    <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class="signin-card text-center" style="max-width: 95%; width:380px; min-height: 500px;">
+            <div>
+                <h3 style="color: white;font-weight:bold">Sign in to your account </h3>
+                <div style="margin-top: 32px;">
+                    <a href="/"><img src="/img/core-img/logo.png"/></a>
+                </div>
+            </div>
+            {{#if message}}
+                <div class="alert alert-info" role="alert">
+                    {{message}}
+                </div>
+            {{/if}}
+            <form id="sign-in-form" class="needs-validation"  method="POST" action="/account/sign-in?retUrl={{retUrl}}" novalidate>
+                <div class="mt-3">
+                    <input type="tel" class="form-control" id="username" name="username" placeholder="Phone Number" required>
+                    <div class="invalid-feedback">
+                            Phone number must not be empty.
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                    <div class="invalid-feedback">
+                            Password must not be empty.
+                    </div>
+                </div>
+                {{#if error}}
+                <div class="mt-3">
+                    <p class="text-danger">{{error}}</p>
+                </div>
+                {{/if}}
+                <button class="btn mt-3" >Sign in</button>
+                <div class="clearfix">
+                    <a class="float-right text-info" href="/account/forgot-password">Forgot password ?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/js/formValidation.js"></script>
+        

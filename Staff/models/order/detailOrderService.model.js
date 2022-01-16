@@ -6,6 +6,7 @@ const DetailOrderServiceSchema = new Schema(
     number: { type: Schema.Types.Number },
     orderDate: { type: Schema.Types.Date },
     price: { type: Schema.Types.Number },
+    status: { type: Schema.Types.String },
   },
   {
     collection: "DetailOrderService",

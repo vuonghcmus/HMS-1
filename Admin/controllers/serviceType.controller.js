@@ -9,11 +9,30 @@ module.exports = {
       page = 1;
     }
 
-    ServiceType.find() // find tất cả các data
+    var type = req.query.type;
+    if(type == ""){
+      res.redirect("/service-type?page="+page)
+    }
+    else{
+      if (!type){
+        type = ""
+      }
+
+    ServiceType.find({
+      "name": {
+        $regex: type,
+        $options: 'mi'
+      }
+    }) // find tất cả các data
       .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
       .limit(perPage)
       .exec((err, serviceTypes) => {
-        ServiceType.countDocuments(async (err, count) => {
+        ServiceType.countDocuments({
+          "name": {
+            $regex: type,
+            $options: 'mi'
+          }
+        }, async (err, count) => {
           // đếm để tính có bao nhiêu trang
           if (err) return next(err);
           const listServices = [];
@@ -47,10 +66,13 @@ module.exports = {
             previousPage: +page - 1,
             services: listServices,
             length: listServices.length,
+            type
           });
         });
       });
+    }
   },
+
   editServiceTypeGet: (req, res) => {
     ServiceType.findById(req.params.id, (err, serviceType) => {
       if (err) {

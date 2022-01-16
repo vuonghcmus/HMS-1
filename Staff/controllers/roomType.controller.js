@@ -9,11 +9,30 @@ module.exports = {
       page = 1;
     }
 
-    RoomType.find() // find tất cả các data
+    var type = req.query.type
+    if(type == ""){
+      res.redirect("/room-type?page="+page)
+    }
+    else{
+      if(!type){
+        type = ""
+      }
+
+      RoomType.find({
+        "name": {
+          $regex: type,
+          $options: 'mi'
+        }
+      }) // find tất cả các data
       .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
       .limit(perPage)
       .exec((err, roomType) => {
-        RoomType.countDocuments(async (err, count) => {
+        RoomType.countDocuments({
+          "name": {
+            $regex: type,
+            $options: 'mi'
+          }
+        },async (err, count) => {
           // đếm để tính có bao nhiêu trang
           if (err) return next(err);
 
@@ -37,8 +56,10 @@ module.exports = {
             isPreviousPage: page > 1,
             nextPage: +page + 1,
             previousPage: +page - 1,
+            type
           });
         });
       });
+    }
   },
 };

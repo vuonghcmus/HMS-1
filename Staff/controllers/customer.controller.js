@@ -4,148 +4,145 @@ const Service = require("../models/service/service.model");
 const DetailOrderService = require("../models/order/detailOrderService.model");
 const RoomType = require("../models/room/roomType.model");
 
-const showCustomerUsing = async (req, res) => {
+const showCustomer = async (req, res) => {
+  const status = req.query.status;
   let perPage = 2; // số lượng sản phẩm xuất hiện trên 1 page
   let page = req.query.page || 1; // số page hiện tại
   if (page < 1) {
     page = 1;
   }
 
-  // find data by status 'using' and skip and limit
-  DetailOrderRoom.find({ status: "using" })
-    .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
-    .limit(perPage)
-    .exec((err, detailOrderRoom) => {
-      DetailOrderRoom.countDocuments(
-        { status: "using" },
-        async (err, count) => {
-          // đếm để tính có bao nhiêu trang
-          if (err) return next(err);
+  var name = req.query.name;
 
-          let isCurrentPage;
-          const pages = [];
-          for (let i = 1; i <= Math.ceil(count / perPage); i++) {
-            if (i === +page) {
-              isCurrentPage = true;
-            } else {
-              isCurrentPage = false;
-            }
-            pages.push({
-              page: i,
-              isCurrentPage: isCurrentPage,
-            });
-          }
-          const listOrderServices = [];
-          for (let i = 0; i < detailOrderRoom.length; i++) {
-            const customer = await Customer.findById(
-              detailOrderRoom[i].customerID
-            );
-            const roomType = await RoomType.findById(
-              detailOrderRoom[i].roomTypeID
-            );
-            detailOrderRoom[i].customerName = customer.fullname;
-            detailOrderRoom[i].customerPhone = customer.phone;
-            detailOrderRoom[i].customerId = customer.ID;
-            detailOrderRoom[i].roomTypeName = roomType.name;
+  if (name == "") {
+    res.redirect("/customer?status=" + status + "&page=" + page);
+  } else {
+    if (!name) {
+      name = "";
+    }
+    const customer = await Customer.find({
+      fullname: {
+        $regex: name,
+        $options: "mi",
+      },
+    });
+    var customerIdList = [];
+    for (var i = 0; i < customer.length; i++) {
+      customerIdList.push(customer[i]._id);
+    }
 
-            if (detailOrderRoom[i].detailOrderService.length > 0) {
-              const _orderService = await DetailOrderService.find({
-                _id: { $in: detailOrderRoom[i].detailOrderService },
+    DetailOrderRoom.find({
+      $and: [
+        {
+          customerID: {
+            $in: customerIdList,
+          },
+        },
+        {
+          status: status,
+        },
+      ],
+    })
+      .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
+      .limit(perPage)
+      .exec((err, detailOrderRoom) => {
+        DetailOrderRoom.countDocuments(
+          {
+            $and: [
+              {
+                customerID: {
+                  $in: customerIdList,
+                },
+              },
+              {
+                status: status,
+              },
+            ],
+          },
+          async (err, count) => {
+            // đếm để tính có bao nhiêu trang
+            if (err) return next(err);
+
+            let isCurrentPage;
+            const pages = [];
+            for (let i = 1; i <= Math.ceil(count / perPage); i++) {
+              if (i === +page) {
+                isCurrentPage = true;
+              } else {
+                isCurrentPage = false;
+              }
+              pages.push({
+                page: i,
+                isCurrentPage: isCurrentPage,
               });
-
-              const _service = await Service.findById(
-                _orderService[0].serviceID
+            }
+            const listOrderServices = [];
+            for (let i = 0; i < detailOrderRoom.length; i++) {
+              const customer = await Customer.findById(
+                detailOrderRoom[i].customerID
               );
+              const roomType = await RoomType.findById(
+                detailOrderRoom[i].roomTypeID
+              );
+              detailOrderRoom[i].customerName = customer.fullname;
+              detailOrderRoom[i].customerPhone = customer.phone;
+              detailOrderRoom[i].customerId = customer.ID;
+              detailOrderRoom[i].roomTypeName = roomType.name;
 
-              _orderService[0].serviceName = _service.name;
-              _orderService[0].serviceImage = _service.image;
-              listOrderServices.push(_orderService);
+              if (detailOrderRoom[i].detailOrderService.length > 0) {
+                const _orderService = await DetailOrderService.find({
+                  _id: {
+                    $in: detailOrderRoom[i].detailOrderService,
+                  },
+                });
+
+                for (let j = 0; j < _orderService.length; j++) {
+                  const service = await Service.findById(
+                    _orderService[j].serviceID
+                  );
+                  _orderService[j].serviceName = service.name;
+                  _orderService[j].serviceImage = service.image;
+                }
+
+                listOrderServices.push(_orderService);
+              } else {
+                listOrderServices.push([]);
+              }
+            }
+            if (status === "pending") {
+              res.render("customer/list-customer-pending", {
+                detailOrderRoom,
+                pages,
+                isNextPage: page < Math.ceil(count / perPage),
+                isPreviousPage: page > 1,
+                nextPage: +page + 1,
+                previousPage: +page - 1,
+                orderServices: listOrderServices,
+                length: listOrderServices.length,
+                name: name,
+              });
             } else {
-              listOrderServices.push([]);
+              res.render("customer/list-customer-using", {
+                detailOrderRoom,
+                pages,
+                isNextPage: page < Math.ceil(count / perPage),
+                isPreviousPage: page > 1,
+                nextPage: +page + 1,
+                previousPage: +page - 1,
+                orderServices: listOrderServices,
+                length: listOrderServices.length,
+                name: name,
+              });
             }
           }
-          res.render("customer/list-customer-using", {
-            detailOrderRoom,
-            pages,
-            isNextPage: page < Math.ceil(count / perPage),
-            isPreviousPage: page > 1,
-            nextPage: +page + 1,
-            previousPage: +page - 1,
-            orderServices: listOrderServices,
-            length: listOrderServices.length,
-          });
-        }
-      );
-    });
-};
-
-const showCustomerPending = async (req, res) => {
-  let perPage = 2; // số lượng sản phẩm xuất hiện trên 1 page
-  let page = req.query.page || 1; // số page hiện tại
-  if (page < 1) {
-    page = 1;
+        );
+      });
   }
-
-  // find data by status 'using' and skip and limit
-  DetailOrderRoom.find({ status: "pending" })
-    .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
-    .limit(perPage)
-    .exec((err, detailOrderRoom) => {
-      DetailOrderRoom.countDocuments(
-        { status: "pending" },
-        async (err, count) => {
-          // đếm để tính có bao nhiêu trang
-          if (err) return next(err);
-
-          let isCurrentPage;
-          const pages = [];
-          for (let i = 1; i <= Math.ceil(count / perPage); i++) {
-            if (i === +page) {
-              isCurrentPage = true;
-            } else {
-              isCurrentPage = false;
-            }
-            pages.push({
-              page: i,
-              isCurrentPage: isCurrentPage,
-            });
-          }
-
-          for (let i = 0; i < detailOrderRoom.length; i++) {
-            const customer = await Customer.findById(
-              detailOrderRoom[i].customerID
-            );
-            const roomType = await RoomType.findById(
-              detailOrderRoom[i].roomTypeID
-            );
-            detailOrderRoom[i].customerName = customer.fullname;
-            detailOrderRoom[i].customerPhone = customer.phone;
-            detailOrderRoom[i].customerId = customer.ID;
-            detailOrderRoom[i].roomTypeName = roomType.name;
-          }
-
-          res.render("customer/list-customer-pending", {
-            detailOrderRoom,
-            pages,
-            isNextPage: page < Math.ceil(count / perPage),
-            isPreviousPage: page > 1,
-            nextPage: +page + 1,
-            previousPage: +page - 1,
-            length: detailOrderRoom.length,
-          });
-        }
-      );
-    });
 };
 
 module.exports = {
   showAllCustomer: async (req, res) => {
-    const status = req.query.status;
-    if (status === "using") {
-      return showCustomerUsing(req, res);
-    } else if (status === "pending") {
-      return showCustomerPending(req, res);
-    }
+    return showCustomer(req, res);
   },
   acceptOrderRoom: (req, res) => {
     // find detailOrderRoom by id and update status

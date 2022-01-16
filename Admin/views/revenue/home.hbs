@@ -1,111 +1,57 @@
-<div class="page-wrap mt-5">
-  <div class="main-content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-8">
-          <div class="card">
-            <div class="card-body">
-              <div class="row align-items-center">
-                <div class="col-lg-8 col-md-12">
-                  <h3 class="card-title">Visitors By Countries</h3>
-                  <div
-                    id="visitfromworld"
-                    style="width: 100%; height: 350px"
-                  ></div>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                  <div class="row mb-15">
-                    <div class="col-9">India</div>
-                    <div class="col-3 text-right">28%</div>
-                    <div class="col-12">
-                      <div class="progress progress-sm mt-5">
-                        <div
-                          class="progress-bar bg-green"
-                          role="progressbar"
-                          style="width: 48%"
-                          aria-valuenow="48"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row mb-15">
-                    <div class="col-9">UK</div>
-                    <div class="col-3 text-right">21%</div>
-                    <div class="col-12">
-                      <div class="progress progress-sm mt-5">
-                        <div
-                          class="progress-bar bg-aqua"
-                          role="progressbar"
-                          style="width: 33%"
-                          aria-valuenow="33"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row mb-15">
-                    <div class="col-9">USA</div>
-                    <div class="col-3 text-right">18%</div>
-                    <div class="col-12">
-                      <div class="progress progress-sm mt-5">
-                        <div
-                          class="progress-bar bg-purple"
-                          role="progressbar"
-                          style="width: 40%"
-                          aria-valuenow="40"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-9">China</div>
-                    <div class="col-3 text-right">12%</div>
-                    <div class="col-12">
-                      <div class="progress progress-sm mt-5">
-                        <div
-                          class="progress-bar bg-danger"
-                          role="progressbar"
-                          style="width: 15%"
-                          aria-valuenow="15"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card" style="min-height: 422px">
-            <div class="card-header"><h3>Donut chart</h3></div>
-            <div class="card-body">
-              <div id="c3-donut-chart"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<div id="container" style="width: 80%; height: 80%"></div>
 
-{{#section "css_chart"}}
-  <link rel="stylesheet" href="css/jquery-jvectormap.css" />
-  <link rel="stylesheet" href="css/theme.min.css" />
+<input type="hidden" id="total-room-revenue" value="{{totalRoomRevenue}}">
+<input type="hidden" id="total-service-revenue" value="{{totalServiceRevenue}}">
+
+<h5 class="text-center">Tổng doanh thu: {{totalRevenue}}</h5>
+
+
+{{#section "script_revenue_chart"}}
+  {{!-- <link rel="stylesheet" href="css/jquery-jvectormap.css" />
+  <link rel="stylesheet" href="css/theme.min.css" /> --}}
+  <script
+      src="https://cdn.anychart.com/js/8.0.1/anychart-core.min.js"
+    ></script>
+    <script
+      src="https://cdn.anychart.com/js/8.0.1/anychart-pie.min.js"
+    ></script>
 {{/section}}
 
-{{#section "js_chart"}}
-  <script src="js/jquery-jvectormap.min.js"></script>
-  <script src="js/jquery-jvectormap-world-mill-en.js"></script>
-  <script src="js/d3.min.js"></script>
-  <script src="js/c3.min.js"></script>
-  <script src="js/widgets.js"></script>
-  <script src="js/charts.js"></script>
+{{#section "js_revenue_chart"}}
+  <script>
+      anychart.onDocumentReady(function() {
+
+      // set the data
+      var data = [
+          {x: "Phòng", value: $('#total-room-revenue').val(), normal:  {
+					fill: "#20B7DA",
+			}
+		  },
+          {x: "Dịch vụ", value: $('#total-service-revenue').val(), normal:  {
+					fill: "#76CF16",
+			}
+		},
+      ];
+
+      // create the chart
+      var chart = anychart.pie();
+
+      // set the chart title
+      chart.title("Thống kê doanh thu");
+
+      // add the data
+      chart.data(data);
+      
+      // set legend position
+      chart.legend().position("right");
+      // set items layout
+      chart.legend().itemsLayout("vertical");  
+
+      // display the chart in the container
+      chart.container('container');
+      chart.draw();
+
+    }); 
+</script>
+  
 {{/section}}

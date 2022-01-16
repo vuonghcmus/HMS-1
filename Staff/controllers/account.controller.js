@@ -3,17 +3,36 @@ const bcrypt = require("bcrypt");
 
 module.exports = {
   getAllCustomer: (req, res, next) => {
-    let perPage = 5; // số lượng sản phẩm xuất hiện trên 1 page
+    let perPage = 10; // số lượng sản phẩm xuất hiện trên 1 page
     let page = req.query.page || 1; // số page hiện tại
     if (page < 1) {
       page = 1;
     }
+    var username = req.query.username
 
-    Customer.find() // find tất cả các data
+    if(username == ""){
+      res.redirect("/account?page="+page)
+    }
+    else{
+      if(!username){
+        username = ""
+      }
+
+      Customer.find({
+        "username": {
+          $regex: username,
+          $options: 'mi'
+        }
+      }) // find tất cả các data
       .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
       .limit(perPage)
       .exec((err, customers) => {
-        Customer.countDocuments((err, count) => {
+        Customer.countDocuments({
+          "username": {
+            $regex: username,
+            $options: 'mi'
+          }
+        },(err, count) => {
           // đếm để tính có bao nhiêu trang
           if (err) return next(err);
           let isCurrentPage;
@@ -36,9 +55,11 @@ module.exports = {
             isPreviousPage: page > 1,
             nextPage: +page + 1,
             previousPage: +page - 1,
+            username,
           });
         });
       });
+    }
   },
   addCustomer: async (req, res) => {
     // check if username is exist using await
@@ -147,10 +168,10 @@ module.exports = {
   },
 
   resetPasswordCustomer: async (req, res) => {
-    const customer = await Customer.findById(req.params.id)
-    if(customer) {
+    const customer = await Customer.findById(req.params.id);
+    if (customer) {
       const ID = customer.ID;
-      const newPassword = bcrypt.hashSync(ID, 10)
+      const newPassword = bcrypt.hashSync(ID, 10);
       Customer.findByIdAndUpdate(
         req.params.id,
         {
@@ -171,7 +192,6 @@ module.exports = {
     }
   },
 
-  
   deleteCustomer: (req, res) => {
     Customer.findByIdAndDelete(req.params.id, (err, account) => {
       if (err) return next(err);

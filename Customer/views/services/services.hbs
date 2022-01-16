@@ -1,0 +1,140 @@
+<!-- ##### Breadcumb Area Start ##### -->
+<section class="breadcumb-area bg-img d-flex align-items-center justify-content-center" style="background-image: url(/img/bg-img/bg-5.jpg);">
+    <div class="bradcumbContent">
+        <h2>Services</h2>
+    </div>
+</section>
+<!-- ##### Breadcumb Area End ##### -->
+
+<!-- ##### Core Features Start ##### -->
+<div class="py-5" style="background-color: #E8E8E8;">
+    <section class="core-features-area">
+        <div class="container">
+            {{#each allServices}}
+            <div class="row service-item card shadow">
+                
+                <div class="col-12 col-md-3">
+                    <img src="{{this.image}}"/>
+                </div>
+                <div class="col-md-6 col-12 text-container">
+                    <h2>{{this.name}}</h2>
+                    <p>{{this.description}}</p>
+                </div>
+                <div class="col-md-3 col-12 price-container d-flex">
+                    <a href="/services/{{this._id}}" class="detail-service-btn btn custom-palatin-btn price-btn ">Details</a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </section>
+</div>
+<!-- ##### Core Features End ##### -->
+
+
+        
+{{!-- floating button --}}
+{{#if isAuth}}
+<button
+    class="btn modal-btn btn-floating {{#ifCond cart.length '<=' 0}} disabled {{/ifCond}}"
+    {{#ifCond cart.length '>' 0}}
+    data-bs-toggle="modal"
+    data-bs-target="#confirm-order-modal"
+    {{/ifCond}}
+>
+    <img src="/img/icon/order-icon.png" alt="">
+    <span>{{cart.length}}</span>
+</button>
+
+{{!-- modal for confirm order room --}}
+<div class="modal" id="confirm-order-modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Your Orders</h5>
+				<button type="button" class="fa fa-close btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">		
+				
+				{{!-- confirm order form --}}
+				<form id="confirm-order-form" class="row g-3 px-2 confirm-order-form" action="/services/confirm" method="POST" style="min-height: 100px;" >
+				{{!-- <div class="row" style="padding: 16px;"> --}}
+				<div class="col-4 align-self-center">
+					<h6>Choose room: </h6>
+				</div>
+				<div class="col-8 align-self-center">
+					<select class="form-select w-100" aria-label="Default select example" name="dtorID">
+						
+						{{#each allBookedRooms}}
+						<option value="{{this._id}}">{{this.roomID}}</option>
+						{{/each}}
+						
+					</select>
+				</div>
+					
+					
+				
+			{{!-- </div> --}}
+						
+						<ul class="order-list" style="width: 100%;">
+							{{#each cart}}
+							<li class="order-item col-12 mt-3 d-flex justify-content-between align-items-center">
+								<div class="col-8">
+									<h4 class="order-title">
+										{{this.nameService}}
+										<span class="order-price">{{this.priceService}}$</span>
+									</h4>
+									{{!-- <p class="order-description">Shortbread, chocolate turtle cookies, and red velvet.</p>                             --}}
+								</div>
+								<div class="order-amount-container col-4">
+									<button class="btn btn-decrease">-</button>
+									<input class="order-amount text-center" style="width: 100%; border: none;" name="orderAmount" value="{{this.orderAmount}}" min="1">
+									<button class="btn btn-increase">+</button>
+								</div>
+							</li>
+							{{/each}}
+						</ul>
+				</form>
+
+				<div class="modal-footer pt-0">
+					<p></p>
+					<p style="margin-bottom: 0;">Total Amount: <span class="total-amount" id="total-amount">0</span></p>
+					<p>Total Price: <span class="total-price" id="total-price">0$</span></p>
+					<p style="font-weight: 500;font-size:15px;">Your changes will be done after confirmation! Please check your order before confirming.</p>
+					<div class="d-flex justify-content-between w-100">
+						<div class="col mb-3">
+							<form action="/services/clear-cart" method="POST">
+								<button class="btn palatin-btn btn-3">Clear All</button>
+							</form>
+						</div>
+						<div class="col mb-3">
+							{{!-- form="confirm-order-form" --}}
+							<button  class="btn palatin-btn btn-confirm" id="confirm">Confirm</button>
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+</div>
+<script src="/js/updateModalItem.js"></script>
+{{/if}} 
+
+<input type="hidden" id="url-staff" value="{{this.url_staff}}">
+<script src="/js/socket.io.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    const url_socket = $('#url-staff').val() || 'http://localhost:3000';
+    const socket = io(url_socket); // port này là port của đích đến của socket.io
+    
+    function sendMessage() {
+        const room = $('.form-select').find(":selected").text();
+       	socket.emit("send-service-notification", room);
+    } 
+
+    $("#confirm").on("click", function () {
+        console.log("confirm");
+        sendMessage();
+		$("#confirm-order-form").submit();
+    }); 
+</script>
+   
