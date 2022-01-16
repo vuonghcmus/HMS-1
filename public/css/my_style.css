@@ -1,0 +1,10 @@
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#myTable {
+  overflow: hidden;
+  word-wrap: normal, break-word;
+}

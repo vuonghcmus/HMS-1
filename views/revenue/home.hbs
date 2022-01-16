@@ -1,0 +1,59 @@
+<div id="container" style="width: 80%; height: 80%"></div>
+
+<input type="hidden" id="total-room-revenue" value="{{totalRoomRevenue}}">
+<input type="hidden" id="total-service-revenue" value="{{totalServiceRevenue}}">
+
+<h5 class="text-center">Tổng doanh thu: {{totalRevenue}}</h5>
+
+
+{{#section "script_revenue_chart"}}
+  {{!-- <link rel="stylesheet" href="css/jquery-jvectormap.css" />
+  <link rel="stylesheet" href="css/theme.min.css" /> --}}
+  <script
+      src="https://cdn.anychart.com/js/8.0.1/anychart-core.min.js"
+    ></script>
+    <script
+      src="https://cdn.anychart.com/js/8.0.1/anychart-pie.min.js"
+    ></script>
+{{/section}}
+
+{{#section "js_revenue_chart"}}
+  <script>
+      anychart.onDocumentReady(function() {
+
+      // set the data
+      var data = [
+          {x: "Phòng", value: $('#total-room-revenue').val(), normal:  {
+					fill: "#20B7DA",
+			}
+		  },
+          {x: "Dịch vụ", value: $('#total-service-revenue').val(), normal:  {
+					fill: "#76CF16",
+			}
+		},
+      ];
+
+      // create the chart
+      var chart = anychart.pie();
+
+      // set the chart title
+      chart.title("Thống kê doanh thu theo phòng và dịch vụ");
+
+      // add the data
+      chart.data(data);
+      
+      // set legend position
+      chart.legend().position("right");
+      // set items layout
+      chart.legend().itemsLayout("vertical");  
+
+      // display the chart in the container
+      chart.container('container');
+      chart.draw();
+
+    }); 
+</script>
+
+
+  
+{{/section}}
