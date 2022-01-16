@@ -21,17 +21,32 @@ module.exports = {
 
         const room = {id: req.params.id, name: roomReceipt.roomID, type: roomType.name, price: roomType.price, checkin: checkIn, checkout: checkOut, numday: numday, subtotal: numday * roomType.price};
         var service = [];
-        var total = roomReceipt.price;
+        var total = numday * roomType.price;
 
         //Tìm xem khách hàng có còn đặt phòng nào khác hay không (using)
 
         for(var i = 0; i < roomReceipt.detailOrderService.length; i++){
             const serviceId = roomReceipt.detailOrderService[i];
-            const serviceItem = await ServiceOrder.findById(serviceId);
-            const serviceInfo = await Service.findById(serviceItem.serviceID);
+            const serviceItem = await ServiceOrder.findOne({
+                $and: [
+                  {
+                    _id: serviceId,
+                  },
+                  {
+                      status: "using",
+                  }, ],
+                  });
+            if (serviceItem) {
+                const serviceInfo = await Service.findById(serviceItem.serviceID);
 
-            service.push({name: serviceInfo.name, price: serviceInfo.price, quantity: serviceItem.number, subtotal: serviceInfo.price* serviceItem.number});
-            total += serviceInfo.price* serviceItem.number;
+                service.push({
+                    name: serviceInfo.name,
+                    price: serviceInfo.price,
+                    quantity: serviceItem.number,
+                    subtotal: serviceInfo.price * serviceItem.number
+                });
+                total += serviceInfo.price * serviceItem.number;
+            }
         }
 
 
