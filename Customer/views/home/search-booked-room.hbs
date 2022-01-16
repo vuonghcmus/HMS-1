@@ -1,0 +1,98 @@
+<!-- ##### Breadcumb Area Start ##### -->
+    <section class="breadcumb-area bg-img d-flex align-items-center justify-content-center" style="background-image: url(/img/bg-img/bg-5.jpg);">
+        <div class="bradcumbContent">
+            <h2>Search Order</h2>
+        </div>
+    </section>
+    <!-- ##### Breadcumb Area End ##### -->
+        <!-- ##### Service Intro Area Start ##### -->
+    <section class="services-intro">
+        <div class="search-order-container container">
+            
+            <div class="row align-items-center mt-5">
+                <!-- Service Intro Text -->
+                <div class="col-12">
+                    <div class="service-intro-text">
+                        <div class="section-heading text-center">
+                            {{!-- <div class="line-"></div> --}}
+                            <h2>Find your booked room</h2>
+                        </div>
+                        {{!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p> --}}
+                        {{!-- <a href="#" class="btn custom-palatin-btn mt-50">Read More</a> --}}
+                    </div>
+                </div>
+            </div>
+            
+            {{!-- INPUT INFORMATION --}}
+            
+            <form id="search-order-form" class="row align-items-center mb-2">
+                <div class="col-12 col-lg-5 mx-auto">
+                    <div class="form-group row text-center">
+                        <div class="col-12">
+                            <input type="number" class="form-control-plaintext" id="phone" name="phone" placeholder="Your phone number">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-12 col-lg-5 mx-auto">
+                    <div class="form-group row text-center">
+                        <div class="col-12">
+                            <input type="number" class="form-control-plaintext" id="identity" name="identity" placeholder="Your ID">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-2 mx-auto">
+                    <button type="submit" class="btn custom-palatin-btn w-100">Search</button>
+                </div>
+            </form>
+            {{#if err}}
+            <div class="row" style="padding-left:20px;">
+                <p style="color: red;">{{err}}</p>
+            </div>
+            {{/if}}
+            <div class="mb-4" style="border: 1px solid #cb8670;"></div>
+        </div>
+    </section>
+    <!-- ##### Service Intro Area End ##### -->
+    <section class="core-features-area">
+        <div class="container " style="min-height: 500px; ">
+            {{#if isEmpty}}
+            <div class="row d-flex justify-content-center">
+                <h4 class="message-error">We haven't found any of your booking yet.</h4>
+            </div>
+            {{else}}
+            <h3 class="mb-3">All your booking</h3>
+            {{#each bookedRooms}}
+            <div class="row service-item search-booked-room-item card shadow" >
+                 <div class="col-12 col-md-5 col-lg-3">
+                    <img src="{{this.room.image}}"/>
+                    <div class="d-flex justify-content-center mt-3">
+                        <a href="/rooms/{{this.room._id}}" class="book-room-btn btn custom-palatin-btn price-btn" style="width: 90%;">View Details</a>      
+                    </div>
+                </div>
+                <div class="col-md-7 col-lg-6 col-12 text-container">
+                    <h2>{{this.room.name}}</h2>
+                    <div class="text-info px-3 d-flex justify-content-between align-items-center">
+                        <p>Price: <span style="color: #cb8670; font-size: 18px;">{{this.room.price}}$</span>/night</p>
+                        <p>Number of beds: <span style="color: #cb8670; font-size: 18px;">{{this.room.bed}}</span></p>
+
+                    </div>
+                    <div class="text-info px-3 d-flex justify-content-between align-items-center">
+                        <p>People: <span style="color: #cb8670; font-size: 18px;">{{this.people}}</span></p>
+                        <p>Room Number: <span style="color: #cb8670; font-size: 18px;">{{this.roomID}}</span></p>
+                    </div>
+                    
+                </div>
+            
+                <div class="col-lg-2 col-12 search-price-container d-flex">
+                    <p>Check in:</p>
+                    <p>{{this.dateOfCheckIn}}</p>
+                    <p>Check out: </p>
+                    <p>{{this.dateOfCheckOut}}</p>
+                </div>
+            </div>
+            {{/each}}
+            {{/if}}
+           
+        </div>
+    </section>

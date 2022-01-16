@@ -1,0 +1,79 @@
+<!-- ##### Header Area Start ##### -->
+<header class="header-area">
+    <!-- Navbar Area -->
+    <div class="palatin-main-menu">
+        <div class="classy-nav-container breakpoint-off">
+            <div class="container">
+                <!-- Menu -->
+                <nav class="classy-navbar justify-content-between" id="palatinNav">
+                    <!-- Nav brand -->
+                    <a href="/" class="nav-brand"><img src="/img/core-img/logo.png" alt=""></a>
+                    {{!-- <a href="/" class="nav-brand"><img src="/img/core-img/logo_HMS.png" alt=""></a> --}}
+
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+
+                    <!-- Menu -->
+                    <div class="classy-menu">
+
+                        <!-- close btn -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul>
+                                <li class="navigate-div"><a class="navigate-link" href="/">Home</a></li>
+                                
+                                <li class="navigate-div"><a class="navigate-link" href="/rooms">Rooms</a></li>
+                                <li class="navigate-div"><a class="navigate-link" href="/services">Services</a></li>
+                                <li class="navigate-div"><a class="navigate-link" href="/contact">Contact</a></li>
+                                <li class="navigate-div"><a class="navigate-link" href="/help">Help & Support</a></li>
+                                <li class="navigate-div">
+                                    <a class="navigate-link" href="/search-booked-rooms">
+                                        Search Order
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            class="bi bi-search"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+                                            />
+                                        </svg>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+
+                            <!-- Button -->
+                            <div class="menu-btn">
+                                {{#if isAuth}}
+                                    <div class="dropdown {{#if active.account}}active{{/if}}">
+                                        <button class="btn dropdown-toggle user-icon" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-user" style="font-size: 24px;"></i>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item {{#if active.profile}} active {{/if}}" href="/account/profile">My Profile</a>
+                                            <a class="dropdown-item" href="/account/change-password">Change Password</a>
+                                            <a class="dropdown-item" href="/account/logout">Logout</a>
+                                        </div>
+                                    </div>
+                                {{else}}
+                                    <a href="/account/sign-in" class="btn custom-palatin-btn sign-in-btn">Sign in</a>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <!-- Nav End -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ##### Header Area End ##### -->

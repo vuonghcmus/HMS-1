@@ -2,70 +2,54 @@ const express = require("express");
 const { engine } = require("express-handlebars");
 const Handlebars = require("handlebars");
 const path = require("path");
-const methodOverride = require('method-override')
+const env = require("dotenv").config();
+const socket = require("socket.io");
+const cors = require("cors");
+const methodOverride = require("method-override");
+const databaseService = require("./services/database.service");
+const helpers = require("./helpers/viewEngine");
+const mongoose = require("mongoose");
+const express_handlebars_sections = require("express-handlebars-sections");
+// mongoose.connect(process.env.da)
+
+const logger = require("morgan");
+
+const routes = require("./routes/index");
 
 const {
-    allowInsecurePrototypeAccess,
+  allowInsecurePrototypeAccess,
 } = require("@handlebars/allow-prototype-access");
 
+databaseService.connectDatabase();
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride('_method'));
+app.use(methodOverride("_method"));
+
+// use logger and use read json , static file
+// app.use(logger("dev"));
+
+require("./middlewares/session")(app);
+require("./middlewares/passport")(app);
+app.use(require("./middlewares/locals"));
+
 app.engine(
-    "hbs",
-    engine({
-        extname: ".hbs",
-        defaultLayout: "main",
-        handlebars: allowInsecurePrototypeAccess(Handlebars),
-    })
+  "hbs",
+  engine({
+    extname: ".hbs",
+    defaultLayout: "main",
+    handlebars: allowInsecurePrototypeAccess(Handlebars),
+    helpers: helpers,
+  })
 );
 app.set("view engine", "hbs");
 app.set("views", "./views");
 
 app.use(express.static(path.join(__dirname, "/public")));
 
-app.get("/", function(req, res) {
-    res.render("home");
-});
+routes(app);
 
-app.get("/about-us", function(req, res) {
-    res.render("about-us");
-});
-
-app.get("/blog", function(req, res) {
-    res.render("blog");
-});
-
-app.get("/contact", function(req, res) {
-    res.render("contact");
-});
-
-app.get("/elements", function(req, res) {
-    res.render("elements");
-});
-
-app.get("/rooms", function(req, res) {
-    res.render("rooms");
-});
-app.get("/rooms/room-details", function(req, res) {
-    res.render("room-details");
-});
-app.get("/services", function(req, res) {
-    res.render("services");
-});
-app.get("/services/service-details", function(req, res) {
-    res.render("service-details");
-});
-app.get("/search-order", function(req, res) {
-    res.render("search-order");
-});
-app.get("/sign-in", function(req, res) {
-    res.render("sign-in", { layout: 'main_no_head' });
-});
-
-const PORT = 3000;
-app.listen(PORT, () => {
-    console.log(`App listening on port ${PORT}`);
+const server = app.listen(process.env.PORT || 3000, () => {
+  console.log(`App listening on port ${process.env.PORT || 3000}`);
 });
