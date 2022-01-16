@@ -4,4 +4,5 @@ const router = express.Router();
 
 router.get("/", RevenueController.getTotalRevenue);
 
+
 module.exports = router;
