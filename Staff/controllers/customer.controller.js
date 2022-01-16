@@ -91,20 +91,29 @@ const showCustomer = async (req, res) => {
 
               if (detailOrderRoom[i].detailOrderService.length > 0) {
                 const _orderService = await DetailOrderService.find({
-                  _id: {
-                    $in: detailOrderRoom[i].detailOrderService,
+                  $and: [
+                  {
+                    _id: {
+                      $in: detailOrderRoom[i].detailOrderService,
+                    },
                   },
+                  {
+                    status: "using",
+                  },
+                  ]
                 });
 
-                for (let j = 0; j < _orderService.length; j++) {
-                  const service = await Service.findById(
-                    _orderService[j].serviceID
-                  );
-                  _orderService[j].serviceName = service.name;
-                  _orderService[j].serviceImage = service.image;
+                if(_orderService){
+                  for (let j = 0; j < _orderService.length; j++) {
+                    const service = await Service.findById(
+                      _orderService[j].serviceID
+                    );
+                    _orderService[j].serviceName = service.name;
+                    _orderService[j].serviceImage = service.image;
+                  }
+  
+                  listOrderServices.push(_orderService);
                 }
-
-                listOrderServices.push(_orderService);
               } else {
                 listOrderServices.push([]);
               }
