@@ -76,7 +76,7 @@ module.exports = {
                     .findById(detailServiceID)
                     .lean();
 
-                if (serviceDetail.status !== 'reject') {
+                if (serviceDetail.status === 'using') {
                     const serviceType = await serviceModel.findById(
                         serviceDetail.serviceID
                     );
