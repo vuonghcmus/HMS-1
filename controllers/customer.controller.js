@@ -72,20 +72,23 @@ module.exports = {
             order.totalPrice = order.price;
             var detailOrderService = [];
             for (let detailServiceID of order.detailOrderService) {
-                var serviceDetail = await detailOrderServiceModel
+                let serviceDetail = await detailOrderServiceModel
                     .findById(detailServiceID)
                     .lean();
-                const serviceType = await serviceModel.findById(
-                    serviceDetail.serviceID
-                );
-                serviceDetail.orderDate = convertDate(
-                    new Date(serviceDetail.orderDate)
-                );
-                serviceDetail.ServiceName = serviceType.name;
-                detailOrderService.push(serviceDetail);
-                serviceDetail.totalPrice = serviceDetail.price * serviceDetail.number;
-                order.totalPrice += serviceDetail.totalPrice;
-                total += serviceDetail.totalPrice;
+
+                if (serviceDetail.status !== 'reject') {
+                    const serviceType = await serviceModel.findById(
+                        serviceDetail.serviceID
+                    );
+                    serviceDetail.orderDate = convertDate(
+                        new Date(serviceDetail.orderDate)
+                    );
+                    serviceDetail.ServiceName = serviceType.name;
+                    detailOrderService.push(serviceDetail);
+                    serviceDetail.totalPrice = serviceDetail.price * serviceDetail.number;
+                    order.totalPrice += serviceDetail.totalPrice;
+                    total += serviceDetail.totalPrice;
+                }
             }
             order.services = detailOrderService;
             order.checkin = convertDate(new Date(order.dateOfCheckIn));
